@@ -1,0 +1,499 @@
+<!-- Content Header (Page header) -->
+<!-- <section class="content-header">
+   <h1>
+     Pace page
+     <small>Loading example</small>
+   </h1>
+   </section>-->
+<!-- Main content -->
+<section class="content">
+   <div class="row">
+      <div class="col-md-3">
+         <!-- Profile Image -->
+         <div class="box box-primary">
+            <div class="box-body box-profile">
+               <%= image_tag(@user.avatar_url(:medium), class:'profile-user-img img-responsive img-circle', style:'max-width: 100px;') if @user.avatar? %>
+               <%= image_tag('dog.jpg', class:'profile-user-img img-responsive img-circle', style:'max-width: 100px;') if !@user.avatar? %>
+               <h3 class="profile-username text-center"><%= @user.name.nil? ? @user.email : @user.two_names.mb_chars.upcase  %></h3>
+               <p class="text-muted text-center"><%= @user.junior_enterprise_new %> <%= (@user.federation.blank?) ?  '' : "- #{@user.federation}"%> - <%=@federado%></p>
+
+              <div align="center"><div class="fb-share-button" data-href="https://rjfej17.herokuapp.com/login" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Frjfej17.herokuapp.com%2Flogin&amp;src=sdkpreparse">Compartilhar</a></div></div>
+
+
+               <p class="text-muted text-center"></p>
+               <ul class="list-group list-group-unbordered">
+                  <li class="list-group-item">
+                     <b>Cargo</b> <a class="pull-right" data-toggle="tooltip", title="", data-original-title= "<%= @user.job.downcase.capitalize %>"><%= @user.job.downcase.capitalize[0..25] %></a>
+                  </li>
+                  <li class="list-group-item">
+                     <b>Quarto</b>
+                     <%# HELPER %>
+                     <%= room_infos %>
+                  </li>
+               </ul>
+               <p class=" text-center" style="margin-top: -15px"><b>Amigos de quarto</b></p>
+               <div class="box-body no-padding" style="margin-top: -7px">
+                  <ul class="users-list clearfix">
+                     <% if !current_user.room.nil? %>
+                     <% room = Room.find(current_user.room) %>
+                     <% room.users.each do |user| %>
+                     <li style="width: <%=width_room%>%">
+                        <%= image_tag(user.avatar_url(:medium), "data-toggle": "tooltip", "title": "", "data-original-title": "#{user.two_names.mb_chars.upcase} | #{user.junior_enterprise_new.mb_chars.upcase}") if user.avatar? %>
+                        <%= image_tag('dog.jpg', "data-toggle": "tooltip", "title": "", "data-original-title": "#{user.two_names.mb_chars.upcase} | #{user.junior_enterprise_new.mb_chars.upcase}") if !user.avatar? %>
+                        <a class="users-list-name" href="#"><%=user.first_name.titleize%></a>
+                     </li>
+                     <% end %>
+                     <% for i in 1..(room.capacity.to_i-room.users.count.to_i) %>
+                     <li style="width: <%=width_room%>%">
+                        <img src="../../img/boxed-bg.jpg" alt="User Image" data-toggle="tooltip" title="" data-original-title="VAZIO">
+                        <a class="users-list-name" href="#">Vazio</a>
+                     </li>
+                     <% end %>
+                     <% else %>
+                     <li style="width: <%=width_room%>%">
+                        <%= image_tag(@user.avatar_url(:medium), "data-toggle": "tooltip", "title": "", "data-original-title": "#{@user.two_names.mb_chars.upcase} | #{@user.junior_enterprise_new.mb_chars.upcase}") if @user.avatar? %>
+                        <%= image_tag('dog.jpg', "data-toggle": "tooltip", "title": "", "data-original-title": "#{@user.two_names.mb_chars.upcase} | #{@user.junior_enterprise_new.mb_chars.upcase}") if !@user.avatar? %>
+                        <a class="users-list-name" href="#"><%=@user.first_name.titleize%></a>
+                     </li>
+                     <% end %>
+                  </ul>
+                  <!-- /.users-list -->
+               </div>
+           
+            </div>
+            <!-- /.box-body -->
+         </div>
+         <!-- /.box -->
+      </div>
+      <!-- /.col -->
+      <div class="col-md-9">
+         <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+               <li class="active"><a href="#activity" data-toggle="tab">Pagamento</a></li>
+               <li><a href="#timeline" data-toggle="tab">Minha Programação<% if @event_open %><small class="label pull-right bg-green" style="margin-left: 2px">new</small><% end %></a></li>
+               <li><a href="#settings" data-toggle="tab">Meus Dados</a></li>
+            </ul>
+            <div class="tab-content">
+               <div class="active tab-pane" id="activity">
+                  <!--alert-->
+                  <% if @user.payment.nil? && !@user.lot.nil? %>
+                  <%= link_to payment_path do %>
+                  <div class="alert alert-danger alert-dismissible">
+                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                     <h4><i class="icon fa fa-ban"></i> Você ainda não efetuou o pagamento</h4>
+                     Clique aqui e efetue o pagamento para garantir sua vaga.
+                  </div>
+                  <% end %>
+                  <% elsif !@user.payment.nil? && !@user.payment.paid? %>
+                  <div class="alert alert-info alert-dismissible">
+                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                     <h4><i class="icon fa fa-info"></i> Status do pagamento</h4>
+                     Vimos que você optou pelo método de pagamento <B><%= @user.payment.method %></B>. Caso já tenha pago, aguarde a nossa confirmação.
+                     <% if @user.payment.method == "Boleto" %>
+                     <br>
+                     Parcelas pagas:
+                     <% if @user.payment.portion_paid == 0 %>
+                     <strong>nenhuma parcela paga</strong>
+                     <% else %>
+                     <strong><%= "#{@user.payment.portion_paid}/#{@user.payment.portions}"  %></strong>
+                     <% end %>
+                     <% end %>
+                  </div>
+                  <% elsif !@payment.nil? && @payment.paid? %>
+                  <div class="alert alert-success alert-dismissible">
+                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                     <h4><i class="icon fa fa-check"></i> Status do pagamento</h4>
+                     <b>Parabéns!</b> Seu pagamento foi realizado e sua inscrição foi confirmada. Em breve você poderá escolher o seu quarto e a programação.
+                  </div>
+                  <% elsif @user.lot.nil? && @user.active %>
+                  <div class="alert alert-danger alert-dismissible">
+                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                     <h4><i class="icon fa fa-info"></i>Você está na fila de espera, congressista!</h4>
+                     Infelizmente, as vagas do lote promocional acabaram, mas fique ligado! O primeiro lote abre no dia 20/07.<br>
+                     </br>
+                     <h5><b>Sua posição na fila é:</b>  <%= User.my_position(@user) %>° Lugar</h5>
+                  </div>
+                  <% else %>
+                  <b>CONTA INATIVA</b>
+                  <% end %>
+                  <% if !@payment.nil? %>
+                  <% if @payment.method == "Boleto" %>
+                  <% if @billets_links.count ==0 %>
+                  OPS!! Parece que houve um erro ao gerar seu(s) boleto(s). Não se preocupe, você está com a vaga garantida. Em breve você poderá gerar seus boletos.  <br> <%= link_to "Tentar Novamente", payment_billet_again_path, method: :put unless @payment.nil? %><%#=link_to 'Tentar novamente' %>
+                  <% end %>
+
+                  <% @billets_links.each do |link| #, download: 'data'%>
+
+                  <% if link.status == 'PENDING' %>
+
+                  <div class="btn-group">
+
+
+                     <a data-toggle="tooltip" title="" data-original-title="PAGAMENTO PENDENTE" type="button" href="<%=link.boleto_url%>" class="btn btn-danger btn-space" target="_blank" class="button"><%= link.description.nil? ? 'Boleto Único' : link.description %></a>
+
+
+                     <button type="button" class="btn btn-danger dropdown-toggle" style="margin-left: -5px;" data-toggle="dropdown">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                     </button>
+
+                     <ul class="dropdown-menu" role="menu">
+                       <li><a href="#" data-toggle="modal" data-target="#modal-pagamento">Transferencia ou Deposito</a></li>
+
+                       <li><a href="#" data-toggle="modal" data-target="#modal-tempo">Tempo de Processamento</a></li>
+                     </ul>
+
+
+                 
+                  </div>
+
+
+                  <% elsif link.status == 'RECEIVED' %>
+                  <button data-toggle="tooltip" title="" data-original-title="PAGAMENTO RECEBIDO" type="button" class="btn btn-success btn-space"><%=link.description.nil? ? 'Boleto Único' : link.description%></button>
+
+                  <% elsif link.status == 'OVERDUE' %>
+                  <button data-toggle="tooltip" title="" data-original-title="PAGAMENTO ATRASADO" type="button" class="btn btn-alert btn-space"><%=link.description.nil? ? 'Boleto Único' : link.description%></button>
+
+                  <% end %>
+                  <% end %>
+
+                  <% if @billets_links.where(status:'OVERDUE').any? %>
+                  <h2 class="page-header"></h2>
+                  <h3 class="box-title __web-inspector-hide-shortcut__"> Fica de olho empresário jr, você tem boletos atrasados. :)</h3>
+
+                  <% @billets_links.where(status:'OVERDUE').each do |link| %>
+                  <%= link_to link.boleto_url, target: '_blank' do %>
+                  <button data-toggle="tooltip" title="" data-original-title="EFETUE O PAGAMENTO!" type="button" class="btn btn-alert btn-space"><%=link.description.nil? ? 'Boleto Único' : link.description%></button> 
+                  <% end %>
+                  Multa: 0%
+                  <% end %>
+                  <% end %>
+                  <% end %>
+                  <% end %>
+
+                  <% if !@payment.nil? && @payment.portion_paid==0 && params[:view]=='true' %>
+                  <% if @payment.method == "PagSeguro"  %>
+                  <%= link_to @payment.url_pagseguro, target: '_blank' do %>
+                  <input data-toggle="tooltip" title="" data-original-title="PAGAMENTO <%= @payment.status_pagseguro.nil? ? ' PENDENTE' : @payment.status_pagseguro.upcase%>" src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/120x53-pagar.gif" type="image" class="btn btn-alert btn-space">
+                  <% end %>
+                  <% end %>
+                  <% end %>
+                  <!--alert end-->
+               </div>
+               <!-- /.tab-pane -->
+               <div class="tab-pane" id="timeline">
+                  <%#= render "user_dashboard/timeline" %>
+                  <div class="box-body">
+                     <div class="box-group" id="accordion">
+                        <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+                        <% if @event_open %>
+                        <% @days.each_with_index do |event, index| %>
+                        <div class="panel box box-primary">
+                           <div class="box-header with-border">
+                              <h4 class="box-title">
+                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%=index%>">
+                                 Dia <%=event[:date].strftime('%d/%m')  %>
+                                 </a>
+                              </h4>
+                           </div>
+                           <div id="collapse<%=index%>" class="panel-collapse collapse">
+                              <div class="box-body">
+                                 <!-- The timeline -->
+                                 <ul class="timeline timeline-inverse">
+                                    <!-- timeline time label -->
+                                    <% event[:hours].each  do |hour| %>
+                                    <li class="time-label">
+                                       <span class="bg-blue">
+                                       <%= "#{hour[:time]}" %>
+                                       </span>
+                                    </li>
+                                    <%a = true%>
+                                    <% hour[:events].each do |event| %>
+                                    <% if event.users.include? @user %>
+                                    <!-- /.timeline-label -->
+                                    <!-- timeline item -->
+                                    <li>
+                                       <i class="fa fa-clock-o bg-purple"></i>
+                                       <div class="timeline-item">
+                                          <span class="time"><i class="fa fa-clock-o"></i> <%= "#{event.start.strftime('%H:%M')} - #{event.end.strftime('%H:%M')}" %></span>
+                                          <h3 class="timeline-header"><a href="javascript:void(0)"><%= event.name %></a> Com <%= event.facilitator %></h3>
+                                          <div class="timeline-body">
+                                             <div>
+                                                <%= event.description == "" ? "Descrição não informada." : event.description%></br></br>
+                                                <b> EJS que estão participando desta programação: </b><a href="javascript:void(0)" data-toggle="collapse" data-target="#ejs_participantes_<%= event.id %>">Abrir/Fechar</a>
+                                                <div id="ejs_participantes_<%= event.id %>" class="collapse"><%= event.ejs_names %></div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </li>
+                                    <%else%>
+                                    <% if !event.concurrents(current_user).any? && a==true %>
+                                    <%a = false%>
+                                    <li>
+                                       <i class="fa fa-clock-o bg-red"></i>
+                                       <div class="timeline-item">
+                                          <h3 class="timeline-header"><a href="javascript:void(0)">Nenhuma programação foi selecionada para este horário.</a></h3>
+                                       </div>
+                                    </li>
+                                    <%end%>
+                                    <%end%>
+                                    <%end%>
+                                    <%end%>
+                                    <li>
+                                       <i class="fa fa-calendar bg-gray"></i>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                        <%end%>
+                        <%else%>
+                        <span class="text-center" style="color: #F44336">
+                           <h4>Em breve você poderá escolher a sua programação.</h4>
+                        </span>
+                        <%end%>
+                     </div>
+                  </div>
+               </div>
+               <!-- /.tab-pane -->
+               <div class="tab-pane" id="settings">
+                  <div class="clearfix">
+                     <%= link_to edit_user_registration_path, class: 'btn btn-app btn-primary' do %>
+                     <i class="fa fa-edit"></i> Editar meus dados
+                     <% end %>
+                     <%= link_to password_edit_path, class: 'btn btn-app btn-primary' do %>
+                     <i class="fa fa-edit"></i> Editar minha senha
+                     <% end %>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-12">
+                        <b>DADOS PESSOAIS</b>
+                     </div>
+                     <hr  style="margin-bottom: 0px">
+                     <div class="col-sm-6 ">
+                        <b>Nome:</b> <%=@user.name.upcase %><br>
+                        <b>Email:</b> <%=@user.email.upcase %><br>
+                        <b>CPF:</b> <%=@user.cpf %><br>
+                        <b>Data de nascimento:</b> <%=@user.birthday %>
+                     </div>
+                     <div class="col-sm-6 ">
+                        <b>RG:</b> <%=@user.general_register %><br>
+                        <b>Gênero:</b> <%=@user.gender.upcase %><br>
+                        <b>Telefone:</b> <%=@user.phone %><br>
+                        <b>Criação da conta:</b> <%=@user.created_at.strftime("%d/%m/%Y - %H:%M:%S") %>
+                     </div>
+                  </div>
+                  <div class="row" style="margin-top: 15px">
+                     <div class="col-sm-12">
+                        <b>PAGAMENTO</b>
+                     </div>
+                     <hr  style="margin-bottom: 0px">
+                     <div class="col-sm-6 ">
+                        <b>Forma de Pagamento:</b> <%= @payment.nil? ? 'Não Escolhida' : @user.payment.method.upcase %><br>
+                        <b>Status do Pagamento:</b> <% unless @payment.nil?
+                           @user.payment.paid? ? 'PAGO' : 'NÃO PAGO'
+                           end %><br>
+                     </div>
+                     <div class="col-sm-6 ">
+                        <b>Data de Pagamento:</b> <%= @user.paid_on.nil? ? '' : @user.paid_on.strftime("%d/%m/%Y - %H:%M:%S") %><br>
+                        <b>Lote Alocado:</b> <%= @user.lot.nil? ? 'NÃO ALOCADO' : @user.lot.name.upcase %><br>
+                     </div>
+                  </div>
+                  <div class="row" style="margin-top: 15px">
+                     <div class="col-sm-12">
+                        <b>DADOS DO MEJ</b>
+                     </div>
+                     <hr  style="margin-bottom: 0px">
+                     <div class="col-sm-6 ">
+                        <b>Federação:</b> <%= @user.federation ? @user.federation.upcase : 'Não Federado' %><br>
+                        <b>Nome da EJ:</b> <%=@user.junior_enterprise_new.upcase %><br>
+                     </div>
+                     <div class="col-sm-6 ">
+                        <b>Cargo:</b> <%=@user.job.upcase %><br>
+                        <b>Universidade:</b> <%=@user.university.upcase %><br>
+                     </div>
+                  </div>
+                  <div class="row" style="margin-top: 15px">
+                     <div class="col-sm-12">
+                        <b>ENDEREÇO</b>
+                     </div>
+                     <hr  style="margin-bottom: 0px">
+                     <div class="col-sm-6 ">
+                        <b>Endereço:</b> <%=@user.address.upcase %><br>
+                        <b>Estado:</b> <%=@user.state.upcase %><br>
+                     </div>
+                     <div class="col-sm-6 ">
+                        <b>Cidade:</b> <%=@user.city.upcase %><br>
+                        <b>Cep:</b> <%=@user.cep.upcase %><br>
+                     </div>
+                  </div>
+                  <div class="row" style="margin-top: 15px">
+                     <div class="col-sm-12">
+                        <b>INFORMAÇÕES ADICIONAIS</b>
+                     </div>
+                     <hr style="margin-bottom: 0px">
+                     <div class="col-sm-6 ">
+                        <b>Traslado:</b> <%=@user.transport_required ? 'SIM' : 'NÃO' %><br>
+                        <b>Local de saída:</b> <%=@user.transport_local.nil? ? '' : @user.transport_local %><br>
+                     </div>
+                     <div class="col-sm-6 ">
+                        <b>Nome do Responsável:</b> <%=@user.name_parents.nil? ? '' : @user.name_parents %><br>
+                        <b>Número do Responsável:</b> <%=@user.phone_parents.nil? ? '' : @user.phone_parents %><br>
+                     </div>
+                  </div>
+                  <div class="row" style="margin-top: 15px">
+                     <div class="col-sm-12">
+                        <b>NECESSIDADES ESPECIAIS</b>
+                     </div>
+                     <hr  style="margin-bottom: 0px">
+                     <div class="col-sm-12 ">
+                        <b>Necessidades especiais:</b> <%=@user.special_needs ? 'NÃO' : @user.special_needs %><br>
+                     </div>
+                  </div>
+               </div>
+               <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+         </div>
+         <!-- /.nav-tabs-custom -->
+      </div>
+
+      <% if true==false %>
+      <div class="col-md-9 pull-right">
+         <div class="box box-primary" >
+             <div class="box-header">
+               <h3 class="box-title">Gerar Certificado</h3>
+            </div>
+            <div class="box-body" style="text-align: left;">
+
+            <%unless @user.certificate=="SIM"%>
+            * Para ter acesso ao certificado é necessário responder a pesquisa de satisfação.<br>
+            * Após responder, aguarde nossa confirmação, iremos lhe avisar por e-mail ;)<br>
+            <br><a href="https://goo.gl/forms/7S23jnEVXW5H8gEQ2" target="_blank"><button type="button" class="btn btn-block btn-primary">Responder a Pesquisa</button></a>
+            <%else%>
+               <a href="/certificate.pdf" target="_blank"><button type="button" class="btn btn-block btn-success">Abrir Certificado</button></a>
+            <%end%>
+            </div>
+         </div>
+      </div>   
+      <%end%>
+
+
+
+      <div class="col-md-9 pull-right">
+         <div class="box box-primary" >
+             <div class="box-header">
+               <h3 class="box-title">TOP 5 - EJS CADASTRADAS</h3>
+            </div>
+
+            <div class="box-body" style="text-align: left;">
+
+              <ul class="nav nav-pills nav-stacked ranking-ejsul">
+                <%i = 1%>
+                <% @ej.each do |empresas, usuarios| %>
+
+                <li >
+                  <div class="ranking-ejs color-<%=i%>"><%=i%>° lugar</div>
+                  <b><%=  usuarios.map{ |h| h.junior_enterprise}.max.upcase %></b> 
+                  <div class="pull-right">
+                     <span class="label label-primary" style="margin-right: 4px" data-toggle="tooltip" title="" data-original-title="Total de membros" ><%=  usuarios.count %>  Membros</span> 
+                     <span class="label label-success" style="margin-right: 4px" data-toggle="tooltip" title="" data-original-title="Total de membros pagantes" ><%= count_paymeny_ej(usuarios) %> Pagantes</span> 
+                  </div>
+               </li>
+               <%i = i+1%>
+               <% end %>
+
+            
+           
+
+        
+              </ul>
+  
+            </div>
+         </div>
+      </div>   
+
+
+   <!-- /.col -->
+   </div>
+   <!-- /.row -->
+</section>
+<!-- /.content -->
+
+<% if !@payment.nil? %>
+<% if @payment.method == "Boleto" %>
+<div class="modal patrick-modal fade in" id="modal-pagamento">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+         </div>
+         <div class="modal-body" style="font-size: 17px;line-height: 1.4;color: #6e7a89">
+            Olá !<br><br>
+            Você sabia que você pode pagar os seus boletos via transferência ou depósito?<br>
+            Pois é! Tudo que você precisa é acessar o link da fatura de cada boleto e seguir o tutorial abaixo.
+            <br><br>
+            <% @billets_links.each do |link| #, download: 'data'%>
+            <% if link.status == 'PENDING' || link.status == 'OVERDUE'  %>
+            Fatura <%= link.description.nil? ? 'do Boleto Único' : "da #{link.description}" %>: <a href="<%=link.fatura_url%>" target="_blank">Pagar</a><br>
+            <%end%>
+            <%end%>
+            <br>
+            <h4 style="text-align: center;">1° Passo</h4>
+            - Na parte inferior, selecione a forma de pagamento e depois clique em "ENTENDI, IREI ENVIAR O COMPROVANTE"<br>
+            <div align="center"><img src="/images/asaas/1.jpg" alt="asaas 1" ></div>
+            <br>
+            <h4 style="text-align: center;">2° Passo</h4>
+            - Preencha um número válido para contato<br>
+            <div align="center"><img src="/images/asaas/2.jpg" alt="asaas 1" ></div>
+            <h4 style="text-align: center;">3° Passo</h4>
+            - Selecione o banco<br>
+            - Faça a transferência ou depósito para a conta informada<br>
+            - <b>Envie o comprovate de pagamento para que o seu pagamento seja aprovado.</b><br>
+            <div align="center"><img src="/images/asaas/3.jpg" alt="asaas 1" ></div>
+            <br><br>
+            <div align="center">Prontinho! Agora é só esperar para ser feliz ;)</div>
+            <br>
+            <div align="center"><img src="/images/asaas/feliz.gif" alt="asaas 1" ></div>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+         </div>
+      </div>
+      <!-- /.modal-content -->
+   </div>
+   <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<div class="modal patrick-modal fade in" id="modal-tempo">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+         </div>
+         <div class="modal-body" style="font-size: 17px;line-height: 1.4;color: #6e7a89">
+            Olá !<br><br>
+            Depois que você efetuar o pagamento, irá demorar 1 dia útil para confirmar o recebimento e a confirmação será feita automaticamente pelo nosso sistema ;)<br>
+            <div align="center"><img src="/images/asaas/pc.gif" alt="asaas 1" ></div>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+         </div>
+      </div>
+      <!-- /.modal-content -->
+   </div>
+   <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<%end%>
+<%end%>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.9&appId=147446729139790";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>

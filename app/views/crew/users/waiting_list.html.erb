@@ -1,0 +1,31 @@
+<section class="content-header">
+   <h1>
+      Usários
+      <small>Lista de Espera</small>
+   </h1>
+
+<section style="margin-top: 5px; margin-left: 15px; margin-bottom: -10px">
+      <!-- Info boxes -->
+      <div class="row">
+      <% unless @lot_active.nil? %>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text"><%=@lot.name%></span>
+              <span class="info-box-number"><small><%= @lot_active.users.count %>/</small><%=@lot_active.limit%></span>
+              <span style="font-size: 12px"><%= link_to "Alocar 1° da Lista", crew_move_first_user_to_lot_path(@lot_active), method: :patch, class: 'btn btn-block btn-info'%></span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <% end %>
+    
+      </div>
+   
+</section>
+
+
+<%= render 'table' %>

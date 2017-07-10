@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>EFEJ 2017 - ADMIN - EvenTi Login</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'login', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'login' %>
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/efej/icon.png">
+    <link rel="manifest" href="/icons/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="author" content="GTi Engenharia Júnior">
+    <meta name="description" content="Encontro Fluminense de Empresários Juniores. #CONECTADOS">
+    <meta name="keywords" content="mej, eventi, gti, empreendedorismo, empresa júnior, ej, empresário júnior, sites, sistemas, aplicativos, fejece, confederação, empresas, juniores, empresa, junior, federação, ufc, congresso, rio júnior, EFEJ 2010, efej, rio de janeiro, brasil jr">
+  </head>
+
+  <body>
+  <div class="image-bg" style="background-image: url(/images/efej/bg.jpg);"> &nbsp; </div>
+   <% flash.each do |key, value| %>
+    <script type="text/javascript">
+      toastr.warning('<span><%= value %></span>', "Aviso");
+     </script>
+  <% end %> 
+  <%= yield %>
+    </div>
+
+  
+    <%= javascript_include_tag 'login_footer' %>
+  </body>
+</html>

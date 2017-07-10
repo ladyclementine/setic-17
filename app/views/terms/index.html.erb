@@ -1,0 +1,45 @@
+<script type="text/javascript">
+	function set_size_mais(){
+		var fontSize = parseInt($(".termos_ecej").css("font-size"));
+		fontSize = fontSize + 1 + "px";
+		$(".termos_ecej").css({'font-size':fontSize});
+	}
+	function set_size_menos(){
+		var fontSize = parseInt($(".termos_ecej").css("font-size"));
+		fontSize = fontSize - 1 + "px";
+		$(".termos_ecej").css({'font-size':fontSize});
+	}
+</script>   
+      
+<div class="row">
+        <div class="col-sm-offset-1 col-md-10">
+
+<section class="content">
+   <div class="box box-default">
+      <div class="box-header with-border">
+         <h3 class="box-title">TERMO DE COMPROMISSO </h3><span style="text-align: right;" class="pull-right"><a href="javascript:void(0);" onclick="set_size_mais();">Aumentar Fonte</a> / <a href="javascript:void(0);" onclick="set_size_menos();">Diminuir Fonte</a></span>
+      </div>
+
+      <div class="box-body termos_ecej" style="font-family: arial; font-size: 14px;">
+         <div style="text-align: center;"><strong>TERMO DE COMPROMISSO</strong></div>
+         <div style="text-align: center;"><strong>XX° ENCONTRO DE EMPRESAS JUNIORES</strong></div>
+         </br>
+         <div style="text-align: center;">
+            CLÁUSULAS AQUI</strong>
+            <br><br>
+           <br>
+            <div style="text-align: right;">Fortaleza, 12 de junho 2017.</div>
+            <% if !@user.terms_accept %>
+            <%= link_to terms_update_path, method: :put do %>
+            <button type="button" class="btn btn-block btn-primary">Eu li e concordo com os termos de compromisso</button><% end %><% end %>
+         </div>
+      </div>
+      <!-- /.box-body -->
+   </div>
+   <!-- /.box -->
+</section>
+<!-- /.content -->
+
+</div>
+
+</div>

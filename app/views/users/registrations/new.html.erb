@@ -1,0 +1,84 @@
+<div class="login-box" style="margin-top: -40px">
+   <!-- /.login-logo -->
+   <div class="login-box-body">
+      <div class="row">
+         <div class="col-md-12">
+            <div align="center"><%= image_tag("efej/logo-cinza.png", :alt => "EFEJ 17",:class => "profile-image-login") %></div>
+            <p class="center text-center">Inscreva-se agora!</p>
+         </div>
+      </div>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name),  html: { class:"registration_form", id: "registration_form", method: :post }) do |f| %>
+      <div class="form-group has-feedback">
+         <%= f.email_field :email, id:"email", autofocus: true, placeholder:'Email', class: 'form-control' %>
+         <i class="fa fa-user  form-control-feedback"></i>
+      </div>
+      <div class="form-group has-feedback">
+         <%= f.password_field :password, id: "password", placeholder:'Senha', autocomplete: "off", class: 'form-control' %>
+         <i class="fa fa-lock  form-control-feedback"></i>
+      </div>
+      <div class="form-group has-feedback">
+         <%= f.password_field :password_confirmation, id: "confirm_password", placeholder:'Repita a senha', autocomplete: "off" , class: 'form-control' %>
+         <i class="fa fa-lock  form-control-feedback"></i>
+      </div>
+      <div class="row">
+         <!-- /.col -->
+         <div class="col-xs-12" style="margin-bottom: 6px">
+            <button type="submit" class="btn btn-primary btn-block btn-flat">ENVIAR INSCRIÇÃO</button>
+         </div>
+         <!-- /.col -->
+      </div>
+      <% end %>
+      <div class="text-center"  style="margin-bottom: 20px">
+         <p style="color:#252525; font-weight: bold;">- OU -</p>
+         <%= link_to user_facebook_omniauth_authorize_path+"?auth_type=rerequest&scope=email", "class": "btn btn-block btn-social btn-facebook btn-flat", id: "sign_in" do %><i class="fa fa-facebook" style="color:#fff;text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);"></i> CADASTRAR COM FACEBOOK <% end %>
+      </div>
+      <!-- /.social-auth-links -->
+      <div class="text-center">
+         <%= render "devise/shared/links" %>
+      </div>
+   </div>
+   <!-- /.login-box-body -->
+     <span class="message__title" style="font-size: 12px">Desenvolvido com ♥ pela <a href="https://www.facebook.com/gti.ufc/" target="_blank">GTI Jr.</a></span>
+</div>
+<!-- /.login-box -->
+<script type="text/javascript">
+   $(document).ready(function() {
+     $("#registration_form").validate({
+       errorElement : 'div',
+       errorPlacement: function(error, element) {
+         var placement = $(element).data('error');
+         if (placement) {
+           $(placement).append(error)
+         } else {
+           error.insertAfter(element);
+         }
+       }
+     });
+     $( "#email" ).rules( "add", {
+       required: true,
+       email: true,
+       messages: {
+         required: "Preencha com seu email",
+         email: "Entre com um email válido"
+       }
+     });
+     $( "#password" ).rules( "add", {
+       required: true,
+       rangelength: [8,30],
+       messages: {
+         required: "Entre com sua senha",
+         rangelength: "A senha deve conter entre 8 e 30 caracteres"
+       }
+     });
+     $( "#confirm_password" ).rules( "add", {
+       required: true,
+       rangelength: [8,30],
+       equalTo: "#password",
+       messages: {
+         required: "Entre com sua senha",
+         rangelength: "A senha deve conter entre 8 e 30 caracteres",
+         equalTo: "As senhas não conferem"
+       }
+     });
+   });
+</script>

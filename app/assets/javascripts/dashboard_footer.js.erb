@@ -1,0 +1,653 @@
+//= require app
+//= require bootstrap/bootstrap.min
+//= require bootstrap/bootstrap-hover-dropdown.js
+//= require plugins/dropify/dropify.min
+//= require plugins/moment/moment.min
+
+//= require plugins/moment/moment-timezone-with-data-2010-2020.min.js
+//= require plugins/datepicker/daterangepicker
+
+//= require plugins/datatable/jquery.dataTables.min
+//= require plugins/datatable/dataTables.bootstrap.min
+//= require plugins/datatable/dataTables.responsive.min
+
+//= require plugins/datatable/dataTables.buttons.min.js
+//= require plugins/datatable/buttons.flash.min.js
+//= require plugins/datatable/buttons.html5.min.js
+//= require plugins/datatable/buttons.print.min.js
+//= require plugins/datatable/dataTables.fixedHeader.min.js
+//= require plugins/datatable/jszip.min.js
+//= require plugins/datatable/pdfmake.min.js
+//= require plugins/datatable/vfs_fonts.js
+
+//= require data-confirm-modal
+//= require plugins/iCheck/icheck.min
+//= require jquery.plugin.js
+//= require jquery.countdown.js
+//= require plugins/select2/select2.full.min.js
+//= require animated-headlines
+$(function() {
+
+    $('.select2').select2();
+    $('#table_ecej').DataTable({
+        "oLanguage": {
+            "sEmptyTable": "Nenhum registro encontrado",
+            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ".",
+            "sLengthMenu": "Mostrando _MENU_ resultados",
+            "sLoadingRecords": "Carregando...",
+            "sProcessing": "Processando...",
+            "sZeroRecords": "Nenhum registro encontrado",
+            "sSearch": "Pesquisar",
+            "oPaginate": {
+                "sNext": "Próximo",
+                "sPrevious": "Anterior",
+                "sFirst": "Primeiro",
+                "sLast": "Último"
+            },
+            "oAria": {
+                "sSortAscending": ": Ordenar colunas de forma ascendente",
+                "sSortDescending": ": Ordenar colunas de forma descendente"
+            }
+        },
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": true,
+        "responsive": true,
+        "pageLength": 50,
+        dom: "Bfrtip",
+              buttons: [
+                {
+                    extend: 'csv',
+                    title: 'EFEJ 2017 - CSV - '+ moment().format('DD/MM/YYYY HH:mm:ss') + ' - '+$('.box-title').html(),
+                    exportOptions: {
+                        columns: "thead th:not(.noExport)"
+                    }
+                },
+                {  
+                     extend: 'excel',
+                    title: 'EFEJ 2017 - EXCEL - '+ moment().format('DD/MM/YYYY HH:mm:ss') + ' - '+$('.box-title').html(),
+                    exportOptions: {
+                        columns: "thead th:not(.noExport)"
+                    }
+                },
+
+                {
+                    extend: 'pdf',
+                    title: 'EFEJ 2017 - PDF - '+ moment().format('DD/MM/YYYY HH:mm:ss') + ' - '+$('.box-title').html(),
+                    exportOptions: {
+                        columns: "thead th:not(.noExport)"
+                    }
+                }
+              ]
+    });
+
+    
+    var table =  $('#table_ecej_rooms').DataTable({
+        "columnDefs": [
+            { "visible": false, "targets": 1 }
+        ],
+        "oLanguage": {
+            "sEmptyTable": "Nenhum registro encontrado",
+            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ".",
+            "sLengthMenu": "Mostrando _MENU_ resultados",
+            "sLoadingRecords": "Carregando...",
+            "sProcessing": "Processando...",
+            "sZeroRecords": "Nenhum registro encontrado",
+            "sSearch": "Pesquisar",
+            "oPaginate": {
+                "sNext": "Próximo",
+                "sPrevious": "Anterior",
+                "sFirst": "Primeiro",
+                "sLast": "Último"
+            },
+            "oAria": {
+                "sSortAscending": ": Ordenar colunas de forma ascendente",
+                "sSortDescending": ": Ordenar colunas de forma descendente"
+            }
+        },
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": true,
+        "responsive": true,
+        "pageLength": 50,
+        "drawCallback": function ( settings ) {
+            var api = this.api();
+            var rows = api.rows( {page:'current'} ).nodes();
+            var last=null;
+ 
+            api.column(1, {page:'current'} ).data().each( function ( group, i ) {
+                if ( last !== group ) {
+                    $(rows).eq( i ).before(
+                        '<tr class="group"><td colspan="5">'+group+'</td></tr>'
+                    );
+ 
+                    last = group;
+                }
+            } );
+        },
+        dom: "Bfrtip",
+              buttons: [
+                {
+                    extend: 'csv',
+                    title: 'EFEJ 2017 - CSV - '+ moment().format('DD/MM/YYYY HH:mm:ss') + ' - '+$('.box-title').html(),
+                    exportOptions: {
+                        columns: "thead th:not(.noExport)"
+                    }
+                },
+                {  
+                     extend: 'excel',
+                    title: 'EFEJ 2017 - EXCEL - '+ moment().format('DD/MM/YYYY HH:mm:ss') + ' - '+$('.box-title').html(),
+                    exportOptions: {
+                        columns: "thead th:not(.noExport)"
+                    }
+                },
+
+                {
+                    extend: 'pdf',
+                    title: 'EFEJ 2017 - PDF - '+ moment().format('DD/MM/YYYY HH:mm:ss') + ' - '+$('.box-title').html(),
+                    exportOptions: {
+                        columns: "thead th:not(.noExport)"
+                    }
+                }
+              ]
+    });
+
+     // Order by the grouping
+    $('#table_ecej_rooms tbody').on( 'click', 'tr.group', function () {
+        var currentOrder = table.order()[0];
+        if ( currentOrder[0] === 1 && currentOrder[1] === 'asc' ) {
+            table.order( [ 1, 'desc' ] ).draw();
+        }
+        else {
+            table.order( [ 1, 'asc' ] ).draw();
+        }
+    } );
+    table.order( [ 1, 'asc' ] ).draw();
+
+   
+
+
+    dataConfirmModal.setDefaults({
+        title: '',
+        commit: 'Continuar',
+        cancel: 'Cancelar',
+        onConfirm: function() { return true },
+        onCancel:  function() { return false },
+        modalClass: 'patrick-modal'
+    });
+
+
+
+    //iCheck for checkbox and radio inputs
+    $('input[type="checkbox"].minimal').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass: 'iradio_minimal-blue'
+    });
+});
+
+
+$('.dropify').dropify({
+    messages: {
+        'default': 'Arraste a foto ou clique para enviar',
+        'replace': 'Arraste ou clique para substituir',
+        'remove': 'Remover',
+        'error': 'Esse arquivo é muito grande'
+
+    }
+});
+
+$('#birthday_picker').daterangepicker({
+    locale: {
+        format: 'DD/MM/YYYY',
+        daysOfWeek: ['Do', 'Se', 'Te', 'Qua', 'Qui', 'Sex', 'Sa'],
+        monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+    },
+
+    singleDatePicker: true,
+    showDropdowns: true,
+    startDate: moment().subtract(22, 'years'),
+    autoUpdateInput: false
+
+}, function(chosen_date) {
+    $('#birthday_picker').val(chosen_date.format('DD/MM/YYYY'));
+});
+
+$('#lots_picker').daterangepicker({
+    locale: {
+        format: 'DD/MM/YYYY HH:mm',
+        daysOfWeek: ['Do', 'Se', 'Te', 'Qua', 'Qui', 'Sex', 'Sa'],
+        monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+    },
+    singleDatePicker: true,
+    timePicker: true,
+    timePicker24Hour: true,
+    autoUpdateInput: false
+}, function(chosen_date) {
+    $('#lots_picker').val(chosen_date.format('DD/MM/YYYY HH:mm'));
+});
+
+$('#lots_picker1').daterangepicker({
+    locale: {
+        format: 'DD/MM/YYYY HH:mm',
+        daysOfWeek: ['Do', 'Se', 'Te', 'Qua', 'Qui', 'Sex', 'Sa'],
+        monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+    },
+    singleDatePicker: true,
+    timePicker: true,
+    timePicker24Hour: true,
+    autoUpdateInput: false
+}, function(chosen_date) {
+    $('#lots_picker1').val(chosen_date.format('DD/MM/YYYY HH:mm'));
+});
+
+$(function() {
+
+
+});
+
+function change_payment_parts(sel, price){
+    if(sel.value !== ''){
+        $("#button_payment_billet").prop("disabled",false);
+    } else {
+        $("#button_payment_billet").prop("disabled",true);
+    }
+    var txt = '';
+    var data_boleto = '';
+    var partions = 0
+    var total = $('#parcelamento_sel option').size() - 1;
+    <%  config = YAML.load_file("#{Rails.root.to_s}/config/asaas.yml")
+        vencimento_boletos = config['vencimentos']
+        m1 = vencimento_boletos['mes1'].split('/')
+        m2 = vencimento_boletos['mes2'].split('/')
+        m3 = vencimento_boletos['mes3'].split('/')
+        m4 = vencimento_boletos['mes4'].split('/')
+    %>
+    var mes1 = moment('<%="#{m1[2]}-#{m1[1]}-#{m1[0]}"%>T23:59:59');
+    var mes2 = moment('<%="#{m2[2]}-#{m2[1]}-#{m2[0]}"%>T23:59:59');
+    var mes3 = moment('<%="#{m3[2]}-#{m3[1]}-#{m3[0]}"%>T23:59:59');
+    var mes4 = moment('<%="#{m4[2]}-#{m4[1]}-#{m4[0]}"%>T23:59:59');
+    var data_atual = moment();
+
+    if (mes1 >= data_atual) {
+        data_boleto = mes1
+    } else if (mes2 >= data_atual) {
+        data_boleto = mes2
+    } else if (mes3 >= data_atual) {
+        data_boleto = mes3
+    } else if (mes4 >= data_atual) {
+        data_boleto = mes4
+    }
+
+    partions = sel.value ? sel.value : 1
+    $('#price_js').html((price + (2.00*(partions-1))).toFixed(2));
+
+    if (partions >= 1) {
+        txt += '<div class="radio"><label>';
+        txt += '<input disabled type="radio" name="options0" id="options0" value="0" checked=""> Vencimento 1° parcela: ' + data_boleto.format('DD/MM/YYYY') + ' ';
+        txt += '</label>';
+    }
+
+    if (partions >= 2) {
+        var data_f = data_boleto.add(1, 'month').format('DD/MM/YYYY');
+        txt += '<div class="radio"><label>';
+        txt += '<input  disabled type="radio" name="options01" id="options0" value="0" checked=""> Vencimento 2° parcela: ' + data_f + ' ';
+        txt += '</label>';
+    }
+
+    if (partions >= 3) {
+        var data_f = data_boleto.add(1, 'month').format('DD/MM/YYYY');
+        txt += '<div class="radio"><label>';
+        txt += '<input disabled type="radio" name="options03" id="options0" value="0" checked=""> Vencimento 3° parcela: ' + data_f + ' ';
+        txt += '</label>';
+
+    }
+
+    if (partions >= 4) {
+        var data_f = data_boleto.add(1, 'month').format('DD/MM/YYYY');
+        txt += '<div class="radio"><label>';
+        txt += '<input disabled type="radio" name="options02" id="options0" value="0" checked=""> Vencimento 4° parcela: ' + data_f + ' ';
+        txt += '</label>';
+    }
+
+    txt += '<div class="radio"><label>';
+    txt += partions + ' x ' + ($('#price_js').html() / partions).toFixed(2);
+    txt += '</label>';
+
+    $('.js_radio_parts').html(txt);
+}
+
+
+$(function() {
+    /*
+    var transport = $('#transport').val();
+    if (transport === '') {
+        $("#transport_check").prop("checked", false);
+    } else {
+        $("#transport_check").prop("checked", true);
+    }
+
+    $('#transport_check').click(function() {
+        if ($('#transport_check').is(':checked')) {
+            $("#transport").prop('disabled', false);
+        } else {
+            $("#transport").val('');
+            $("#federation").prop('disabled', true);
+        }
+    });
+    if ($('#transport_check').is(':checked')) {
+        $("#transport").prop('disabled', false);
+    } else {
+        $("#transport").prop('disabled', true);
+    }
+    */
+});
+
+
+function valueChanged() {
+
+}
+
+$('#cpf').formatter({
+    'pattern': '{{999}}.{{999}}.{{999}}-{{99}}',
+});
+$('#postal_code').formatter({
+    'pattern': '{{99999}}-{{999}}',
+});
+$('.phone').formatter({
+    'pattern': '({{99}}) {{99999}}-{{9999}}',
+});
+$('#birthday_picker').formatter({
+    'pattern': '{{99}}/{{99}}/{{9999}}',
+});
+$('.progress').hide();
+if ($("#edit_user_form").length) {
+    $("#edit_user_form").validate({
+        submitHandler: function(form) {
+            // do other things for a valid form
+            $('.progress').show();
+            form.submit();
+        },
+        errorElement: 'div',
+        errorPlacement: function(error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error);
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    });
+    $("#user_avatar").rules("add", {
+        extension: "png|jpg",
+        messages: {
+            extension: "Só são permitidos arquivos .jpg ou .png"
+        }
+    });
+    $("#name").rules("add", {
+        required: true,
+        messages: {
+            required: "Preencha com nome completo"
+        }
+    });
+    $("#rg").rules("add", {
+        required: true,
+        digits: true,
+        messages: {
+            required: "Entre com seu número de identidade",
+            digits: "Preencha esse campo apenas com números"
+        }
+    });
+    $("#cpf").rules("add", {
+        required: true,
+        rangelength: [11, 14],
+        messages: {
+            required: "Entre com seu cpf",
+            rangelength: "O CPF deve possuir 11 dígitos"
+        }
+    });
+    $("#birthday_picker").rules("add", {
+        required: true,
+        messages: {
+            required: "Entre com sua data de nascimento",
+        }
+    });
+    $("#phone").rules("add", {
+        required: true,
+        messages: {
+            required: "Entre com seu número de celular"
+        }
+    });
+    $("#phoneresp").rules("add", {
+        required: true,
+        messages: {
+            required: "Entre com um número de celular"
+        }
+    });
+    $("#nameresp").rules("add", {
+        required: true,
+        messages: {
+            required: "Entre com o nome do responsavel"
+        }
+    });
+    $("#postal_code").rules("add", {
+        required: true,
+        //  rangelength: [8],
+        messages: {
+            required: "Entre com seu cep",
+            //  rangelength: "O CEP deve possuir 8 dígitos"
+        }
+    });
+    $("#state").rules("add", {
+        required: true,
+        messages: {
+            required: "Preencha com seu Estado"
+        }
+    });
+    $("#city").rules("add", {
+        required: true,
+        messages: {
+            required: "Preencha com o nome de sua cidade"
+        }
+    });
+    $("#street").rules("add", {
+        required: true,
+        messages: {
+            required: "Preencha com seu endereço - rua e número"
+        }
+    });
+    $("#junior_enterprise").rules("add", {
+        required: true,
+        messages: {
+            required: "Entre com o nome de sua EJ"
+        }
+    });
+    $("#job").rules("add", {
+        required: true,
+        messages: {
+            required: "Diga qual cargo exerce"
+        }
+    });
+    $("#university").rules("add", {
+        required: true,
+        messages: {
+            required: "Informe a universidade da sua EJ"
+        }
+    });
+
+    //  $( "#transport" ).rules( "add", {
+    //    required: true,
+    //    messages: {
+    //      required: "Precisamos saber se precisa de transporte para o evento"
+    //    }
+    //  });
+}
+
+function popitup(url) {
+    //newwindow=window.open(url,'Tire sua dúvida - EFEJ 2017','height=500,width=500');
+    newwindow = window.open('http://google.com.br', 'Tire sua dúvida - EFEJ 2017','height=500,width=500'); 
+    if (window.focus) {newwindow.focus()}
+    return false;
+}
+
+
+$('.preloader').hide();
+$(window).load(function(){
+  // Preloader
+ $('.preloader').fadeOut('slow',function(){$(this).hide();});
+});
+
+
+
+$('body').on('shown.bs.modal', function () {
+     $('.patrick-modal').find('.commit').on('click', function () {
+      $('.preloader').show();
+     });
+});
+
+var play = false;
+function animate_ship(){
+    if (play===false){
+        play = true;
+        AnimateRotate(-90);
+    }
+}
+
+function AnimateRotate(angle) {
+    var $elem = $('#navio');
+    $({deg: 0}).animate({deg: angle}, {
+        duration: 2000,
+        complete : function(){
+            setTimeout(function() {
+                $('#navio').hide();
+                $(".ocean").hide("slow");
+            }, 2000);
+        },
+        step: function(now) {
+            $elem.css({
+                transform: 'rotate(' + now + 'deg)'
+            });
+            var gti = (now*-1)*200;
+            $elem.animate({"top": '+='+gti+'px'});
+        }
+    });
+
+}
+
+
+
+function change_name_room(id, name) {
+
+    dataConfirmModal.confirm({
+        title: 'Editar Nome',
+        text: "Nome do quarto: <input class='form-control' maxlength='23' id='new_name_"+id+"' value='" + $('.name_room_'+id).html() + "'> ",
+        commit: 'Editar',
+        cancel: 'Cancelar',
+        onConfirm: function() {
+            var new_name = $('#new_name_'+id).val();
+            $.post('/room/change_name', {room_id: id, name: new_name}).
+            success(function(data) {
+                if (data.mensage === 'success') {
+                    $('.name_room_'+id).html(new_name);
+                    $('.title_room_'+id).attr('data-original-title','Atualizado por: '+data.user_add);
+                } else {
+                    alert("Você não está no quarto requisitado.")
+                }
+            }).
+            error(function() {
+                alert(":(! Algo errado :-(")
+            })
+        },
+        onCancel: function() {
+
+        }
+    });
+
+}
+
+jQuery(document).ready(function($) {
+
+  /* Countdown 
+  ----------------------------------------------------------------------*/
+  if($(".room_time").length>0) {
+    $(function () {
+      var austDay = new Date(2017, 04, 16, 22, 0, 0);
+      $('.room_time').countdown({until: austDay, onTick: watchGti });
+    });
+    var first = false;
+    function watchGti(periods) {
+      if(first) 
+        return false;
+      if ($.countdown.periodsToSeconds(periods) <= 10 && first==false && $.countdown.periodsToSeconds(periods) >0) { 
+        animationLogo();
+        first=true;
+      } 
+    }
+  }
+
+  if($(".event_time").length>0) {
+    $(function () {
+      var austDay = new Date(2017, 04, 18, 22, 0, 0);
+      $('.event_time').countdown({until: austDay, onTick: watchGti });
+    });
+    var first = false;
+    function watchGti(periods) {
+      if(first) 
+        return false;
+      if ($.countdown.periodsToSeconds(periods) <= 10 && first==false && $.countdown.periodsToSeconds(periods) >0) { 
+        animationLogo();
+        first=true;
+      } 
+    }
+
+  }
+
+});
+
+
+$(document).ready(function() {
+
+
+
+$(".hover_room").hover(function(){
+    $( ".room_time" ).stop().animate({
+            'margin-left': '23px'
+        }, 200)
+    }, function () {
+      $( ".room_time" ).stop()
+        .animate({
+           'margin-left': '0px'
+    }, 200)
+});
+
+
+$(".hover_event").hover(function(){
+    $( ".event_time" ).stop().animate({
+            'margin-left': '23px'
+        }, 200)
+    }, function () {
+      $( ".event_time" ).stop()
+        .animate({
+           'margin-left': '0px'
+    }, 200)
+});
+
+});
+
+
+    
+
+

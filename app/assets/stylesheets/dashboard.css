@@ -1,0 +1,20 @@
+/*
+ *= require_self
+ *= require bootstrap/bootstrap.min.css
+ *= require select2/select2.min.css
+ *= require AdminLTE.css
+ *= require font-awesome.min.css
+ *= require iCheck/minimal/blue
+ *= require toast/toastr.css
+
+ = require skins/_all-skins.css
+
+ *= require dropify/dropify.css
+ *= require datepicker/daterangepicker.css
+ *= require datatable/dataTables.bootstrap.css
+ *= require datatable/responsive.bootstrap.min.css
+ *= require datatable/buttons.bootstrap.min.css
+ *= require animated-headlines.css
+
+
+ */

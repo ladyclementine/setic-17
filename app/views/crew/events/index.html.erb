@@ -1,0 +1,68 @@
+<section class="content-header">
+   <h1>
+      Programação
+   </h1>
+</section>
+<!-- Main content -->
+<section class="content">
+   <!-- <section class="box"> -->
+   <div class="row">
+      <div class="col-xs-12">
+         <div class="box">
+            <div class="box-header">
+               <%= link_to "NOVO EVENTO", new_crew_event_path, class:"btn btn-info pull-right" %>
+               <h3 class="box-title">Gerenciamento de Programação</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+             <table id="table_ecej_rooms" class="table table-striped table-bordered dt-responsive nowrap display"  cellspacing="0" width="100%">
+                  <thead>
+                     <tr>
+                        <th>Nome</th>
+                        <th>dia</th>
+                        <th>Facilitador</th>
+                        <th>Vagas</th>
+                        <th hidden="">Dia</th>
+                        <th>Horário</th>
+                        <th class="noExport">Opções</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                  
+                     <% @crew_events.each do |event| %>
+                     <tr>
+                        <td><%= event.name %></td>
+                        <td>Dia <%= event.start.strftime('%d/%m') %></td>
+                        <td><%= event.facilitator %></td>
+                        <td><%= "#{event.users.count} / #{event.limit}" %></td>
+                        <td hidden=""><%= event.start.strftime('%d/%m/%Y') %></td>
+                        <td><%= event.start.strftime('%H:%M') %> - <%= event.end.strftime('%H:%M') %></td>
+          
+
+                        <td>
+                          <%= link_to crew_event_path(event) do %>
+                           <small class="btn btn-info dropdown-toggle btn-xs">
+                           <i class="fa fa-eye"></i> Ver Congressistas
+                           </small>
+                           <% end %>
+                           <%= link_to edit_crew_event_path(event) do %>
+                           <small class="btn btn-default dropdown-toggle btn-xs">
+                           <i class="fa fa-pencil-square-o"></i> Editar
+                           </small>
+                           <% end %>
+                           <%= link_to crew_event_path(event), method: :delete, data: { confirm: "Deseja realmente apagar este evento e seus Congressistas alocados?" } do %>
+                           <small class="btn btn-danger dropdown-toggle btn-xs">
+                           <i class="fa fa-pencil-square-o"></i> Excluir
+                           </small>
+                           <% end %>
+                        </td>
+                     </tr>
+                     <% end %> 
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- </section> -->
+</section>

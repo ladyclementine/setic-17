@@ -1,0 +1,79 @@
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+     
+      <!-- search form -->
+      <form action="#" method="get" class="sidebar-form">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control" placeholder="Pesquisar">
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+        </div>
+      </form>
+      <!-- /.search form -->
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu">
+        <li class="header">OPÇÕES</li>
+        <li class="treeview">
+          <%= link_to authenticated_user_root_path do %>
+            <i class="fa  fa-home"></i> <span>HOME </span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to about_path do %>
+            <i class="fa fa-info" aria-hidden="true"></i> <span>Sobre o EFEJ</span>
+          <% end %>
+        </li>
+        <li class="treeview">
+          <%= link_to payment_path do %>
+            <i class="fa  fa-credit-card"></i> <span>Pagamento</span>
+           <% end %> 
+        </li>
+        <li>
+          <%= link_to hotels_path do %>
+            <i class="fa fa-bed"></i> <span>Acomodações</span>
+            <% unless @room_open %>
+            <span data-toggle="tooltip" title="" data-original-title="Em breve" class="pull-right-container hover_room">
+            <i class="fa fa-circle-o text-yellow "></i>
+    
+            </span>
+            <% end %>
+          <% end %>
+        </li>
+         <li>
+          <%= link_to events_path do %>
+            <i class="fa fa-calendar"></i> <span>Programações</span>
+            <% unless @event_open %>
+            <span data-toggle="tooltip" title="" data-original-title="Em breve" class="pull-right-container hover_event">
+              <i class="fa fa-circle-o text-aqua"></i>
+            </span>
+            <% end %>
+          <% end %>
+        </li> 
+        <li>
+          <a href="javascript:void(0)" onclick="popitup();">
+            <i class="fa fa-file-pdf-o"></i> <span>FAQ</span>
+          </a>
+        </li>
+        <!-- <li>
+           <%#= link_to terms_path do %>
+            <i class="fa fa-file-text-o"></i> <span>Termos de Compromisso</span>
+          <%# end %>
+        </li>  -->
+        <li class="header">Abertura dos Quartos/Programação</li>
+        <li><a href="javascript:void(0)"><i class="fa fa-circle-o text-yellow"></i> <span class="room_time"></span></a></li>
+        <li><a href="javascript:void(0)"><i class="fa fa-circle-o text-aqua"></i> <span class="event_time"></span></a></li>
+
+       <!--  <li><div class="logo animar-patrick-gti" style="max-width: 140px !important; display: none;">
+                     <img src="/images/gti1.png" alt="Home">
+                  </div></li>
+ -->
+        <!-- <li><div class="tinta"></div></li> -->
+
+      </ul>
+
+    </section>
+    <!-- /.sidebar -->
+  </aside>

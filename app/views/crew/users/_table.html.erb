@@ -1,0 +1,114 @@
+<!-- Main content -->
+<section class="content">
+   <!-- <section class="box"> -->
+   <div class="row">
+      <div class="col-xs-12">
+         <div class="box">
+            <div class="box-header">
+               <h3 class="box-title">Gerenciamento de Usuários</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+               <table id="table_ecej" class="table table-striped table-bordered dt-responsive nowrap display"  cellspacing="0" width="100%">
+                  <thead>
+                     <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th class="noExport">Pagamento</th>
+                        <th hidden="">Pagamento</th>
+                        <th><%= @list ? 'Posição' : 'Lote' %> </th>
+                        <th>EJ</th>
+                        <th>Federada?</th>
+                        <th>Data de Inscr.</th>
+                        <th class="noExport">Editar</th>
+                        <th class="noExport">Login</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <% j=1 %>
+                     <% @users.each do |users| %>
+                     <tr>
+                        <td><%= users.name.nil? ? 'Não Informado' : users.name.titleize%></td>
+                        <td><%= users.email%></td>
+                        <td>
+                           <% if users.payment.nil? %>
+                           Não Selecionado
+                           <% elsif !users.payment.nil?  %>
+                           <!-- PAG SELECIONADO -->
+                           <% if users.payment.method == "Boleto" %>
+                           <% i = 1 %>
+                           <% users.payment.asaas_payments.order('description').each do |boletos| %>
+                           <% if  boletos.status == 'PENDING' %>
+                           <small class="label bg-red" data-toggle="tooltip" title="" data-original-title="Pagamento Pendente | <%=boletos.description%>"><%=i%></small>
+                           <% elsif boletos.status == 'RECEIVED' %>
+                           <small class="label bg-green" data-toggle="tooltip" title="" data-original-title="Pagamento Recebido | <%=boletos.description%>"><%=i%></small>
+                           <% elsif boletos.status == 'OVERDUE' %>
+                           <small class="label bg-blue" data-toggle="tooltip" title="" data-original-title="Pagamento Atrasado | <%=boletos.description%>"><%=i%></small>
+                           <% end %>
+                           <% i += 1 %>
+                           <% end %>
+                           <% elsif  users.payment.method == "PagSeguro"  %>
+                              <% if users.payment.paid? %>
+                              <small class="label bg-green" data-toggle="tooltip" title="" data-original-title="Pagamento Recebido">PagSeguro</small> 
+                              <% else %>
+                              <small class="label bg-red" data-toggle="tooltip" title="" data-original-title="Pagamento <%= users.payment.status_pagseguro.nil? ? ' Pendente' : users.payment.status_pagseguro%>">PagSeguro</small> 
+                              <% end %>
+                           <% end %>
+                           <div class="btn-group ">
+                              <small class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown" aria-expanded="true">
+                              <span class="caret"></span>
+                              </small>
+                              <ul class="dropdown-menu">
+                                 <li><a href="#">Forma de Pag.: <%=users.payment.method%></a></li>
+                                 <li><a href="#">Status: <%=users.payment.paid? ? 'Pago' : 'Pendente'%></a></li>
+                                 <li><a href="#">Valor Total: R$ <%=users.payment.price %></a></li>
+                              </ul>
+                           </div>
+                           <% end %>
+                        </td>
+                        <td hidden="">
+                        <% if  users.payment.nil? %> 
+                          Não selecionado
+                        <% else %>
+                          <%= users.payment.method %> - <% if users.payment.paid? %> Pago<% else %>Não Pago - <%=users.payment.portion_paid%>/<%=users.payment.portions%>
+                          <% end %>
+                        <%end %>
+                        </td>
+                        <td>
+                       
+                        <% if @list %>
+                         <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> <%= j %> </span>
+
+                          <span class="label label-info pull-right" data-toggle="tooltip" title="" data-original-title="Data de inscrição: <%= users.created_at.strftime("%d/%m/%Y - %H:%M:%S") %>">Info</span>
+                        <% else %>
+                           <%= users.lot.nil? ? 'Não Alocado' : "Lote #{users.lot.number}"%>
+                        <% end %>
+                        <% j+=1 %>
+                        </td>
+                        <td><%= users.junior_enterprise.nil? ? 'Não Informado' : users.junior_enterprise %></td>
+                        <td><%= users.federation_check %></td> 
+                        <td><%= users.created_at.strftime("%d-%m-%Y  %H:%M:%S") %></td> 
+                        <td>
+                           <%= link_to  edit_crew_user_path(users) do %>
+                           <small class="btn btn-default dropdown-toggle btn-xs">
+                              <i class="fa fa-pencil-square-o"></i> Editar
+                           </small>
+                           <!-- <span class="glyphicon glyphicon-wrench" aria-hidden="true" style="margin-left: 5px"></span> -->
+                           <% end %> <i style="margin-left:3px"></i>
+                           <%#= link_to users, method: :delete, data: { confirm: 'Are you sure?' } do %><a href="">
+                        
+                           <!-- <span class="glyphicon glyphicon-remove" aria-hidden="true" style="margin-left: 20px"></span> -->
+                           <%# end %>
+                        </td>
+                        <td> <%= link_to crew_login_user_path(users), target: "_blank", method: :patch do %><button type="button" class="btn btn-block btn-warning btn-sm">Login</button> <% end %>
+                      </td>
+                     </tr>
+                     <% end %>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- </section> -->
+</section>

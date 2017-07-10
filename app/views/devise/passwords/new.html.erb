@@ -1,0 +1,36 @@
+<div class="login-box">
+ 
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h3 ><%= t('.forgot_your_password') %></h3>
+      <p class="center">Recuperamos para você</p>
+    </div>
+  </div>
+
+     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <div class="form-group has-feedback">
+        <%= f.email_field :email, id:"email", autofocus: true, placeholder:'Email', class: 'form-control' %>
+       <i class="fa fa-user  form-control-feedback"></i>
+      </div>
+      
+      <div class="row">
+        <!-- /.col -->
+        <div class="col-xs-12" style="margin-bottom: 6px">
+          <button type="submit" class="btn btn-primary btn-block btn-flat"><%= t('.send_me_reset_password_instructions') %></button>
+        </div>
+        <!-- /.col -->
+      </div>
+    <% end %>
+
+  
+    <!-- /.social-auth-links -->
+    <div class="text-center">
+    <%= render "devise/shared/links" %>
+    </div>
+  </div>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+

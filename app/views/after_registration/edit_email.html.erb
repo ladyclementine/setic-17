@@ -1,0 +1,59 @@
+<section class="content-header">
+   <h1>
+      Finalizar Cadastro
+      <small></small>
+   </h1>
+</section>
+<%= form_for @user, url: { :action => "update_email" }, html: { id: "edit_user_forma", method: :put } do |f| %>
+<% if @user.errors.any? %>
+<script>
+   $(document).ready(function() {
+    noty({text: ' <%= pluralize(@user.errors.count, "erros") %> encontrados: </br><ul><% @user.errors.full_messages.each do |message| %><li><%= message %></li><% end %></ul>', layout: 'bottom', type: 'warning', timeout: 4000});
+   });
+</script>
+<% end %>
+<!-- Main content -->
+<section class="content">
+   <!-- /.box -->
+   <div class="box box-primary">
+      <div class="box-header with-border">
+         <h3 class="box-title">E-mail Pessoal</h3>
+         <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+         </div>
+      </div>
+
+      <!-- /.box-header -->
+      <div class="box-body"><div class="callout callout-warning">
+                <h4>Olá, <%=@user.first_name%>!</h4>
+
+                <p>Preencha um e-mail válido para receber os nossos avisos e ficar por dentro de tudo. Vamos lhe enviar uma confirmação e, após feita, você poderá continuar o seu cadastro. </p>
+              </div>
+         <div class="row">
+            <div class="col-md-12">
+               <div class="form-group">
+                  <label>E-mail pessoal <% if !@user.unconfirmed_email.nil? %><small style="color: red">(Aguardando confirmação de <%=@user.unconfirmed_email%>)</small><%end%></label>
+                  <%= f.text_field :email, :id => 'email', :value=>'', placeholder: 'E-mail', class: 'form-control'%>
+               </div>
+              
+            </div>
+            <!-- /.col -->
+
+         </div>
+         <!-- /.row -->
+      </div>
+      <!-- /.box-body -->
+   </div>
+   <!-- /.box -->
+   <div class="box box-success">
+      <div class="box-header with-border">
+         <button type="submit" class="btn btn-block btn-success">Continuar</button>
+         <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+         </div>
+      </div>
+   </div>
+   <!-- /.box -->
+</section>
+<% end %>
+

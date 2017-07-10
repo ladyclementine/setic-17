@@ -1,0 +1,104 @@
+<section class="content-header">
+   <h1>
+      Efetuar Pagamento
+      <small></small>
+   </h1>
+</section>
+<!-- Main content -->
+<section class="content">
+   <div class="row">
+      <div class="col-md-12">
+         <!-- Custom Tabs (Pulled to the right) -->
+         <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs ">
+               <li class="active"><a href="#tab_1-1" data-toggle="tab"><i class="icon fa fa-barcode"></i> BOLETO</a></li>
+               <li><a href="#tab_2-2" data-toggle="tab"><i class="icon fa  fa-credit-card"></i> PAGSEGURO</a></li>
+               <!--<li><a href="#tab_3-2" data-toggle="tab"><i class="icon fa fa-money"></i> DEPÓSITO OU TRASNFÊNCIA</a></li>-->
+            </ul>
+            <div class="tab-content">
+               <div class="tab-pane active" id="tab_1-1">
+                  <!--INICIO -->
+                  <div class="modal-danger">
+                     <div class="modal-dialog">
+                        <%= form_tag payment_billet_path do %>
+                        <div class="modal-content">
+                           <div class="modal-header ">
+                              <h4 class="modal-title text-center"><%= @user.lot.name.upcase %></h4>
+                           </div>
+                           <div class="modal-body plans-container">
+                              <div class="price">
+                                 <sup>R$</sup>
+                                 <span id="price_js">
+                                 <%= '%.2f' % (@user.paid_lot_value + 2.00) %>
+                                 </span>
+                              </div>
+                              <div class="modal-body" style="background-color: #fff !important; color: #000 !important">
+                                 <div class="form-group">
+                                    <label>Parcelamento</label>
+                                    <%= select_tag(:installmentCount, options_for_select([ ["À vista", 1], ["Duas vezes", 2], ["Três vezes", 3]]), {:class => 'form-control', onchange: 'change_payment_parts(this,'"#{@user.paid_lot_value + 2.00}"')', :prompt => "SELECIONE O PARCELAMENTO",  "required": "",  "oninvalid":"setCustomValidity('Selecione como deseja Pagar')", "oninput":"setCustomValidity('')", "id": "parcelamento_sel"
+                                       })  %>
+                                 </div>
+                                 <span id="recebe_info_boleto">
+                                    <div class="form-group js_radio_parts">
+                                       <div class="radio">
+                                       </div>
+                                    </div>
+                                 </span>
+                              </div>
+                              * O serviço Asaas cobra uma taxa de R$2,00 por boleto pago.
+                           </div>
+                           <!--fim body-->
+                           <div class="modal-footer">
+                              <button type="submit" disabled="" class="btn btn-outline pull-left" data-dismiss="modal" data-disable-with="Aguarde..."  data-confirm="Após confirmar, não será possível alterar o método de pagamento ou parcelamento manualmente. Deseja Continuar?" rel="nofollow" data-method="patch" id="button_payment_billet">GERAR BOLETO(S)</button> 
+                           </div>
+                        </div>
+                        <% end -%>
+                     </div>
+                  </div>
+                  <!-- /. Fim modal -->
+               </div>
+               <!-- /.tab-pane -->
+               <div class="tab-pane" id="tab_2-2">
+                  <div class="modal-danger">
+                     <div class="modal-dialog">
+                        <div class="modal-content">
+                           <div class="modal-header ">
+                              <h4 class="modal-title text-center"><%= @user.lot.name.upcase %></h4>
+                           </div>
+                           <div class="modal-body plans-container">
+                              <div class="price">
+                                 <sup>R$</sup>
+                                 <span id="price_js">
+                                 <%= '%.2f' % pagseguro(@user.paid_lot_value) %>
+                                 </span>
+                              </div>
+                              * O PAGSEGURO cobra um acréscimo de 3,99%  + R$ 0,40 no preço da inscrição, no entanto, você tem a vantagem de poder parcelar em mais vezes, da forma que melhor lhe agradar.
+                           </div>
+                           <!--fim body-->
+                           <div class="modal-footer">
+                              <%= link_to payment_pagseguro_path, method: :post, data: {confirm: 'Após confirmar, não será possível alterar o método de pagamento manualmente. Deseja Continuar?', commit: 'Pagar Agora'} do %>
+                              <button type="button" class="btn btn-outline pull-left" data-disable-with="Aguarde..."><i class="icon fa  fa-credit-card"></i> PAGAR COM PAGSEGURO</button>
+                              <% end %>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- /.tab-pane -->
+                  
+            </div>
+            <!-- /.tab-content -->
+         </div>
+         <!-- nav-tabs-custom -->
+      </div>
+      <!-- /.col -->
+   </div>
+   <!-- /.row -->
+   <!-- END CUSTOM TABS -->
+</section>
+<div class="preloader" hidden="">
+   <div id="logo-proloader">
+      <img src="/images/efej/logo-about.png" alt="Home" width="200">
+   </div>
+   <span>PROCESSANDO PAGAMENTO</span>
+</div>

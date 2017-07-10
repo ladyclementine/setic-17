@@ -1,0 +1,46 @@
+<!-- Main content -->
+<!-- <section class="box"> -->
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Gerenciamento de Usuários</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           <% @users.each do |users| %>
+                            <tr>
+                              <td><%= users.name%></td>
+                              <td><%= users.email%></td>
+                              <!-- <td><%= users.birthday.nil? ? '' : users.birthday.strftime("%d/%m/%Y")%></td> -->
+                              <td><%= users.active ? 'Ativo' : 'Inativo' %></td>
+                              <td colspan="3"><%= link_to  edit_user_path(users) do %>
+                                <i class="fa fa-pencil-square-o" aria-hidden="true" style="margin-left: 10px"></i>
+                                    <!-- <span class="glyphicon glyphicon-wrench" aria-hidden="true" style="margin-left: 5px"></span> -->
+                              <% end %> <i style="margin-left:3px"></i>
+                              <%= link_to users, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                                  <i class="fa fa-trash-o" aria-hidden="true" style="margin-left: 10px"></i>
+                                    <!-- <span class="glyphicon glyphicon-remove" aria-hidden="true" style="margin-left: 20px"></span> -->
+                              <% end %>
+                              </td>
+
+                            </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+      </div>
+
+    <!-- </section> -->

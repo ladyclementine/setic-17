@@ -1,0 +1,235 @@
+<section class="content-header">
+   <h1>
+      Editar Cadastro
+      <small></small>
+   </h1>
+</section>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: "edit_user_form"}) do |f| %>
+<% if @user.errors.any? %>
+<script>
+   $(document).ready(function() {
+    noty({text: ' <%= pluralize(@user.errors.count, "erros") %> encontrados: </br><ul><% @user.errors.full_messages.each do |message| %><li><%= message %></li><% end %></ul>', layout: 'bottom', type: 'warning', timeout: 4000});
+   });
+</script>
+<% end %>
+<!-- Main content -->
+<section class="content">
+   <div class="box  box-info">
+      <!-- /.box-header -->
+      <div class="box-body">
+         <div class="row">
+            <div class="col-md-12">
+               <div class="form-group">
+                  <label>FOTO DE PERFIL</label>
+                  <%= f.file_field :avatar, class:"dropify" , 'data-default-file' => @user.avatar_url%>
+               </div>
+            </div>
+         </div>
+         <!-- /.row -->
+      </div>
+      <!-- /.box-body -->
+   </div>
+   <!-- /.box -->
+   <div class="box box-primary">
+      <div class="box-header with-border">
+         <h3 class="box-title">Dados Pessoais</h3>
+         <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+         </div>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+         <div class="row">
+            <div class="col-md-6">
+               <div class="form-group">
+                  <label>Nome Completo</label>
+                  <%= f.text_field :name, :id => 'name', placeholder: 'Nome completo', class: 'form-control'%>
+               </div>
+               <!-- /.form-group -->
+               <div class="form-group">
+                  <label>CPF</label>
+                  <%= f.text_field :cpf, :id => 'cpf', placeholder: 'CPF', class: 'form-control'%>
+               </div>
+               <!-- /.form-group -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-6">
+               <div class="form-group">
+                  <label>RG</label>
+                  <%= f.text_field :general_register, :id => 'rg', placeholder: 'rg', class: 'form-control'%>
+               </div>
+               <!-- /.form-group -->
+               <div class="form-group">
+                  <label>Data de Nascimento</label>
+                  <div class="input-group date">
+                     <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                     </div>
+                     <%= f.text_field :birthday, :id => 'birthday_picker', placeholder: 'Data de nascimento', class: 'form-control'%>
+                  </div>
+               </div>
+               <!-- /.form-group -->
+            </div>
+            <!-- /.col -->
+            <div class="">
+               <div class="form-group col-md-6">
+                  <label>Gênero</label>
+                  <%= f.select(:gender,['Masculino', 'Feminino', 'Prefiro não declarar'], {}, { :class => 'form-control select2' }) %>
+               </div>
+               <!-- /.form-group -->
+         
+               <!-- /.form-group -->
+            </div>
+            <div class="col-md-12">
+               <div class="form-group">
+                  <label>Necessidades especiais</label>
+                  <%= f.text_area :special_needs, :id => 'special_needs', :class => 'form-control',:length => '120' %>
+               </div>
+            </div>
+         </div>
+         <!-- /.row -->
+      </div>
+      <!-- /.box-body -->
+   </div>
+   <!-- /.box -->
+   <div class="box  box-info">
+      <div class="box-header with-border">
+         <h3 class="box-title">DADOS DO MEJ</h3>
+         <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+         </div>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+         <div class="row">
+            <div class="col-md-6">
+               <div class="form-group">
+                  <label>EJ Federada?</label>
+                  <div class="input-group">
+                     <span class="input-group-addon">
+                     <%= f.select(:federation_check,['Não', 'Sim', 'Pós-júnior'], {},style: 'height: 20px') %>
+                     </span>
+                     <%= f.select(:federation, ['Não confederada', 'RioJunior (RJ)', 'UNIJr-BA (BA)', 'SERJÚNIOR (SE)', 'RN Júnior (RN)', 'PB Júnior (PB)', 'Maranhão Júnior (MA)', 'Juniores (ES)', 'Goiás Júnior (GO)', 'FEJESP (SP)', 'FEJESC (SC)', 'FEJERS (RS)', 'FEJEPE (PE)', 'FEJEPAR (PR)', 'FEJEMS (MS)', 'FEJEMG (MG)', 'FEMTEJ (MT)', 'FEJECE (CE)', 'FEJEA (AL)', 'Concentro (DF)', 'Piauí Junior (PI)', 'Pará Júnior (PA)', 'Acre Júnior (AC)'], {include_blank: 'Selecione sua federação'}, class: "form-control select2", :id => 'federation') %>    
+                  </div>
+               </div>
+               <!-- /.form-group -->
+               <div class="form-group">
+                  <label>Cargo</label>
+                  <%= f.text_field :job, :id => 'job', placeholder: "Ex: Analista, Diretor", class:"form-control"%>
+               </div>
+               <!-- /.form-group -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-6">
+               <div class="form-group">
+                  <label>Nome da EJ</label>
+                  <%= f.text_field :junior_enterprise, :id => 'junior_enterprise', placeholder: "Empresa Junior", class:"form-control", "data-toggle"=>"tooltip" ,"title"=>"", "data-original-title"=>"Pós-júnior, informe a sua última EJ." %>
+               </div>
+               <!-- /.form-group -->
+               <div class="form-group">
+                  <label>Nome Completo da Universidade</label>
+                  <%= f.text_field :university, :id => 'university', placeholder: "Universidade", class: 'form-control'%>
+               </div>
+               <!-- /.form-group -->
+            </div>
+            <!-- /.col -->
+         </div>
+         <!-- /.row -->
+      </div>
+      <!-- /.box-body -->
+   </div>
+   <!-- /.box -->
+   <div class="box box-default">
+      <div class="box-header with-border">
+         <h3 class="box-title">Endereço</h3>
+         <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+         </div>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+         <div class="row">
+            <div class="col-md-6">
+               <div class="form-group">
+                  <label>CEP</label>
+                  <%= f.text_field :cep, placeholder: "CEP", id:"postal_code", class: 'form-control'%>
+               </div>
+               <!-- /.form-group -->
+               <div class="form-group">
+                  <label>Cidade</label>
+                  <%= f.text_field :city, placeholder: "Cidade", id:"city", class: 'form-control'%>
+               </div>
+               <!-- /.form-group -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-6">
+               <div class="form-group">
+                  <label>Estado</label>
+                  <%= f.text_field :state, placeholder: "Estado", id:"state", class: 'form-control'%>
+               </div>
+               <!-- /.form-group -->
+               <div class="form-group">
+                  <label>Endereço</label>
+                  <%= f.text_field :address, placeholder: "Rua, Bairro e número", id:"street", class: 'form-control'%>
+               </div>
+               <!-- /.form-group -->
+            </div>
+            <!-- /.col -->
+         </div>
+         <!-- /.row -->
+      </div>
+      <!-- /.box-body -->
+   </div>
+   <!-- /.box -->
+   <div class="box box-danger">
+      <div class="box-header with-border">
+         <h3 class="box-title">Contato</h3>
+         <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+         </div>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+         <div class="row">
+            <div class="col-md-6">
+               <div class="form-group">
+                  <label>Meu Número</label>
+                  <%= f.text_field :phone, placeholder: "Número para contato.", id:"phone", class: 'form-control phone'%>
+               </div>
+               <!-- /.form-group -->
+            </div>
+         </div>
+         <!-- /.row -->
+         <div class="row">
+            <div class="col-md-6">
+               <div class="form-group">
+                  <label>Número do responsavel</label>
+                  <%= f.text_field :phone_parents, placeholder: "Número para contato em caso de urgência", id:"phoneresp", class: 'form-control phone'%>
+               </div>
+               <!-- /.form-group -->
+            </div>
+            <div class="col-md-6">
+               <div class="form-group">
+                  <label>Nome do responsável</label>
+                  <%= f.text_field :name_parents, placeholder: "Pai, Mãe, avós", id:"phoneresp", class: 'form-control'%>
+               </div>
+               <!-- /.form-group -->
+            </div>
+         </div>
+         <!-- /.row -->
+      </div>
+      <!-- /.box-body -->
+   </div>
+   <!-- /.box -->
+   <div class="box box-success">
+      <div class="box-header with-border">
+         <button type="submit" class="btn btn-block btn-success">SALVAR</button>
+         <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+         </div>
+      </div>
+   </div>
+   <!-- /.box -->
+</section>
+<% end %>
+<%= javascript_include_tag 'cep' %>

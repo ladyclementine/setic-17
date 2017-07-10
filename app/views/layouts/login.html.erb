@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>EFEJ 2017 - EvenTi Login</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes" name="viewport">
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'login', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'login' %>
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/efej/icon.png">
+    <meta property="og:url"           content="https://rjfej17.herokuapp.com/login" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="EFEJ 2017 - Aréa do Congressista" />
+    <meta property="og:description"   content="Encontro Fluminense de Empresários Juniores. #CONECTADOS" />
+    <meta property="og:image"         content="https://rjfej17.herokuapp.com/images/efej/face1.jpg" />
+
+    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="theme-color" content="#000000">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="GTi Engenharia Júnior">
+    <meta name="description" content="Encontro Fluminense de Empresários Juniores. #CONECTADOS">
+    <meta name="keywords" content="mej, eventi, gti, empreendedorismo, empresa júnior, ej, empresário júnior, sites, sistemas, aplicativos, fejece, confederação, empresas, juniores, empresa, junior, federação, ufc, congresso, rio júnior, EFEJ 2010, efej, rio de janeiro, brasil jr">
+
+  </head>
+
+  <body style="background: url(/images/efej/bg.jpg) top center;">
+  <div> &nbsp; </div>
+   <% flash.each do |key, value| %>
+    <script type="text/javascript">
+      toastr.warning('<span><%= value %></span>', "Aviso");
+     </script>
+  <% end %> 
+  <%= yield %>
+
+  
+    <%= javascript_include_tag 'login_footer' %>
+  </body>
+</html>

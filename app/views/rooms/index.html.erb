@@ -1,0 +1,82 @@
+<section class="content-header">
+   <h1>
+     <i class="fa fa-undo" aria-hidden="true"></i> <%=link_to 'Voltar', hotels_path %> Quartos em <%= @hotel.name %>
+   </h1>
+</section>
+<section class="content">
+   <div class="row">
+   <% @rooms.each do |room| %>
+      <div class="col-md-4" style="width: 370px">
+         <div class="summary entry-summary dark_section" style="min-height: 324px">
+            <div class="media">
+               <span style="position: absolute; margin-top: 10px; margin-left:10px;" class="badge bg-green title_room_<%= room.id%>" data-original-title="<%= !room.name.nil? ? "Atualizado por: #{room.name[1]}" : '' %>" data-toggle= "tooltip">N° <%= room.number %> - <span class="name_room_<%= room.id%>"><%= room.name.any? ? room.name[0] : 'Sem nome' %></span></span>
+          
+              <span style="position: absolute; margin-top: 30px; margin-left:10px; background-color: #FFFFFF" class="text-light-blue badge"><%= room_name_link(room) %></span>
+
+               <span class="hotel-vagas"><%= room.extra_info %></span>
+               <img src="/images/eventi/room.jpg" width="370" height="200" alt="">
+               <span class="hotel-ventilacao"><img src="/images/<%= room.air==true ? 'ar' : 'ventilador' %>.png" alt=""></span>
+            </div>
+            <div class="content-hotel">
+               <ul class="users-list clearfix">
+                  <% room.users.each do |user| %>
+                  <li  style="width: <%= room.capacity.to_i == 6 ? '16' : 20 %>%">
+                     <%= image_tag(user.avatar_url(:medium), "data-toggle": "tooltip", "title": "", "data-original-title": "#{user.two_names.mb_chars.upcase} | #{user.junior_enterprise.mb_chars.upcase}") if user.avatar? %>
+                      <%= image_tag('dog.jpg', "data-toggle": "tooltip", "title": "", "data-original-title": "#{user.two_names.mb_chars.upcase} | #{user.junior_enterprise.mb_chars.upcase}") if !user.avatar? %>
+                      <a class="users-list-name" href="#"><%=user.first_name.titleize%></a>
+                  </li>
+                  <% end %>
+
+                  <% for i in 1..(room.capacity.to_i-room.users.count.to_i) %>
+                  <li  style="width:<%= room.capacity.to_i == 6 ? '16' : 20 %>%">
+                     <img src="../../img/boxed-bg.jpg" alt="User Image" data-toggle="tooltip" title="" data-original-title="VAZIO">
+                     <a class="users-list-name" href="#">Vazio</a>
+                  </li>
+                  <% end %>
+                 
+               </ul>
+               <div class="pull-right">
+
+               <% if room.users.where("lower(split_part(junior_enterprise, ' ', 1)) = ?", current_user.junior_enterprise.split(" ")[0].downcase).any? %>
+                  <a href="#" class="btn btn-xs bg-maroon" style="margin-right: 5px">Há membros da sua EJ aqui</a>
+               <% end %>
+               </div>
+
+               <% if current_user.room == room %>
+                <%= link_to exit_room_path(@hotel.id), method: :patch, data: { confirm: "Ao sair do quarto, outra pessoa poderá preencher a vaga." } do %>
+                  <button type="submit" class="btn btn-sm hotel-choose" style="background-color: #ef1717; margin-bottom: 5px;color:#fff;margin-top: 1px"><strong>SAIR <i class="fa fa-long-arrow-right"></i></strong></button>
+                <% end %>
+
+
+               <% else %>
+                  <% if room.full? %>
+                     <button type="submit" class="btn btn-sm hotel-choose" style="background-color: #a0a0a0; margin-bottom: 5px;color:#fff;margin-top: 1px"><strong>LOTADO</button>
+                  <% else %>
+                     <% if current_user.room.nil? %>
+                        <%= link_to insert_current_user_into_room_path(@hotel.id, room), method: :patch do %>
+                         <button type="submit" class="btn btn-sm hotel-choose" style="background-color: #1AB394; margin-bottom: 5px;color:#fff;margin-top: 1px"><strong>ENTRAR <i class="fa fa-long-arrow-right"></i></strong></button>
+                        <% end %>
+                     <% else %>
+                       <%= link_to insert_current_user_into_room_path(@hotel.id, room), method: :patch, data: { confirm: "Ao entrar nesse quarto, você perderá sua vaga no qual você já está inserido." } do %>
+                         <button type="submit" class="btn btn-sm hotel-choose" style="background-color: #1AB394; margin-bottom: 5px;color:#fff;margin-top: 1px"><strong>ENTRAR <i class="fa fa-long-arrow-right"></i></strong></button>
+                        <% end %>
+                     <% end %>
+                  <% end %>
+               <% end %>
+
+            </div>
+         </div>
+      </div>
+   <% end %>
+
+
+    <% if @rooms.empty? %>
+      <div class="col-md-12 center-align">
+        <div class="callout callout-danger">
+            <h4>OPS!</h4>
+            <p>Nenhum quarto cadastrado para esse hotel.</p>
+         </div>
+      </div>
+    <% end %>
+   </div>
+</section>

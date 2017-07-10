@@ -1,0 +1,45 @@
+
+
+<div class="login-box">
+ 
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h3><%= t('.change_your_password') %></h3>
+    </div>
+  </div>
+
+     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+     <%= f.hidden_field :reset_password_token %>
+      <div class="form-group has-feedback">
+
+      <%#= f.label :password, t('.new_password') %>
+      <%= f.password_field :password, autocomplete: "off",autofocus: true, placeholder:' Nova Senha',class: 'form-control' %>
+       <i class="fa fa-lock  form-control-feedback"></i>
+      </div>
+      <div class="form-group has-feedback">
+        <%#= f.label :password_confirmation, t('.confirm_new_password') %>
+        <%= f.password_field :password_confirmation, autocomplete: "off",class: 'form-control', placeholder: 'Repita a Senha' %>
+        <i class="fa fa-lock  form-control-feedback"></i>
+      </div>
+
+      <div class="row">
+        <!-- /.col -->
+        <div class="col-xs-12" style="margin-bottom: 6px">
+          <button type="submit" class="btn btn-primary btn-block btn-flat"><%=  t('.change_my_password') %></button>
+        </div>
+        <!-- /.col -->
+      </div>
+    <% end %>
+
+  
+    <!-- /.social-auth-links -->
+    <div class="text-center">
+    <%= render "devise/shared/links" %>
+    </div>
+  </div>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+

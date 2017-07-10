@@ -1,0 +1,44 @@
+<div class="login-box">
+   <!-- /.login-logo -->
+   <div class="login-box-body">
+      <div class="row">
+         <div class="col-md-12">
+            <div align="center"><%= image_tag("efej/logo-cinza.png", :alt => "EFEJ 17",:class => "profile-image-login") %></div>
+            <p class="center text-center">Área do Congressista</p>
+         </div>
+      </div>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name),  html: {:class => 'login-form', :id => 'form_login'} ) do |f| %>
+      <div class="form-group has-feedback">
+         <%= f.email_field :email, id: 'email', class: 'form-control', placeholder: 'example@mail.com', autofocus: true %>
+         <i class="fa fa-user  form-control-feedback"></i>
+      </div>
+      <div class="form-group has-feedback">
+         <%= f.password_field :password, id:'password', class: 'form-control', autocomplete: "off", placeholder: 'Senha' %>
+         <i class="fa fa-lock  form-control-feedback"></i>
+      </div>
+      <div class="row">
+         <!-- /.col -->
+         <div class="col-xs-12"  style="margin-bottom: 5px">
+            <button type="submit" style="" class="btn btn-primary btn-block btn-flat">ENTRAR</button>
+         </div>
+         <!-- /.col -->
+      </div>
+      <% end %>
+      <div class="text-center"  style="margin-bottom: 20px">
+         <p style="color:#252525; font-weight: bold;">- OU -</p>
+         <%= link_to user_facebook_omniauth_authorize_path+"?auth_type=rerequest&scope=email", "class": "btn btn-block btn-social btn-facebook btn-flat", id: "sign_in" do %><i class="fa fa-facebook" style="color:#fff;text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);"></i> ENTRAR COM FACEBOOK <% end %>
+      </div>
+      <div class="row">
+         <div class="text-left col-xs-6">
+            <%= link_to 'Nova inscrição', new_registration_path(resource_name), style: 'color:#f91675; font-weight: bold;'%>
+         </div>
+         <div class="text-right col-xs-6">
+            <%= link_to "Esqueceu sua senha?", new_password_path(resource_name), style: 'color:#252525' %>
+            <br>
+         </div>
+      </div>
+   </div>
+   <!-- /.login-box-body -->
+     <span class="message__title" style="font-size: 13px">Desenvolvido com ♥ pela <a href="https://www.facebook.com/gti.ufc/" target="_blank">GTI Jr.</a></span>
+</div>
+<!-- /.login-box -->

@@ -1,0 +1,35 @@
+<div class="login-box">
+ 
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h4>REENVIAR INSTRUÇÕES DE CONFIRMAÇÃO</h4>
+    </div>
+  </div>
+
+    <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+      <div class="form-group has-feedback">
+        <%= f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: 'form-control' %>
+       <i class="fa fa-user  form-control-feedback"></i>
+      </div>
+   
+      <div class="row">
+        <!-- /.col -->
+        <div class="col-xs-12" style="margin-bottom: 6px">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">              Reenviar instruções de confirmação</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    <% end %>
+
+   
+    <div class="text-center">
+    <%= render "devise/shared/links" %>
+    </div>
+  </div>
+  <!-- /.login-box-body -->
+    <span class="message__title" style="font-size: 12px">Desenvolvido com ♥ pela <a href="https://www.facebook.com/gti.ufc/" target="_blank">GTI Jr.</a></span>
+</div>
+<!-- /.login-box -->
+

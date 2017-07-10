@@ -1,0 +1,46 @@
+<%= javascript_include_tag 'after_registration' %>
+<section class="content-header">
+    <h1>
+      Editar Cadastro <%= @user.name.titlelize %>
+    <small></small>
+    </h1>
+</section>
+<%= form_for(@users, html: { method: :put, id: "edit_user_form"}) do |f| %>
+
+ <% if @user.errors.any? %>
+  <script>
+   $(document).ready(function() {
+    noty({text: ' <%= pluralize(@user.errors.count, "erros") %> encontrados: </br><ul><% @user.errors.full_messages.each do |message| %><li><%= message %></li><% end %></ul>', layout: 'bottom', type: 'warning', timeout: 4000});
+  });
+  </script>
+<% end %>
+ <!-- Main content -->
+    <section class="content">
+            <div class="box  box-info">
+      </div>
+      <!-- /.box -->
+
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Opções</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+          </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Desclassificar Usuário</label>
+
+              </div>
+        </div>
+        <!-- /.box-body -->
+
+      </div>
+
+
+    </section>
+         <% end %>

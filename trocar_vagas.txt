@@ -1,0 +1,16 @@
+Para implementar:
+
+
+Input 1: Vendedor (email)
+Input 1: Comprador (email)
+
+1 - Verificar se Vendedor existe & pagou + de 1 parcela  
+
+2.1 Se Comprador Existir:
+*  pagou algo? Não:
+   * apagar pagamentos do comprador, caso exista
+   * Lote do comprador = lote atual do vendedor
+   * Lote do vendedor = vazio
+   * editar user_id da tabela payment(vendedor) para o user_id do comprador
+   * desalocar comprador
+   

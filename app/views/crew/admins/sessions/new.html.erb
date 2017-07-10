@@ -1,0 +1,37 @@
+<div class="login-box">
+   <!-- /.login-logo -->
+   <div class="login-box-body">
+      <div class="row">
+         <div class="col-md-12">
+            <div align="center"><%= image_tag("efej/logo-cinza.png", :alt => "EFEJ 17",:class => "profile-image-login") %></div>
+            <p class="text-center">Painel Administrativo</p>
+         </div>
+      </div>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name),  html: {:class => 'login-form'} ) do |f| %>
+      <div class="form-group has-feedback">
+         <%= f.email_field :email, id: 'email', class: 'form-control', placeholder: 'example@mail.com', autofocus: true %>
+         <i class="fa fa-user  form-control-feedback"></i>
+      </div>
+      <div class="form-group has-feedback">
+         <%= f.password_field :password, id:'password', class: 'form-control', autocomplete: "off", placeholder: 'Senha' %>
+         <i class="fa fa-lock  form-control-feedback"></i>
+      </div>
+      <div class="row">
+         <!-- /.col -->
+         <div class="col-xs-12"  style="margin-bottom: 5px">
+            <button type="submit" style="" class="btn btn-primary btn-block btn-flat">ENTRAR</button>
+         </div>
+         <!-- /.col -->
+      </div>
+      <% end %>
+      <!-- /.social-auth-links -->
+     <!--  <div class="row">
+         <div class="col-xs-6">
+            <%#= link_to "Esqueceu sua senha?", new_password_path(resource_name) %>
+            <br>
+         </div>
+      </div> -->
+   </div>
+   <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
