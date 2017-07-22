@@ -293,7 +293,7 @@
                         <b>Status do Pagamento:</b> <%= unless @payment.nil?
                            @user.payment.paid? ? 'PAGO' : 'NÃO PAGO'
                            end %><br>
-                        <% if @user.lot.nohost_active %>  
+                        <% if @user.lot.nohost_active && !@user.payment.nil? %>  
                         <b>Hospedagem:</b> <%= @payment.host ? 'COM HOSPEDAGEM' : 'SEM HOSPEDAGEM'%><br>
                         <%end%>
                      </div>
