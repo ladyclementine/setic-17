@@ -25,7 +25,7 @@ class CheckoutController < BaseController
       @total_valores << price_p.to_f * p.to_f
     end
 
-    if self.user.lot.nohost_active
+    if @user.lot.nohost_active
       @preco_avista_nohost = CheckoutHelper.pagseguro_self(@user.paid_lot_nohost_value)
 
       @valores_parcela_nohost = []
@@ -37,8 +37,6 @@ class CheckoutController < BaseController
         @total_valores_nohost << price_p.to_f * p.to_f
       end
     end
-
-
   end
 
   def billet
