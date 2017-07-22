@@ -17,19 +17,27 @@ class Crew::LotsController < Crew::BaseController
   end
 
   def create
-    @lot = Lot.new(lot_params)
-    if @lot.save
-      redirect_to crew_lots_path, notice: "Lote criado com sucesso"
-    else
-      render :new
+    respond_to do |format|
+      @lot = Lot.new(lot_params)
+      if @lot.save
+        flash[:success] = "Lote criado com sucesso."
+        format.html {  redirect_to crew_lots_path }
+      else
+        format.html { render 'edit'}
+        format.json { render json: @lot.errors }
+      end
     end
   end
 
   def update
-    if @lot.update(lot_params)
-      redirect_to crew_lots_path, notice: "Lote editado com sucesso."
-    else
-      redirect_to edit_crew_lot_path(@lot), alert: "Não foi possível alterar lote."
+    respond_to do |format|
+      if @lot.update(lot_params)
+        flash[:success] = "Lote editado com sucesso."
+        format.html {  redirect_to crew_lots_path }
+      else
+        format.html { render 'edit'}
+        format.json { render json: @lot.errors }
+      end
     end
   end
 
@@ -42,6 +50,6 @@ class Crew::LotsController < Crew::BaseController
 
   def lot_params
     params.require(:lot).permit(:name, :number, :limit, :value_federated,
-                                :value_not_federated, :start_date, :end_date)
+                                :value_not_federated, :start_date, :end_date, :nohost_active, :value_federated_nohost, :value_not_federated_nohost)
   end
 end

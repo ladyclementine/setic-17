@@ -11,12 +11,39 @@ class CheckoutController < BaseController
   end
 
   def new
+    @pagseguro_fatores = [1.0 ,0.52255, 0.35347, 0.26898, 0.21830, 0.18453, 0.16044, 0.14240,
+                          0.12838, 0.11717, 0.10802, 0.10040]
+    @preco_avista = CheckoutHelper.pagseguro_self(@user.paid_lot_value) 
+
+    @parcelas = 1..12
+    @valores_parcela = []
+    @total_valores = []
+
+    @parcelas.each do |p|
+      price_p = @preco_avista * @pagseguro_fatores[p-1]
+      @valores_parcela << price_p
+      @total_valores << price_p.to_f * p.to_f
+    end
+
+    @preco_avista_nohost = CheckoutHelper.pagseguro_self(@user.paid_lot_nohost_value) 
+
+    @valores_parcela_nohost = []
+    @total_valores_nohost = []
+
+    @parcelas.each do |p|
+      price_p = @preco_avista_nohost * @pagseguro_fatores[p-1]
+      @valores_parcela_nohost << price_p
+      @total_valores_nohost << price_p.to_f * p.to_f
+    end
+
+
   end
 
   def billet
     @user.payment ||= Payment.new do |payment|
       payment.method = "Boleto"
       payment.portions = Asaas::Utils.check_portions(params[:installmentCount].to_i)
+      payment.host = params[:nohost_active] if @user.lot.nohost_active
     end
     begin
       @user.payment.pay_asaas
@@ -61,6 +88,7 @@ class CheckoutController < BaseController
     @user.payment ||= Payment.new do |payment|
       payment.method = "PagSeguro"
       payment.portions = 1
+      payment.host = params[:nohost_active] if @user.lot.nohost_active
     end
 
     @user.payment.pay_pagseguro

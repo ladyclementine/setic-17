@@ -25,7 +25,7 @@ module EfejNovo
     require "#{Rails.root}/lib/asaas/asaas.rb"
 
     if Rails.env.development? || Rails.env.test?
-      Asaas.api_key = '6875c5d07f20a1b523d0e0aaef7f537f0d6c136847ad14e882b8de63e7496107'
+      Asaas.api_key = 'f19de683785d32da9360ec840ec7582da3d7a2be6355e8751b73cf7574be88ba'
     else
       Asaas.api_key = ENV['ASAAS_KEY']
     end

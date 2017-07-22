@@ -11,21 +11,35 @@ class Payment < ApplicationRecord
     self.portion_paid > 0 ? true : false
   end
 
-  ########### PAGSEGURO ###################
-  def set_name_description
-    self.user.is_fed? ? '- Federado' : '- Não Federado'
+  #NOVO METODO - MODULO NOHOST
+  def set_price
+    if self.user.lot.nohost_active
+      self.host ? self.user.paid_lot_value : self.user.paid_lot_nohost_value
+    else
+      self.user.paid_lot_value
+    end
   end
 
-  #acressimo 227.90
+  ########### PAGSEGURO ###################
+  def set_name_description
+    self.user.is_fed? ? '- Federado ' : '- Não Federado '
+  end
+
+  def set_name_host
+    if self.user.lot.nohost_active
+      self.host ? '- Com Hospedagem' : '- Sem Hospedagem'
+    end
+  end
+
   def price_pagseguro
     percert_taxa = 0.0399
     fixed_taxa = 0.4
-    total = (self.user.paid_lot_value + fixed_taxa) / (1 - percert_taxa)
+    total = (set_price + fixed_taxa) / (1 - percert_taxa)
     return '%.2f' % total
   end
 
   def pay_pagseguro
-    update(price: self.user.paid_lot_value) unless self.user.paid_lot_value.nil?
+    update(price: set_price) unless set_price.nil?
     payment = PagSeguro::PaymentRequest.new
 
     payment.reference = "REFl#{self.user.lot_id}user#{self.user.id}"
@@ -40,7 +54,7 @@ class Payment < ApplicationRecord
 
     payment.items << {
       id: self.user.id,
-      description: "#{self.user.lot.name} #{set_name_description}" ,
+      description: "#{self.user.lot.name} #{set_name_description} #{set_name_host}" ,
       amount: price_pagseguro
     }
 
@@ -78,13 +92,13 @@ class Payment < ApplicationRecord
     return false if self.asaas_payments.any?
     response = Asaas::Payments.Create(
       "customer"=> self.user_asaas_id,
-      "value"=> self.user.paid_lot_value + 2.00,
+      "value"=> set_price + 2.00,
       "billingType"=> "BOLETO",
       "dueDate"=> Asaas::Utils.data_vencimento,
       "installmentCount"=>Asaas::Utils.check_portions(self.portions),
-      "installmentValue"=>self.user.paid_lot_value/Asaas::Utils.check_portions(self.portions) + 2.00
+      "installmentValue"=>set_price/Asaas::Utils.check_portions(self.portions) + 2.00
     )
-    update(price: self.user.paid_lot_value) unless self.user.paid_lot_value.nil?
+    update(price: set_price) unless set_price.nil?
   end
 
   def generate_links_billets

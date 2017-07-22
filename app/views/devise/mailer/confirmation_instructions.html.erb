@@ -1,28 +1,20 @@
-
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
-    <head>
-        <!-- NAME: SUBSCRIBER ALERT -->
-        <!--[if gte mso 15]>
-        <xml>
-        <o:OfficeDocumentSettings>
-        <o:AllowPNG/>
-        <o:PixelsPerInch>96</o:PixelsPerInch>
-        </o:OfficeDocumentSettings>
-        </xml>
-        <![endif]-->
-        <meta charset="UTF-8">
+  <head>
+    <!-- NAME: 1 COLUMN -->
+    <!--[if gte mso 15]>
+    <xml>
+      <o:OfficeDocumentSettings>
+      <o:AllowPNG/>
+      <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+    <![endif]-->
+    <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>EvenTi-confirmação</title>
+    <title>EFEJ17</title>
         
-
-
-        <!-- ////// OUTLOOK-SPECIFIC STYLES ///// -->
-        <!--[if gte mso 7]>
-        <style type="text/css">
-        </style>
-        <![endif]-->
     <style type="text/css">
     p{
       margin:10px 0;
@@ -90,6 +82,12 @@
       font-weight:inherit !important;
       line-height:inherit !important;
     }
+    #bodyCell{
+      padding:10px;
+    }
+    .templateContainer{
+      max-width:600px !important;
+    }
     a.mcnButton{
       display:block;
     }
@@ -107,28 +105,36 @@
     }
   /*
   @tab Page
-  @section background style
+  @section Background Style
   @tip Set the background color and top border for your email. You may want to choose colors that match your company's branding.
   */
     body,#bodyTable{
-      /*@editable*/background-color:#F2F2F2;
+      /*@editable*/background-color:#FAFAFA;
     }
   /*
   @tab Page
-  @section background style
+  @section Background Style
   @tip Set the background color and top border for your email. You may want to choose colors that match your company's branding.
   */
     #bodyCell{
-      /*@editable*/border-top:5px solid #FFFFFF;
+      /*@editable*/border-top:0;
     }
   /*
   @tab Page
-  @section heading 1
+  @section Email Border
+  @tip Set the border for your email.
+  */
+    .templateContainer{
+      /*@editable*/border:0;
+    }
+  /*
+  @tab Page
+  @section Heading 1
   @tip Set the styling for all first-level headings in your emails. These should be the largest of your headings.
   @style heading 1
   */
     h1{
-      /*@editable*/color:#FFFFFF !important;
+      /*@editable*/color:#202020;
       /*@editable*/font-family:Helvetica;
       /*@editable*/font-size:26px;
       /*@editable*/font-style:normal;
@@ -139,12 +145,12 @@
     }
   /*
   @tab Page
-  @section heading 2
+  @section Heading 2
   @tip Set the styling for all second-level headings in your emails.
   @style heading 2
   */
     h2{
-      /*@editable*/color:#FFFFFF !important;
+      /*@editable*/color:#202020;
       /*@editable*/font-family:Helvetica;
       /*@editable*/font-size:22px;
       /*@editable*/font-style:normal;
@@ -155,12 +161,28 @@
     }
   /*
   @tab Page
-  @section heading 3
+  @section Heading 3
   @tip Set the styling for all third-level headings in your emails.
   @style heading 3
   */
     h3{
-      /*@editable*/color:#D55258 !important;
+      /*@editable*/color:#202020;
+      /*@editable*/font-family:Helvetica;
+      /*@editable*/font-size:20px;
+      /*@editable*/font-style:normal;
+      /*@editable*/font-weight:bold;
+      /*@editable*/line-height:125%;
+      /*@editable*/letter-spacing:normal;
+      /*@editable*/text-align:left;
+    }
+  /*
+  @tab Page
+  @section Heading 4
+  @tip Set the styling for all fourth-level headings in your emails. These should be the smallest of your headings.
+  @style heading 4
+  */
+    h4{
+      /*@editable*/color:#202020;
       /*@editable*/font-family:Helvetica;
       /*@editable*/font-size:18px;
       /*@editable*/font-style:normal;
@@ -170,86 +192,66 @@
       /*@editable*/text-align:left;
     }
   /*
-  @tab Page
-  @section heading 4
-  @tip Set the styling for all fourth-level headings in your emails. These should be the smallest of your headings.
-  @style heading 4
-  */
-    h4{
-      /*@editable*/color:#D55258 !important;
-      /*@editable*/font-family:Helvetica;
-      /*@editable*/font-size:16px;
-      /*@editable*/font-style:normal;
-      /*@editable*/font-weight:bold;
-      /*@editable*/line-height:125%;
-      /*@editable*/letter-spacing:normal;
-      /*@editable*/text-align:left;
-    }
-  /*
   @tab Preheader
-  @section preheader style
+  @section Preheader Style
   @tip Set the background color and borders for your email's preheader area.
   */
     #templatePreheader{
-      /*@editable*/background-color:#F2F2F2;
+      /*@editable*/background-color:#FAFAFA;
+      /*@editable*/background-image:none;
+      /*@editable*/background-repeat:no-repeat;
+      /*@editable*/background-position:center;
+      /*@editable*/background-size:cover;
       /*@editable*/border-top:0;
       /*@editable*/border-bottom:0;
+      /*@editable*/padding-top:9px;
+      /*@editable*/padding-bottom:9px;
     }
   /*
   @tab Preheader
-  @section preheader text
+  @section Preheader Text
   @tip Set the styling for your email's preheader text. Choose a size and color that is easy to read.
   */
-    .preheaderContainer .mcnTextContent,.preheaderContainer .mcnTextContent p{
-      /*@editable*/color:#404040;
+    #templatePreheader .mcnTextContent,#templatePreheader .mcnTextContent p{
+      /*@editable*/color:#656565;
       /*@editable*/font-family:Helvetica;
       /*@editable*/font-size:12px;
-      /*@editable*/line-height:125%;
+      /*@editable*/line-height:150%;
       /*@editable*/text-align:left;
     }
   /*
   @tab Preheader
-  @section preheader link
-  @tip Set the styling for your email's header links. Choose a color that helps them stand out from your text.
+  @section Preheader Link
+  @tip Set the styling for your email's preheader links. Choose a color that helps them stand out from your text.
   */
-    .preheaderContainer .mcnTextContent a{
-      /*@editable*/color:#404040;
+    #templatePreheader .mcnTextContent a,#templatePreheader .mcnTextContent p a{
+      /*@editable*/color:#656565;
       /*@editable*/font-weight:normal;
       /*@editable*/text-decoration:underline;
     }
   /*
   @tab Header
-  @section header style
+  @section Header Style
   @tip Set the background color and borders for your email's header area.
   */
     #templateHeader{
-      /*@editable*/background-color:#F2F2F2;
+      /*@editable*/background-color:#FFFFFF;
+      /*@editable*/background-image:none;
+      /*@editable*/background-repeat:no-repeat;
+      /*@editable*/background-position:center;
+      /*@editable*/background-size:cover;
       /*@editable*/border-top:0;
       /*@editable*/border-bottom:0;
+      /*@editable*/padding-top:9px;
+      /*@editable*/padding-bottom:0;
     }
   /*
   @tab Header
-  @section header container
-  @tip Set the background color and bottom border for your email's header text container.
-  */
-    .headerFrontBackground,.headerRearBackground{
-      /*@editable*/background-color:#221f1f;
-    }
-  /*
-  @tab Header
-  @section header container
-  @tip Set the background color and bottom border for your email's header text container.
-  */
-    .headerFrontBackground{
-      /*@editable*/border-bottom:2px solid #000000;
-    }
-  /*
-  @tab Header
-  @section header text
+  @section Header Text
   @tip Set the styling for your email's header text. Choose a size and color that is easy to read.
   */
-    .headerContainer .mcnTextContent,.headerContainer .mcnTextContent p{
-      /*@editable*/color:#FFFFFF;
+    #templateHeader .mcnTextContent,#templateHeader .mcnTextContent p{
+      /*@editable*/color:#202020;
       /*@editable*/font-family:Helvetica;
       /*@editable*/font-size:16px;
       /*@editable*/line-height:150%;
@@ -257,79 +259,96 @@
     }
   /*
   @tab Header
-  @section header link
+  @section Header Link
   @tip Set the styling for your email's header links. Choose a color that helps them stand out from your text.
   */
-    .headerContainer .mcnTextContent a{
-      /*@editable*/color:#FFFFFF;
+    #templateHeader .mcnTextContent a,#templateHeader .mcnTextContent p a{
+      /*@editable*/color:#2BAADF;
       /*@editable*/font-weight:normal;
       /*@editable*/text-decoration:underline;
     }
   /*
   @tab Body
-  @section body style
+  @section Body Style
   @tip Set the background color and borders for your email's body area.
   */
     #templateBody{
-      /*@editable*/background-color:#F2F2F2;
+      /*@editable*/background-color:#FFFFFF;
+      /*@editable*/background-image:none;
+      /*@editable*/background-repeat:no-repeat;
+      /*@editable*/background-position:center;
+      /*@editable*/background-size:cover;
       /*@editable*/border-top:0;
-      /*@editable*/border-bottom:0;
+      /*@editable*/border-bottom:2px solid #EAEAEA;
+      /*@editable*/padding-top:0;
+      /*@editable*/padding-bottom:9px;
     }
   /*
   @tab Body
-  @section body text
+  @section Body Text
   @tip Set the styling for your email's body text. Choose a size and color that is easy to read.
   */
-    .bodyContainer .mcnTextContent,.bodyContainer .mcnTextContent p{
-      /*@editable*/color:#606060;
+    #templateBody .mcnTextContent,#templateBody .mcnTextContent p{
+      /*@editable*/color:#202020;
       /*@editable*/font-family:Helvetica;
-      /*@editable*/font-size:14px;
+      /*@editable*/font-size:16px;
       /*@editable*/line-height:150%;
       /*@editable*/text-align:left;
     }
   /*
   @tab Body
-  @section body link
+  @section Body Link
   @tip Set the styling for your email's body links. Choose a color that helps them stand out from your text.
   */
-    .bodyContainer .mcnTextContent a{
-      /*@editable*/color:#D55258;
+    #templateBody .mcnTextContent a,#templateBody .mcnTextContent p a{
+      /*@editable*/color:#2BAADF;
       /*@editable*/font-weight:normal;
       /*@editable*/text-decoration:underline;
     }
   /*
   @tab Footer
-  @section footer style
+  @section Footer Style
   @tip Set the background color and borders for your email's footer area.
   */
     #templateFooter{
-      /*@editable*/background-color:#F2F2F2;
+      /*@editable*/background-color:#FAFAFA;
+      /*@editable*/background-image:none;
+      /*@editable*/background-repeat:no-repeat;
+      /*@editable*/background-position:center;
+      /*@editable*/background-size:cover;
       /*@editable*/border-top:0;
       /*@editable*/border-bottom:0;
+      /*@editable*/padding-top:9px;
+      /*@editable*/padding-bottom:9px;
     }
   /*
   @tab Footer
-  @section footer text
+  @section Footer Text
   @tip Set the styling for your email's footer text. Choose a size and color that is easy to read.
   */
-    .footerContainer .mcnTextContent,.footerContainer .mcnTextContent p{
-      /*@editable*/color:#AAAAAA;
+    #templateFooter .mcnTextContent,#templateFooter .mcnTextContent p{
+      /*@editable*/color:#656565;
       /*@editable*/font-family:Helvetica;
-      /*@editable*/font-size:10px;
-      /*@editable*/line-height:125%;
+      /*@editable*/font-size:12px;
+      /*@editable*/line-height:150%;
       /*@editable*/text-align:center;
     }
   /*
   @tab Footer
-  @section footer link
+  @section Footer Link
   @tip Set the styling for your email's footer links. Choose a color that helps them stand out from your text.
   */
-    .footerContainer .mcnTextContent a{
-      /*@editable*/color:#AAAAAA;
+    #templateFooter .mcnTextContent a,#templateFooter .mcnTextContent p a{
+      /*@editable*/color:#656565;
       /*@editable*/font-weight:normal;
       /*@editable*/text-decoration:underline;
     }
-  @media only screen and (max-width: 480px){
+  @media only screen and (min-width:768px){
+    .templateContainer{
+      width:600px !important;
+    }
+
+} @media only screen and (max-width: 480px){
     body,table,td,p,a,li,blockquote{
       -webkit-text-size-adjust:none !important;
     }
@@ -341,9 +360,8 @@
     }
 
 } @media only screen and (max-width: 480px){
-    .templateContainer{
-      max-width:600px !important;
-      width:100% !important;
+    #bodyCell{
+      padding-top:10px !important;
     }
 
 } @media only screen and (max-width: 480px){
@@ -416,18 +434,18 @@
 } @media only screen and (max-width: 480px){
   /*
   @tab Mobile Styles
-  @section heading 1
+  @section Heading 1
   @tip Make the first-level headings larger in size for better readability on small screens.
   */
     h1{
-      /*@editable*/font-size:24px !important;
+      /*@editable*/font-size:22px !important;
       /*@editable*/line-height:125% !important;
     }
 
 } @media only screen and (max-width: 480px){
   /*
   @tab Mobile Styles
-  @section heading 2
+  @section Heading 2
   @tip Make the second-level headings larger in size for better readability on small screens.
   */
     h2{
@@ -438,7 +456,7 @@
 } @media only screen and (max-width: 480px){
   /*
   @tab Mobile Styles
-  @section heading 3
+  @section Heading 3
   @tip Make the third-level headings larger in size for better readability on small screens.
   */
     h3{
@@ -449,12 +467,12 @@
 } @media only screen and (max-width: 480px){
   /*
   @tab Mobile Styles
-  @section heading 4
+  @section Heading 4
   @tip Make the fourth-level headings larger in size for better readability on small screens.
   */
     h4{
       /*@editable*/font-size:16px !important;
-      /*@editable*/line-height:125% !important;
+      /*@editable*/line-height:150% !important;
     }
 
 } @media only screen and (max-width: 480px){
@@ -464,8 +482,8 @@
   @tip Make the boxed text larger in size for better readability on small screens. We recommend a font size of at least 16px.
   */
     .mcnBoxedTextContentContainer .mcnTextContent,.mcnBoxedTextContentContainer .mcnTextContent p{
-      /*@editable*/font-size:18px !important;
-      /*@editable*/line-height:125% !important;
+      /*@editable*/font-size:14px !important;
+      /*@editable*/line-height:150% !important;
     }
 
 } @media only screen and (max-width: 480px){
@@ -484,9 +502,9 @@
   @section Preheader Text
   @tip Make the preheader text larger in size for better readability on small screens.
   */
-    .preheaderContainer .mcnTextContent,.preheaderContainer .mcnTextContent p{
+    #templatePreheader .mcnTextContent,#templatePreheader .mcnTextContent p{
       /*@editable*/font-size:14px !important;
-      /*@editable*/line-height:115% !important;
+      /*@editable*/line-height:150% !important;
     }
 
 } @media only screen and (max-width: 480px){
@@ -495,9 +513,9 @@
   @section Header Text
   @tip Make the header text larger in size for better readability on small screens.
   */
-    .headerContainer .mcnTextContent,.headerContainer .mcnTextContent p{
-      /*@editable*/font-size:18px !important;
-      /*@editable*/line-height:125% !important;
+    #templateHeader .mcnTextContent,#templateHeader .mcnTextContent p{
+      /*@editable*/font-size:16px !important;
+      /*@editable*/line-height:150% !important;
     }
 
 } @media only screen and (max-width: 480px){
@@ -506,128 +524,80 @@
   @section Body Text
   @tip Make the body text larger in size for better readability on small screens. We recommend a font size of at least 16px.
   */
-    .bodyContainer .mcnTextContent,.bodyContainer .mcnTextContent p{
-      /*@editable*/font-size:18px !important;
-      /*@editable*/line-height:125% !important;
+    #templateBody .mcnTextContent,#templateBody .mcnTextContent p{
+      /*@editable*/font-size:16px !important;
+      /*@editable*/line-height:150% !important;
     }
 
 } @media only screen and (max-width: 480px){
   /*
   @tab Mobile Styles
-  @section footer text
-  @tip Make the body content text larger in size for better readability on small screens.
+  @section Footer Text
+  @tip Make the footer content text larger in size for better readability on small screens.
   */
-    .footerContainer .mcnTextContent,.footerContainer .mcnTextContent p{
+    #templateFooter .mcnTextContent,#templateFooter .mcnTextContent p{
       /*@editable*/font-size:14px !important;
-      /*@editable*/line-height:115% !important;
+      /*@editable*/line-height:150% !important;
     }
 
 }</style></head>
     <body>
-        <!--*|IF:MC_PREVIEW_TEXT|*-->
-        <!--[if !gte mso 9]><!----><span class="mcnPreviewText" style="display:none; font-size:0px; line-height:0px; max-height:0px; max-width:0px; opacity:0; overflow:hidden; visibility:hidden; mso-hide:all;">[EFEJ 17]</span><!--<![endif]-->
-        <!--*|END:IF|*-->
-      <center>
-          <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
-              <tr>
-                  <td align="center" valign="top" id="bodyCell">
+    <!--*|IF:MC_PREVIEW_TEXT|*-->
+    <!--[if !gte mso 9]><!----><span class="mcnPreviewText" style="display:none; font-size:0px; line-height:0px; max-height:0px; max-width:0px; opacity:0; overflow:hidden; visibility:hidden; mso-hide:all;">[EFEJ 2017]</span><!--<![endif]-->
+    <!--*|END:IF|*-->
+        <center>
+            <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
+                <tr>
+                    <td align="center" valign="top" id="bodyCell">
                         <!-- BEGIN TEMPLATE // -->
-                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <!--[if gte mso 9]>
+            <table align="center" border="0" cellspacing="0" cellpadding="0" width="600" style="width:600px;">
+            <tr>
+            <td align="center" valign="top" width="600" style="width:600px;">
+            <![endif]-->
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="templateContainer">
                             <tr>
-                                <td align="center" valign="top">
-                                    <!-- BEGIN PREHEADER // -->
-                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templatePreheader">
-                                        <tr>
-                                          <td align="center" valign="top">
-                                                <table border="0" cellpadding="0" cellspacing="0" width="600" class="templateContainer">
-                                                    <tr>
-                                                        <td valign="top" class="preheaderContainer" style="padding-top:10px; padding-bottom:10px;"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnDividerBlock" style="min-width:100%;">
-    <tbody class="mcnDividerBlockOuter">
-        <tr>
-            <td class="mcnDividerBlockInner" style="min-width:100%; padding:18px;">
-                <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width:100%;">
-                    <tbody><tr>
-                        <td>
-                            <span></span>
-                        </td>
-                    </tr>
-                </tbody></table>
-<!--            
-                <td class="mcnDividerBlockInner" style="padding: 18px;">
-                <hr class="mcnDividerContent" style="border-bottom-color:none; border-left-color:none; border-right-color:none; border-bottom-width:0; border-left-width:0; border-right-width:0; margin-top:0; margin-right:0; margin-bottom:0; margin-left:0;" />
--->
-            </td>
-        </tr>
-    </tbody>
-</table></td>
-                                                    </tr>
-                                                </table>
-                                            </td>                                            
-                                        </tr>
-                                    </table>
-                                    <!-- // END PREHEADER -->
-                                </td>
+                                <td valign="top" id="templatePreheader"></td>
                             </tr>
                             <tr>
-                              <td align="center" valign="top">
-                  <!-- BEGIN HEADER // -->
-                                  <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateHeader">
-                                      <tr>
-                                          <td align="center" valign="top" style="padding-top:20px; padding-bottom:20px;">
-                                                <table border="0" cellpadding="0" cellspacing="0" width="600" class="templateContainer">
-                          <tr>
-                            <td align="center" height="10" valign="top" width="10">
-                              <img src="https://gallery.mailchimp.com/27aac8a65e64c994c4416d6b8/images/d4042106-8117-4b79-b76b-91f8d64c5dff.gif" height="10" width="10" style="display:block; line-height:0px;">
+                                <td valign="top" id="templateHeader"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnImageBlock" style="min-width:100%;">
+    <tbody class="mcnImageBlockOuter">
+            <tr>
+                <td valign="top" style="padding:0px" class="mcnImageBlockInner">
+                    <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0" class="mcnImageContentContainer" style="min-width:100%;">
+                        <tbody><tr>
+                            <td class="mcnImageContent" valign="top" style="padding-right: 0px; padding-left: 0px; padding-top: 0; padding-bottom: 0; text-align:center;">
+                                
+                                    
+                                        <img align="center" alt="" src="https://gallery.mailchimp.com/a26bffb79d89432aa2dcd7e48/images/b03e8d78-4c8f-4b2f-b866-09b2d3898767.png" width="600" style="max-width:1000px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnImage">
+                                    
+                                
                             </td>
-                            <td align="center" height="10" valign="top" class="headerRearBackground" style="opacity:0.5;">
-                              <img src="https://gallery.mailchimp.com/27aac8a65e64c994c4416d6b8/images/640a7ee0-db88-4905-a550-89e571c94697.png" class="mcnImage" height="10" width="580" style="display:block; line-height:0px;">
+                        </tr>
+                    </tbody></table>
+                </td>
+            </tr>
+    </tbody>
+</table></td>
+                            </tr>
+                            <tr>
+                                <td valign="top" id="templateBody"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnImageBlock" style="min-width:100%;">
+    <tbody class="mcnImageBlockOuter">
+            <tr>
+                <td valign="top" style="padding:9px" class="mcnImageBlockInner">
+                    <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0" class="mcnImageContentContainer" style="min-width:100%;">
+                        <tbody><tr>
+                            <td class="mcnImageContent" valign="top" style="padding-right: 9px; padding-left: 9px; padding-top: 0; padding-bottom: 0; text-align:center;">
+                                
+                                    
+                                        <img align="center" alt="" src="https://gallery.mailchimp.com/a26bffb79d89432aa2dcd7e48/images/2b38f6c1-d321-4bc2-a782-66c208ab6940.png" width="564" style="max-width:1000px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnImage">
+                                    
+                                
                             </td>
-                            <td align="center" height="10" valign="top" width="10">
-                              <img src="https://gallery.mailchimp.com/27aac8a65e64c994c4416d6b8/images/d4042106-8117-4b79-b76b-91f8d64c5dff.gif" height="10" width="10" style="display:block; line-height:0px;">
-                            </td>
-                          </tr>
-                                                  <tr>
-                                                      <td align="center" colspan="3" valign="top">
-                                                          <table border="0" cellpadding="0" cellspacing="0" width="100%" class="headerFrontBackground">
-                                                                <tr>
-                                                                    <td align="center" valign="top">
-                                                                        <!-- BEGIN HEADER // -->
-                                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" id="">
-                                                                            <tr>
-                                                                                <td valign="top" class="headerContainer" style="padding-top:20px; padding-bottom:20px;">
-                                                                              <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="min-width:100%;">
-    <tbody class="mcnTextBlockOuter">
-        <tr>
-            <td valign="top" class="mcnTextBlockInner" style="padding-top:9px;">
-                <!--[if mso]>
-        <table align="left" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100%;">
-        <tr>
-        <![endif]-->
-          
-        <!--[if mso]>
-        <td valign="top" width="600" style="width:600px;">
-        <![endif]-->
-                <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:100%; min-width:100%;" width="100%" class="mcnTextContentContainer">
-                    <tbody><tr>
-                        
-                        <td valign="top" class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;">
-                        
-                            <h1>Seja Bem Vindo ao EFEJ 2017</h1>
-</h1>
-
-                        </td>
-                    </tr>
-                </tbody></table>
-        <!--[if mso]>
-        </td>
-        <![endif]-->
-                
-        <!--[if mso]>
-        </tr>
-        </table>
-        <![endif]-->
-            </td>
-        </tr>
+                        </tr>
+                    </tbody></table>
+                </td>
+            </tr>
     </tbody>
 </table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="min-width:100%;">
     <tbody class="mcnTextBlockOuter">
@@ -646,9 +616,10 @@
                         
                         <td valign="top" class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;">
                         
-                            Estamos muito felizes com a sua participação no evento, entretanto a&nbsp;<strong>sua inscrição não está totalmente confirmada!</strong>&nbsp;<br>
-&nbsp;
-<div style="text-align: center;">Para isso precisamos que você acesse esse link:</div>
+                            <div style="text-align: center;"><span style="font-size:15px"><span style="font-family:open sans,helvetica neue,helvetica,arial,sans-serif">Estamos muito felizes com a sua participação no evento, entretanto a sua inscrição não está totalmente confirmada!<br>
+<br>
+Para isso precisamos que você acesse esse link:</span></span><br>
+&nbsp;</div>
 
                         </td>
                     </tr>
@@ -668,14 +639,11 @@
     <tbody class="mcnButtonBlockOuter">
         <tr>
             <td style="padding-top:0; padding-right:18px; padding-bottom:18px; padding-left:18px;" valign="top" align="center" class="mcnButtonBlockInner">
-                <table border="0" cellpadding="0" cellspacing="0" class="mcnButtonContentContainer" style="border-collapse: separate !important;border: 2px solid #F2F2F2;border-radius: 4px;background-color: #FFFFFF;">
+                <table border="0" cellpadding="0" cellspacing="0" class="mcnButtonContentContainer" style="border-collapse: separate !important;border-radius: 3px;background-color: #3D3D3D;">
                     <tbody>
                         <tr>
-                            <td align="center" valign="middle" class="mcnButtonContent" style="font-family: Arial; font-size: 16px; padding: 20px;">
-
-                            <%= link_to confirmation_url(@resource, confirmation_token: @token), style: "font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #D55258;" do %>
-                                <div class="mcnButton" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #D55258;">Confirmar Minha Conta</div>
-                                <% end %>
+                            <td align="center" valign="middle" class="mcnButtonContent" style="font-family: &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 16px; padding: 15px;">
+                              <%= link_to "CONFIRMAR MINHA INSCRIÇÃO", confirmation_url(@resource, confirmation_token: @token), style: "font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;", class: "mcnButton" %>
                             </td>
                         </tr>
                     </tbody>
@@ -700,11 +668,10 @@
                         
                         <td valign="top" class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;">
                         
-                            <strong>Se você não confirmar a inscrição, não terá a sua vaga reservada para o evento</strong>, então cuidado!<br>
+                            <div style="text-align: center;"><span style="font-size:15px"><span style="font-family:open sans,helvetica neue,helvetica,arial,sans-serif">Se você não confirmar a inscrição, não terá a sua vaga reservada para o evento, então cuidado!<br>
 <br>
-Boa Sorte! Esperamos você lá! :D<br>
-<br>
-#conectados
+Boa Sorte! Esperamos você lá! :D</span></span></div>
+
                         </td>
                     </tr>
                 </tbody></table>
@@ -719,52 +686,163 @@ Boa Sorte! Esperamos você lá! :D<br>
             </td>
         </tr>
     </tbody>
-</table></td>
-                                                                            </tr>
-                                                                        </table>
-                                                                        <!-- // END HEADER -->
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                      </td>
-                    </tr>
-                  </table>
-                  <!-- // END HEADER -->
+</table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnImageBlock" style="min-width:100%;">
+    <tbody class="mcnImageBlockOuter">
+            <tr>
+                <td valign="top" style="padding:9px" class="mcnImageBlockInner">
+                    <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0" class="mcnImageContentContainer" style="min-width:100%;">
+                        <tbody><tr>
+                            <td class="mcnImageContent" valign="top" style="padding-right: 9px; padding-left: 9px; padding-top: 0; padding-bottom: 0; text-align:center;">
+                                
+                                    
+                                        <img align="center" alt="" src="https://gallery.mailchimp.com/a26bffb79d89432aa2dcd7e48/images/6fd3a895-016c-4383-9903-3484cfbe9351.png" width="564" style="max-width:1000px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnImage">
+                                    
+                                
+                            </td>
+                        </tr>
+                    </tbody></table>
                 </td>
-              </tr>
-                            <tr>
-                                <td align="center" valign="top">
-                                    <!-- BEGIN BODY // -->
-                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateBody">
-                                        <tr>
-                                            <td align="center" valign="top">
-                                                <table border="0" cellpadding="0" cellspacing="0" width="600" class="templateContainer">
-                                                    <tr>
-                                                        <td valign="top" class="bodyContainer" style="padding-top:10px; padding-bottom:10px;"></td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <!-- // END BODY -->
-                                </td>
+            </tr>
+    </tbody>
+</table></td>
                             </tr>
                             <tr>
-                                <td align="center" valign="top" style="padding-bottom:40px;">
-                                    <!-- BEGIN FOOTER // -->
-                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateFooter">
-                                        <tr>
-                                            <td align="center" valign="top">
-                                                <table border="0" cellpadding="0" cellspacing="0" width="600" class="templateContainer">
-                                                    <tr>
-                                                        <td valign="top" class="footerContainer" style="padding-top:10px; padding-bottom:10px;"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnDividerBlock" style="min-width:100%;">
+                                <td valign="top" id="templateFooter"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnFollowBlock" style="min-width:100%;">
+    <tbody class="mcnFollowBlockOuter">
+        <tr>
+            <td align="center" valign="top" style="padding:9px" class="mcnFollowBlockInner">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnFollowContentContainer" style="min-width:100%;">
+    <tbody><tr>
+        <td align="center" style="padding-left:9px;padding-right:9px;">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width:100%;" class="mcnFollowContent">
+                <tbody><tr>
+                    <td align="center" valign="top" style="padding-top:9px; padding-right:9px; padding-left:9px;">
+                        <table align="center" border="0" cellpadding="0" cellspacing="0">
+                            <tbody><tr>
+                                <td align="center" valign="top">
+                                    <!--[if mso]>
+                                    <table align="center" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                    <![endif]-->
+                                    
+                                        <!--[if mso]>
+                                        <td align="center" valign="top">
+                                        <![endif]-->
+                                        
+                                        
+                                            <table align="left" border="0" cellpadding="0" cellspacing="0" style="display:inline;">
+                                                <tbody><tr>
+                                                    <td valign="top" style="padding-right:10px; padding-bottom:9px;" class="mcnFollowContentItemContainer">
+                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnFollowContentItem">
+                                                            <tbody><tr>
+                                                                <td align="left" valign="middle" style="padding-top:5px; padding-right:10px; padding-bottom:5px; padding-left:9px;">
+                                                                    <table align="left" border="0" cellpadding="0" cellspacing="0" width="">
+                                                                        <tbody><tr>
+                                                                            
+                                                                                <td align="center" valign="middle" width="24" class="mcnFollowIconContent">
+                                                                                    <a href="http://instagram.com/efej2017" target="_blank"><img src="https://cdn-images.mailchimp.com/icons/social-block-v2/color-instagram-48.png" style="display:block;" height="24" width="24" class=""></a>
+                                                                                </td>
+                                                                            
+                                                                            
+                                                                        </tr>
+                                                                    </tbody></table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody></table>
+                                                    </td>
+                                                </tr>
+                                            </tbody></table>
+                                        
+                                        <!--[if mso]>
+                                        </td>
+                                        <![endif]-->
+                                    
+                                        <!--[if mso]>
+                                        <td align="center" valign="top">
+                                        <![endif]-->
+                                        
+                                        
+                                            <table align="left" border="0" cellpadding="0" cellspacing="0" style="display:inline;">
+                                                <tbody><tr>
+                                                    <td valign="top" style="padding-right:10px; padding-bottom:9px;" class="mcnFollowContentItemContainer">
+                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnFollowContentItem">
+                                                            <tbody><tr>
+                                                                <td align="left" valign="middle" style="padding-top:5px; padding-right:10px; padding-bottom:5px; padding-left:9px;">
+                                                                    <table align="left" border="0" cellpadding="0" cellspacing="0" width="">
+                                                                        <tbody><tr>
+                                                                            
+                                                                                <td align="center" valign="middle" width="24" class="mcnFollowIconContent">
+                                                                                    <a href="http://www.facebook.com/efej2017" target="_blank"><img src="https://cdn-images.mailchimp.com/icons/social-block-v2/color-facebook-48.png" style="display:block;" height="24" width="24" class=""></a>
+                                                                                </td>
+                                                                            
+                                                                            
+                                                                        </tr>
+                                                                    </tbody></table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody></table>
+                                                    </td>
+                                                </tr>
+                                            </tbody></table>
+                                        
+                                        <!--[if mso]>
+                                        </td>
+                                        <![endif]-->
+                                    
+                                        <!--[if mso]>
+                                        <td align="center" valign="top">
+                                        <![endif]-->
+                                        
+                                        
+                                            <table align="left" border="0" cellpadding="0" cellspacing="0" style="display:inline;">
+                                                <tbody><tr>
+                                                    <td valign="top" style="padding-right:0; padding-bottom:9px;" class="mcnFollowContentItemContainer">
+                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnFollowContentItem">
+                                                            <tbody><tr>
+                                                                <td align="left" valign="middle" style="padding-top:5px; padding-right:10px; padding-bottom:5px; padding-left:9px;">
+                                                                    <table align="left" border="0" cellpadding="0" cellspacing="0" width="">
+                                                                        <tbody><tr>
+                                                                            
+                                                                                <td align="center" valign="middle" width="24" class="mcnFollowIconContent">
+                                                                                    <a href="http://www.efej.com.br" target="_blank"><img src="https://cdn-images.mailchimp.com/icons/social-block-v2/color-link-48.png" style="display:block;" height="24" width="24" class=""></a>
+                                                                                </td>
+                                                                            
+                                                                            
+                                                                        </tr>
+                                                                    </tbody></table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody></table>
+                                                    </td>
+                                                </tr>
+                                            </tbody></table>
+                                        
+                                        <!--[if mso]>
+                                        </td>
+                                        <![endif]-->
+                                    
+                                    <!--[if mso]>
+                                    </tr>
+                                    </table>
+                                    <![endif]-->
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </td>
+                </tr>
+            </tbody></table>
+        </td>
+    </tr>
+</tbody></table>
+
+            </td>
+        </tr>
+    </tbody>
+</table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnDividerBlock" style="min-width:100%;">
     <tbody class="mcnDividerBlockOuter">
         <tr>
-            <td class="mcnDividerBlockInner" style="min-width:100%; padding:18px;">
-                <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%;border-top: 1px solid #AAAAAA;">
+            <td class="mcnDividerBlockInner" style="min-width: 100%; padding: 10px 18px 25px;">
+                <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%;border-top: 2px solid #EEEEEE;">
                     <tbody><tr>
                         <td>
                             <span></span>
@@ -795,11 +873,7 @@ Boa Sorte! Esperamos você lá! :D<br>
                         
                         <td valign="top" class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;">
                         
-                            <p dir="ltr"><strong id="docs-internal-guid-0def68ff-9eed-c2b8-d691-8f94dc2a6fd9">Acesse<a href="http://gti.ufc.br" target="_blank"> </a><a href="http://www.gti.ufc.br">www.gti.ufc.br</a> e desenvolva-se.</strong></p>
-
-<p dir="ltr"><strong>EFEJ 17 | Sistema EvenTi 17</strong></p>
-
-<p dir="ltr">&nbsp;</p>
+                            <em>Enviado pela plataforma EvenTi / GTI Jr.</em>
 
                         </td>
                     </tr>
@@ -816,16 +890,14 @@ Boa Sorte! Esperamos você lá! :D<br>
         </tr>
     </tbody>
 </table></td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <!-- // END FOOTER -->
-                                </td>
                             </tr>
+                        </table>
+            <!--[if gte mso 9]>
+            </td>
+            </tr>
             </table>
-            <!-- // END TEMPLATE -->
+            <![endif]-->
+                        <!-- // END TEMPLATE -->
                     </td>
                 </tr>
             </table>

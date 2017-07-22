@@ -5,7 +5,13 @@
     </h1>
 </section>
 <%= form_for @lot, url: {action: "update"} do |f| %>
-
+<% if @lot.errors.any? %>
+<script>
+   $(document).ready(function() {
+    noty({text: ' <%= pluralize(@lot.errors.count, "error") %> encontrados: </br><ul><% @lot.errors.each do |attr,message| %><li><%= message %></li><% end %></ul>', layout: 'bottom', type: 'warning', timeout: 4000});
+   });
+</script>
+<% end %>
  <!-- Main content -->
 
 <section class="content">
@@ -29,7 +35,7 @@
             <!-- /.col -->
             <div class="col-md-6">
                <div class="form-group">
-                  <label>Valor para federados</label>
+                  <label>Valor para federados </label>
                   <%= f.text_field :value_federated, class: 'form-control' %>
                </div>
                <div class="form-group">
@@ -42,7 +48,7 @@
             <!-- /.col -->
             <div class="col-md-6">
                <div class="form-group">
-                  <label>Valor para não federados</label>
+                  <label>Valor para não federados/Pós-Jr. </label><small>* Com Hospedagem</small>
                   <%= f.text_field :value_not_federated, :id => 'name', placeholder: '', class: 'form-control'%>
                </div>
                <!-- /.form-group -->
@@ -68,6 +74,39 @@
                <!-- /.form-group -->
             </div>
             <!-- /.col -->
+         </div>
+         <div class="row">
+            <div class="col-md-12">
+               <h4>Módulo Sem Hospegem <br><small>* Permite o congressita comprar o ingresso sem a hospedagem.</small></h4>
+
+               <div class="form-group">
+                  <div class="radio">
+                    <label>
+                     <%= f.radio_button(:nohost_active, true) %>
+                      Ativo
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label>
+                      <%= f.radio_button(:nohost_active, false) %>
+                      Inativo
+                    </label>
+                  </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+               <div class="form-group">
+                  <label>Valor para federados </label>
+                  <%= f.text_field :value_federated_nohost, class: 'form-control' %>
+               </div>
+            </div>
+            <div class="col-md-6">
+               <div class="form-group">
+                  <label>Valor para não federados/Pós-Jr. </label>
+                  <%= f.text_field :value_not_federated_nohost, :id => 'name', placeholder: '', class: 'form-control'%>
+               </div>
+            </div>
          </div>
          <!-- /.row -->
       </div>

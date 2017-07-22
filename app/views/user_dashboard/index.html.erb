@@ -290,9 +290,12 @@
                      <hr  style="margin-bottom: 0px">
                      <div class="col-sm-6 ">
                         <b>Forma de Pagamento:</b> <%= @payment.nil? ? 'Não Escolhida' : @user.payment.method.upcase %><br>
-                        <b>Status do Pagamento:</b> <% unless @payment.nil?
+                        <b>Status do Pagamento:</b> <%= unless @payment.nil?
                            @user.payment.paid? ? 'PAGO' : 'NÃO PAGO'
                            end %><br>
+                        <% if @user.lot.nohost_active %>  
+                        <b>Hospedagem:</b> <%= @payment.host ? 'COM HOSPEDAGEM' : 'SEM HOSPEDAGEM'%><br>
+                        <%end%>
                      </div>
                      <div class="col-sm-6 ">
                         <b>Data de Pagamento:</b> <%= @user.paid_on.nil? ? '' : @user.paid_on.strftime("%d/%m/%Y - %H:%M:%S") %><br>

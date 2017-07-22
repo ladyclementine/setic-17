@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170628180401) do
+ActiveRecord::Schema.define(version: 20170722030053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,10 +86,13 @@ ActiveRecord::Schema.define(version: 20170628180401) do
     t.integer  "limit"
     t.float    "value_not_federated"
     t.float    "value_federated"
-    t.datetime "start_date",          null: false
-    t.datetime "end_date",            null: false
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "start_date",                                 null: false
+    t.datetime "end_date",                                   null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.float    "value_not_federated_nohost"
+    t.float    "value_federated_nohost"
+    t.boolean  "nohost_active",              default: false
   end
 
   create_table "payments", force: :cascade do |t|
@@ -101,8 +104,9 @@ ActiveRecord::Schema.define(version: 20170628180401) do
     t.string   "user_asaas_id"
     t.string   "url_pagseguro"
     t.string   "status_pagseguro"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.boolean  "host",             default: true
     t.index ["user_id"], name: "index_payments_on_user_id", using: :btree
   end
 

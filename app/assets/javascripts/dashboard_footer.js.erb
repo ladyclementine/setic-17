@@ -266,6 +266,7 @@ function change_payment_parts(sel, price){
         $("#button_payment_billet").prop("disabled",true);
     }
     var txt = '';
+    var txt_parcelas = '';
     var data_boleto = '';
     var partions = 0
     var total = $('#parcelamento_sel option').size() - 1;
@@ -293,25 +294,35 @@ function change_payment_parts(sel, price){
     }
 
     partions = sel.value ? sel.value : 1
-    $('#price_js').html((price + (2.00*(partions-1))).toFixed(2));
+    var nohost = $( "input[name='nohost_active']:checked" );
+    var nohost_value = nohost.val();
+    if (typeof nohost_value === "undefined") {
+       $('#price_js').html((price + (2.00*(partions-1))).toFixed(2));
+    } else {
+        var text_radio_nohost = nohost.next('div:first').html();
+        var price_nohost_checked = (parseFloat(text_radio_nohost.split('R$ ')[1]) + 2.0);
+        console.log(price_nohost_checked);
+        $('#price_js').html((price_nohost_checked + (2.00*(partions-1))).toFixed(2));
+    }
+    
 
     if (partions >= 1) {
         txt += '<div class="radio"><label>';
-        txt += '<input disabled type="radio" name="options0" id="options0" value="0" checked=""> Vencimento 1° parcela: ' + data_boleto.format('DD/MM/YYYY') + ' ';
+        txt += '* Vencimento da 1° parcela: ' + data_boleto.format('DD/MM/YYYY') + ' ';
         txt += '</label>';
     }
 
     if (partions >= 2) {
         var data_f = data_boleto.add(1, 'month').format('DD/MM/YYYY');
         txt += '<div class="radio"><label>';
-        txt += '<input  disabled type="radio" name="options01" id="options0" value="0" checked=""> Vencimento 2° parcela: ' + data_f + ' ';
+        txt += '* Vencimento da 2° parcela: ' + data_f + ' ';
         txt += '</label>';
     }
 
     if (partions >= 3) {
         var data_f = data_boleto.add(1, 'month').format('DD/MM/YYYY');
         txt += '<div class="radio"><label>';
-        txt += '<input disabled type="radio" name="options03" id="options0" value="0" checked=""> Vencimento 3° parcela: ' + data_f + ' ';
+        txt += '* Vencimento da 3° parcela: ' + data_f + ' ';
         txt += '</label>';
 
     }
@@ -319,17 +330,34 @@ function change_payment_parts(sel, price){
     if (partions >= 4) {
         var data_f = data_boleto.add(1, 'month').format('DD/MM/YYYY');
         txt += '<div class="radio"><label>';
-        txt += '<input disabled type="radio" name="options02" id="options0" value="0" checked=""> Vencimento 4° parcela: ' + data_f + ' ';
+        txt += '* Vencimento da 4° parcela: ' + data_f + ' ';
         txt += '</label>';
     }
 
-    txt += '<div class="radio"><label>';
-    txt += partions + ' x ' + ($('#price_js').html() / partions).toFixed(2);
-    txt += '</label>';
+    txt_parcelas += '<div class="radio"><label>';
+    txt_parcelas += '<b>Parcelas: </b>'+ partions + ' x ' + ($('#price_js').html() / partions).toFixed(2);
+    txt_parcelas += '</label>';
 
     $('.js_radio_parts').html(txt);
+    $('.js_radio_parts_parcelas').html(txt_parcelas);
 }
 
+function change_payment_nohost(sel, price){
+    var parcelas = $('select[name=installmentCount]');
+    var partions = parcelas.val() ? parcelas.val() : 1;
+    var txt_parcelas = '';
+    var new_price = (price + (2.00*(partions-1)));
+    $('#price_js').html(new_price.toFixed(2));
+    
+    txt_parcelas += '<div class="radio"><label>';
+    txt_parcelas += '<b>Parcelas: </b>'+ partions + ' x ' + (new_price / partions).toFixed(2);
+    txt_parcelas += '</label>';
+    $('.js_radio_parts_parcelas').html(txt_parcelas);
+}
+
+function change_payment_nohost_pags(sel, price){
+    $('#price_js_p').html((price).toFixed(2));
+}
 
 $(function() {
     /*

@@ -4,4 +4,10 @@ module CheckoutHelper
     fixed_taxa = 0.4
     (value + fixed_taxa) / (1 - percert_taxa)
   end
+
+  def self.pagseguro_self(value)
+  	percert_taxa = 0.0399
+    fixed_taxa = 0.4
+    (value + fixed_taxa) / (1 - percert_taxa)
+  end
 end
