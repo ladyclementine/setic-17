@@ -85,7 +85,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.action_mailer.default_url_options = { :host => 'rjfej17.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'www.efej.com.br' }
 
   Rails.application.config.middleware.use ExceptionNotification::Rack,
   :email => {

@@ -1,0 +1,73 @@
+<!-- Main content -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<section class="content">
+   <!-- <section class="box"> -->
+   <div class="row">
+      <div class="col-xs-12">
+         <div class="box">
+            <div class="box-header">
+               <h3 class="box-title">Ranking Geral</h3>
+            
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+                     <!-- Sales Chart Canvas -->
+                     <div id="chart_div"></div>
+          
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- </section> -->
+</section>
+
+
+<script type="text/javascript">
+   google.charts.load('current', {packages: ['corechart', 'bar']});
+   google.charts.setOnLoadCallback(drawMaterial);
+   
+
+   
+    function drawMaterial() {
+         var data = google.visualization.arrayToDataTable([
+           ['Lotes', 'Total', {type: 'string', role: 'annotation'}, 'Alocados', {type: 'string', role: 'annotation'}, 'Fila de Espera', {type: 'string', role: 'annotation'},'Pago Total', {type: 'string', role: 'annotation'},  'Parcialmente Pago', {type: 'string', role: 'annotation'}],
+           <% @ej.each do |empresa,usuarios| %>
+           ['<%=  usuarios.map{ |h| h.junior_enterprise}.max.upcase %>', <%=  usuarios.count %>, <%=  usuarios.count %>, <%= count_alocados(usuarios) %>,<%= count_alocados(usuarios) %>,<%= count_fila(usuarios) %>, <%= count_fila(usuarios) %>, <%= count_pagototal(usuarios) %> , <%= count_pagototal(usuarios) %>, <%= count_pagoparcial(usuarios) %>, <%= count_pagoparcial(usuarios) %>],
+           <% end %>
+          
+         ]);
+   
+         var options = {
+       
+             title: 'Lista de EJS Cadastradas',
+      
+          'chartArea': {'height': '100%'},
+           hAxis: {
+             title: 'Congressistas',
+             minValue: 0,
+           },
+
+           annotations: {
+          alwaysOutside: true,
+          textStyle: {
+            fontSize: 12,
+            auraColor: 'none',
+            color: '#555'
+          }
+         
+        },
+   
+           //vAxis: {
+           //  title: 'City'
+           //},
+           bars: 'horizontal'
+         };
+        var height = data.getNumberOfRows() * 81 + 200;
+         $("#chart_div").height(height);
+         var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+       }
+   
+          
+</script>

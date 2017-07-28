@@ -34,4 +34,17 @@ class UserDashboardController < BaseController
   def about
   end
 
+  def active_account
+    if !@user.active
+      @lot = Lot.active_lot
+      if !@lot.nil? && !@lot.is_full? && @user.lot.nil?
+        @user.lot = @lot
+      end
+      @user.active = true
+      @user.created_at = Time.now
+      @user.save!
+      redirect_to authenticated_user_root_path
+    end
+  end
+
 end

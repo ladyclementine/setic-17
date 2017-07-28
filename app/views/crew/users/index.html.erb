@@ -4,4 +4,37 @@
       <small>Todo os Congressistas</small>
    </h1>
 </section>
-<%= render 'table' %>
+<!-- Main content -->
+<section class="content">
+   <!-- <section class="box"> -->
+   <div class="row">
+      <div class="col-xs-12">
+         <div class="box">
+            <div class="box-header">
+               <h3 class="box-title">Gerenciamento de Usuários</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+               <table id="users-table", data-source="<%= crew_users_path(format: :json) %>" class="table table-striped table-bordered dt-responsive nowrap display"  cellspacing="0" width="100%">
+                  <thead>
+                     <tr>
+                        <th>Nome</th>
+ 						<th>Email</th>
+ 						<th class="noExport">Pagamento</th>
+ 						<th hidden="">Pagamento</th>
+ 						<th>Lote</th>
+ 						<th>EJ</th>
+ 						<th>Federada?</th>
+ 						<th class="noExport">Editar</th>
+ 						<th class="noExport">Login</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- </section> -->
+</section>

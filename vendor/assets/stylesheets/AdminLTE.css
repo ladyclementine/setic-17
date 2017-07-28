@@ -5318,25 +5318,25 @@ canvas{
 }
 
 .patrick-modal .modal-header {
-  background-image: url('/images/efej/modal.jpg');
+  background-image: url('/images/efej/modal_avisos.png');
   height: 150px;
   background-size: 600px 100%;
   background-position: bottom;
 }
-.patrick-modal .modal-header:before{
+/*.patrick-modal .modal-header:before{
   content: url('/images/efej/logo-modal.png');
   margin: auto;
   margin-top: -20px
 
 }
-
+*/
 
 .patrick-modal .modal-header .close{
   margin-top: -130px;
 }
 
 .patrick-modal .modal-header .modal-title{
-  margin-top:13px;
+  margin-top:150px;
   text-align: center;
 }
 /*DESCUBRA*/

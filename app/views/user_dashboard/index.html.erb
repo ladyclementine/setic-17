@@ -75,99 +75,91 @@
             </ul>
             <div class="tab-content">
                <div class="active tab-pane" id="activity">
-                  <!--alert-->
-                  <% if @user.payment.nil? && !@user.lot.nil? %>
-                  <%= link_to payment_path do %>
-                  <div class="alert alert-danger alert-dismissible">
-                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                     <h4><i class="icon fa fa-ban"></i> Você ainda não efetuou o pagamento</h4>
-                     Clique aqui e efetue o pagamento para garantir sua vaga.
-                  </div>
-                  <% end %>
-                  <% elsif !@user.payment.nil? && !@user.payment.paid? %>
-                  <div class="alert alert-info alert-dismissible">
-                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                     <h4><i class="icon fa fa-info"></i> Status do pagamento</h4>
-                     Vimos que você optou pelo método de pagamento <B><%= @user.payment.method %></B>. Caso já tenha pago, aguarde a nossa confirmação.
-                     <% if @user.payment.method == "Boleto" %>
-                     <br>
-                     Parcelas pagas:
-                     <% if @user.payment.portion_paid == 0 %>
-                     <strong>nenhuma parcela paga</strong>
-                     <% else %>
-                     <strong><%= "#{@user.payment.portion_paid}/#{@user.payment.portions}"  %></strong>
+                  <% if @user.active%>
+                     <% if @user.payment.nil? && !@user.lot.nil?  %>
+                        <%= link_to payment_path do %>
+                           <div class="alert alert-danger alert-dismissible">
+                              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                              <h4><i class="icon fa fa-ban"></i> Você ainda não efetuou o pagamento</h4>
+                              Clique aqui e efetue o pagamento para garantir sua vaga.
+                           </div>
+                        <% end %>
+                     <% elsif !@user.payment.nil? && !@user.payment.paid? %>
+                        <div class="alert alert-info alert-dismissible">
+                           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                           <h4><i class="icon fa fa-info"></i> Status do pagamento</h4>
+                           Vimos que você optou pelo método de pagamento <B><%= @user.payment.method %></B>. Caso já tenha pago, aguarde a nossa confirmação.
+                           <% if @user.payment.method == "Boleto" %>
+                              <br>
+                              Parcelas pagas:
+                              <% if @user.payment.portion_paid == 0 %>
+                                 <strong>nenhuma parcela paga</strong>
+                              <% else %>
+                                 <strong><%= "#{@user.payment.portion_paid}/#{@user.payment.portions}"  %></strong>
+                              <% end %>
+                           <% end %>
+                        </div>
+                     <% elsif !@payment.nil? && @payment.paid? %>
+                        <div class="alert alert-success alert-dismissible">
+                           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                           <h4><i class="icon fa fa-check"></i> Status do pagamento</h4>
+                           <b>Parabéns!</b> Seu pagamento foi realizado e sua inscrição foi confirmada. Em breve você poderá escolher o seu quarto e a programação.
+                        </div>
+                     <% elsif @user.lot.nil? && @user.active %>
+                        <div class="alert alert-danger alert-dismissible">
+                           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                           <h4><i class="icon fa fa-info"></i>Você está na fila de espera, congressista!</h4>
+                           Infelizmente, as vagas do lote acabaram, mas fique ligado, iremos lhe avisar por email quando surgir novas vagas.<br>
+                           </br>
+                           <h5><b>Sua posição na fila é:</b>  <%= User.my_position(@user) %>° Lugar</h5>
+                        </div>
                      <% end %>
+                     <% if !@payment.nil? %>
+                     <% if @payment.method == "Boleto" %>
+                        <% if @billets_links.count ==0 %>
+                           OPS!! Parece que houve um erro ao gerar seu(s) boleto(s). Não se preocupe, você está com a vaga garantida. Em breve você poderá gerar seus boletos.  <br> <%= link_to "Tentar Novamente", payment_billet_again_path, method: :put unless @payment.nil? %><%#=link_to 'Tentar novamente' %>
+                        <% end %>
+
+                        <% @billets_links.each do |link| #, download: 'data'%>
+                           <% if link.status == 'PENDING' %>
+                              <div class="btn-group">
+
+                                 <a data-toggle="tooltip" title="" data-original-title="PAGAMENTO PENDENTE" type="button" href="<%=link.boleto_url%>" class="btn btn-danger btn-space" target="_blank" class="button"><%= link.description.nil? ? 'Boleto Único' : link.description %></a>
+
+
+                                 <button type="button" class="btn btn-danger dropdown-toggle" style="margin-left: -5px;" data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                 </button>
+
+                                 <ul class="dropdown-menu" role="menu">
+                                   <li><a href="#" data-toggle="modal" data-target="#modal-pagamento">Transferencia ou Deposito</a></li>
+
+                                   <li><a href="#" data-toggle="modal" data-target="#modal-tempo">Tempo de Processamento</a></li>
+                                 </ul>
+                             
+                              </div>
+
+                           <% elsif link.status == 'RECEIVED' %>
+                              <button data-toggle="tooltip" title="" data-original-title="PAGAMENTO RECEBIDO" type="button" class="btn btn-success btn-space"><%=link.description.nil? ? 'Boleto Único' : link.description%></button>
+
+                           <% elsif link.status == 'OVERDUE' %>
+                              <button data-toggle="tooltip" title="" data-original-title="PAGAMENTO ATRASADO" type="button" class="btn btn-alert btn-space"><%=link.description.nil? ? 'Boleto Único' : link.description%></button>
+
+                           <% end %>
+                        <% end %>
+
+                     <% if @billets_links.where(status:'OVERDUE').any? %>
+                        <h2 class="page-header"></h2>
+                        <h3 class="box-title __web-inspector-hide-shortcut__"> Fica de olho empresário jr, você tem boletos atrasados. :)</h3>
+
+                        <% @billets_links.where(status:'OVERDUE').each do |link| %>
+                           <%= link_to link.boleto_url, target: '_blank' do %>
+                              <button data-toggle="tooltip" title="" data-original-title="EFETUE O PAGAMENTO!" type="button" class="btn btn-alert btn-space"><%=link.description.nil? ? 'Boleto Único' : link.description%></button> 
+                           <% end %>
+                           Multa: 0%
+                        <% end %>
                      <% end %>
-                  </div>
-                  <% elsif !@payment.nil? && @payment.paid? %>
-                  <div class="alert alert-success alert-dismissible">
-                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                     <h4><i class="icon fa fa-check"></i> Status do pagamento</h4>
-                     <b>Parabéns!</b> Seu pagamento foi realizado e sua inscrição foi confirmada. Em breve você poderá escolher o seu quarto e a programação.
-                  </div>
-                  <% elsif @user.lot.nil? && @user.active %>
-                  <div class="alert alert-danger alert-dismissible">
-                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                     <h4><i class="icon fa fa-info"></i>Você está na fila de espera, congressista!</h4>
-                     Infelizmente, as vagas do lote promocional acabaram, mas fique ligado! O primeiro lote abre no dia 20/07.<br>
-                     </br>
-                     <h5><b>Sua posição na fila é:</b>  <%= User.my_position(@user) %>° Lugar</h5>
-                  </div>
-                  <% else %>
-                  <b>CONTA INATIVA</b>
-                  <% end %>
-                  <% if !@payment.nil? %>
-                  <% if @payment.method == "Boleto" %>
-                  <% if @billets_links.count ==0 %>
-                  OPS!! Parece que houve um erro ao gerar seu(s) boleto(s). Não se preocupe, você está com a vaga garantida. Em breve você poderá gerar seus boletos.  <br> <%= link_to "Tentar Novamente", payment_billet_again_path, method: :put unless @payment.nil? %><%#=link_to 'Tentar novamente' %>
-                  <% end %>
-
-                  <% @billets_links.each do |link| #, download: 'data'%>
-
-                  <% if link.status == 'PENDING' %>
-
-                  <div class="btn-group">
-
-
-                     <a data-toggle="tooltip" title="" data-original-title="PAGAMENTO PENDENTE" type="button" href="<%=link.boleto_url%>" class="btn btn-danger btn-space" target="_blank" class="button"><%= link.description.nil? ? 'Boleto Único' : link.description %></a>
-
-
-                     <button type="button" class="btn btn-danger dropdown-toggle" style="margin-left: -5px;" data-toggle="dropdown">
-                        <span class="caret"></span>
-                        <span class="sr-only">Toggle Dropdown</span>
-                     </button>
-
-                     <ul class="dropdown-menu" role="menu">
-                       <li><a href="#" data-toggle="modal" data-target="#modal-pagamento">Transferencia ou Deposito</a></li>
-
-                       <li><a href="#" data-toggle="modal" data-target="#modal-tempo">Tempo de Processamento</a></li>
-                     </ul>
-
-
-                 
-                  </div>
-
-
-                  <% elsif link.status == 'RECEIVED' %>
-                  <button data-toggle="tooltip" title="" data-original-title="PAGAMENTO RECEBIDO" type="button" class="btn btn-success btn-space"><%=link.description.nil? ? 'Boleto Único' : link.description%></button>
-
-                  <% elsif link.status == 'OVERDUE' %>
-                  <button data-toggle="tooltip" title="" data-original-title="PAGAMENTO ATRASADO" type="button" class="btn btn-alert btn-space"><%=link.description.nil? ? 'Boleto Único' : link.description%></button>
-
-                  <% end %>
-                  <% end %>
-
-                  <% if @billets_links.where(status:'OVERDUE').any? %>
-                  <h2 class="page-header"></h2>
-                  <h3 class="box-title __web-inspector-hide-shortcut__"> Fica de olho empresário jr, você tem boletos atrasados. :)</h3>
-
-                  <% @billets_links.where(status:'OVERDUE').each do |link| %>
-                  <%= link_to link.boleto_url, target: '_blank' do %>
-                  <button data-toggle="tooltip" title="" data-original-title="EFETUE O PAGAMENTO!" type="button" class="btn btn-alert btn-space"><%=link.description.nil? ? 'Boleto Único' : link.description%></button> 
-                  <% end %>
-                  Multa: 0%
-                  <% end %>
-                  <% end %>
                   <% end %>
                   <% end %>
 
@@ -179,6 +171,18 @@
                   <% end %>
                   <% end %>
                   <!--alert end-->
+                  <% else %>
+                     <!--CONTA INATIVA -->
+                     <b style="font-size: 18px">CONTA INATIVA</b>
+                     <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+                        Sua conta pode ter sido inativada por um dos seguintes motivos: <br>
+                        1° - Você não efetuou o pagamento da  1° parcela no prazo estabelecido.<br>
+                        2° - Você vendeu sua vaga.
+                     </p>
+                      <%= link_to active_again_path, method: :put, data: {confirm: 'Deseja buscar e ser alocado em um lote disponível? ', commit: 'Sim'} do %>
+                     <button type="button" class="btn bg-navy ">Ativar Minha Conta</button>
+                     <% end %>
+                  <% end %>
                </div>
                <!-- /.tab-pane -->
                <div class="tab-pane" id="timeline">
@@ -290,12 +294,9 @@
                      <hr  style="margin-bottom: 0px">
                      <div class="col-sm-6 ">
                         <b>Forma de Pagamento:</b> <%= @payment.nil? ? 'Não Escolhida' : @user.payment.method.upcase %><br>
-                        <b>Status do Pagamento:</b> <%= unless @payment.nil?
+                        <b>Status do Pagamento:</b> <% unless @payment.nil?
                            @user.payment.paid? ? 'PAGO' : 'NÃO PAGO'
                            end %><br>
-                        <% if @user.lot.nohost_active && !@user.payment.nil? %>  
-                        <b>Hospedagem:</b> <%= @payment.host ? 'COM HOSPEDAGEM' : 'SEM HOSPEDAGEM'%><br>
-                        <%end%>
                      </div>
                      <div class="col-sm-6 ">
                         <b>Data de Pagamento:</b> <%= @user.paid_on.nil? ? '' : @user.paid_on.strftime("%d/%m/%Y - %H:%M:%S") %><br>

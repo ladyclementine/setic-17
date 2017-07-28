@@ -34,6 +34,8 @@
                            <% if users.payment.nil? %>
                            Não Selecionado
                            <% elsif !users.payment.nil?  %>
+
+
                            <!-- PAG SELECIONADO -->
                            <% if users.payment.method == "Boleto" %>
                            <% i = 1 %>
@@ -47,6 +49,8 @@
                            <% end %>
                            <% i += 1 %>
                            <% end %>
+
+
                            <% elsif  users.payment.method == "PagSeguro"  %>
                               <% if users.payment.paid? %>
                               <small class="label bg-green" data-toggle="tooltip" title="" data-original-title="Pagamento Recebido">PagSeguro</small> 
@@ -54,6 +58,7 @@
                               <small class="label bg-red" data-toggle="tooltip" title="" data-original-title="Pagamento <%= users.payment.status_pagseguro.nil? ? ' Pendente' : users.payment.status_pagseguro%>">PagSeguro</small> 
                               <% end %>
                            <% end %>
+
                            <div class="btn-group ">
                               <small class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown" aria-expanded="true">
                               <span class="caret"></span>
@@ -65,7 +70,10 @@
                               </ul>
                            </div>
                            <% end %>
+                           
                         </td>
+
+
                         <td hidden="">
                         <% if  users.payment.nil? %> 
                           Não selecionado

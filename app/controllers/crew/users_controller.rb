@@ -6,7 +6,10 @@ class Crew::UsersController < Crew::BaseController
     #  format.html
     #  format.json { render json: UserDatatable.new(view_context) }
     #end
-    @users= User.all.order('completed DESC, name ASC')
+    respond_to do |format|
+      format.html
+      format.json { render json: UserDatatable.new(view_context, {table_select: 'all'}) }
+    end
   end
 
   def edit
@@ -28,7 +31,13 @@ class Crew::UsersController < Crew::BaseController
   end
 
   def qualified
-    @users = User.allocated
+    respond_to do |format|
+      format.html
+      format.json { render json: UserDatatable.new(view_context, {table_select: 'qualified'}) }
+    end
+  end
+
+  def qualified_server
   end
 
   def waiting_list
@@ -48,7 +57,10 @@ class Crew::UsersController < Crew::BaseController
   end
 
   def pays_list
-    @users = User.pays
+    respond_to do |format|
+      format.html
+      format.json { render json: UserDatatable.new(view_context, {table_select: 'pay'}) }
+    end
   end
 
   def ejs_list
@@ -60,6 +72,11 @@ class Crew::UsersController < Crew::BaseController
     @users_l = params[:ej].nil? ? User.allocated : @users
     #junior_enterprise group('name AS grouped_name, age')
   end
+
+  def ejs_chat
+    @ej = User.all.where.not(junior_enterprise:nil).order(:junior_enterprise).group_by{|d| d.junior_enterprise.split(' ').first.downcase}.sort_by { |k, v| v.count }.reverse
+  end
+
 
   def certificate
     @users = User.pays_total

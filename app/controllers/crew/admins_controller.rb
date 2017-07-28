@@ -17,27 +17,15 @@ class Crew::AdminsController < Crew::BaseController
     @tPagseguro = 0
     @tBoleto = 0
 
-    @lots.each do |lot|
-      lot.users.pays.each do |user|
-        if user.payment.method == 'PagSeguro' && user.payment.paid?
-          if user.is_fed?
-            @total += lot.value_federated
-            @tPagseguro += lot.value_federated
-          else
-            @total += lot.value_not_federated
-            @tPagseguro += lot.value_not_federated
-          end
-        elsif user.payment.method == 'Boleto' && !user.payment.asaas_payments.nil?
-          parcelas = user.payment.portions
-          total_pago = user.payment.asaas_payments.where(status: 'RECEIVED').count
-          if user.is_fed?
-            @total += (lot.value_federated/parcelas) * total_pago
-            @tBoleto += (lot.value_federated/parcelas) * total_pago
-          else
-            @total += (lot.value_not_federated/parcelas) * total_pago
-            @tBoleto += (lot.value_not_federated/parcelas) * total_pago
-          end
-        end
+    @pays.each do |user|
+      if user.payment.method == 'PagSeguro' && user.payment.paid? && !user.payment.price.nil?
+        @total += user.payment.price
+        @tPagseguro += user.payment.price
+      elsif user.payment.method == 'Boleto' && !user.payment.asaas_payments.nil? && !user.payment.price.nil?
+        parcelas = user.payment.portions
+        total_pago = user.payment.asaas_payments.where(status: 'RECEIVED').count
+        @total += (user.payment.price/parcelas) * total_pago
+        @tBoleto += (user.payment.price/parcelas) * total_pago
       end
     end
   end

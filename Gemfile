@@ -55,7 +55,9 @@ gem 'cpf_faker'
 
 # gem 'newrelic_rpm'
 
-#gem 'ajax-datatables-rails', git: 'https://github.com/ajahongir/ajax-datatables-rails.git'
+gem 'jquery-datatables-rails'
+gem 'ajax-datatables-rails'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
