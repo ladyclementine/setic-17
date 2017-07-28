@@ -1,5 +1,6 @@
 class Lot < ApplicationRecord
   has_many :users
+  validates_presence_of :limit, message: "Limite não pode ficar em branco."
   validates_presence_of :value_federated_nohost, message: "Preço para federados não pode ficar em branco.", if: Proc.new { |a| a.nohost_active }
   validates_presence_of :value_not_federated_nohost, message: "Preço para não federados não pode ficar em branco.", if: Proc.new { |a| a.nohost_active }
 

@@ -13,18 +13,18 @@ class Crew::LotsController < Crew::BaseController
   end
 
   def new
-    @lots = Lot.new
+    @lot = Lot.new
   end
 
   def create
+    @lot = Lot.new(lot_params)
     respond_to do |format|
-      @lot = Lot.new(lot_params)
       if @lot.save
         flash[:success] = "Lote criado com sucesso."
         format.html {  redirect_to crew_lots_path }
       else
-        format.html { render 'edit'}
-        format.json { render json: @lot.errors }
+        format.html { render :new }
+        format.json { render json: @lot.errors}
       end
     end
   end
