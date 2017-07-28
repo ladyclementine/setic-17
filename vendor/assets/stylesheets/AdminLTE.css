@@ -249,6 +249,9 @@ a:focus {
     color: inherit;
     background: transparent;
   }
+  .full_ranking{
+    width: 100%;
+  }
 }
 @media (max-width: 767px) {
   .main-header .navbar-right {

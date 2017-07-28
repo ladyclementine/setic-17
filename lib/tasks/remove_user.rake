@@ -41,6 +41,18 @@ namespace :remove_user do
     p "#{counter} contas excluidas"
   end
 
+
+  #NOVA VERSÃO - RODAR FILA DE ESPERA -- ALL LOTS
+  # SELECIONAR USERS QUE NÃO SELECIONARAM PAGAMENTO OU SELECIONARAM E NÃO PAGARAM
+  task rodar_fila: :environment do
+    users = User.select { |user| (user.payment.nil? || (!user.payment.nil? && user.payment.portion_paid==0 )) && !user.lot.nil? }
+    users.each do |u|
+      #u.payment.asaas_payments.destroy_all if !u.payment.nil?
+      u.payment.destroy if !u.payment.nil?
+      #DESCLASSIFICAR
+      u.update_attributes(lot_id: nil, active: false)
+    end
+  end
 end
 
 # heroku run rake remove_user:no_completed  40 excluidos

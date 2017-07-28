@@ -8,17 +8,24 @@
     <Table>
       <Row>
       	<% @columns.each do |column| %>
-        <Cell><Data ss:Type="String"><%= column %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= t("columns.#{column.to_symbol}") %></Data></Cell>
   		<% end %>
   		<Cell><Data ss:Type="String">Status do Pagamento</Data></Cell>
+      <Cell><Data ss:Type="String">Com alojamento/hospedagem?</Data></Cell>
       </Row>
 
       <% @users.each do |user| %>
         <Row>
+
         <% @columns.each do |column| %>
+
           <Cell><Data ss:Type="String"><%= user.send(column.to_symbol) %></Data></Cell>
         <% end %>
+
+
          <Cell><Data ss:Type="String"> <% if  user.payment.nil? %>Não selecionado<% else %><%= user.payment.method %> - <% if user.payment.paid? %> Pago<% else %>Não Pago - <%=user.payment.portion_paid%>/<%=user.payment.portions%> <% end %><%end %></Data></Cell>
+
+         <Cell><Data ss:Type="String"><% if !user.payment.nil? %> <%= user.payment.host ? 'Sim' : 'Não' %> <% end %></Data></Cell>
         </Row>
        <% end %>
 

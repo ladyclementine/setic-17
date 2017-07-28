@@ -115,7 +115,7 @@ class ApplicationController < ActionController::Base
   #end
 
   def verify_register_conclusion
-    if !@user.face_confirmed?
+    if !@user.face_confirmed? && !@user.uid.nil?
       flash[:notice] = "Insira um e-mail pessoal para receber nossos avisos."
       redirect_to email_completar_path
       return false

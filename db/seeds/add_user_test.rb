@@ -18,7 +18,7 @@ for i in 0..40
     user.birthday = Faker::Date.birthday(18, 25) 
     user.gender = ['Masculino','Feminino'].sample
     user.phone = '(85) 99999-9999'
-    user.federation = 'FEJECE'
+    user.federation = ['Não confederada', 'RioJunior (RJ)', 'UNIJr-BA (BA)', 'SERJÚNIOR (SE)', 'RN Júnior (RN)', 'PB Júnior (PB)', 'Maranhão Júnior (MA)', 'Juniores (ES)', 'Goiás Júnior (GO)', 'FEJESP (SP)', 'FEJESC (SC)', 'FEJERS (RS)', 'FEJEPE (PE)', 'FEJEPAR (PR)', 'FEJEMS (MS)', 'FEJEMG (MG)', 'FEMTEJ (MT)', 'FEJECE (CE)', 'FEJEA (AL)', 'Concentro (DF)', 'Piauí Junior (PI)', 'Pará Júnior (PA)', 'Acre Júnior (AC)'].sample
     user.job =  ['Analista','Desenvolvedor','Presidente','Gerente de Projetos', 'RH', 'DAF'].sample
     user.university = ['USP','UECE','UNIFOR','UFRJ'].sample
     user.special_needs = ''
@@ -69,7 +69,7 @@ for i in 0..10
     user.birthday = Faker::Date.birthday(18, 25) 
     user.gender = ['Masculino','Feminino'].sample
     user.phone = '(85) 99999-9999'
-    user.federation = 'FEJECE'
+    user.federation = ['Não confederada', 'RioJunior (RJ)', 'UNIJr-BA (BA)', 'SERJÚNIOR (SE)', 'RN Júnior (RN)', 'PB Júnior (PB)', 'Maranhão Júnior (MA)', 'Juniores (ES)', 'Goiás Júnior (GO)', 'FEJESP (SP)', 'FEJESC (SC)', 'FEJERS (RS)', 'FEJEPE (PE)', 'FEJEPAR (PR)', 'FEJEMS (MS)', 'FEJEMG (MG)', 'FEMTEJ (MT)', 'FEJECE (CE)', 'FEJEA (AL)', 'Concentro (DF)', 'Piauí Junior (PI)', 'Pará Júnior (PA)', 'Acre Júnior (AC)'].sample
     user.job =  ['Analista','Desenvolvedor','Presidente','Gerente de Projetos', 'RH', 'DAF'].sample
     user.university = ['USP','UECE','UNIFOR','UFRJ'].sample
     user.address = Faker::Address.street_address 
@@ -126,7 +126,7 @@ for i in 0..10
     user.birthday = Faker::Date.birthday(18, 25) 
     user.gender = ['Masculino','Feminino'].sample
     user.phone = '(85) 99999-9999'
-    user.federation = 'FEJECE'
+    user.federation = ['Não confederada', 'RioJunior (RJ)', 'UNIJr-BA (BA)', 'SERJÚNIOR (SE)', 'RN Júnior (RN)', 'PB Júnior (PB)', 'Maranhão Júnior (MA)', 'Juniores (ES)', 'Goiás Júnior (GO)', 'FEJESP (SP)', 'FEJESC (SC)', 'FEJERS (RS)', 'FEJEPE (PE)', 'FEJEPAR (PR)', 'FEJEMS (MS)', 'FEJEMG (MG)', 'FEMTEJ (MT)', 'FEJECE (CE)', 'FEJEA (AL)', 'Concentro (DF)', 'Piauí Junior (PI)', 'Pará Júnior (PA)', 'Acre Júnior (AC)'].sample
     user.job =  ['Analista','Desenvolvedor','Presidente','Gerente de Projetos', 'RH', 'DAF'].sample
     user.university = ['USP','UECE','UNIFOR','UFRJ'].sample
     user.address = Faker::Address.street_address 

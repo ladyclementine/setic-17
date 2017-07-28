@@ -294,9 +294,14 @@
                      <hr  style="margin-bottom: 0px">
                      <div class="col-sm-6 ">
                         <b>Forma de Pagamento:</b> <%= @payment.nil? ? 'Não Escolhida' : @user.payment.method.upcase %><br>
-                        <b>Status do Pagamento:</b> <% unless @payment.nil?
+                        <b>Status do Pagamento:</b> <%= unless @payment.nil?
                            @user.payment.paid? ? 'PAGO' : 'NÃO PAGO'
                            end %><br>
+                        <% if !@user.lot.nil? && !@user.payment.nil? && @user.lot.nohost_active %>
+                        <b>Tipo:</b> 
+                      
+                           <%= @user.payment.host ? 'Com Hospedagem' : 'Sem Hospedagem' %>
+                         <br><% end %>
                      </div>
                      <div class="col-sm-6 ">
                         <b>Data de Pagamento:</b> <%= @user.paid_on.nil? ? '' : @user.paid_on.strftime("%d/%m/%Y - %H:%M:%S") %><br>
@@ -384,7 +389,7 @@
 
 
 
-      <div class="col-md-9 pull-right">
+      <div class="col-sm-9 full_ranking" style="float: right;">
          <div class="box box-primary" >
              <div class="box-header">
                <h3 class="box-title">TOP 5 - EJS CADASTRADAS</h3>

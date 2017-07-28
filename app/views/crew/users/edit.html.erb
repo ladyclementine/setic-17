@@ -1,3 +1,8 @@
+<style type="text/css">
+   .box-body .btn{
+      margin-bottom: 10px;
+   }
+</style>
 <section class="content-header">
    <h1>
       Editar Cadastro
@@ -24,7 +29,7 @@
       <div class="box-body">
          <div class="row">
             <div class="col-md-3">
-               <%= link_to "Desclassificar usuário", crew_disqualify_user_path(@user), class: 'btn btn-block btn-danger', method: :patch, data: { confirm: "Deseja realmente desclassificar #{@user.name || @user.email}" } %>
+               <%= link_to "Inativar Congressista", crew_disqualify_user_path(@user), class: 'btn btn-block btn-danger', method: :patch, data: { confirm: "Deseja realmente inativar #{@user.name || @user.email}" },'data-toggle': "tooltip", 'title': "", 'data-original-title': "Remover do lote atual e marcar a conta com o status inativo" %>
             </div>
             <div class="col-md-3">
                <button type="button"  class="btn btn-info btn-block  dropdown-toggle" data-toggle="dropdown">
@@ -41,9 +46,12 @@
                   <li><a href="#">Atual: <%= @user.lot.nil? ? 'Não Alocado' : @user.lot.name%></a></li>
                </ul>
             </div>
+            <% if !@payment.nil? %>
             <div class="col-md-3">
                <%= link_to "Remover Método De Pagamento", crew_change_payment_method_path(@payment.id),'data-toggle': "tooltip", 'title': "", 'data-original-title': "Só será possivel remover o pagamento caso o usuário não tenha feito nenhum pagamento.", class: 'btn btn-block btn-danger', method: :patch, data: { confirm: "Deseja realmente apagar os boletos|pagseguro de #{@user.name || @user.email}?" } unless @payment.nil? %>
             </div>
+            <% end %>
+
             <div class="col-md-3">
                <button type="button" class="btn btn-info btn-block  dropdown-toggle" data-toggle="dropdown">
                Status Do Pagamento <span class="caret"></span>
@@ -85,6 +93,21 @@
                   <% end %>
                </ul>
             </div>
+
+            <div class="col-md-3">
+               <%= link_to crew_login_user_path(@user), target: "_blank", method: :patch do %><button type="button" class="btn btn-block btn-warning">Login</button><% end %>
+            </div>
+            <div class="col-md-3">
+               <% if @user.avatar?  %>
+                  <%= link_to @user.avatar_url, target: "_blank" do %><button type="button" class="btn btn-block btn-warning">Foto de Perfil</button><% end %>
+               <% end %>
+            </div>
+            <!-- <div class="col-md-3">
+               <button type="button" class="btn btn-block btn-warning">Quarto</button>
+            </div>
+            <div class="col-md-3">
+               <button type="button" class="btn btn-block btn-warning">Programação</button>
+            </div> -->
          </div>
       </div>
    </div>

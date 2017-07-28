@@ -2,6 +2,7 @@ class Payment < ApplicationRecord
   belongs_to :user
   has_many :asaas_payments,  foreign_key: 'custumer_id', primary_key: 'user_asaas_id'
   validates :portions, numericality: { less_than_or_equal_to: 3, greater_than: 0 }
+  acts_as_paranoid
 
   def paid?
     self.portion_paid == self.portions
@@ -49,7 +50,7 @@ class Payment < ApplicationRecord
       payment.redirect_url = 'http://localhost:3000/'
     else
       payment.notification_url = 'https://rjfej17.herokuapp.com/confirm_payment'
-      payment.redirect_url = 'https://rjfej17.herokuapp.com/'
+      payment.redirect_url = 'http://www.efej.com.br'
     end
 
     payment.items << {
