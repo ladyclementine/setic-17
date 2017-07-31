@@ -12,18 +12,17 @@ Rails.application.configure do
 
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
+  
   config.action_controller.perform_caching = true
-  config.cache_store = :dalli_store
-
-  config.cache_store = :dalli_store,
-                    (ENV["MEMCACHIER_SERVERS"] || "").split(","),
-                    {:username => ENV["MEMCACHIER_USERNAME"] || "",
-                     :password => ENV["MEMCACHIER_PASSWORD"] || "",
-                     :failover => true,
-                     :socket_timeout => 1.5,
-                     :socket_failure_delay => 0.2,
-                     :pool_size => 5
-                    }
+  # config.cache_store = :dalli_store,
+  #                   (ENV["MEMCACHIER_SERVERS"] || "").split(","),
+  #                   {:username => ENV["MEMCACHIER_USERNAME"] || "",
+  #                    :password => ENV["MEMCACHIER_PASSWORD"] || "",
+  #                    :failover => true,
+  #                    :socket_timeout => 1.5,
+  #                    :socket_failure_delay => 0.2,
+  #                    :pool_size => 5
+  #                   }
 
 
   # Disable serving static files from the `/public` folder by default since

@@ -14,7 +14,7 @@
               <span style="position: absolute; margin-top: 30px; margin-left:10px; background-color: #FFFFFF" class="text-light-blue badge"><%= room_name_link(room) %></span>
 
                <span class="hotel-vagas"><%= room.extra_info %></span>
-               <img src="/images/eventi/room.jpg" width="370" height="200" alt="">
+               <img src="/images/quarto.jpg" width="370" height="200" alt="">
                <span class="hotel-ventilacao"><img src="/images/<%= room.air==true ? 'ar' : 'ventilador' %>.png" alt=""></span>
             </div>
             <div class="content-hotel">
@@ -35,13 +35,13 @@
                   <% end %>
                  
                </ul>
-               <div class="pull-right">
+               <!-- <div class="pull-right">
 
-               <% if room.users.where("lower(split_part(junior_enterprise, ' ', 1)) = ?", current_user.junior_enterprise.split(" ")[0].downcase).any? %>
+               <%# if room.users.where("lower(split_part(junior_enterprise, ' ', 1)) = ?", current_user.junior_enterprise.split(" ")[0].downcase).any? %>
                   <a href="#" class="btn btn-xs bg-maroon" style="margin-right: 5px">Há membros da sua EJ aqui</a>
-               <% end %>
+               <%# end %>
                </div>
-
+ -->
                <% if current_user.room == room %>
                 <%= link_to exit_room_path(@hotel.id), method: :patch, data: { confirm: "Ao sair do quarto, outra pessoa poderá preencher a vaga." } do %>
                   <button type="submit" class="btn btn-sm hotel-choose" style="background-color: #ef1717; margin-bottom: 5px;color:#fff;margin-top: 1px"><strong>SAIR <i class="fa fa-long-arrow-right"></i></strong></button>

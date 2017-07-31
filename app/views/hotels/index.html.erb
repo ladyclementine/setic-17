@@ -13,7 +13,7 @@
                </div>
                <span style="position: absolute; margin-top: 10px; margin-left:10px " data-toggle="tooltip" title="" class="badge bg-yellow" data-original-title="3 New Messages">1° ANDAR</span>
                <span class="hotel-vagas"><%= Hotel.find(1).restant_capacity %> vagas restantes</span>
-               <img src="/images/eventi/3hotelbyblos.jpg" width="370" height="300" alt="">
+               <img src="http://opturismo.com.br/assets/img/content/hoteis/Hotel-Byblos-Saint-Tropez-foto-3.jpg" width="370" height="300" alt="">
             </div>
             <div class="content-hotel">
                <h3 class="textify_links" align="center"><a href="#" title="Single Room" target="_parent" class=""><span class="cd-headline clip">
@@ -64,58 +64,3 @@
 
    </div>
 </section>
-<!--
-
-<a href="javascript:void(0)" onclick="animate_ship();">
-<div class="ocean"></div>
-<div class="here-there">
-<div class="traslate">
-<div id="navio" class="ship">
-
-
-<div class="avatar_ship">
-<% @ship_users.each do |user|%>
-
-<img src="<%=user.avatar? ? user.avatar_url(:thumb) : '/images/jack-avatar.jpg' %>" alt="User" data-toggle="tooltip" title="" data-original-title="<%=user.name%>">
-
-<%end%>
-</div>
-
-
-
-</div>
-
-</a>
--->
-
-</div>
-</div>
-
-<script type="text/javascript">
-document.onkeyup = function(e) {
-
-    var position = $('#navio').offset();
-    var childWidth = $('#navio').width();
-    var parWidth = $('.content-wrapper').width();
-
-
-    var offSet = parWidth - position.left - 200;
-
-
-    if (e.which === 39 && offSet > 0) {
-
-        $('#navio').animate({
-            left: '+=' + 400
-        }, 1000);
-
-    }
-    if (e.which === 37 && offSet < parWidth) {
-
-        $('#navio').animate({
-            left: '-=' + 400
-        }, 1000);
-
-    }
-
-}
-</script>

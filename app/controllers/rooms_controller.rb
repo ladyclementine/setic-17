@@ -16,6 +16,7 @@ class RoomsController < BaseController
 
   def index
     @rooms = Room.includes(:users).where(hotel: @hotel).order(:number)
+    Rails.cache.fetch(:@rooms, expires_in: 15.minutes) { @rooms }
   end
 
   def insert_current_user_into_room
