@@ -59,6 +59,8 @@ gem 'jquery-datatables-rails'
 gem 'ajax-datatables-rails'
 gem 'newrelic_rpm'
 
+gem 'dalli'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
@@ -87,6 +89,7 @@ group :production do
   gem 'rails_12factor'
   gem 'sendgrid'
   #gem 'airbrake', '~> 5.4'
+  gem 'connection_pool'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

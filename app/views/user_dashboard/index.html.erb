@@ -398,6 +398,7 @@
             <div class="box-body" style="text-align: left;">
 
               <ul class="nav nav-pills nav-stacked ranking-ejsul">
+              <% cache "rankingejs", expires_in: 5.minutes do %>
                 <%i = 1%>
                 <% @ej.each do |empresas, usuarios| %>
 
@@ -406,12 +407,13 @@
                   <b><%=  usuarios.map{ |h| h.junior_enterprise}.max.upcase %></b> 
                   <div class="pull-right">
                      <span class="label label-primary" style="margin-right: 4px" data-toggle="tooltip" title="" data-original-title="Total de membros" ><%=  usuarios.count %>  Membros</span> 
-                     <span class="label label-success" style="margin-right: 4px" data-toggle="tooltip" title="" data-original-title="Total de membros pagantes" ><%= count_paymeny_ej(usuarios) %> Pagantes</span> 
+                     <span class="label label-success" style="margin-right: 4px" data-toggle="tooltip" title="" data-original-title="Total de membros pagantes" ><%#= Rails.cache.fetch(:count_paymeny_ej, :expires_in => 5) {count_paymeny_ej(usuarios) } %><%= count_paymeny_ej(usuarios)  %> Pagantes</span> 
                   </div>
                </li>
                <%i = i+1%>
                <% end %>
 
+               <% end %>
             
            
 
