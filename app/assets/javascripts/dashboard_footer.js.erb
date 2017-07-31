@@ -307,21 +307,49 @@ function change_payment_parts(sel, price){
     }
     
 
+    // if (partions >= 1) {
+    //     txt += '<div class="radio"><label>';
+    //     txt += '* Vencimento da 1° parcela: ' + data_boleto.format('DD/MM/YYYY') + ' ';
+    //     txt += '</label>';
+    // }
+
+    // if (partions >= 2) {
+    //     var data_f = data_boleto.add(1, 'month').format('DD/MM/YYYY');
+    //     txt += '<div class="radio"><label>';
+    //     txt += '* Vencimento da 2° parcela: ' + data_f + ' ';
+    //     txt += '</label>';
+    // }
+
+    // if (partions >= 3) {
+    //     var data_f = data_boleto.add(1, 'month').format('DD/MM/YYYY');
+    //     txt += '<div class="radio"><label>';
+    //     txt += '* Vencimento da 3° parcela: ' + data_f + ' ';
+    //     txt += '</label>';
+
+    // }
+
+    // if (partions >= 4) {
+    //     var data_f = data_boleto.add(1, 'month').format('DD/MM/YYYY');
+    //     txt += '<div class="radio"><label>';
+    //     txt += '* Vencimento da 4° parcela: ' + data_f + ' ';
+    //     txt += '</label>';
+    // }
+
     if (partions >= 1) {
         txt += '<div class="radio"><label>';
-        txt += '* Vencimento da 1° parcela: ' + data_boleto.format('DD/MM/YYYY') + ' ';
+        txt += '* Vencimento da 1° parcela: ' + mes1.format('DD/MM/YYYY') + ' ';
         txt += '</label>';
     }
 
     if (partions >= 2) {
-        var data_f = data_boleto.add(1, 'month').format('DD/MM/YYYY');
+        var data_f = mes2.format('DD/MM/YYYY');
         txt += '<div class="radio"><label>';
         txt += '* Vencimento da 2° parcela: ' + data_f + ' ';
         txt += '</label>';
     }
 
     if (partions >= 3) {
-        var data_f = data_boleto.add(1, 'month').format('DD/MM/YYYY');
+        var data_f = mes3.format('DD/MM/YYYY');
         txt += '<div class="radio"><label>';
         txt += '* Vencimento da 3° parcela: ' + data_f + ' ';
         txt += '</label>';
@@ -329,7 +357,7 @@ function change_payment_parts(sel, price){
     }
 
     if (partions >= 4) {
-        var data_f = data_boleto.add(1, 'month').format('DD/MM/YYYY');
+        var data_f = mes4.format('DD/MM/YYYY');
         txt += '<div class="radio"><label>';
         txt += '* Vencimento da 4° parcela: ' + data_f + ' ';
         txt += '</label>';

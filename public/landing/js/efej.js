@@ -52,6 +52,12 @@ $(document).ready(function(){
 	    }, 500);
 	    return false;
 	});
+
+	$('.counter').counterUp({
+        delay: 10,
+        time: 1200
+    });
+    // PRELOADER    
 	
 });
 

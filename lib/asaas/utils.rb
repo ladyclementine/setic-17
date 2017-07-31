@@ -19,25 +19,25 @@ module Asaas
       today = DateTime.now
 
 
-      if mes1>=today
+      if mes4>=today
         if installmentCount <=4
           installmentCount
         else
           4
         end
-      elsif mes2>=today
+      elsif mes3>=today
         if installmentCount <=3
           installmentCount
         else
           3
         end
-      elsif mes3>=today
+      elsif mes2>=today
         if installmentCount <=2
           installmentCount
         else
           2
         end
-      elsif mes4>=today
+      elsif mes1>=today
         if installmentCount <=1
           installmentCount
         else
