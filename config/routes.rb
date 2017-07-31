@@ -147,8 +147,8 @@ Rails.application.routes.draw do
 
     end
     unauthenticated :users do
-      root to: "users/sessions#new", as: :unauthenticated_user_root
-      #root to: "site#index", as: :site
+      #root to: "users/sessions#new", as: :unauthenticated_user_root
+      root to: "site#index", as: :site
 
       get 'reminder'  => "users/registrations#show_reminder"
     end

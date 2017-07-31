@@ -28,11 +28,13 @@ class User < ApplicationRecord
   scope :eligible, -> { where(active: true, completed: true, lot_id: nil).order(:created_at) }
   scope :allocated, -> { order(:created_at).select { |user| user.lot_id.is_a? Integer } }
   scope :disqualified, -> { where(active: false).order(:created_at) }
-  scope :pays, -> { joins(:payment).where("payments.portion_paid!=0") }
+  scope :pays, -> { includes(:payment).where.not(payments: {portion_paid: 0}) }
   scope :no_pays, -> { joins(:payment).where("payments.portion_paid=0") }
   scope :online, lambda{ where("updated_at > ?", 10.minutes.ago) }
   scope :no_finalized, -> { where(completed: nil) }
-  scope :no_selected_payment, -> { select { |user| user.lot_id.is_a? Integer }.select{|user| user.payment.nil? } }
+  #scope :no_selected_payment, -> { select { |user| user.lot_id.is_a? Integer }.select{|user| user.payment.nil? } }
+  scope :no_selected_payment, -> { includes(:payment).where.not(users: {lot_id: nil}).where(payments: {id: nil})}
+
   scope :no_selected_payment_e, -> { select{|user| user.payment.nil? } }
   scope :pays_total, -> { joins(:payment).where("payments.portion_paid=payments.portions") }
   scope :qnt_pays_partial, -> { joins(:payment).where("payments.portion_paid>0").where("payments.portion_paid!=payments.portions") }
