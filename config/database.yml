@@ -16,4 +16,4 @@ production:
   database: efej_production
   username: patrick
   password: <%= ENV['CONCEITO_DATABASE_PASSWORD'] %>
-  url: <%= ENV['HEROKU_POSTGRESQL_GTI_URL'] %>
+  #url: <%= ENV['HEROKU_POSTGRESQL_GTI_URL'] %>
