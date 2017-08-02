@@ -12,7 +12,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'gtiengenhariajr@gmail.com'
+  config.mailer_sender = 'nao.responda.efej@gmail.com'
 
   config.omniauth :facebook, Rails.application.secrets.app_id_face, Rails.application.secrets.app_secret_face, :info_fields => 'email, gender, name', image_size: {width: 400, height: 400}
 

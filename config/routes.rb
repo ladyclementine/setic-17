@@ -92,12 +92,12 @@ Rails.application.routes.draw do
     omniauth_callbacks: "users/omniauth_callbacks"
   },
     path: "/",
-    path_names: { sign_in: 'login',
-                  sign_out: 'logout',
-                  password: 'secret',
-                  unlock: 'unblock',
-                  registration: 'inscription',
-                  sign_up: 'new' },
+    path_names: { sign_in: 'login_secret',
+                  sign_out: 'logout_secret',
+                  password: 'secret_secret',
+                  unlock: 'unblock_secret',
+                  registration: 'inscription_secret',
+                  sign_up: 'new_secret' },
     :skip => 'registration'
 
   devise_scope :user do
@@ -158,7 +158,7 @@ Rails.application.routes.draw do
 
     get '/inscription/cancel' => 'users/registrations#cancel', :as => 'cancel_user_registration'
 
-    get '/inscription/new' => 'users/registrations#new', :as => 'new_user_registration'
+    get '/inscription/new_secret' => 'users/registrations#new', :as => 'new_user_registration'
     post '/inscription' => 'users/registrations#create', :as => 'user_registration'
 
     get '/inscription/edit' => 'users/registrations#edit', :as => 'edit_user_registration'
