@@ -7,6 +7,7 @@ default: &default
 development:
   <<: *default
   database: efej_development
+  #url: 'postgres://gtijr:papa12369@mygti.cwxgcpy6bi6a.us-east-1.rds.amazonaws.com:5432/gti_db'
 test:
   <<: *default
   database: efej_test

@@ -29,13 +29,13 @@
                               <div class="price">
                                  <sup>R$</sup>
                                  <span id="price_js">
-                                 <%= '%.2f' % (@user.paid_lot_value + 2.00) %>
+                                 <%= '%.2f' % (@user.paid_lot_value + 0.00) %>
                                  </span>
                               </div>
                               <div class="modal-body" style="background-color: #fff !important; color: #000 !important">
                                  <div class="form-group">
                                     <label>Parcelamento</label>
-                                    <%= select_tag(:installmentCount, options_for_select([ ["À vista", 1], ["Duas vezes", 2], ["Três vezes", 3]]), {:class => 'form-control', onchange: 'change_payment_parts(this,'"#{@user.paid_lot_value + 2.00}"')', :prompt => "SELECIONE O PARCELAMENTO",  "required": "",  "oninvalid":"setCustomValidity('Selecione como deseja Pagar')", "oninput":"setCustomValidity('')", "id": "parcelamento_sel"
+                                    <%= select_tag(:installmentCount, options_for_select([ ["À vista", 1], ["Duas vezes", 2], ["Três vezes", 3]]), {:class => 'form-control', onchange: 'change_payment_parts(this,'"#{@user.paid_lot_value + 0.00}"')', :prompt => "SELECIONE O PARCELAMENTO",  "required": "",  "oninvalid":"setCustomValidity('Selecione como deseja Pagar')", "oninput":"setCustomValidity('')", "id": "parcelamento_sel"
                                        })  %>
                                  </div>
                                  <% if @user.lot.nohost_active %>
@@ -43,13 +43,13 @@
                                     <label>Hospedagem</label>
                                     <div class="radio">
                                       <label>
-                                       <%= radio_button_tag(:nohost_active, true, true, onchange: 'change_payment_nohost(this,'"#{@user.paid_lot_value + 2.00}"')') %>
+                                       <%= radio_button_tag(:nohost_active, true, true, onchange: 'change_payment_nohost(this,'"#{@user.paid_lot_value + 0.00}"')') %>
                                          <div>Com Hospedagem - R$ <%= @user.paid_lot_value %></div>
                                       </label>
                                     </div>
                                     <div class="radio">
                                       <label>
-                                        <%= radio_button_tag(:nohost_active, false, false, onchange: 'change_payment_nohost(this,'"#{@user.paid_lot_nohost_value + 2.00}"')') %>
+                                        <%= radio_button_tag(:nohost_active, false, false, onchange: 'change_payment_nohost(this,'"#{@user.paid_lot_nohost_value + 0.00}"')') %>
                                           <div>Sem Hospedagem - R$ <%= @user.paid_lot_nohost_value %></div>
                                       </label>
                                     </div>
@@ -65,7 +65,6 @@
                                     </div>
                                  </span>
                               </div>
-                              * O serviço Asaas cobra uma taxa de R$2,00 por boleto pago.
                            </div>
                            <!--fim body-->
                            <div class="modal-footer">

@@ -298,12 +298,12 @@ function change_payment_parts(sel, price){
     var nohost = $( "input[name='nohost_active']:checked" );
     var nohost_value = nohost.val();
     if (typeof nohost_value === "undefined") {
-       $('#price_js').html((price + (2.00*(partions-1))).toFixed(2));
+       $('#price_js').html((price + (0.00*(partions-1))).toFixed(2));
     } else {
         var text_radio_nohost = nohost.next('div:first').html();
-        var price_nohost_checked = (parseFloat(text_radio_nohost.split('R$ ')[1]) + 2.0);
+        var price_nohost_checked = (parseFloat(text_radio_nohost.split('R$ ')[1]) + 0.0);
         console.log(price_nohost_checked);
-        $('#price_js').html((price_nohost_checked + (2.00*(partions-1))).toFixed(2));
+        $('#price_js').html((price_nohost_checked + (0.00*(partions-1))).toFixed(2));
     }
     
 
@@ -375,7 +375,7 @@ function change_payment_nohost(sel, price){
     var parcelas = $('select[name=installmentCount]');
     var partions = parcelas.val() ? parcelas.val() : 1;
     var txt_parcelas = '';
-    var new_price = (price + (2.00*(partions-1)));
+    var new_price = (price + (0.00*(partions-1)));
     $('#price_js').html(new_price.toFixed(2));
     
     txt_parcelas += '<div class="radio"><label>';

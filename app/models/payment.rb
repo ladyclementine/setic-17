@@ -114,7 +114,7 @@ class Payment < ApplicationRecord
     qnt_parcelas.times do |i|
       response = Asaas::Payments.Create(
         "customer"=> self.user_asaas_id,
-        "value"=> set_price/qnt_parcelas + 2.00,
+        "value"=> set_price/qnt_parcelas,
         "billingType"=> "BOLETO",
         "dueDate"=>  Date.parse(vencimentos["mes#{i+1}"]).strftime("%Y-%m-%d"),
         "description" => "Parcela #{i+1} de #{qnt_parcelas}."
