@@ -81,7 +81,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def verify_lot_and_redirect
     if(Lot.active_lot.nil?)
       flash[:notice] = "Aguarde a abertura do próximo lote para realizar seu cadastro. Para mais informações, visite nossa página no Facebook."
-      redirect_to authenticated_user_root_path
+      redirect_to new_user_session_path
     end
   end
 
