@@ -1,15 +1,7 @@
 Admin.create(email: 'efej@admin.com', password: 'efej@@147')
 
-lot1 = Lot.new do |lot|
-  lot.name = "Primeiro lote"
-  lot.number = 1
-  lot.limit = 150
-  lot.start_date = DateTime.new(2017, 8, 2, 22, 0, 0 , '-3')
-  lot.end_date = DateTime.new(2017, 8, 3, 12, 0, 0 , '-3')
-  lot.value_federated = 360
-  lot.value_not_federated = 360
-  lot.value_federated_nohost = 220
-  lot.value_not_federated_nohost = 220
-  lot.nohost_active = true
-end
-lot1.save!
+User.create(email: 'userteste@hotmail.com', password: '12345678')
+Event.create(facilitator: 'fulano', limit: 4, name: 'Título da palestra', price: 12.0)
+Shirt.create(size: 'p', price: 25, limit: 10)
+Shirt.create(size: 'm', price: 25, limit: 10)
+Subscription.create(user_id: 1, buyable_id: 2, buyable_type: 'Shirt')

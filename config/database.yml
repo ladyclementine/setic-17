@@ -6,14 +6,14 @@ default: &default
 
 development:
   <<: *default
-  database: efej_development
+  database: semana_development
   #url: 'postgres://gtijr:papa12369@mygti.cwxgcpy6bi6a.us-east-1.rds.amazonaws.com:5432/gti_db'
 test:
   <<: *default
-  database: efej_test
+  database: semana_test
 production:
   <<: *default
-  database: efej_production
-  username: patrick
+  database: semana_production
+  username: semanas
   password: <%= ENV['CONCEITO_DATABASE_PASSWORD'] %>
   #url: <%= ENV['HEROKU_POSTGRESQL_GTI_URL'] %>

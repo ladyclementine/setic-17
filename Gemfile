@@ -57,7 +57,7 @@ gem 'cpf_faker'
 
 gem 'jquery-datatables-rails'
 gem 'ajax-datatables-rails'
-gem 'newrelic_rpm'
+
 
 gem 'dalli'
 

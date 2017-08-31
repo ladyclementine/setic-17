@@ -11,35 +11,31 @@ class User < ApplicationRecord
   #INSTALAR: apt-get install imagemagick
   mount_uploader :avatar, AvatarUploader
 
-  belongs_to :lot
-  has_one :payment
-  belongs_to :room
+  has_many :payments
+  #has_many :subscription
   has_many :subscriptions
-  has_many :events, through: :subscriptions
-
-  enum federation_check: { 'Sim':0, 'Não':1 ,'Pós-júnior':2}
+  has_many :events, :through => :subscriptions, :source => :buyable, :source_type => 'Event' 
+  has_many :shirts, :through => :subscriptions, :source => :buyable, :source_type => 'Shirt' 
+  
 
   enum certificate: { 'SIM':true, 'NÃO':false }
   #VALIDAÇÃO PARA CONCLUSÃO DE CADASTRO
-  validates_presence_of :name, :general_register, :birthday ,:cpf, :gender, :phone, :junior_enterprise, :job, :university, :cep, :state, :city, :address, :name_parents, :phone_parents, :federation_check, :federation, on: [:update], :allow_nil => true
+  #validates_presence_of :name, :general_register, :birthday ,:cpf, :gender, :phone, :junior_enterprise, :job, :university, :cep, :state, :city, :address, :name_parents, :phone_parents, :federation_check, :federation, on: [:update], :allow_nil => true
 
   usar_como_cpf :cpf
 
-  scope :eligible, -> { where(active: true, completed: true, lot_id: nil).order(:created_at) }
-  scope :allocated, -> { order(:created_at).select { |user| user.lot_id.is_a? Integer } }
-  scope :disqualified, -> { where(active: false).order(:created_at) }
-  scope :pays, -> { includes(:payment).where.not(payments: {portion_paid: 0}) }
-  scope :no_pays, -> { joins(:payment).where("payments.portion_paid=0") }
+  scope :pays, -> { includes(:payment).where(payments: {status: true})}
+  scope :no_pays, -> { includes(:payment).where(payments: {status: false })}
   scope :online, lambda{ where("updated_at > ?", 10.minutes.ago) }
   scope :no_finalized, -> { where(completed: nil) }
   #scope :no_selected_payment, -> { select { |user| user.lot_id.is_a? Integer }.select{|user| user.payment.nil? } }
-  scope :no_selected_payment, -> { includes(:payment).where.not(users: {lot_id: nil}).where(payments: {id: nil})}
-
-  scope :no_selected_payment_e, -> { select{|user| user.payment.nil? } }
-  scope :pays_total, -> { joins(:payment).where("payments.portion_paid=payments.portions") }
-  scope :qnt_pays_partial, -> { joins(:payment).where("payments.portion_paid>0").where("payments.portion_paid!=payments.portions") }
+  scope :no_selected_payment, -> { includes(:payment).where(payments: {id: nil})}
 
 
+
+  def total_cart 
+    self.events.sum(:price) + self.shirts.sum(:price)
+    end
   # PARA O RELATORIO - EXCEL
   # Verificar se o cadastro possui associação com o facebook
   def login_face
@@ -82,40 +78,6 @@ class User < ApplicationRecord
     end
   end
 
-  def is_fed?
-    if federation_check == 'Sim'
-      true
-    else
-      false
-    end
-  end
-
-  def paid_lot_value
-    self.is_fed? ? self.lot.value_federated : self.lot.value_not_federated
-  end
-
-  def paid_lot_nohost_value
-    self.is_fed? ? self.lot.value_federated_nohost : self.lot.value_not_federated_nohost
-  end
-
-  def self.my_position(user)
-    User.eligible.index(user) + 1
-  end
-
-  def disqualify
-    self.active = false
-
-    if !self.lot.nil?
-      if User.eligible.where.not(id: self.id).any?
-        allocated_user = User.eligible.first
-        allocated_user.update_attribute('lot_id', lot.id)
-        UsersLotMailer.allocated(allocated_user).deliver_now
-      end
-      self.lot = nil
-    end
-    save(:validate => false)
-  end
-
   #LOGIN VIA FACEBOOK
   #CADASTRAR SE N TIVER CADASTRADO, VERIFICANDO O LOTE
   #LOGAR
@@ -124,51 +86,30 @@ class User < ApplicationRecord
     if !where(uid: auth.uid).any?
       if !where(email: auth.info.email).any?
         #CRIAR CONTA SE NÃO EXISITIR E SE LOTE TIVER ABERTO
-        if !Lot.active_lot.nil?
-          create do |user|
-            if auth.info.email.nil?
-              #GERAR RANDOM EMAIL
-              r_email = "gti_#{((1..1000).to_a).sample}_#{((2..3000).to_a).sample}@#{['hotmail.com','gmail.com','gti.com','yahoo.com','gti.com.br','eventi.com','random.com'].sample}"
-              user.email = r_email
-              user.email_face = r_email
-            else
-              user.email = auth.info.email
-              user.email_face = auth.info.email
-            end
-            user.password = Devise.friendly_token[0,20]
-            user.name = auth.info.name   # assuming the user model has a name
-            user.remote_avatar_url = auth.info.image.gsub('http://','https://') unless auth.info.image.nil?
-            user.uid = auth.uid
-            #user.gender = auth.info.gender
-            user.skip_confirmation!
-            user.save! if !Lot.active_lot.nil?
-            return {status: 'create_user', data: user}
+        create do |user|
+          if auth.info.email.nil?
+            #GERAR RANDOM EMAIL
+            r_email = "gti_#{((1..1000).to_a).sample}_#{((2..3000).to_a).sample}@#{['hotmail.com','gmail.com','gti.com','yahoo.com','gti.com.br','eventi.com','random.com'].sample}"
+            user.email = r_email
+            user.email_face = r_email
+          else
+            user.email = auth.info.email
+            user.email_face = auth.info.email
           end
-        else
-          return {status: 'lots_inactive'}
+          user.password = Devise.friendly_token[0,20]
+          user.name = auth.info.name   # assuming the user model has a name
+          user.remote_avatar_url = auth.info.image.gsub('http://','https://') unless auth.info.image.nil?
+          user.uid = auth.uid
+          #user.gender = auth.info.gender
+          user.skip_confirmation!
+          user.save! 
+          return {status: 'create_user', data: user}
         end
       else
         return {status: 'email_associate'}
       end
     else
       return {status: 'success', data: where(uid: auth.uid).first}
-    end
-  end
-
-  # Exit room
-  def exit_room!
-    self.room = nil
-    self.save
-  end
-
-
-  #ADM CONSULT E ADM SOLUÇÕES
-  def junior_enterprise_new
-    if !junior_enterprise.nil? && junior_enterprise.downcase == 'adm_consult'
-      full = junior_enterprise.split('_')
-      "#{full[0]} #{full[1]}"
-    else
-      junior_enterprise
     end
   end
 

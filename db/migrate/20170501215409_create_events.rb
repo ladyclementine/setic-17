@@ -4,10 +4,10 @@ class CreateEvents < ActiveRecord::Migration[5.0]
       t.string :name
       t.string :facilitator
       t.integer :limit
-      t.datetime :start
-      t.datetime :end
       t.text :description
-      t.string :facilitator_image
+      t.string :avatar
+      t.string :price
+      t.integer :type
       t.timestamps
     end
   end

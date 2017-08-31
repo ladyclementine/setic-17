@@ -4,8 +4,12 @@ class Event < ApplicationRecord
   # Old: https://github.com/GTi-Jr/ECEJ-2016/blob/master/app/models/event.rb
   # 2/05/17
   # Patrick C. M
-  has_many :subscriptions
+  #has_many :subscriptions
+  #has_many :users, through: :subscriptions
+  has_many :subscriptions, :as => :buyable
   has_many :users, through: :subscriptions
+  
+
   validates :name,
     presence: true
   validates :facilitator,
@@ -96,18 +100,6 @@ class Event < ApplicationRecord
     # equivalents.each { |event| event.users.delete(user) }
   end
 
-  def total_ejs
-    self.users.all.where.not(junior_enterprise:nil).order(:junior_enterprise).group_by{|d| d.junior_enterprise.split(' ').first.downcase}
-  end
-
-  def ejs_names
-    self.total_ejs.map { |k,usuarios| usuarios.map{ |h| h.junior_enterprise_new}.max.titleize }.join(' | ')
-  end
-
-  def membros_ejs(user)
-    ej = user.junior_enterprise.split(' ')[0].downcase
-    results = self.users.where.not(junior_enterprise:nil).where.not(id:user.id).where("lower(split_part(junior_enterprise, ' ', 1)) = ?", ej)
-  end
 
   # Validator method
   def start_must_be_smaller_than_end
