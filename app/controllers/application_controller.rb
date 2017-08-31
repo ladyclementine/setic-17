@@ -115,11 +115,6 @@ class ApplicationController < ActionController::Base
   #end
 
   def verify_register_conclusion
-    if !@user.face_confirmed? && !@user.uid.nil?
-      flash[:notice] = "Insira um e-mail pessoal para receber nossos avisos."
-      redirect_to email_completar_path
-      return false
-    end
     if !@user.is_completed?
       flash[:notice] = "Conclua sua inscrição para acessar todas as funções do sistema"
       #flash[:notice] = "Não é possível finalizar seu cadastro. Aguarde até o dia 20 para se inscrever novamente!"

@@ -51,7 +51,8 @@
   /*background-color: #357ca5;*/
 }
 .skin-blue .main-header li.user-header {
-  background-color: #222d32;
+  background-color: #fff;
+  color: #000;
 }
 .skin-blue .content-header {
   background: transparent;

@@ -11,16 +11,14 @@ class User < ApplicationRecord
   #INSTALAR: apt-get install imagemagick
   mount_uploader :avatar, AvatarUploader
 
-  has_many :payments
-  #has_many :subscription
   has_many :subscriptions
-  has_many :events, :through => :subscriptions, :source => :buyable, :source_type => 'Event' 
-  has_many :shirts, :through => :subscriptions, :source => :buyable, :source_type => 'Shirt' 
-  
+  has_many :events, through: :subscriptions
+  has_many :shirts, -> { where(is_shirt: true) }, through: :subscriptions, class_name: "Event"
+  has_many :payments
 
   enum certificate: { 'SIM':true, 'NÃO':false }
   #VALIDAÇÃO PARA CONCLUSÃO DE CADASTRO
-  #validates_presence_of :name, :general_register, :birthday ,:cpf, :gender, :phone, :junior_enterprise, :job, :university, :cep, :state, :city, :address, :name_parents, :phone_parents, :federation_check, :federation, on: [:update], :allow_nil => true
+  validates_presence_of :name, :general_register, :birthday ,:cpf, :course, :semester, :university, on: [:update], :allow_nil => true
 
   usar_como_cpf :cpf
 
@@ -28,14 +26,14 @@ class User < ApplicationRecord
   scope :no_pays, -> { includes(:payment).where(payments: {status: false })}
   scope :online, lambda{ where("updated_at > ?", 10.minutes.ago) }
   scope :no_finalized, -> { where(completed: nil) }
-  #scope :no_selected_payment, -> { select { |user| user.lot_id.is_a? Integer }.select{|user| user.payment.nil? } }
   scope :no_selected_payment, -> { includes(:payment).where(payments: {id: nil})}
 
 
-
-  def total_cart 
+  def total_cart
     self.events.sum(:price) + self.shirts.sum(:price)
-    end
+  end
+
+
   # PARA O RELATORIO - EXCEL
   # Verificar se o cadastro possui associação com o facebook
   def login_face
@@ -62,21 +60,6 @@ class User < ApplicationRecord
     true
   end
 
-  #verificar se o congressita inseriu um email pessoal
-  def face_confirmed?
-    return false unless self.active_face
-    true
-  end
-
-  def self.to_csv
-    CSV.generate do |csv|
-      csv << ['Nome', "Telefone"]
-      all.each do |user|
-        csv_attributes = [user.name, user.phone]
-        csv << csv_attributes
-      end
-    end
-  end
 
   #LOGIN VIA FACEBOOK
   #CADASTRAR SE N TIVER CADASTRADO, VERIFICANDO O LOTE
@@ -102,7 +85,7 @@ class User < ApplicationRecord
           user.uid = auth.uid
           #user.gender = auth.info.gender
           user.skip_confirmation!
-          user.save! 
+          user.save!
           return {status: 'create_user', data: user}
         end
       else
@@ -124,7 +107,5 @@ class User < ApplicationRecord
     end
     false
   end
-
-
 
 end

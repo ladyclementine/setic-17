@@ -8,181 +8,122 @@
 <!-- Main content -->
 <section class="content">
    <div class="row">
-      <div class="col-md-3">
-         <!-- Profile Image -->
-         <div class="box box-primary">
-            <div class="box-body box-profile">
-               <%= image_tag(@user.avatar_url(:medium), class:'profile-user-img img-responsive img-circle', style:'max-width: 100px;') if @user.avatar? %>
-               <%= image_tag('dog.jpg', class:'profile-user-img img-responsive img-circle', style:'max-width: 100px;') if !@user.avatar? %>
-               <h3 class="profile-username text-center"><%= @user.name.nil? ? @user.email : @user.two_names.mb_chars.upcase  %></h3>
-               <p class="text-muted text-center"><%= @user.junior_enterprise_new %> <%= (@user.federation.blank?) ?  '' : "- #{@user.federation}"%> - <%=@federado%></p>
-
-              <div align="center"><div class="fb-share-button" data-href="https://www.efej.com.br" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.efej.com.br%2F&amp;src=sdkpreparse">Compartilhar</a></div></div>
-
-
-               <p class="text-muted text-center"></p>
-               <ul class="list-group list-group-unbordered">
-                  <li class="list-group-item">
-                     <b>Cargo</b> <a class="pull-right" data-toggle="tooltip", title="", data-original-title= "<%= @user.job.downcase.capitalize %>"><%= @user.job.downcase.capitalize[0..25] %></a>
-                  </li>
-                  <li class="list-group-item">
-                     <b>Quarto</b>
-                     <%# HELPER %>
-                     <%= room_infos %>
-                  </li>
-               </ul>
-               <p class=" text-center" style="margin-top: -15px"><b>Amigos de quarto</b></p>
-               <div class="box-body no-padding" style="margin-top: -7px">
-                  <ul class="users-list clearfix">
-                     <% if !current_user.room.nil? %>
-                     <% room = Room.find(current_user.room) %>
-                     <% room.users.each do |user| %>
-                     <li style="width: <%=width_room%>%">
-                        <%= image_tag(user.avatar_url(:medium), "data-toggle": "tooltip", "title": "", "data-original-title": "#{user.two_names.mb_chars.upcase} | #{user.junior_enterprise_new.mb_chars.upcase}") if user.avatar? %>
-                        <%= image_tag('dog.jpg', "data-toggle": "tooltip", "title": "", "data-original-title": "#{user.two_names.mb_chars.upcase} | #{user.junior_enterprise_new.mb_chars.upcase}") if !user.avatar? %>
-                        <a class="users-list-name" href="#"><%=user.first_name.titleize%></a>
-                     </li>
-                     <% end %>
-                     <% for i in 1..(room.capacity.to_i-room.users.count.to_i) %>
-                     <li style="width: <%=width_room%>%">
-                        <img src="../../img/boxed-bg.jpg" alt="User Image" data-toggle="tooltip" title="" data-original-title="VAZIO">
-                        <a class="users-list-name" href="#">Vazio</a>
-                     </li>
-                     <% end %>
-                     <% else %>
-                     <li style="width: <%=width_room%>%">
-                        <%= image_tag(@user.avatar_url(:medium), "data-toggle": "tooltip", "title": "", "data-original-title": "#{@user.two_names.mb_chars.upcase} | #{@user.junior_enterprise_new.mb_chars.upcase}") if @user.avatar? %>
-                        <%= image_tag('dog.jpg', "data-toggle": "tooltip", "title": "", "data-original-title": "#{@user.two_names.mb_chars.upcase} | #{@user.junior_enterprise_new.mb_chars.upcase}") if !@user.avatar? %>
-                        <a class="users-list-name" href="#"><%=@user.first_name.titleize%></a>
-                     </li>
-                     <% end %>
-                  </ul>
-                  <!-- /.users-list -->
-               </div>
-           
-            </div>
-            <!-- /.box-body -->
-         </div>
-         <!-- /.box -->
-      </div>
       <!-- /.col -->
-      <div class="col-md-9">
+      <div class="col-md-12">
+         <div class="box box-primary" >
+             <div class="box-header">
+               <h3 class="box-title">Bem vindo, <%=@user.first_name%>! Verifique seus pagamentos abaixos</h3>
+            </div>
+            <div class="box-body" style="text-align: left;">
+               <div class="box-group" id="accordion">
+                <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+                <div class="panel alert alert-danger">
+
+
+                  <div class="box-header">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                        Pedido #2017083101 - Pagamento Pendente
+                      </a>
+
+                    </h4>
+                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                    <span class="pull-right">
+                        <i class="fa fa-caret-down" aria-hidden="true"></i> [VER +]
+                     </span>
+                     </a>
+                  </div>
+                  <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="box-body">
+                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
+                      wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
+                      eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+                      assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
+                      nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
+                      farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
+                      labore sustainable VHS.
+                    </div>
+                  </div>
+                </div>
+
+                
+                <div class="panel box box-danger">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                        Collapsible Group Danger
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="box-body">
+                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
+                      wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
+                      eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+                      assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
+                      nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
+                      farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
+                      labore sustainable VHS.
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+         </div>
+
+      </div>
+
+
+
+      <div class="col-md-12">
          <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-               <li class="active"><a href="#activity" data-toggle="tab">Pagamento</a></li>
+               <li class="active"><a href="#activity" data-toggle="tab">Avisos</a></li>
                <li><a href="#timeline" data-toggle="tab">Minha Programação<% if @event_open %><small class="label pull-right bg-green" style="margin-left: 2px">new</small><% end %></a></li>
                <li><a href="#settings" data-toggle="tab">Meus Dados</a></li>
             </ul>
             <div class="tab-content">
                <div class="active tab-pane" id="activity">
-                  <% if @user.active%>
-                     <% if @user.payment.nil? && !@user.lot.nil?  %>
-                        <%= link_to payment_path do %>
-                           <div class="alert alert-danger alert-dismissible">
-                              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                              <h4><i class="icon fa fa-ban"></i> Você ainda não efetuou o pagamento</h4>
-                              Clique aqui e efetue o pagamento para garantir sua vaga.
-                           </div>
-                        <% end %>
-                     <% elsif !@user.payment.nil? && !@user.payment.paid? %>
-                        <div class="alert alert-info alert-dismissible">
-                           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                           <h4><i class="icon fa fa-info"></i> Status do pagamento</h4>
-                           Vimos que você optou pelo método de pagamento <B><%= @user.payment.method %></B>. Caso já tenha pago, aguarde a nossa confirmação.
-                           <% if @user.payment.method == "Boleto" %>
-                              <br>
-                              Parcelas pagas:
-                              <% if @user.payment.portion_paid == 0 %>
-                                 <strong>nenhuma parcela paga</strong>
-                              <% else %>
-                                 <strong><%= "#{@user.payment.portion_paid}/#{@user.payment.portions}"  %></strong>
-                              <% end %>
-                           <% end %>
-                        </div>
-                     <% elsif !@payment.nil? && @payment.paid? %>
-                        <div class="alert alert-success alert-dismissible">
-                           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                           <h4><i class="icon fa fa-check"></i> Status do pagamento</h4>
-                           <b>Parabéns!</b> Seu pagamento foi realizado e sua inscrição foi confirmada. Em breve você poderá escolher o seu quarto e a programação.
-                        </div>
-                     <% elsif @user.lot.nil? && @user.active %>
-                        <div class="alert alert-danger alert-dismissible">
-                           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                           <h4><i class="icon fa fa-info"></i>Você está na fila de espera, congressista!</h4>
-                           Infelizmente, as vagas do lote acabaram, mas fique ligado, iremos lhe avisar por email quando surgir novas vagas.<br>
-                           </br>
-                           <h5><b>Sua posição na fila é:</b>  <%= User.my_position(@user) %>° Lugar</h5>
-                        </div>
-                     <% end %>
-                     <% if !@payment.nil? %>
-                     <% if @payment.method == "Boleto" %>
-                        <% if @billets_links.count ==0 %>
-                           OPS!! Parece que houve um erro ao gerar seu(s) boleto(s). Não se preocupe, você está com a vaga garantida. Em breve você poderá gerar seus boletos.  <br> <%= link_to "Tentar Novamente", payment_billet_again_path, method: :put unless @payment.nil? %><%#=link_to 'Tentar novamente' %>
-                        <% end %>
-
-                        <% @billets_links.each do |link| #, download: 'data'%>
-                           <% if link.status == 'PENDING' %>
-                              <div class="btn-group">
-
-                                 <a data-toggle="tooltip" title="" data-original-title="PAGAMENTO PENDENTE" type="button" href="<%=link.boleto_url%>" class="btn btn-danger btn-space" target="_blank" class="button"><%= link.description.nil? ? 'Boleto Único' : link.description %></a>
 
 
-                                 <button type="button" class="btn btn-danger dropdown-toggle" style="margin-left: -5px;" data-toggle="dropdown">
-                                    <span class="caret"></span>
-                                    <span class="sr-only">Toggle Dropdown</span>
-                                 </button>
 
-                                 <ul class="dropdown-menu" role="menu">
-                                   <li><a href="#" data-toggle="modal" data-target="#modal-pagamento">Transferencia ou Deposito</a></li>
+           <ul class="avisos avisos-inverse">
+          
+            <!-- END timeline item -->
+            <!-- timeline item -->
+            <li>
+              <i class="fa fa-comments bg-yellow"></i>
 
-                                   <li><a href="#" data-toggle="modal" data-target="#modal-tempo">Tempo de Processamento</a></li>
-                                 </ul>
-                             
-                              </div>
+              <div class="avisos-item">
+                <span class="time"><i class="fa fa-clock-o"></i>  15:20 18/11/2016</span>
 
-                           <% elsif link.status == 'RECEIVED' %>
-                              <button data-toggle="tooltip" title="" data-original-title="PAGAMENTO RECEBIDO" type="button" class="btn btn-success btn-space"><%=link.description.nil? ? 'Boleto Único' : link.description%></button>
+                <h3 class="avisos-header"><a href="#">Mudança de Horário - Workshop de Esteganografia Digital</a></h3>
 
-                           <% elsif link.status == 'OVERDUE' %>
-                              <button data-toggle="tooltip" title="" data-original-title="PAGAMENTO ATRASADO" type="button" class="btn btn-alert btn-space"><%=link.description.nil? ? 'Boleto Único' : link.description%></button>
+                <div class="avisos-body">
+                  Caros participantes, Àqueles que escolheram o curso de Esteganografia Digital, por motivos de força maior, o horário teve que ser mudado. Agora, o curso será : sexta, 25, 10:00 às 12:00 horas; sexta, 25, 14:00 às 16:00 horas Esperamos que isso não cause inconveniências para ninguém.
+                </div>
+              </div>
+            </li>
 
-                           <% end %>
-                        <% end %>
+            <li>
+              <i class="fa fa-comments bg-yellow"></i>
 
-                     <% if @billets_links.where(status:'OVERDUE').any? %>
-                        <h2 class="page-header"></h2>
-                        <h3 class="box-title __web-inspector-hide-shortcut__"> Fica de olho empresário jr, você tem boletos atrasados. :)</h3>
+              <div class="avisos-item">
+                <span class="time"><i class="fa fa-clock-o"></i>  15:20 18/11/2016</span>
 
-                        <% @billets_links.where(status:'OVERDUE').each do |link| %>
-                           <%= link_to link.boleto_url, target: '_blank' do %>
-                              <button data-toggle="tooltip" title="" data-original-title="EFETUE O PAGAMENTO!" type="button" class="btn btn-alert btn-space"><%=link.description.nil? ? 'Boleto Único' : link.description%></button> 
-                           <% end %>
-                           Multa: 0%
-                        <% end %>
-                     <% end %>
-                  <% end %>
-                  <% end %>
+                <h3 class="avisos-header"><a href="#">Visita Técnica Casa Magalhães</a></h3>
 
-                  <% if !@payment.nil? && @payment.portion_paid==0 && params[:view]=='true' %>
-                  <% if @payment.method == "PagSeguro"  %>
-                  <%= link_to @payment.url_pagseguro, target: '_blank' do %>
-                  <input data-toggle="tooltip" title="" data-original-title="PAGAMENTO <%= @payment.status_pagseguro.nil? ? ' PENDENTE' : @payment.status_pagseguro.upcase%>" src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/120x53-pagar.gif" type="image" class="btn btn-alert btn-space">
-                  <% end %>
-                  <% end %>
-                  <% end %>
-                  <!--alert end-->
-                  <% else %>
-                     <!--CONTA INATIVA -->
-                     <b style="font-size: 18px">CONTA INATIVA</b>
-                     <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-                        Sua conta pode ter sido inativada por um dos seguintes motivos: <br>
-                        1° - Você não efetuou o pagamento da  1° parcela no prazo estabelecido.<br>
-                        2° - Você vendeu sua vaga.
-                     </p>
-                      <%= link_to active_again_path, method: :put, data: {confirm: 'Deseja buscar e ser alocado em um lote disponível? ', commit: 'Sim'} do %>
-                     <button type="button" class="btn bg-navy ">Ativar Minha Conta</button>
-                     <% end %>
-                  <% end %>
+                <div class="avisos-body">
+                  E aí, pessoal! Estamos abrindo inscrições para a visita técnica à Casa Magalhães, uma empresa de sucesso que tem sede aqui em Fortaleza. A visita será na terça feira, dia 22, saindo por volta das 8 da manhã. Os interessados, procurem a organização na sala do PET Teleinformática para pegar logo as suas vagas! Estaremos lá amanhã a partir das 9 da manhã, quando estaremos entregando os Kits de quem já pagou. Preços: - R$ 8,00 se você já tem o Kit SETIC - R$ 12,00 se você não tem o nosso Kit SETIC. Mais informações, como local de saída, serão enviadas por email um dia antes para os inscritos.
+                </div>
+              </div>
+            </li>
+           
+          </ul>
+
+
+
                </div>
                <!-- /.tab-pane -->
                <div class="tab-pane" id="timeline">
@@ -282,9 +223,11 @@
                      </div>
                      <div class="col-sm-6 ">
                         <b>RG:</b> <%=@user.general_register %><br>
-                        <b>Gênero:</b> <%=@user.gender.upcase %><br>
-                        <b>Telefone:</b> <%=@user.phone %><br>
-                        <b>Criação da conta:</b> <%=@user.created_at.strftime("%d/%m/%Y - %H:%M:%S") %>
+                  
+                        <b>Criação da conta:</b> <%=@user.created_at.strftime("%d/%m/%Y - %H:%M:%S") %><br>
+                        <b>Universidade:</b> <%=@user.university.upcase %><br>
+
+
                      </div>
                   </div>
                   <div class="row" style="margin-top: 15px">
@@ -293,72 +236,12 @@
                      </div>
                      <hr  style="margin-bottom: 0px">
                      <div class="col-sm-6 ">
-                        <b>Forma de Pagamento:</b> <%= @payment.nil? ? 'Não Escolhida' : @user.payment.method.upcase %><br>
-                        <b>Status do Pagamento:</b> <%= unless @payment.nil?
-                           @user.payment.paid? ? 'PAGO' : 'NÃO PAGO'
-                           end %><br>
-                        <% if !@user.lot.nil? && !@user.payment.nil? && @user.lot.nohost_active %>
-                        <b>Tipo:</b> 
-                      
-                           <%= @user.payment.host ? 'Com Hospedagem' : 'Sem Hospedagem' %>
-                         <br><% end %>
-                     </div>
-                     <div class="col-sm-6 ">
-                        <b>Data de Pagamento:</b> <%= @user.paid_on.nil? ? '' : @user.paid_on.strftime("%d/%m/%Y - %H:%M:%S") %><br>
-                        <b>Lote Alocado:</b> <%= @user.lot.nil? ? 'NÃO ALOCADO' : @user.lot.name.upcase %><br>
+                        <b>Data de Pagamento:</b> <%#= @user.paid_on.nil? ? '' : @user.paid_on.strftime("%d/%m/%Y - %H:%M:%S") %><br>
+                     
                      </div>
                   </div>
-                  <div class="row" style="margin-top: 15px">
-                     <div class="col-sm-12">
-                        <b>DADOS DO MEJ</b>
-                     </div>
-                     <hr  style="margin-bottom: 0px">
-                     <div class="col-sm-6 ">
-                        <b>Federação:</b> <%= @user.federation ? @user.federation.upcase : 'Não Federado' %><br>
-                        <b>Nome da EJ:</b> <%=@user.junior_enterprise_new.upcase %><br>
-                     </div>
-                     <div class="col-sm-6 ">
-                        <b>Cargo:</b> <%=@user.job.upcase %><br>
-                        <b>Universidade:</b> <%=@user.university.upcase %><br>
-                     </div>
-                  </div>
-                  <div class="row" style="margin-top: 15px">
-                     <div class="col-sm-12">
-                        <b>ENDEREÇO</b>
-                     </div>
-                     <hr  style="margin-bottom: 0px">
-                     <div class="col-sm-6 ">
-                        <b>Endereço:</b> <%=@user.address.upcase %><br>
-                        <b>Estado:</b> <%=@user.state.upcase %><br>
-                     </div>
-                     <div class="col-sm-6 ">
-                        <b>Cidade:</b> <%=@user.city.upcase %><br>
-                        <b>Cep:</b> <%=@user.cep.upcase %><br>
-                     </div>
-                  </div>
-                  <div class="row" style="margin-top: 15px">
-                     <div class="col-sm-12">
-                        <b>INFORMAÇÕES ADICIONAIS</b>
-                     </div>
-                     <hr style="margin-bottom: 0px">
-                     <div class="col-sm-6 ">
-                        <b>Traslado:</b> <%=@user.transport_required ? 'SIM' : 'NÃO' %><br>
-                        <b>Local de saída:</b> <%=@user.transport_local.nil? ? '' : @user.transport_local %><br>
-                     </div>
-                     <div class="col-sm-6 ">
-                        <b>Nome do Responsável:</b> <%=@user.name_parents.nil? ? '' : @user.name_parents %><br>
-                        <b>Número do Responsável:</b> <%=@user.phone_parents.nil? ? '' : @user.phone_parents %><br>
-                     </div>
-                  </div>
-                  <div class="row" style="margin-top: 15px">
-                     <div class="col-sm-12">
-                        <b>NECESSIDADES ESPECIAIS</b>
-                     </div>
-                     <hr  style="margin-bottom: 0px">
-                     <div class="col-sm-12 ">
-                        <b>Necessidades especiais:</b> <%=@user.special_needs ? 'NÃO' : @user.special_needs %><br>
-                     </div>
-                  </div>
+                 
+               
                </div>
                <!-- /.tab-pane -->
             </div>
@@ -389,49 +272,13 @@
 
 
 
-      <div class="col-sm-9 full_ranking" style="float: right;">
-         <div class="box box-primary" >
-             <div class="box-header">
-               <h3 class="box-title">TOP 5 - EJS CADASTRADAS</h3>
-            </div>
-
-            <div class="box-body" style="text-align: left;">
-
-              <ul class="nav nav-pills nav-stacked ranking-ejsul">
-              <%# cache "rankingejs", expires_in: 5.minutes do %>
-                <%i = 1%>
-                <% @ej.each do |empresas, usuarios| %>
-
-                <li >
-                  <div class="ranking-ejs color-<%=i%>"><%=i%>° lugar</div>
-                  <b><%=  usuarios.map{ |h| h.junior_enterprise}.max.upcase %></b> 
-                  <div class="pull-right">
-                     <span class="label label-primary" style="margin-right: 4px" data-toggle="tooltip" title="" data-original-title="Total de membros" ><%=  usuarios.count %>  Membros</span> 
-                     <span class="label label-success" style="margin-right: 4px" data-toggle="tooltip" title="" data-original-title="Total de membros pagantes" ><%#= Rails.cache.fetch(:count_paymeny_ej, :expires_in => 5) {count_paymeny_ej(usuarios) } %><%= count_paymeny_ej(usuarios)  %> Pagantes</span> 
-                  </div>
-               </li>
-               <%i = i+1%>
-               <% end %>
-
-               <%# end %>
-            
-           
-
-        
-              </ul>
-  
-            </div>
-         </div>
-      </div>   
-
-
    <!-- /.col -->
    </div>
    <!-- /.row -->
 </section>
 <!-- /.content -->
 
-<% if !@payment.nil? %>
+<% if 1==2 && !@payment.nil? %>
 <% if @payment.method == "Boleto" %>
 <div class="modal patrick-modal fade in" id="modal-pagamento">
    <div class="modal-dialog">

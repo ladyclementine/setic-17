@@ -1130,8 +1130,7 @@ a:focus {
 }
 .navbar-nav > .user-menu > .dropdown-menu > li.user-header > p {
   z-index: 5;
-  color: #fff;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(0, 0, 0, 0.8);
   font-size: 17px;
   margin-top: 10px;
 }
@@ -2218,6 +2217,94 @@ a:focus {
   box-shadow: none;
 }
 .timeline-inverse > li > .timeline-item > .timeline-header {
+  border-bottom-color: #ddd;
+}
+/*
+ * Component: Avisos
+ * -------------------
+ */
+.avisos {
+  position: relative;
+  margin: 0 0 30px 0;
+  padding: 0;
+  list-style: none;
+}
+.avisos > li {
+  position: relative;
+  margin-right: 10px;
+  margin-bottom: 15px;
+}
+.avisos > li:before,
+.avisos > li:after {
+  content: " ";
+  display: table;
+}
+.avisos > li:after {
+  clear: both;
+}
+.avisos > li > .avisos-item {
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  margin-top: 0;
+  background: #fff;
+  color: #444;
+  margin-left: 60px;
+  margin-right: 15px;
+  padding: 0;
+  position: relative;
+}
+.avisos > li > .avisos-item > .time {
+  color: #999;
+  float: right;
+  padding: 10px;
+  font-size: 12px;
+}
+.avisos > li > .avisos-item > .avisos-header {
+  margin: 0;
+  color: #555;
+  border-bottom: 1px solid #f4f4f4;
+  padding: 10px;
+  font-size: 16px;
+  line-height: 1.1;
+}
+.avisos > li > .avisos-item > .avisos-header > a {
+  font-weight: 600;
+}
+.avisos > li > .avisos-item > .avisos-body,
+.avisos > li > .avisos-item > .avisos-footer {
+  padding: 10px;
+}
+.avisos > li > .fa,
+.avisos > li > .glyphicon,
+.avisos > li > .ion {
+  width: 30px;
+  height: 30px;
+  font-size: 15px;
+  line-height: 30px;
+  position: absolute;
+  color: #666;
+  background: #d2d6de;
+  border-radius: 50%;
+  text-align: center;
+  left: 18px;
+  top: 0;
+}
+.avisos > .time-label > span {
+  font-weight: 600;
+  padding: 5px;
+  display: inline-block;
+  background-color: #fff;
+  border-radius: 4px;
+  margin-left: 12px;
+}
+.avisos-inverse > li > .avisos-item {
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.avisos-inverse > li > .avisos-item > .avisos-header {
   border-bottom-color: #ddd;
 }
 /*

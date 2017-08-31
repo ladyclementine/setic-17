@@ -92,12 +92,12 @@ Rails.application.routes.draw do
     omniauth_callbacks: "users/omniauth_callbacks"
   },
     path: "/",
-    path_names: { sign_in: 'login_secret',
-                  sign_out: 'logout_secret',
-                  password: 'secret_secret',
+    path_names: { sign_in: 'login',
+                  sign_out: 'logout',
+                  password: 'secret',
                   unlock: 'unblock_secret',
-                  registration: 'inscription_secret',
-                  sign_up: 'new_secret' },
+                  registration: 'inscription',
+                  sign_up: 'new' },
     :skip => 'registration'
 
   devise_scope :user do
@@ -147,8 +147,8 @@ Rails.application.routes.draw do
 
     end
     unauthenticated :users do
-      #root to: "users/sessions#new", as: :unauthenticated_user_root
-      root to: "site#index", as: :site
+      root to: "users/sessions#new", as: :unauthenticated_user_root
+      #root to: "site#index", as: :site
 
       get 'reminder'  => "users/registrations#show_reminder"
     end

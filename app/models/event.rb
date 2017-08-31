@@ -1,42 +1,16 @@
 class Event < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
-  # New code compactado
-  # Old: https://github.com/GTi-Jr/ECEJ-2016/blob/master/app/models/event.rb
   # 2/05/17
   # Patrick C. M
-  #has_many :subscriptions
-  #has_many :users, through: :subscriptions
-  has_many :subscriptions, :as => :buyable
+  has_many :subscriptions
   has_many :users, through: :subscriptions
-  
 
-  validates :name,
-    presence: true
-  validates :facilitator,
-    presence: true
-  validates :limit,
-    presence: true
-  validates :limit,
-    numericality: { greater_than: -1, message: " deve ser maior= zero." }
-  validates :start,
-    presence: true
-  validates :end,
-    presence: true
-  validate :start_must_be_smaller_than_end
+  validates :name, presence: true
+  validates :facilitator, presence: true, unless: Proc.new{|a| a.is_shirt == true }
+  validates :limit, presence: true
+  validates :limit, numericality: { greater_than: -1, message: " deve ser maior= zero." }
 
-  #@@hours = 0..23
-  #@@minutes = 0..59
 
-  #def self.times
-  #  times = []
-  #  @@hours.each do |hour|
-  #    @@minutes.each do |minute|
-  #     join = "#{hour}:#{minute}".to_time.strftime('%H:%M')
-  #     times << join
-  #   end
-  # end
-  # times
-  #end
 
   def self.days
     self.all.group_by{|d| d.start.to_date}
@@ -100,11 +74,4 @@ class Event < ApplicationRecord
     # equivalents.each { |event| event.users.delete(user) }
   end
 
-
-  # Validator method
-  def start_must_be_smaller_than_end
-    if !self.start.nil? && !self.end.nil?
-      errors.add(:start, "deve ser menor que a data de término") if self.start > self.end
-    end
-  end
 end

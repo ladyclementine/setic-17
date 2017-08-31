@@ -15,30 +15,11 @@
     yearRange: '1950:2005'
   });
 
-  function valueChanged(){
-        if($('#filled-in-box').is(":checked")){
-            $("#federation_div").show();
-            $( "#federation" ).rules( "add", {
-              required: true,
-              messages: {
-                required: "Se você pertence a uma EJ federada, é necessário que informe qual federação."
-              }
-            });
-        }
-        else{
-            $("#federation_div").hide();
-        }
-  }
 
     $('#cpf').formatter({
             'pattern': '{{999}}.{{999}}.{{999}}-{{99}}',
     });
-    $('#phone').formatter({
-            'pattern': '({{99}}) {{99999}} {{9999}}',
-    });
-    $('#postal_code').formatter({
-            'pattern': '{{99999}}-{{999}}',
-    });
+
     $('#birthday').formatter({
         'pattern': '{{99}}/{{99}}/{{9999}}',
     });
@@ -58,12 +39,6 @@
          } else {
            error.insertAfter(element);
          }
-       }
-     });
-     $( "#user_avatar" ).rules( "add", {
-       extension: "png|jpg",
-       messages: {
-         extension: "Só são permitidos arquivos .jpg ou .png"
        }
      });
      $( "#name" ).rules( "add", {
@@ -88,48 +63,7 @@
          rangelength: "O CPF deve possuir 11 dígitos"
        }
      });
-     $( "#phone" ).rules( "add", {
-       required: true,
-       messages: {
-         required: "Entre com seu número de celular"
-       }
-     });
-     $( "#cep" ).rules( "add", {
-       required: true,
-       messages: {
-         required: "Preencha com seu CEP"
-       }
-     });
-     $( "#state" ).rules( "add", {
-       required: true,
-       messages: {
-         required: "Preencha com seu Estado"
-       }
-     });
-     $( "#city" ).rules( "add", {
-       required: true,
-       messages: {
-         required: "Preencha com o nome de sua cidade"
-       }
-     });
-     $( "#street" ).rules( "add", {
-       required: true,
-       messages: {
-         required: "Preencha com seu endereço - rua e número"
-       }
-     });
-     $( "#federation_check" ).rules( "add", {
-       required: true,
-       messages: {
-         required: "Entre com o nome de sua EJ"
-       }
-     });
-     $( "#job" ).rules( "add", {
-       required: true,
-       messages: {
-         required: "Diga qual cargo exerce"
-       }
-     });
+  
      $( "#university" ).rules( "add", {
        required: true,
        messages: {
@@ -140,12 +74,6 @@
        required: true,
        messages: {
          required: "Informe sua Data de Nascimento"
-       }
-     });
-     $( "#transport" ).rules( "add", {
-       required: true,
-       messages: {
-         required: "Precisamos saber se precisa de transporte para o evento"
        }
      });
    }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170828200013) do
+ActiveRecord::Schema.define(version: 20170831171709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,12 @@ ActiveRecord::Schema.define(version: 20170828200013) do
     t.index ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
   end
 
+  create_table "event_types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "events", force: :cascade do |t|
     t.string   "name"
     t.string   "facilitator"
@@ -55,9 +61,10 @@ ActiveRecord::Schema.define(version: 20170828200013) do
     t.text     "description"
     t.string   "avatar"
     t.string   "price"
-    t.integer  "type"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "event_type_id"
+    t.boolean  "is_shirt",      default: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   create_table "payments", force: :cascade do |t|
@@ -80,22 +87,11 @@ ActiveRecord::Schema.define(version: 20170828200013) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "shirts", force: :cascade do |t|
-    t.string   "size"
-    t.float    "price"
-    t.integer  "limit"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "subscriptions", force: :cascade do |t|
-    t.datetime "subscribed_at"
-    t.integer  "user_id"
-    t.integer  "paymant_id"
-    t.integer  "buyable_id"
-    t.string   "buyable_type"
-    t.index ["buyable_id"], name: "index_subscriptions_on_buyable_id", using: :btree
-    t.index ["buyable_type"], name: "index_subscriptions_on_buyable_type", using: :btree
+    t.integer "user_id"
+    t.integer "event_id"
+    t.integer "paymant_id"
+    t.index ["event_id", "paymant_id", "user_id"], name: "index_subscriptions_on_event_id_and_paymant_id_and_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

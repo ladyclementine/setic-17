@@ -1,7 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
-  before_action :verify_lot_and_redirect, only: [:new, :create]
   before_action :get_user
   #before_action :verify_facebook_login, only: :edit_password
   layout :determine_layout
@@ -77,13 +76,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   private
-  #VERIFICAR SE HÁ VAGAS NO LOTE
-  def verify_lot_and_redirect
-    if(Lot.active_lot.nil?)
-      flash[:notice] = "Aguarde a abertura do próximo lote para realizar seu cadastro. Para mais informações, visite nossa página no Facebook."
-      redirect_to new_user_session_path
-    end
-  end
 
   #PARAMETROS PARA A INSCRIÇÃO INICIAL
   def inscription_params
@@ -92,7 +84,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def user_params
     # NOTE: Using `strong_parameters` gem
-    params.require(:user).permit(:name, :general_register, :birthday ,:cpf, :gender, :avatar, :phone, :special_needs, :federation, :junior_enterprise, :job, :university, :transport_required, :cep, :state, :city, :street, :transport_local, :address, :phone_parents, :name_parents, :federation_check)
+    params.require(:user).permit(:name, :general_register, :birthday ,:cpf, :gender, :avatar, :phone, :university)
   end
 
   def password_params

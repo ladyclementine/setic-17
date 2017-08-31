@@ -21,10 +21,6 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
 
   # GET /resource/confirmation?confirmation_token=abcdef
   def show
-    if !params[:confirmation_token].nil?
-      face = User.where(confirmation_token: params[:confirmation_token]).first
-      face.update_attributes!(active_face: true) if !face.nil?
-    end
     self.resource = resource_class.confirm_by_token(params[:confirmation_token])
 
     yield resource if block_given?
