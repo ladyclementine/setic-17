@@ -4,7 +4,7 @@ class UserDashboardController < BaseController
 
   def index
     #@days = Event.join_events_by_time
-    @days = Event.none
+    @days = Event.join_events_by_time
     
 
   end

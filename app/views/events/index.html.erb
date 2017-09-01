@@ -5,60 +5,69 @@
 </section>
 <section class="content">
    
+   <div class="nav-tabs-custom">
+      <ul class="nav nav-tabs">
+         <% @days.each_with_index do |day, index| %>
+         <li class="<%= active(index) %>"><a href="#tab_<%=index%>" data-toggle="tab"><%= l day[:date], format: :week_format %>
+         </a></li>
+         <% end %>
+
+         <li class="pull-right">
+         <a href="">Selecione o Dia</a>
+         </li>
+      </ul>
+
+   </div>
+
+
    <div class="tab-content">
       <% @days.each_with_index do |event, index| %>
       <div class="tab-pane <%= active(index) %>" id="tab_<%= index %>">
          <% event[:hours].each  do |hour| %>
          <h3><%= "#{hour[:time]}" %></h3>
          <div class="row">
-            <% hour[:events].each do |event| %>
+            <% hour[:events].each do |schedule| %>
             <div class="col-md-<%=grid_value(hour[:events])%>">
                <!-- Widget: user widget style 1 -->
                <div class="box box-widget widget-user">
                   <div class="widget-user-header bg-aqua-active">
                      <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-events-info" data-dismiss="modal" data-disable-with="Aguarde..."  data-commit="Entendi"  data-confirm="Facilitador: <%= event.facilitator %> </br></br><%= event.description %> " rel="nofollow" style="z-index: 1000;margin-top: -10px"><i class="fa fa-info"></i></button>
+                        <button type="button" class="btn btn-events-info" data-dismiss="modal" data-disable-with="Aguarde..."  data-commit="Entendi"  data-confirm="Facilitador: <%= schedule.event.facilitator %> </br></br><%= schedule.event.description %> " rel="nofollow" style="z-index: 1000;margin-top: -10px"><i class="fa fa-info"></i></button>
                      </div>
-                     <h3 class="widget-user-username" style="margin-top: -10px"><%= event.name %></h3>
-                     <h5 class="widget-user-desc"> <%= "#{event.start.strftime('%H:%M')} - #{event.end.strftime('%H:%M')}" %></h5>
+                     <h3 class="widget-user-username" style="margin-top: -10px">[<%=schedule.event.event_type.name.upcase%>] <%= schedule.event.name %></h3>
+                     <h5 class="widget-user-desc"> <%= "#{schedule.start_time.strftime('%H:%M')} - #{schedule.end_time.strftime('%H:%M')}" %></h5>
                   </div>
                   <div class="widget-user-image">
-                     <img class="img-circle" style="border: 3px solid #54524F;" src="<%=event.avatar_url(:medium)%>"  data-toggle="tooltip" title="" data-original-title="<%= event.facilitator %>" alt="Palestrante Avatar">
+                     <img class="img-circle" style="border: 3px solid #54524F;" src="https://ecej17.s3.amazonaws.com/uploads/event/avatar/13/medium_J%C3%9ALIA-01.png<%#=event.avatar_url(:medium)%>"  data-toggle="tooltip" title="" data-original-title="<%= schedule.event.facilitator %>" alt="Palestrante Avatar">
                   </div>
                   <div class="box-footer">
                      <div class="row">
-                        <div class="col-sm-4 col-xs-4 border-right">
+                        <div class="col-sm-6 col-xs-6 border-right">
                            <div class="description-block">
-                              <h5 class="description-header inscritos_event_<%= event.id %>"><%= "#{event.users.count}" %></h5>
+                              <h5 class="description-header inscritos_event_<%= schedule.event.id %>"><%= "#{schedule.event.users.count}" %></h5>
                               <span class="description-text">Inscritos</span>
                            </div>
                            <!-- /.description-block -->
                         </div>
                         <!-- /.col -->
-                        <div class="col-sm-4 col-xs-4 border-right">
+                        <div class="col-sm-6 col-xs-6 border-right">
                            <div class="description-block">
-                              <h5 class="description-header"><%= event.limit || 0 %></h5>
+                              <h5 class="description-header"><%= schedule.event.limit || 0 %></h5>
                               <span class="description-text">Vagas</span>
                            </div>
                            <!-- /.description-block -->
                         </div>
                         <!-- /.col -- .join(' | ') -->
              
-                        <div class="col-sm-4 col-xs-4">
-                           <div class="description-block title_<%= event.id %>" data-html="true" data-toggle="tooltip" title="" data-original-title="* Membros da EJ que estão participando do evento: <br><%= event.membros_ejs(@user).map { |u| u.two_names}.join(' | ').titleize %>">
-                              <h5 class="description-header ej_total_<%= event.id %>"><%= event.membros_ejs(@user).count %></h5>
-                              <span class="description-text">Membros da EJ</span>
-                           </div>
-                           <!-- /.description-block -->
-                        </div>
-                        <div id="buttons_event_<%= event.id %>">
-                        <% if event.users.include? @user %>
-                        <button type="submit" class="btn btn-sm hotel-choose pull-right send_event_out" id="event_<%= event.id %>" style="background-color: #db3f3f; margin-bottom: 5px;color:#fff;margin-top: 3px; margin-right: 20px"><strong>SAIR DA PROGRAMAÇÃO</strong></button>
+                        
+                        <div id="buttons_event_<%= schedule.event.id %>">
+                        <% if schedule.event.users.include? @user %>
+                        <button type="submit" class="btn btn-sm hotel-choose pull-right send_event_out" id="event_<%= schedule.event.id %>" style="background-color: #db3f3f; margin-bottom: 5px;color:#fff;margin-top: 3px; margin-right: 20px"><strong>SAIR DA PROGRAMAÇÃO</strong></button>
                         <% else %>
-                           <% if event.full? %>
-                              <button type="submit" class="btn btn-sm hotel-choose pull-right send_event_enter" id="event_<%= event.id %>" style="background-color: #a0a0a0; margin-bottom: 5px;color:#fff;margin-top: 3px; margin-right: 20px"><strong>LOTADO</strong></button>
+                           <% if schedule.event.full? %>
+                              <button type="submit" class="btn btn-sm hotel-choose pull-right send_event_enter" id="event_<%= schedule.event.id %>" style="background-color: #a0a0a0; margin-bottom: 5px;color:#fff;margin-top: 3px; margin-right: 20px"><strong>LOTADO</strong></button>
                            <% else %>
-                              <button type="submit" class="btn btn-sm hotel-choose pull-right send_event_enter" id="event_<%= event.id %>" style="background-color: #1AB394; margin-bottom: 5px;color:#fff;margin-top: 3px; margin-right: 20px"><strong>ENTRAR NA PROGRAMAÇÃO</strong></button>
+                              <button type="submit" class="btn btn-sm hotel-choose pull-right send_event_enter" id="event_<%= schedule.event.id %>" style="background-color: #1AB394; margin-bottom: 5px;color:#fff;margin-top: 3px; margin-right: 20px"><strong>ENTRAR NA PROGRAMAÇÃO</strong></button>
                             <% end %>
                         <% end %>
                         </div>
@@ -76,12 +85,5 @@
       <% end %>
    </div>
 
-   <div class="nav-tabs-custom">
-      <ul class="nav nav-tabs">
-         <% @days.each_with_index do |day, index| %>
-         <li class="<%= active(index) %>"><a href="#tab_<%=index%>" data-toggle="tab">Dia <%=day[:date].strftime('%d/%m')  %></a></li>
-         <% end %>
-      </ul>
-   </div>
 </section>
 <%= javascript_include_tag 'events.js' %>

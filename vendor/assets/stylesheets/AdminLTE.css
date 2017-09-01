@@ -2539,7 +2539,6 @@ a:focus {
 }
 .alert a {
   color: #fff;
-  text-decoration: underline;
 }
 .alert-success {
   border-color: #008d4c;
@@ -4641,7 +4640,8 @@ table.text-center th {
 .bg-aqua-active,
 .modal-info .modal-header,
 .modal-info .modal-footer {
-   background: url('/images/beach_new.jpg') center ; 
+   background: url('/images/fundo.png') center ; 
+   background-size: cover;
    z-index: 2;
 }
 .bg-aqua-active:after {

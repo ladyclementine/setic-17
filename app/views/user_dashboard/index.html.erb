@@ -12,7 +12,7 @@
       <div class="col-md-12">
          <div class="box box-primary" >
              <div class="box-header">
-               <h3 class="box-title">Bem vindo, <%=@user.first_name%>! Verifique seus pagamentos abaixos</h3>
+               <h3 class="box-title">Bem vindo, <%=@user.first_name%>! Verifique seus pagamentos abaixo</h3>
             </div>
             <div class="box-body" style="text-align: left;">
                <div class="box-group" id="accordion">
@@ -29,41 +29,62 @@
                     </h4>
                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
                     <span class="pull-right">
-                        <i class="fa fa-caret-down" aria-hidden="true"></i> [VER +]
+                        <i class="fa fa-caret-down" aria-hidden="true"></i> [VER ITENS]
                      </span>
                      </a>
                   </div>
                   <div id="collapseOne" class="panel-collapse collapse">
-                    <div class="box-body">
-                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
-                      wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                      eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
-                      assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
-                      nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
-                      farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
-                      labore sustainable VHS.
-                    </div>
-                  </div>
-                </div>
-
+                    <div class="box-body" style="background-color: #fff; color: #000">
+                     <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                        <tr>
+                          <th>Itens</th>
+                          <th>Preço unitário</th>
+                          <th>Desconto</th>
+                          <th>Subtotal</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                          <td>[CURSO] Projeto com Ruby On Rails</td>
+                          <td>R$ 12,00</td>
+                          <td>5,00 R$</td>
+                          <td>7,00 R$</td>
+                        </tr>
+                        <tr>
+                          <td>[PALESTRA] Projeto com Ruby On Rails</td>
+                          <td>R$ 12,00</td>
+                          <td>5,00 R$</td>
+                          <td>7,00 R$</td>
+                        </tr>
+                        <tr>
+                          <td>[WORKSHOP] Projeto com Ruby On Rails</td>
+                          <td>R$ 12,00</td>
+                          <td>5,00 R$</td>
+                          <td>7,00 R$</td>
+                        </tr>
+                        <tr>
+                          <td>Camisa P</td>
+                          <td>R$ 12,00</td>
+                          <td>0,00 R$</td>
+                          <td>12,00 R$</td>
+                        </tr>
                 
-                <div class="panel box box-danger">
-                  <div class="box-header with-border">
-                    <h4 class="box-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                        Collapsible Group Danger
-                      </a>
-                    </h4>
-                  </div>
-                  <div id="collapseTwo" class="panel-collapse collapse">
-                    <div class="box-body">
-                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
-                      wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                      eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
-                      assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
-                      nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
-                      farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
-                      labore sustainable VHS.
+                        </tbody>
+                      </table>
+                       <table class="table">
+                        <tr>
+                          <th>Forma de Pagamento:</th>
+                          <td><a href="#" style="color: #DD4B39;" data-toggle="modal" data-target="#modal-tempo">Deposito (Ver Dados da Conta)</a></td>
+                        </tr>
+                        <tr>
+                          <th>Total:</th>
+                          <td>R$ 33,00</td>
+                        </tr>
+                      </table>
+                      </div>
+
                     </div>
                   </div>
                 </div>
@@ -131,7 +152,6 @@
                   <div class="box-body">
                      <div class="box-group" id="accordion">
                         <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
-                        <% if @event_open %>
                         <% @days.each_with_index do |event, index| %>
                         <div class="panel box box-primary">
                            <div class="box-header with-border">
@@ -153,26 +173,25 @@
                                        </span>
                                     </li>
                                     <%a = true%>
-                                    <% hour[:events].each do |event| %>
-                                    <% if event.users.include? @user %>
+                                    <% hour[:events].each do |schedule| %>
+                                    <% if schedule.event.users.include? @user %>
                                     <!-- /.timeline-label -->
                                     <!-- timeline item -->
                                     <li>
                                        <i class="fa fa-clock-o bg-purple"></i>
                                        <div class="timeline-item">
-                                          <span class="time"><i class="fa fa-clock-o"></i> <%= "#{event.start.strftime('%H:%M')} - #{event.end.strftime('%H:%M')}" %></span>
-                                          <h3 class="timeline-header"><a href="javascript:void(0)"><%= event.name %></a> Com <%= event.facilitator %></h3>
+                                          <span class="time"><i class="fa fa-clock-o"></i> <%= "#{schedule.start_time.strftime('%H:%M')} - #{schedule.end_time.strftime('%H:%M')}" %></span>
+                                          <h3 class="timeline-header"><a href="javascript:void(0)"><%= schedule.event.name %></a> Com <%= schedule.event.facilitator %></h3>
                                           <div class="timeline-body">
                                              <div>
-                                                <%= event.description == "" ? "Descrição não informada." : event.description%></br></br>
-                                                <b> EJS que estão participando desta programação: </b><a href="javascript:void(0)" data-toggle="collapse" data-target="#ejs_participantes_<%= event.id %>">Abrir/Fechar</a>
-                                                <div id="ejs_participantes_<%= event.id %>" class="collapse"><%= event.ejs_names %></div>
+                                                <%= schedule.event.description == "" ? "Descrição não informada." : schedule.event.description%></br></br>
+                                        
                                              </div>
                                           </div>
                                        </div>
                                     </li>
                                     <%else%>
-                                    <% if !event.concurrents(current_user).any? && a==true %>
+                                    <% if !schedule.event.concurrents(current_user).any? && a==true %>
                                     <%a = false%>
                                     <li>
                                        <i class="fa fa-clock-o bg-red"></i>
@@ -192,11 +211,7 @@
                            </div>
                         </div>
                         <%end%>
-                        <%else%>
-                        <span class="text-center" style="color: #F44336">
-                           <h4>Em breve você poderá escolher a sua programação.</h4>
-                        </span>
-                        <%end%>
+                      
                      </div>
                   </div>
                </div>
@@ -278,52 +293,8 @@
 </section>
 <!-- /.content -->
 
-<% if 1==2 && !@payment.nil? %>
-<% if @payment.method == "Boleto" %>
-<div class="modal patrick-modal fade in" id="modal-pagamento">
-   <div class="modal-dialog">
-      <div class="modal-content">
-         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span></button>
-         </div>
-         <div class="modal-body" style="font-size: 17px;line-height: 1.4;color: #6e7a89">
-            Olá !<br><br>
-            Você sabia que você pode pagar os seus boletos via transferência ou depósito?<br>
-            Pois é! Tudo que você precisa é acessar o link da fatura de cada boleto e seguir o tutorial abaixo.
-            <br><br>
-            <% @billets_links.each do |link| #, download: 'data'%>
-            <% if link.status == 'PENDING' || link.status == 'OVERDUE'  %>
-            Fatura <%= link.description.nil? ? 'do Boleto Único' : "da #{link.description}" %>: <a href="<%=link.fatura_url%>" target="_blank">Pagar</a><br>
-            <%end%>
-            <%end%>
-            <br>
-            <h4 style="text-align: center;">1° Passo</h4>
-            - Na parte inferior, selecione a forma de pagamento e depois clique em "ENTENDI, IREI ENVIAR O COMPROVANTE"<br>
-            <div align="center"><img src="/images/asaas/1.jpg" alt="asaas 1" ></div>
-            <br>
-            <h4 style="text-align: center;">2° Passo</h4>
-            - Preencha um número válido para contato<br>
-            <div align="center"><img src="/images/asaas/2.jpg" alt="asaas 1" ></div>
-            <h4 style="text-align: center;">3° Passo</h4>
-            - Selecione o banco<br>
-            - Faça a transferência ou depósito para a conta informada<br>
-            - <b>Envie o comprovate de pagamento para que o seu pagamento seja aprovado.</b><br>
-            <div align="center"><img src="/images/asaas/3.jpg" alt="asaas 1" ></div>
-            <br><br>
-            <div align="center">Prontinho! Agora é só esperar para ser feliz ;)</div>
-            <br>
-            <div align="center"><img src="/images/asaas/feliz.gif" alt="asaas 1" ></div>
-         </div>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
-         </div>
-      </div>
-      <!-- /.modal-content -->
-   </div>
-   <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
+<% if 1==1 %>
+
 <div class="modal patrick-modal fade in" id="modal-tempo">
    <div class="modal-dialog">
       <div class="modal-content">
@@ -332,9 +303,8 @@
             <span aria-hidden="true">&times;</span></button>
          </div>
          <div class="modal-body" style="font-size: 17px;line-height: 1.4;color: #6e7a89">
-            Olá !<br><br>
-            Depois que você efetuar o pagamento, irá demorar 1 dia útil para confirmar o recebimento e a confirmação será feita automaticamente pelo nosso sistema ;)<br>
-            <div align="center"><img src="/images/asaas/pc.gif" alt="asaas 1" ></div>
+
+          Dados
          </div>
          <div class="modal-footer">
             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
@@ -345,7 +315,6 @@
    <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-<%end%>
 <%end%>
 <div id="fb-root"></div>
 <script>(function(d, s, id) {

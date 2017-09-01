@@ -1,21 +1,14 @@
 class EventsController < BaseController
   before_action :get_user
   before_action :verify_register_conclusion
-  before_action :if_event_close_redirect
-  before_action :user_must_have_paid
+  #before_action :if_event_close_redirect
 
   #before_action :close_insert_exit_event, only: [:enter_event,:exit_event]
 
-  def close_insert_exit_event
-    if get_admin.nil?
-      render :status => 200, :json => {mensage: "error", infos: "Não é mais possível entrar ou sair de evento." }
-    end
-  end
-
-
 
   def index
-    @days = Event.join_events_by_time
+   # @days = Event.join_events_by_time
+   @days = Event.join_events_by_time
   end
 
   def enter_event
