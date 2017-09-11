@@ -7,7 +7,6 @@ class CreateEvents < ActiveRecord::Migration[5.0]
       t.text :description
       t.string :avatar
       t.string :price
-      t.integer :event_type_id
       t.boolean :is_shirt, default: false
       t.timestamps
     end

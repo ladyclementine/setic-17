@@ -8,7 +8,7 @@ class Event < ApplicationRecord
   belongs_to :event_type
 
   validates :name, presence: true
-  validates :facilitator, presence: true, unless: Proc.new{|a| a.is_shirt == true }
+  #validates :facilitator, presence: true, unless: Proc.new{|a| a.is_shirt == true }
   validates :limit, presence: true
   validates :limit, numericality: { greater_than: -1, message: " deve ser maior= zero." }
 

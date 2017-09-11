@@ -1,6 +1,6 @@
 <section class="content-header">
    <h1>
-      Hoteis
+      Programação
    </h1>
 </section>
 <!-- Main content -->
@@ -10,42 +10,41 @@
       <div class="col-xs-12">
          <div class="box">
             <div class="box-header">
-               <h3 class="box-title">Gerenciamento de Hoteis</h3>
+               <%= link_to "NOVO AVISO", new_crew_comment_path, class:"btn btn-info pull-right" %>
+               <h3 class="box-title">Gerenciamento de Avisos</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
              <table id="table_ecej" class="table table-striped table-bordered dt-responsive nowrap display"  cellspacing="0" width="100%">
                   <thead>
                      <tr>
-                        <th>Id</th>
-                        <th>Nome</th>
-                        <th>Total de vagas</th>
-                        <th>Vagas restantes</th>
+                        <th>Título</th>
+                        <th>Descrição</th>
                         <th class="noExport">Opções</th>
                      </tr>
                   </thead>
                   <tbody>
                   
-                     <% @hotels.each do |hotel| %>
+                     <% @comments.each do |comment| %>
                      <tr>
-                        <td><%= hotel.id %></td>
-                        <td><%= hotel.name %></td>
-                        <td><%= hotel.capacity %></td>
-                        <td><%= hotel.restant_capacity %></td>
-
+                        <td><%= comment.title %></td>
+                        <td><%= comment.description %></td>
                         <td>
-                           <%= link_to edit_crew_hotel_path(hotel) do %>
+                          <%= link_to crew_comment_path(comment) do %>
+                           <small class="btn btn-info dropdown-toggle btn-xs">
+                           <i class="fa fa-eye"></i> Ver Aviso
+                           </small>
+                           <% end %>
+                           <%= link_to edit_crew_comment_path(comment) do %>
                            <small class="btn btn-default dropdown-toggle btn-xs">
                            <i class="fa fa-pencil-square-o"></i> Editar
                            </small>
                            <% end %>
-
-                           <%= link_to crew_hotel_users_path(hotel) do %>
-                           <small class="btn btn-info dropdown-toggle btn-xs">
-                           <i class="fa fa-eye"></i> Ver Congressistas
+                           <%= link_to crew_comment_path(comment), method: :delete, data: { confirm: "Tem certeza que deseja apagar esse aviso?" } do %>
+                           <small class="btn btn-danger dropdown-toggle btn-xs">
+                           <i class="fa fa-pencil-square-o"></i> Excluir
                            </small>
                            <% end %>
-
                         </td>
                      </tr>
                      <% end %> 

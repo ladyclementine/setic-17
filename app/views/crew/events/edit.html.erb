@@ -38,11 +38,6 @@
                   <label>Facilitador</label>
                   <%= f.text_field :facilitator, class: 'form-control' %>
                </div>
-               <div class="form-group">
-                  <label>Data de início</label>
-                  <%= f.text_field :start, class: 'form-control', id: 'lots_picker' %>
-               </div>
-               <!-- /.form-group -->
                <!-- /.form-group -->
             </div>
             <!-- /.col -->
@@ -51,14 +46,18 @@
                   <label>Limite de vagas</label>
                   <%= f.text_field :limit, class: 'form-control'%>
                </div>
-               <!-- /.form-group -->
-               <div class="form-group">
-                  <label>Data de término</label>
-                  <%= f.text_field :end, class: 'form-control', id: 'lots_picker1'%>
-               </div>
-               <!-- /.form-group -->
+
             </div>
             <!-- /.col -->
+
+            <div class="col-md-6">
+            <div class="form-group">
+              <label>Valor</label>
+              <%= f.text_field :price, class: 'form-control ' %>
+           </div>
+           </div>
+           <!-- /.col -->
+
             <div class="col-md-6">
                <div class="form-group">
                   <label>Descrição</label>
@@ -84,7 +83,7 @@
    <div class="box box-success">
       <div class="box-header with-border">
          <button type="submit" class="btn btn-block btn-success">EDITAR</button>
-         <%= link_to "VOLTAR", crew_rooms_path, class:"btn btn-block btn-default" %>
+         <%= link_to "VOLTAR", crew_events_path, class:"btn btn-block btn-default" %>
          <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
          </div>

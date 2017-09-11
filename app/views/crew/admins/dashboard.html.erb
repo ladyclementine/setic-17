@@ -20,13 +20,10 @@
       <!-- small box -->
       <div class="small-box bg-yellow">
          <div class="inner">
-            <h3><%=@eligible_users.count%></sup></h3>
-            <p>Na lista de espera</p>
          </div>
          <div class="icon">
             <i class="fa fa-clock-o" aria-hidden="true"></i>
          </div>
-         <%= link_to crew_users_waiting_list_path, class: 'small-box-footer' do %>Ver Todos <i class="fa fa-arrow-circle-right"></i><%end%>
       </div>
    </div>
    <!-- ./col -->
@@ -34,7 +31,7 @@
       <!-- small box -->
       <div class="small-box bg-green">
          <div class="inner">
-            <h3><%=@pays.count%></h3>
+            <h3></h3>
             <p>Pagantes</p>
          </div>
          <div class="icon">
@@ -49,7 +46,7 @@
       <!-- small box -->
       <div class="small-box bg-green">
          <div class="inner">
-            <h3><%=@allocated_users.count%></h3>
+            <h3></h3>
             <p>Alocado(s)</p>
          </div>
          <div class="icon">
@@ -84,7 +81,6 @@
                   <%= image_tag(user.avatar_url(:medium), style:'max-height: 100px') if user.avatar? %>
                   <%= image_tag('dog.jpg', style:'max-height: 100px') if !user.avatar? %>
                   <a class="users-list-name" href="#"><%= user.name.nil? ? user.email : user.name.titleize%></a>
-                  <span class="users-list-date"><%= user.junior_enterprise.nil? ? 'Não Informado' : user.junior_enterprise %></span>
                </li>
                <% end %>
             </ul>
@@ -100,110 +96,7 @@
    </div>
    <!-- /.col -->
    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-   <div class="col-md-12">
-      <div class="box">
-         <div class="box-header with-border">
-            <h3 class="box-title">Lotes e Usuários</h3>
-            <div class="box-tools pull-right">
-               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-               </button>
-               <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-            </div>
-         </div>
-         <!-- /.box-header -->
-         <div class="box-body">
-            <div class="row">
-               <div class="col-md-8">
-                  <div class="chart">
-                     <!-- Sales Chart Canvas -->
-                     <div id="chart_div"></div>
-                  </div>
-                  <!-- /.chart-responsive -->
-               </div>
-               <!-- /.col -->
-               <div class="col-md-4">
-                  <p class="text-center">
-                     <strong>Infos Adicionais</strong>
-                  </p>
-                  <div class="progress-group">
-                     <span class="progress-text">Total de Vagas</span>
-                     <span class="progress-number"><b><%=@allocated_users.count%></b>/<%=@lots.totalLimit%></span>
-                     <div class="progress sm">
-                        <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
-                     </div>
-                  </div>
-                  <!-- /.progress-group -->
-                  <div class="progress-group">
-                     <span class="progress-text">Não Finalizaram</span>
-                     <span class="progress-number"><b><%=@user.no_finalized.count%></b>/<%=@user.count%></span>
-                     <div class="progress sm">
-                        <div class="progress-bar progress-bar-red" style="width: 80%"></div>
-                     </div>
-                  </div>
-                  <!-- /.progress-group -->
-                  <div class="progress-group">
-                     <span class="progress-text">Não Sel. Pag.</span>
-                     <span class="progress-number"><b><%=@user.no_selected_payment.count%></b>/<%=@allocated_users.count%></span>
-                     <div class="progress sm">
-                        <div class="progress-bar progress-bar-green" style="width: 80%"></div>
-                     </div>
-                  </div>
-                  <!-- /.progress-group -->
-                  <div class="progress-group">
-                     <span class="progress-text">Contas Inativas: </span>
-                     <span class="progress-number"><b><%=@disqualified_users.count %></b></span>
-                     <div class="progress sm">
-                        <div class="progress-bar progress-bar-green" style="width: 80%"></div>
-                     </div>
-                  </div>
-                  <!-- /.progress-group -->
-               </div>
-               <div class="col-md-4">
-                  <p class="text-center">
-                     <strong>Infos de Pagamento</strong>
-                  </p>
-                  <div class="progress-group">
-                     <span class="progress-text">Selecionaram Boleto</span>
-                     <span class="progress-number"><b><%=@select_boleto.count%></b></span>
-                     <div class="progress sm">
-                        <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
-                     </div>
-                  </div>
-                  <!-- /.progress-group -->
-                  <div class="progress-group">
-                     <span class="progress-text">Selecionaram PagSeguro</span>
-                     <span class="progress-number"><b><%=@select_pagseguro.count%></b></span>
-                     <div class="progress sm">
-                        <div class="progress-bar progress-bar-red" style="width: 80%"></div>
-                     </div>
-                  </div>
-                  <!-- /.progress-group -->
-                  <div class="progress-group">
-                     <span class="progress-text">Recebido Boletos: </span>
-                     <span class="progress-number"><b><%=number_to_currency(@tBoleto)%></b></span>
-                     <div class="progress sm">
-                        <div class="progress-bar progress-bar-green" style="width: 80%"></div>
-                     </div>
-                  </div>
-                  <!-- /.progress-group -->
-                   <!-- /.progress-group -->
-                  <div class="progress-group">
-                     <span class="progress-text">Recebido PagSeguro: </span>
-                     <span class="progress-number"><b><%=number_to_currency(@tPagseguro)%></b></span>
-                     <div class="progress sm">
-                        <div class="progress-bar progress-bar-green" style="width: 80%"></div>
-                     </div>
-                  </div>
-                  <!-- /.progress-group -->
-               </div>
-               <!-- /.col -->
-            </div>
-            <!-- /.row -->
-         </div>
-         </br>
-      </div>
-      <!-- /.box -->
-   </div>
+
 
    <div class="col-md-12">
       <!-- USERS LIST -->
@@ -238,52 +131,3 @@
    <!-- /.col -->
 
 </div>
-<script type="text/javascript">
-   google.charts.load('current', {packages: ['corechart', 'bar']});
-   google.charts.setOnLoadCallback(drawMaterial);
-   
-
-   
-    function drawMaterial() {
-         var data = google.visualization.arrayToDataTable([
-           ['Lotes', 'Limite', {type: 'string', role: 'annotation'}, 'Alocados', {type: 'string', role: 'annotation'}, 'Pago Total', {type: 'string', role: 'annotation'},  'Parcialmente Pago', {type: 'string', role: 'annotation'}],
-           <% @lots.each do |lot| %>
-           ['<%=lot.name%>', <%=lot.limit%>, <%=lot.limit%>,<%=lot.users.count%>, <%=lot.users.count%>, <%=lot.qnt_pays_total %>, <%=lot.qnt_pays_total %>, <%=lot.qnt_pays_partial %>, <%=lot.qnt_pays_partial %>],
-           <% end %>
-          
-         ]);
-   
-         var options = {
-       
-             title: 'Dados sobre os lotes ativos',
-      
-          chartArea: {width: '60%'},
-           hAxis: {
-             title: 'Congressistas',
-             minValue: 0,
-           },
-
-           annotations: {
-          alwaysOutside: true,
-          textStyle: {
-            fontSize: 12,
-            auraColor: 'none',
-            color: '#555'
-          }
-         
-        },
-          series: [{color: '#605CA8'}, {color: '#f4dc41'}, {color: '#41f444'}],
-   
-           //vAxis: {
-           //  title: 'City'
-           //},
-           bars: 'horizontal'
-         };
-       
-
-         var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
-      chart.draw(data, options);
-       }
-   
-          
-</script>
