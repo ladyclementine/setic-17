@@ -12,9 +12,10 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
 
   has_many :subscriptions
-  has_many :events, through: :subscriptions
+  has_many :all_itens, through: :subscriptions, class_name: "Event"
+  has_many :events, -> { where(is_shirt: false) }, through: :subscriptions
   has_many :shirts, -> { where(is_shirt: true) }, through: :subscriptions, class_name: "Event"
-  has_many :payments
+  has_one :payment
 
   enum certificate: { 'SIM':true, 'NÃO':false }
   #VALIDAÇÃO PARA CONCLUSÃO DE CADASTRO
@@ -31,6 +32,11 @@ class User < ApplicationRecord
 
   def total_cart
     self.events.sum(:price) + self.shirts.sum(:price)
+  end
+
+
+  def total_cart_discount
+    self.all_itens.total_discount_by_pack[0] * (1 - self.events.total_discount)
   end
 
 
@@ -98,14 +104,18 @@ class User < ApplicationRecord
 
   #evento
   def has_concurrent_event?(event)
-    events.each do |user_event|
-      condition =   (user_event.end < event.start) ||
-        (user_event.end.strftime('%Y/%m/%d %H:%M:%S') == event.start.strftime('%Y/%m/%d %H:%M:%S')) ||
-        (user_event.start > event.end) ||
-        (user_event.start.strftime('%Y/%m/%d %H:%M:%S') == event.end.strftime('%Y/%m/%d %H:%M:%S'))
-      return true unless condition
+    check_schedules = []
+    conflit_schedules = []
+    check_schedules = self.events.where.not(id: event.id).collect { |e| e.schedules }
+
+    event.schedules.each do |schedule|
+      conflit_schedules << schedule.start_time_between
     end
-    false
+   result = (conflit_schedules.flatten & check_schedules.flatten)
+   false
+   true if !result.empty?
   end
+
+
 
 end

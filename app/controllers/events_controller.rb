@@ -9,6 +9,7 @@ class EventsController < BaseController
   def index
    # @days = Event.join_events_by_time
    @days = Event.join_events_by_time
+   @types = EventType.all
   end
 
   def enter_event

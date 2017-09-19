@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20170831171709) do
     t.integer  "limit"
     t.text     "description"
     t.string   "avatar"
-    t.string   "price"
+    t.float    "price",         default: 0.0
     t.integer  "event_type_id"
     t.boolean  "is_shirt",      default: false
     t.datetime "created_at",                    null: false

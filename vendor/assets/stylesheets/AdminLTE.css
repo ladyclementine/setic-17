@@ -2626,6 +2626,11 @@ a:focus {
   margin-bottom: -2px;
   margin-right: 5px;
 }
+.filtros-nav-tabs-custom > .nav-tabs > li {
+  margin: 0px;
+  padding: 10px 10px 0px 10px; 
+}
+
 .nav-tabs-custom > .nav-tabs > li > a {
   color: #444;
   border-radius: 0;

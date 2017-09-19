@@ -1,8 +1,8 @@
 class CheckoutController < BaseController
   before_action :get_user
   before_action :verify_register_conclusion
-  before_action :verify_user_lot
-  before_action :redirect_if_user_has_paid, except: [:try_again] # PENDENTE
+  #before_action :redirect_if_user_has_paid, except: [:try_again] # PENDENTE
+  require "#{Rails.root}/config/initializers/packages.rb"
 
   #before_action :close_payments
   def close_payments
@@ -11,52 +11,26 @@ class CheckoutController < BaseController
   end
 
   def new
-    @pagseguro_fatores = [1.0 ,0.52255, 0.35347, 0.26898, 0.21830, 0.18453, 0.16044, 0.14240,
-                          0.12838, 0.11717, 0.10802, 0.10040]
-    @preco_avista = CheckoutHelper.pagseguro_self(@user.paid_lot_value)
-
-    @parcelas = 1..12
-    @valores_parcela = []
-    @total_valores = []
-
-    @parcelas.each do |p|
-      price_p = @preco_avista * @pagseguro_fatores[p-1]
-      @valores_parcela << price_p
-      @total_valores << price_p.to_f * p.to_f
-    end
-
-    if @user.lot.nohost_active
-      @preco_avista_nohost = CheckoutHelper.pagseguro_self(@user.paid_lot_nohost_value)
-
-      @valores_parcela_nohost = []
-      @total_valores_nohost = []
-
-      @parcelas.each do |p|
-        price_p = @preco_avista_nohost * @pagseguro_fatores[p-1]
-        @valores_parcela_nohost << price_p
-        @total_valores_nohost << price_p.to_f * p.to_f
-      end
-    end
+    @user_cart = @user.all_itens.order(:is_shirt, :event_type_id)
+    @payment = Payment.new
   end
 
-  def billet
-    @user.payment ||= Payment.new do |payment|
-      payment.method = "Boleto"
-      payment.portions = Asaas::Utils.check_portions(params[:installmentCount].to_i)
-      payment.host = params[:nohost_active] if @user.lot.nohost_active
-    end
-    begin
-      @user.payment.pay_asaas
+  def pay
+    # @user.payment ||= Payment.new do |payment|
+    #   payment.method = "Boleto"
+    # end
 
-      if @user.payment.portions > 1
-        message = "Os links dos boletos referentes as #{@user.payment.portions} parcelas da inscrição estão disponíveis na tela principal do sistema."
-      else
-        message = "O link do boleto referente a inscrição está disponível na tela principal do sistema."
-      end
-    rescue => ex
-      message = "Houve um erro na hora de processar seus boletos."
+    #@user.payment.pay_asaas
+
+    @cart_events = @user.events
+    @total_price = @user.total_cart_discount
+
+    @user.payment ||= Payment.new do |payment|
+       payment.method = payment_params[:method]
+       payment.price = @total_price 
     end
-    redirect_to authenticated_user_root_path, notice: message
+
+ 
   end
 
   def try_again
@@ -103,6 +77,17 @@ class CheckoutController < BaseController
 
   end
 
+  def exit_event
+    event = Event.find(params[:id])
+    event.remove current_user
+    if event.contains? current_user
+      redirect_to payment_path, notice: "Não foi possível sair da programação."
+    else
+      redirect_to payment_path, notice: "Você saiu da programação."
+    end
+  end
+
+
   private
   def redirect_if_user_has_paid
     payment = @user.payment
@@ -131,5 +116,7 @@ class CheckoutController < BaseController
     end
   end
 
-
+  def payment_params
+    params.require(:payment).permit(:method)
+  end
 end
