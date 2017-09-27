@@ -21,13 +21,12 @@ class Event < ApplicationRecord
 
   def self.total_discount
     total_eventos = self.count - 1
-    total_discount = total_eventos * 0.1
-    if total_discount <= 0.3
+    total_discount = total_eventos * 0.05
+    if total_discount <= 0.25
       total_discount
     else
-      0.3
+      0.25
     end
-    0
   end
 
 

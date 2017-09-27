@@ -1,35 +1,41 @@
 module Packages
   ALL_PACKAGES = {
-    pacote_1: {
-      name: 'A',
+    pacote_1:  {
+      name: 'BRONZE',
       types: {
-        "Workshop": 2
+        "Palestra": 2,
+        "Mesa Redonda": 1,
+        "MiniCurso": 2
       },
-      price: 34.0
+      price: 20.0,
+      limit: 50
     },
     pacote_2:  {
-      name: 'B',
+      name: 'PRATA',
       types: {
-        "Curso": 2
+        "Palestra": 2,
+        "Mesa Redonda": 1,
+        "MiniCurso": 2,
+        "Visita Técnica": 1
+
       },
-      price: 38.0
+      price: 30.0,
+      limit: 10
     },
     pacote_3:  {
-      name: 'C',
+      name: 'OURO',
       types: {
-        "Curso": 1,
-        "Workshop": 1
+        "Palestra": 2,
+        "Mesa Redonda": 1,
+        "MiniCurso": 2,
+        "Visita Técnica": 2,
+        "Oficina": 1
+
       },
-      price: 36.0
-    },
-    pacote_4:  {
-      name: 'D',
-      types: {
-        "Visita Técnica": 1,
-        "Curso": 1
-      },
-      price: 36.0
+      price: 40.0,
+      limit: 5
     }
+    
     
   }
 end

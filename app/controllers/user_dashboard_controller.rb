@@ -5,6 +5,7 @@ class UserDashboardController < BaseController
   def index
     #@days = Event.join_events_by_time
     @days = Event.join_events_by_time
+    @user_cart = @user.all_itens
     
 
   end

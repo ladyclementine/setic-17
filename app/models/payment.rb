@@ -2,8 +2,18 @@ class Payment < ApplicationRecord
   belongs_to :user
   acts_as_paranoid
 
-  
   validate :validate_payment_method
+  before_validation :waiting, on: :create
+
+  enum status: { 'Confirmado':true, 'Pendente':false }
+
+  def waiting
+    self.status = self.accepted_payment_status[0]
+  end
+
+  def paid?
+    self.status == self.accepted_payment_status[3]
+  end
   
   #validate :validate_payment_method, :validate_payment_status
 
@@ -12,7 +22,7 @@ class Payment < ApplicationRecord
   end
 
   def accepted_payment_status
-    ['Aguardando' ,'Pendente', 'Confirmado']
+    ['Pendente', 'Confirmado']
   end
 
   def validate_payment_method

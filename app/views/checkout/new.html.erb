@@ -26,7 +26,7 @@
         <div class="col-sm-4 invoice-col">
           <address>
             <strong>Dados da compra:</strong><br>
-            <b>Status:</b> Pendente
+            <b>Status:</b> <%#=@user.payment.status%>
            <br>
           </address>
         </div>
@@ -49,7 +49,9 @@
               <th>Nome</th>
               <th>Descrição</th>
               <th>Preço</th>
+              <% if @user.payment.nil?%>
               <th>#</th>
+              <%end%>
             </tr>
             </thead>
             <tbody>
@@ -58,8 +60,10 @@
               <td><% if !cart.is_shirt %>[<%=cart.event_type.name%>] - <%end%><%=cart.name%></td>
               <td><%=cart.description%></td>
               <td><%=number_to_currency(cart.price)%></td>
+              <% if @user.payment.nil?%>
               <td><%= link_to remove_from_path(cart.id), :method => :put do %>
               <small class="label bg-red">remover</small><% end %></td>
+              <% end %>
             </tr>
             <%end%>
             </tbody>
@@ -73,12 +77,14 @@
       <div class="row">
         <!-- accepted payments column -->
         <div class="col-md-6">
+          <% if @user.payment.nil?%>
           <p class="lead">Forma de Pagamento</p>
-
+          
           <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
            <%= f.select :method, @payment.accepted_payment_methods, {}, {class: 'form-control' } %>
 
           </p>
+          <%end%>
            <p class="lead">Pacote</p>
           <div class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
           <b class=text-danger>Atenção:</b> A escolha do pacote será feita de acordo com a programação selecionada e seu respectivo TIPO.

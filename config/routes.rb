@@ -117,7 +117,7 @@ Rails.application.routes.draw do
 
       put 'active_again' => 'user_dashboard#active_account', as: :active_again
 
-      post 'pay' => 'checkout#pay', as: :payment_send
+      post 'pay' => 'checkout#create', as: :payment_send
 
       #Sobre o evento
       get "about" => "user_dashboard#about"

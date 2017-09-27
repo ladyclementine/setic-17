@@ -1,4 +1,26 @@
+
 <section class="content-header">
+      <div class="row">
+      <%i = 0%>
+       <%Packages::ALL_PACKAGES.each do |k, v|%>
+         <div class="col-md-3 col-sm-6 col-xs-12">
+         
+
+          <div class="info-box info-box-packs" style="border-color: <%=@cores[0]%>">
+          
+              <span class="info-box-text"> <%=v[:name].upcase%></span>
+              <span class="info-box-number"><%=number_to_currency(v[:price])%></span>
+              <span class=""><%=v[:types].map{|a| "#{a[1]} #{a[0].to_s.pluralize(a[1])}"}.join(", ")%></span>
+       
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <%i = i+1%>
+        <% end %>
+
+</div>                
+
    <h1>
       Lista de programação - <span class="recebe_dia"></span>
    </h1>

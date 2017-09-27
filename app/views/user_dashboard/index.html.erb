@@ -15,82 +15,79 @@
                <h3 class="box-title">Bem vindo, <%=@user.first_name%>! Verifique seus pagamentos abaixo</h3>
             </div>
             <div class="box-body" style="text-align: left;">
-               <div class="box-group" id="accordion">
-                <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
-                <div class="panel alert alert-danger">
-
-
-                  <div class="box-header">
-                    <h4 class="box-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                        Pedido #2017083101 - Pagamento Pendente
-                      </a>
-
-                    </h4>
-                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                    <span class="pull-right">
-                        <i class="fa fa-caret-down" aria-hidden="true"></i> [VER ITENS]
-                     </span>
-                     </a>
+               <% if @user.payment.nil? %>
+                  <div class="alert alert-danger alert-dismissible">
+                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                     <h4><i class="icon fa fa-ban"></i> Você ainda não efetuou o pagamento</h4>
+                     Clique aqui e efetue o pagamento para garantir sua vaga.
                   </div>
-                  <div id="collapseOne" class="panel-collapse collapse">
-                    <div class="box-body" style="background-color: #fff; color: #000">
-                     <div class="table-responsive">
-                      <table class="table table-striped">
-                        <thead>
-                        <tr>
-                          <th>Itens</th>
-                          <th>Preço unitário</th>
-                          <th>Desconto</th>
-                          <th>Subtotal</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                          <td>[CURSO] Projeto com Ruby On Rails</td>
-                          <td>R$ 12,00</td>
-                          <td>5,00 R$</td>
-                          <td>7,00 R$</td>
-                        </tr>
-                        <tr>
-                          <td>[PALESTRA] Projeto com Ruby On Rails</td>
-                          <td>R$ 12,00</td>
-                          <td>5,00 R$</td>
-                          <td>7,00 R$</td>
-                        </tr>
-                        <tr>
-                          <td>[WORKSHOP] Projeto com Ruby On Rails</td>
-                          <td>R$ 12,00</td>
-                          <td>5,00 R$</td>
-                          <td>7,00 R$</td>
-                        </tr>
-                        <tr>
-                          <td>Camisa P</td>
-                          <td>R$ 12,00</td>
-                          <td>0,00 R$</td>
-                          <td>12,00 R$</td>
-                        </tr>
-                
-                        </tbody>
-                      </table>
-                       <table class="table">
-                        <tr>
-                          <th>Forma de Pagamento:</th>
-                          <td><a href="#" style="color: #DD4B39;" data-toggle="modal" data-target="#modal-tempo">Deposito (Ver Dados da Conta)</a></td>
-                        </tr>
-                        <tr>
-                          <th>Total:</th>
-                          <td>R$ 33,00</td>
-                        </tr>
-                      </table>
-                      </div>
+                <% else %>
+                <div class="box-group" id="accordion">
+                  <div class="panel alert <%=@user.payment.status!='Confirmado' ? 'alert-danger' : 'alert-success' %>">
 
+                    <div class="box-header">
+                      <h4 class="box-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                          Pedido #<%=@user.payment.id%> - Pagamento <%=@user.payment.status%>
+                        </a>
+
+                      </h4>
+                       <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                      <span class="pull-right">
+                          <i class="fa fa-caret-down" aria-hidden="true"></i> [VER ITENS]
+                       </span>
+                       </a>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse">
+                      <div class="box-body" style="background-color: #fff; color: #000">
+                       <div class="table-responsive">
+                        <table class="table table-striped">
+                          <thead>
+                          <tr>
+                            <th>Itens</th>
+                            <th>Preço unitário</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <% @user_cart.each do |cart|%>
+                          <tr>
+                            <td>[<%=cart.event_type.name%>] - <%=cart.name%></td>
+                            <td><%=number_to_currency(cart.price)%></td>
+                          </tr>
+                          <% end %>
+                  
+                          </tbody>
+                        </table>
+                         <table class="table">
+                          <tr>
+                            <th>Forma de Pagamento:</th>
+                            <td>
+
+                            <a href="#" style="color: #DD4B39;" data-toggle="modal" data-target="#modal-tempo"><%=number_to_currency(@user.payment.method)%> (Ver Dados da Conta)</a>
+
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>Desconto:</th>
+                            <td><%=number_to_currency(@user_cart.total_discount_by_pack[0])%> (<%= @user_cart.total_discount_by_pack[1] || "Nenhum"%>)</td>
+                          </tr>
+                          <tr>
+                            <th>Total:</th>
+                            <td><%=number_to_currency(@user.payment.price)%></td>
+                          </tr>
+                        </table>
+                        </div>
+
+                      </div>
                     </div>
                   </div>
                 </div>
+              <% end %>
+
                 
-              </div>
             </div>
+
+
          </div>
 
       </div>
