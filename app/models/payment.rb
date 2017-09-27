@@ -1,37 +1,47 @@
 class Payment < ApplicationRecord
   belongs_to :user
-  has_many :asaas_payments,  foreign_key: 'custumer_id', primary_key: 'user_asaas_id'
-  validates :portions, numericality: { less_than_or_equal_to: 3, greater_than: 0 }
   acts_as_paranoid
 
+  validate :validate_payment_method
+  before_validation :waiting, on: :create
+
+  enum status: { 'Confirmado':true, 'Pendente':false }
+
+  def waiting
+    self.status = self.accepted_payment_status[0]
+  end
 
   def paid?
-    self.portion_paid == self.portions
+    self.status == self.accepted_payment_status[3]
+  end
+  
+  #validate :validate_payment_method, :validate_payment_status
+
+  def accepted_payment_methods
+    ['Depósito', 'Transferência', 'Presencial']
   end
 
-  def partially_paid?
-    self.portion_paid > 0 ? true : false
+  def accepted_payment_status
+    ['Pendente', 'Confirmado']
   end
 
-  #NOVO METODO - MODULO NOHOST
-  def set_price
-    if self.user.lot.nohost_active
-      self.host ? self.user.paid_lot_value : self.user.paid_lot_nohost_value
-    else
-      self.user.paid_lot_value
-    end
+  def validate_payment_method
+    errors.add("Método de pagamento","é inválido.") unless payment_method_is_valid?
   end
 
-  ########### PAGSEGURO ###################
-  def set_name_description
-    self.user.is_fed? ? '- Federado ' : '- Não Federado '
+  def validate_payment_status
+    errors.add("Status do pagamento","é inválido.") unless payment_status_is_valid?
   end
 
-  def set_name_host
-    if self.user.lot.nohost_active
-      self.host ? '- Com Hospedagem' : '- Sem Hospedagem'
-    end
+  def payment_method_is_valid?
+    self.accepted_payment_methods.include? self.method
   end
+
+  def payment_status_is_valid?
+    self.accepted_payment_status.include? self.status
+  end
+
+
 
   def price_pagseguro
     percert_taxa = 0.0399
@@ -78,84 +88,4 @@ class Payment < ApplicationRecord
     end
   end
 
-  ########### BOLETO ASAAS ###################
-  def pay_asaas
-    # 1° CRIAR CONTA NO ASAAS CASO NÃO EXISTA (a verifiação será feita só no sistema)
-    self.user_asaas_id.nil? ? create_user_asaas : self.user_asaas_id
-    # 2° GERAR FATURAS
-    create_billets #no asaas
-    generate_links_billets #no sistema
-  end
-
-  #no asaas
-  #em caso de n gerar os boletos :  @user.payment.create_billets e  @user.payment.generate_links_billets
-  # def create_billets
-  #   return false if self.user_asaas_id.nil?
-  #   return false if self.asaas_payments.any?
-  #   response = Asaas::Payments.Create(
-  #     "customer"=> self.user_asaas_id,
-  #     "value"=> set_price + 2.00,
-  #     "billingType"=> "BOLETO",
-  #     "dueDate"=> Asaas::Utils.data_vencimento,
-  #     "installmentCount"=>Asaas::Utils.check_portions(self.portions),
-  #     "installmentValue"=>set_price/Asaas::Utils.check_portions(self.portions) + 2.00
-  #   )
-  #   update(price: set_price) unless set_price.nil?
-  # end
-
-
-  def create_billets
-    return false if self.user_asaas_id.nil?
-    return false if self.asaas_payments.any?
-    config = YAML.load_file("#{Rails.root.to_s}/config/asaas.yml")
-    vencimentos = config['vencimentos']
-    qnt_parcelas = Asaas::Utils.check_portions(self.portions)
-
-    qnt_parcelas.times do |i|
-      response = Asaas::Payments.Create(
-        "customer"=> self.user_asaas_id,
-        "value"=> set_price/qnt_parcelas,
-        "billingType"=> "BOLETO",
-        "dueDate"=>  Date.parse(vencimentos["mes#{i+1}"]).strftime("%Y-%m-%d"),
-        "description" => "Parcela #{i+1} de #{qnt_parcelas}."
-      )
-    end
-
-    update(price: set_price) unless set_price.nil?
-  end
-
-
-  def generate_links_billets
-    return false if self.user_asaas_id.nil?
-    return false if self.asaas_payments.any?
-    row_list_billet = Asaas::Payments.Show("customer"=>self.user_asaas_id)
-
-    billet_url = row_list_billet['data'].reverse!
-    billet_url.map do |payment_billet|
-      asaas_db = AsaasPayment.new do |payment|
-        payment.payment_asaas_id = payment_billet['id']
-        payment.installment = payment_billet['installment']
-        payment.custumer_id = payment_billet['customer']
-        payment.boleto_url = payment_billet['bankSlipUrl']
-        payment.fatura_url = payment_billet['invoiceUrl']
-        payment.description = payment_billet['description']
-      end
-      asaas_db.save
-    end
-
-  end
-
-  private
-
-  def create_user_asaas
-    custumer_id = Asaas::Clients.Create(
-      "name"=> self.user.name,
-      "email"=> self.user.email,
-      "mobilePhone"=> self.user.phone.only_numbers,
-      "cpfCnpj"=> self.user.cpf.numero.only_numbers,
-      "company"=> self.user.junior_enterprise
-    )
-    update(user_asaas_id: custumer_id) unless custumer_id.nil?
-    return custumer_id
-  end
 end

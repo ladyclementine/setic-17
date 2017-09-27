@@ -11,9 +11,76 @@ class Event < ApplicationRecord
   #validates :facilitator, presence: true, unless: Proc.new{|a| a.is_shirt == true }
   validates :limit, presence: true
   validates :limit, numericality: { greater_than: -1, message: " deve ser maior= zero." }
-
+  require "#{Rails.root}/config/initializers/packages.rb"
 
   #validates_associated :schedules  MENOS PARA CAMISA
+
+  def self.total_price
+    self.sum(:price)
+  end
+
+  def self.total_discount
+    total_eventos = self.count - 1
+    total_discount = total_eventos * 0.05
+    if total_discount <= 0.25
+      total_discount
+    else
+      0.25
+    end
+  end
+
+
+  #DECONNTO POR PACOTES
+  def self.total_discount_by_pack
+    preco_total = self.total_price
+    count = Hash.new(0)
+    price = 0
+    self.all.each do |a|
+      count[a.event_type.name] += 1 unless a.is_shirt
+    end
+
+    belong = false
+    pacote_select = nil
+    
+    #checar se ta nos conformes do pacote
+    Packages::ALL_PACKAGES.each do |k, v|
+      
+      v[:types].each do |pacote|
+        if pacote[1] <= count[pacote[0].to_s]
+          belong = true
+        else
+          belong = false
+          break
+        end
+      end
+
+      if belong == true
+        pacote_select = v[:name]
+        price = v[:price] + self.plus(k)
+      end
+
+    end
+    price = preco_total if price == 0
+    [price,pacote_select, count]
+  end
+
+  #CARLCULAR PREÇO DOS ITENS FORA DO PACOTE
+  def self.plus(pack_name)
+    preco_total = self.total_price
+    Packages::ALL_PACKAGES[pack_name][:types].each do |p|
+      p[1].times do
+        event_id = EventType.find_by(name:p[0])
+        events = Event.where("price != 0")
+        if !events.find_by(event_type_id:event_id).nil?
+          preco_total -= events.find_by(event_type_id: event_id).price
+        else
+          preco_total -= 0
+        end
+      end
+    end
+    preco_total
+  end
+
 
   def self.days
     Schedule.all.group_by{|d| d.start_time.to_date }
@@ -58,31 +125,11 @@ class Event < ApplicationRecord
     false
   end
 
-  # def concurrents(user = nil)
-  #   user.nil? ? events = Event : events = user.events
-
-  #   events.select do |event|
-  #     event != self &&
-  #       ((event.start >= self.start && event.start < self.end) ||
-  #        (event.end > self.start && event.end <= self.end) ||
-  #        (event.start <= self.start && event.end >= self.end))
-  #       end
-  # end
 
 
   def concurrents(user = nil)
     user.nil? ? events = Event : events = user.events
-
-
-    # events.each do |event|
-    #   event.schedules.select do |schedule|
-    #       schedule != self &&
-    #         ((schedule.start_time >= self.start_time && schedule.start_time < self.end_time) ||
-    #          (schedule.end_time > self.start_time && schedule.end_time <= self.end_time) ||
-    #          (schedule.start_time <= self.start_time && schedule.end_time >= self.end_time))
-    #         end
-
-    #end
+    #RETORNAR CONFLITANTES
 
   end
 

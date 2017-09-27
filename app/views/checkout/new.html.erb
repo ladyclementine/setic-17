@@ -1,196 +1,162 @@
-<section class="content-header">
-   <h1>
-      Efetuar Pagamento
-      <small></small>
-   </h1>
-</section>
-<!-- Main content -->
+
 <section class="content">
-   <div class="row">
-      <div class="col-md-12">
-         <!-- Custom Tabs (Pulled to the right) -->
-         <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs ">
-               <li class="active"><a href="#tab_1-1" data-toggle="tab"><i class="icon fa fa-barcode"></i> BOLETO</a></li>
-               <li><a href="#tab_2-2" data-toggle="tab"><i class="icon fa  fa-credit-card"></i> PAGSEGURO</a></li>
-               <!--<li><a href="#tab_3-2" data-toggle="tab"><i class="icon fa fa-money"></i> DEPÓSITO OU TRASNFÊNCIA</a></li>-->
-            </ul>
-            <div class="tab-content">
-               <div class="tab-pane active" id="tab_1-1">
-                  <!--INICIO -->
-                  <div class="modal-danger">
-                     <div class="modal-dialog">
-                        <%= form_tag payment_billet_path do %>
-                        <div class="modal-content">
-                           <div class="modal-header ">
-                              <h4 class="modal-title text-center"><%= @user.lot.name.upcase %></h4>
-                           </div>
-                           <div class="modal-body plans-container">
-                              <div class="price">
-                                 <sup>R$</sup>
-                                 <span id="price_js">
-                                 <%= '%.2f' % (@user.paid_lot_value + 0.00) %>
-                                 </span>
-                              </div>
-                              <div class="modal-body" style="background-color: #fff !important; color: #000 !important">
-                                 <div class="form-group">
-                                    <label>Parcelamento</label>
-                                    <%= select_tag(:installmentCount, options_for_select([ ["À vista", 1], ["Duas vezes", 2], ["Três vezes", 3]]), {:class => 'form-control', onchange: 'change_payment_parts(this,'"#{@user.paid_lot_value + 0.00}"')', :prompt => "SELECIONE O PARCELAMENTO",  "required": "",  "oninvalid":"setCustomValidity('Selecione como deseja Pagar')", "oninput":"setCustomValidity('')", "id": "parcelamento_sel"
-                                       })  %>
-                                 </div>
-                                 <% if @user.lot.nohost_active %>
-                                 <div class="form-group">
-                                    <label>Hospedagem</label>
-                                    <div class="radio">
-                                      <label>
-                                       <%= radio_button_tag(:nohost_active, true, true, onchange: 'change_payment_nohost(this,'"#{@user.paid_lot_value + 0.00}"')') %>
-                                         <div>Com Hospedagem - R$ <%= @user.paid_lot_value %></div>
-                                      </label>
-                                    </div>
-                                    <div class="radio">
-                                      <label>
-                                        <%= radio_button_tag(:nohost_active, false, false, onchange: 'change_payment_nohost(this,'"#{@user.paid_lot_nohost_value + 0.00}"')') %>
-                                          <div>Sem Hospedagem - R$ <%= @user.paid_lot_nohost_value %></div>
-                                      </label>
-                                    </div>
-                                 </div>
-                                 <hr style=" border-top: 1px solid #ccc; " />
-                                 <% end %>
-                                 <span id="recebe_info_boleto">
-                                    <div class="form-group js_radio_parts">
-                                       <div class="radio">
-                                       </div>
-                                    </div>
-                                    <div class="form-group js_radio_parts_parcelas">
-                                    </div>
-                                 </span>
-                              </div>
-                           </div>
-                           <!--fim body-->
-                           <div class="modal-footer">
-                              <button type="submit" disabled="" class="btn btn-outline pull-left" data-dismiss="modal" data-disable-with="Aguarde..."  data-confirm="Após confirmar, não será possível alterar o método de pagamento ou parcelamento manualmente. Deseja Continuar?" rel="nofollow" data-method="patch" id="button_payment_billet">GERAR BOLETO(S)</button> 
-                           </div>
-                        </div>
-                        <% end -%>
-                     </div>
-                  </div>
-                  <!-- /. Fim modal -->
-               </div>
-               <!-- /.tab-pane -->
-               <div class="tab-pane" id="tab_2-2">
-                  <div class="modal-danger">
-                     <div class="modal-dialog">
-                     <%= form_tag payment_pagseguro_path do %>
-                        <div class="modal-content">
-                           <div class="modal-header ">
-                              <h4 class="modal-title text-center"><%= @user.lot.name.upcase %></h4>
-                           </div>
-                           <div class="modal-body plans-container">
-                              <div class="price">
-                                 <sup>R$</sup>
-                                 <span id="price_js_p">
-                                 <%= '%.2f' % pagseguro(@user.paid_lot_value) %>
-                                 </span>
-                              </div>
-                              <% if @user.lot.nohost_active %>
-                              <div class="modal-body" style="background-color: #fff !important; color: #000 !important">
-                                 <div class="form-group">
-                                    <label>Hospedagem</label>
-                                    <div class="radio">
-                                      <label>
-                                       <%= radio_button_tag(:nohost_active, true, true, onchange: 'change_payment_nohost_pags(this,'"#{pagseguro(@user.paid_lot_value)}"')') %>
-                                         <div>Com Hospedagem - R$ <%= '%.2f' % pagseguro(@user.paid_lot_value) %></div>
-                                      </label>
-                                    </div>
-                                    <div class="radio">
-                                      <label>
-                                        <%= radio_button_tag(:nohost_active, false, false, onchange: 'change_payment_nohost_pags(this,'"#{pagseguro(@user.paid_lot_nohost_value)}"')') %>
-                                          <div>Sem Hospedagem - R$ <%= '%.2f' % pagseguro(@user.paid_lot_nohost_value) %></div>
-                                      </label>
-                                    </div>
-                                 </div>
-                              </div>
-                              <% end %>
-                              * O PAGSEGURO cobra um acréscimo de 3,99%  + R$ 0,40 no preço da inscrição, no entanto, você tem a vantagem de poder parcelar em mais vezes, da forma que melhor lhe agradar.
-                           </div>
-                           <!--fim body-->
-                           <div class="modal-footer">
 
-                              <button type="submit" class="btn btn-outline pull-left" data-dismiss="modal" data-disable-with="Aguarde..."  data-confirm="Após confirmar, não será possível alterar o método de pagamento manualmente. Deseja Continuar?" rel="nofollow" data-method="patch" id="button_payment_billet"><i class="icon fa  fa-credit-card"></i> PAGAR COM PAGSEGURO</button> 
 
-                           </div>
-                        </div>
+<section class="invoice">
+      <!-- title row -->
+      <div class="row">
+        <div class="col-xs-12">
+          <h2 class="page-header">
+            <i class="fa fa-globe"></i> Pedido #<%= @user.confirmation_token.first(3).upcase %><%= @user.id %>
 
-                     <% end %>
-                     </div>
-                  </div>
-                  <div class="row">
-                  <div class="col-md-<%= @user.lot.nohost_active ? '6' : '12' %>">
-                     <div class="info_pagseguro" align="center">
-                     <h2 align="center">PREÇOS <% if @user.lot.nohost_active %>- COM HOSPEDAGEM<% end %></h2>
-                     <img class="img-responsive" src="https://stc.pagseguro.uol.com.br/public/img/banners/pagamento/todos_animado_550_50.gif" alt="Logotipos de meios de pagamento do PagSeguro" title="Este site aceita pagamentos com as principais bandeiras e bancos, saldo em conta PagSeguro e boleto.">
-                        <table class="table table-bordered">
-                           <thead>
-                              <tr>
-                                 <th class="center noLeft">Parcelas</th>
-                                 <th class="center">Valor da Parcela</th>
-                                 <th class="center">Valor total da compra</th>
-                              </tr>
-                           </thead>
-                           <tbody>
-                           <% @parcelas.each do |i|%>
-                              <tr>
-                                 <td class="center"><%=i %></td>
-                                 <td><%=number_to_currency(@valores_parcela[i-1])%></td>
-                                 <td><%=number_to_currency(@total_valores[i-1])%></td>
-                              </tr>
-                           <% end %>       
-                           </tbody>
-                        </table>   
-                     </div>
-                  </div>
-                  <% if @user.lot.nohost_active %>
-                  <div class="col-md-6">
-                     <div class="info_pagseguro" align="center">
-                     <h2 align="center">PREÇOS - SEM HOSPEDAGEM</h2>
-                     <img class="img-responsive" src="https://stc.pagseguro.uol.com.br/public/img/banners/pagamento/todos_animado_550_50.gif" alt="Logotipos de meios de pagamento do PagSeguro" title="Este site aceita pagamentos com as principais bandeiras e bancos, saldo em conta PagSeguro e boleto.">
-                        <table class="table table-bordered">
-                           <thead>
-                              <tr>
-                                 <th class="center noLeft">Parcelas</th>
-                                 <th class="center">Valor da Parcela</th>
-                                 <th class="center">Valor total da compra</th>
-                              </tr>
-                           </thead>
-                           <tbody>
-                           <% @parcelas.each do |i|%>
-                              <tr>
-                                 <td class="center"><%=i %></td>
-                                 <td><%=number_to_currency(@valores_parcela_nohost[i-1])%></td>
-                                 <td><%=number_to_currency(@total_valores_nohost[i-1])%></td>
-                              </tr>
-                           <% end %>       
-                           </tbody>
-                        </table>   
-                     </div>
-                  </div>
-                  <% end %>
-               </div>
-               <!-- /.tab-pane -->
-                  
-            </div>
-            <!-- /.tab-content -->
-         </div>
-         <!-- nav-tabs-custom -->
+          </h2>
+        </div>
+        <!-- /.col -->
       </div>
-      <!-- /.col -->
-   </div>
-   <!-- /.row -->
-   <!-- END CUSTOM TABS -->
+      <!-- info row -->
+      <div class="row invoice-info">
+        <div class="col-sm-4 invoice-col">
+          <address>
+            <strong>Dados do comprador:</strong><br>
+           <b>Nome:</b> <%=@user.name%><br>
+            <b>Email:</b> <%=@user.email%>
+          </address>
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-4 invoice-col">
+          <address>
+            <strong>Dados da compra:</strong><br>
+            <b>Status:</b> <%#=@user.payment.status%>
+           <br>
+          </address>
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-4 invoice-col">
+          <b>Invoice #007612</b><br>
+          <br>
+    
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <!-- Table row -->
+      <div class="row">
+        <div class="col-xs-12 table-responsive">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Descrição</th>
+              <th>Preço</th>
+              <% if @user.payment.nil?%>
+              <th>#</th>
+              <%end%>
+            </tr>
+            </thead>
+            <tbody>
+            <%@user_cart.each do |cart|%>
+            <tr>
+              <td><% if !cart.is_shirt %>[<%=cart.event_type.name%>] - <%end%><%=cart.name%></td>
+              <td><%=cart.description%></td>
+              <td><%=number_to_currency(cart.price)%></td>
+              <% if @user.payment.nil?%>
+              <td><%= link_to remove_from_path(cart.id), :method => :put do %>
+              <small class="label bg-red">remover</small><% end %></td>
+              <% end %>
+            </tr>
+            <%end%>
+            </tbody>
+          </table>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+<%= form_for(@payment , url: payment_send_path, html: {class: 'form-horizontal '}, data: {confirm: 'Tem certeza que deseja finalizar a compra?'} ) do |f| %>
+      <div class="row">
+        <!-- accepted payments column -->
+        <div class="col-md-6">
+          <% if @user.payment.nil?%>
+          <p class="lead">Forma de Pagamento</p>
+          
+          <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+           <%= f.select :method, @payment.accepted_payment_methods, {}, {class: 'form-control' } %>
+
+          </p>
+          <%end%>
+           <p class="lead">Pacote</p>
+          <div class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+          <b class=text-danger>Atenção:</b> A escolha do pacote será feita de acordo com a programação selecionada e seu respectivo TIPO.
+           <p> <b class=text-danger>Atenção:</b> em qualquer compra feita fora da cobertura do pacote, será cobrado o preço avulso dos eventos, exceto as que ultrapassarem as quantidades especificadas(sendo cobrado valor do pacote + o total dos eventos adicionais).</p>
+           <div class="table-responsive">
+          <table class="table table-bordered">
+                <tr>
+                  <th>Nome</th>
+                  <th>Programações</th>
+                  <th style="width: 40px">Preço</th>
+                </tr>
+                <%Packages::ALL_PACKAGES.each do |k, v|%>
+                <tr>
+                  <td><%=v[:name].upcase%></td>
+                  <td><%=v[:types].map{|a| "#{a[1]} #{a[0].to_s.pluralize(a[1])}"}.join(", ")%></td>
+                  <td><span class="badge bg-green"><%=number_to_currency(v[:price])%></span></td>
+                </tr>
+                <% end %>
+              </table>
+              </div>
+              Minha programação (por tipo): <%=@user_cart.total_discount_by_pack[2].map{|a| "#{a[1]} #{a[0].pluralize(a[1])}" }.join(", ")%>
+          </div>
+        </div>
+
+        <!-- /.col -->
+        <div class="col-md-6">
+          <p class="lead">Valores</p>
+
+          <div class="table-responsive">
+            <table class="table">
+            <tr>
+                <th>Camisa:</th>
+                <td><a href="">Selecionar</a></td>
+              </tr>
+              <tr>
+                <th style="width:50%">Subtotal:</th>
+                <td><%=number_to_currency(@user_cart.total_price)%></td>
+              </tr>
+              <tr>
+                <th>Desconto (Pacotes)</th>
+                <td><%=number_to_currency(@user_cart.total_price - @user_cart.total_discount_by_pack[0])%> (<%= @user_cart.total_discount_by_pack[1] || "Nenhum"%>)</td>
+              </tr>
+              <tr>
+                <th>Desconto:</th>
+                <td><%='%.2f' % (@user.events.total_discount * 100)%> %</td>
+              </tr>
+              <tr>
+                <th>Total:</th>
+                <td><%=number_to_currency(@user_cart.total_discount_by_pack[0] * (1 - @user.events.total_discount))%></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+
+  <!-- this row will not appear when printing -->
+      <div class="row no-print">
+        <div class="col-md-12">
+          <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+          <button type="submit" class="btn btn-success pull-right"class="btn btn-outline pull-left" data-dismiss="modal" data-disable-with="Aguarde..."  data-confirm="Após confirmar, não será possível alterar o método de pagamento manualmente. Deseja Continuar?" rel="nofollow"><i class="fa fa-credit-card"></i> Pagar
+          </button>
+
+
+               
+          <button type="button" class="btn btn-danger pull-right" style="margin-right: 5px;">
+            <i class="fa fa-download"></i> Cancelar
+          </button>
+        </div>
+      </div>
+<% end %>
 </section>
-<div class="preloader" hidden="">
-   <div id="logo-proloader">
-      <img src="/images/efej/logo-pay.png" alt="Home" width="200">
-   </div>
-   <span>PROCESSANDO PAGAMENTO</span>
-</div>
+</section>

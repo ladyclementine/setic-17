@@ -111,12 +111,7 @@ Rails.application.routes.draw do
 
       put 'active_again' => 'user_dashboard#active_account', as: :active_again
 
-      post 'payment_billet' => 'checkout#billet', as: :payment_billet
-      put 'payment_billet_again' => 'checkout#try_again', as: :payment_billet_again
-
-      post 'payment_pagseguro' => 'checkout#pagseguro', as: :payment_pagseguro
-
-      post 'payment_deposit' => 'checkout#deposit', as: :payment_deposit
+      post 'pay' => 'checkout#create', as: :payment_send
 
       #Sobre o evento
       get "about" => "user_dashboard#about"
@@ -132,6 +127,8 @@ Rails.application.routes.draw do
       get 'events' => 'events#index', as: :events
       post 'events/enter' => 'events#enter_event', as: :enter_event
       post 'events/exit' => 'events#exit_event', as: :exit_event
+      #
+      put 'cart/remove/:id', to: 'checkout#exit_event', as: :remove_from
 
       #get 'terms'  => 'terms#index'
       #put 'terms/update'  => 'terms#update'

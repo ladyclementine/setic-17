@@ -67,7 +67,8 @@ ActiveRecord::Schema.define(version: 20170904142314) do
     t.integer  "limit"
     t.text     "description"
     t.string   "avatar"
-    t.string   "price"
+    t.float    "price",         default: 0.0
+    t.integer  "event_type_id"
     t.boolean  "is_shirt",      default: false
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
@@ -98,8 +99,7 @@ ActiveRecord::Schema.define(version: 20170904142314) do
   create_table "subscriptions", force: :cascade do |t|
     t.integer "user_id"
     t.integer "event_id"
-    t.integer "paymant_id"
-    t.index ["event_id", "paymant_id", "user_id"], name: "index_subscriptions_on_event_id_and_paymant_id_and_user_id", using: :btree
+    t.index ["event_id", "user_id"], name: "index_subscriptions_on_event_id_and_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
