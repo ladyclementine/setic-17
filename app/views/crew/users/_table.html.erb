@@ -16,9 +16,6 @@
                         <th>Email</th>
                         <th class="noExport">Pagamento</th>
                         <th hidden="">Pagamento</th>
-                        <th><%= @list ? 'Posição' : 'Lote' %> </th>
-                        <th>EJ</th>
-                        <th>Federada?</th>
                         <th>Data de Inscr.</th>
                         <th class="noExport">Editar</th>
                         <th class="noExport">Login</th>
@@ -82,19 +79,7 @@
                           <% end %>
                         <%end %>
                         </td>
-                        <td>
-                       
-                        <% if @list %>
-                         <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> <%= j %> </span>
 
-                          <span class="label label-info pull-right" data-toggle="tooltip" title="" data-original-title="Data de inscrição: <%= users.created_at.strftime("%d/%m/%Y - %H:%M:%S") %>">Info</span>
-                        <% else %>
-                           <%= users.lot.nil? ? 'Não Alocado' : "Lote #{users.lot.number}"%>
-                        <% end %>
-                        <% j+=1 %>
-                        </td>
-                        <td><%= users.junior_enterprise.nil? ? 'Não Informado' : users.junior_enterprise %></td>
-                        <td><%= users.federation_check %></td> 
                         <td><%= users.created_at.strftime("%d-%m-%Y  %H:%M:%S") %></td> 
                         <td>
                            <%= link_to  edit_crew_user_path(users) do %>

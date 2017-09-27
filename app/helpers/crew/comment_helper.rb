@@ -1,0 +1,2 @@
+module Crew::CommentHelper
+end

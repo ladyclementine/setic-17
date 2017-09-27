@@ -24,4 +24,9 @@ class Schedule < ApplicationRecord
     end
   end
 
+#horário de término não pode ser em uma data anterior a data de início
+  def end_time_bigger?
+    self.end_time >= self.start_time
+  end
+
 end

@@ -107,37 +107,23 @@
 
 
            <ul class="avisos avisos-inverse">
-          
+            <% @comment.each do |comment| %>
             <!-- END timeline item -->
             <!-- timeline item -->
             <li>
               <i class="fa fa-comments bg-yellow"></i>
 
               <div class="avisos-item">
-                <span class="time"><i class="fa fa-clock-o"></i>  15:20 18/11/2016</span>
+                <span class="time"><i class="fa fa-clock-o"></i><%= comment.posted_on %></span>
 
-                <h3 class="avisos-header"><a href="#">Mudança de Horário - Workshop de Esteganografia Digital</a></h3>
-
-                <div class="avisos-body">
-                  Caros participantes, Àqueles que escolheram o curso de Esteganografia Digital, por motivos de força maior, o horário teve que ser mudado. Agora, o curso será : sexta, 25, 10:00 às 12:00 horas; sexta, 25, 14:00 às 16:00 horas Esperamos que isso não cause inconveniências para ninguém.
-                </div>
-              </div>
-            </li>
-
-            <li>
-              <i class="fa fa-comments bg-yellow"></i>
-
-              <div class="avisos-item">
-                <span class="time"><i class="fa fa-clock-o"></i>  15:20 18/11/2016</span>
-
-                <h3 class="avisos-header"><a href="#">Visita Técnica Casa Magalhães</a></h3>
+                <h3 class="avisos-header"><a href="#"><%= comment.title %></a></h3>
 
                 <div class="avisos-body">
-                  E aí, pessoal! Estamos abrindo inscrições para a visita técnica à Casa Magalhães, uma empresa de sucesso que tem sede aqui em Fortaleza. A visita será na terça feira, dia 22, saindo por volta das 8 da manhã. Os interessados, procurem a organização na sala do PET Teleinformática para pegar logo as suas vagas! Estaremos lá amanhã a partir das 9 da manhã, quando estaremos entregando os Kits de quem já pagou. Preços: - R$ 8,00 se você já tem o Kit SETIC - R$ 12,00 se você não tem o nosso Kit SETIC. Mais informações, como local de saída, serão enviadas por email um dia antes para os inscritos.
+                  <%= comment.description%>
                 </div>
               </div>
-            </li>
-           
+            </li>         
+            <% end %>
           </ul>
 
 
