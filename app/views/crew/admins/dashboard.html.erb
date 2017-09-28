@@ -2,7 +2,7 @@
 <section class="content">
 <!-- Small boxes (Stat box) -->
 <div class="row">
-   <div class="col-lg-3 col-xs-6">
+   <div class="col-lg-4 col-xs-6">
       <!-- small box -->
       <div class="small-box bg-aqua">
          <div class="inner">
@@ -16,34 +16,38 @@
       </div>
    </div>
    <!-- ./col -->
-   <div class="col-lg-3 col-xs-6">
+   <div class="col-lg-4 col-xs-6">
       <!-- small box -->
       <div class="small-box bg-yellow">
          <div class="inner">
+            <h3><%=@total_pendente.count%></h3>
+            <p>Pagamentos Pendentes</p>
          </div>
          <div class="icon">
             <i class="fa fa-clock-o" aria-hidden="true"></i>
          </div>
+         <%= link_to crew_users_pays_list_path, class: 'small-box-footer', "data-toggle": "tooltip", "title": "", "data-original-title": " Sendo #{number_to_currency(@tPagseguro)} do PagSeguro e #{number_to_currency(@tBoleto)} dos boletos." do %>Valor Pendente: <%=number_to_currency(@total_pendente.sum(:price))%></i>
+         <%end%>
       </div>
    </div>
    <!-- ./col -->
-   <div class="col-lg-3 col-xs-6">
+   <div class="col-lg-4 col-xs-6">
       <!-- small box -->
       <div class="small-box bg-green">
          <div class="inner">
-            <h3></h3>
+            <h3><%=@total.count%></h3>
             <p>Pagantes</p>
          </div>
          <div class="icon">
             <i class="fa fa-money" aria-hidden="true"></i>
          </div>
-         <%= link_to crew_users_pays_list_path, class: 'small-box-footer', "data-toggle": "tooltip", "title": "", "data-original-title": " Sendo #{number_to_currency(@tPagseguro)} do PagSeguro e #{number_to_currency(@tBoleto)} dos boletos." do %>Valor recebido: <%=number_to_currency(@total)%></i>
+         <%= link_to crew_users_pays_list_path, class: 'small-box-footer', "data-toggle": "tooltip", "title": "", "data-original-title": " Sendo #{number_to_currency(@tPagseguro)} do PagSeguro e #{number_to_currency(@tBoleto)} dos boletos." do %>Valor recebido: <%=number_to_currency(@total.sum(:price))%></i>
          <%end%>
       </div>
    </div>
    <!-- ./col -->
-   <div class="col-lg-3 col-xs-6">
-      <!-- small box -->
+  <!--  <div class="col-lg-3 col-xs-6">
+    
       <div class="small-box bg-green">
          <div class="inner">
             <h3></h3>
@@ -54,7 +58,7 @@
          </div>
          <%= link_to crew_users_qualified_path, class: 'small-box-footer' do %>Ver Todos <i class="fa fa-arrow-circle-right"></i><%end%>
       </div>
-   </div>
+   </div> -->
    <!-- ./col -->
 </div>
 <!-- /.row -->

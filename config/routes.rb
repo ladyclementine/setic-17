@@ -24,6 +24,7 @@ Rails.application.routes.draw do
         end
         resources :event_types, except: [:show]
         resources :comments
+        resources :configs, only: [:edit, :update]
         get '/events_pending' => 'events#pending'
 
 
@@ -45,10 +46,10 @@ Rails.application.routes.draw do
         patch 'move_user_to_lot/:user_id/:lot_id' => 'admins_methods#move_user_to_lot', as: :move_user_to_lot
         patch 'change_users/:user_id/:user_2_email' => 'admins_methods#change_users', as: :change_users_position
         patch 'disqualify/:id' => 'admins_methods#disqualify_user', as: :disqualify_user
-      
+
         #PAYMENTS
         patch 'change_payment_status/:id/:status' => 'admins_methods#change_payment_status', as: :change_payment_status
-      
+
         patch 'remove_payment_method/:id' => 'admins_methods#remove_payment_method', as: :change_payment_method
 
         #sistema
@@ -111,12 +112,8 @@ Rails.application.routes.draw do
 
       put 'active_again' => 'user_dashboard#active_account', as: :active_again
 
-      post 'payment_billet' => 'checkout#billet', as: :payment_billet
-      put 'payment_billet_again' => 'checkout#try_again', as: :payment_billet_again
-
-      post 'payment_pagseguro' => 'checkout#pagseguro', as: :payment_pagseguro
-
-      post 'payment_deposit' => 'checkout#deposit', as: :payment_deposit
+      post 'pay' => 'checkout#create', as: :payment_send
+      post 'remove_payment' => 'checkout#remove_payment', as: :remove_payment
 
       #Sobre o evento
       get "about" => "user_dashboard#about"
@@ -132,12 +129,22 @@ Rails.application.routes.draw do
       get 'events' => 'events#index', as: :events
       post 'events/enter' => 'events#enter_event', as: :enter_event
       post 'events/exit' => 'events#exit_event', as: :exit_event
+      #
+      put 'cart/remove/:id', to: 'checkout#exit_event', as: :remove_from
 
       #get 'terms'  => 'terms#index'
       #put 'terms/update'  => 'terms#update'
 
       #certificado
       get 'certificate.pdf' => 'certificates#show'
+
+      #KITS
+      post 'kit/select/:id' => 'kit#select', as: :kit_select
+
+      post 'kit/remove'
+
+      get 'kits' => 'kit#index'
+
 
     end
     unauthenticated :users do

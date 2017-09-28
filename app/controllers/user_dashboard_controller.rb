@@ -6,6 +6,7 @@ class UserDashboardController < BaseController
     #@days = Event.join_events_by_time
     @days = Event.join_events_by_time
     @comment = Comment.all.order("created_at DESC")
+    @user_cart = @user.events
     
 
   end

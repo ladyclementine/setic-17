@@ -18,17 +18,17 @@ class Crew::SchedulesController < Crew::BaseController
   # POST /events
   def create
     @schedule = @event.schedules.new(schedule_params)
-      respond_to do |format|
-        if @schedule.save
-          format.html { redirect_to crew_events_path, notice: 'Horário da programação criado com sucesso.' }
-          format.json { render :show, status: :created, location: @schedule }
-        else
-          format.html { render :new }
-          format.json { render json: @schedule.errors, status: :unprocessable_entity }
-        end
+    respond_to do |format|
+      if @schedule.save
+        format.html { redirect_to [:crew, @event], notice: 'Horário da programação criado com sucesso.' }
+        format.json { render :show, status: :created, location: @crew_event }
+      else
+        format.html { render :new }
+        format.json { render json: @schedule.errors, status: :unprocessable_entity }
       end
+    end
   end
-
+  
   # PATCH/PUT /events/1
   def update
     if @schedule.update(schedule_params)

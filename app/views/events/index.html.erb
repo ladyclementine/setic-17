@@ -1,4 +1,26 @@
+
 <section class="content-header">
+      <div class="row">
+      <%i = 0%>
+       <%Packages::ALL_PACKAGES.each do |k, v|%>
+         <div class="col-md-3 col-sm-6 col-xs-12">
+         
+
+          <div class="info-box info-box-packs" style="border-color: <%=@cores[0]%>">
+          
+              <span class="info-box-text"> <%=v[:name].upcase%></span>
+              <span class="info-box-number"><%=number_to_currency(v[:price])%></span>
+              <span class=""><%=v[:types].map{|a| "#{a[1]} #{a[0].to_s.pluralize(a[1])}"}.join(", ")%></span>
+       
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <%i = i+1%>
+        <% end %>
+
+</div>                
+
    <h1>
       Lista de programação - <span class="recebe_dia"></span>
    </h1>
@@ -19,6 +41,20 @@
 
    </div>
 
+   <div class="nav-tabs-custom filtros-nav-tabs-custom">
+      <ul class="nav nav-tabs">
+         <% @types.each do |e|%>
+         <li class="li_tipo_<%=e.id%> active"><input type="checkbox" checked class="flat-red filtro" name="tipo_<%=e.id%>"> <%=e.name.upcase%></li>
+         <% end %>
+ 
+
+         <li class="pull-right" style="margin-top: -10px">
+         <a href="">Filtre os Resultados</a>
+         </li>
+      </ul>
+
+   </div>
+
 
    <div class="tab-content">
       <% @days.each_with_index do |event, index| %>
@@ -27,7 +63,7 @@
          <h3><%= "#{hour[:time]}" %></h3>
          <div class="row">
             <% hour[:events].each do |schedule| %>
-            <div class="col-md-<%=grid_value(hour[:events])%>">
+            <div class="col-md-<%=grid_value(hour[:events])%> tipo_<%=schedule.event.event_type.id%>">
                <!-- Widget: user widget style 1 -->
                <div class="box box-widget widget-user">
                   <div class="widget-user-header bg-aqua-active">
@@ -42,7 +78,7 @@
                   </div>
                   <div class="box-footer">
                      <div class="row">
-                        <div class="col-sm-6 col-xs-6 border-right">
+                        <div class="col-sm-3 col-xs-3 border-right">
                            <div class="description-block">
                               <h5 class="description-header inscritos_event_<%= schedule.event.id %>"><%= "#{schedule.event.users.count}" %></h5>
                               <span class="description-text">Inscritos</span>
@@ -50,17 +86,33 @@
                            <!-- /.description-block -->
                         </div>
                         <!-- /.col -->
-                        <div class="col-sm-6 col-xs-6 border-right">
+                        <div class="col-sm-3 col-xs-3 border-right">
                            <div class="description-block">
                               <h5 class="description-header"><%= schedule.event.limit || 0 %></h5>
                               <span class="description-text">Vagas</span>
                            </div>
                            <!-- /.description-block -->
                         </div>
+
+                         <div class="col-sm-3 col-xs-3 border-right">
+                           <div class="description-block">
+                              <h5 class="description-header"><%=schedule.event.schedules.count %></h5>
+                              <span class="description-text">Horários</span>
+                           </div>
+                           <!-- /.description-block -->
+                        </div>
+
+                        <div class="col-sm-3 col-xs-3 border-right">
+                           <div class="description-block">
+                              <h5 class="description-header"><%=number_to_currency(schedule.event.price)%></h5>
+                              <span class="description-text">Reais</span>
+                           </div>
+                           <!-- /.description-block -->
+                        </div>
                         <!-- /.col -- .join(' | ') -->
              
                         
-                        <div id="buttons_event_<%= schedule.event.id %>">
+                        <div id="buttons_event_<%= schedule.event.id %>" class="buttons_event_<%= schedule.event.id %>"">
                         <% if schedule.event.users.include? @user %>
                         <button type="submit" class="btn btn-sm hotel-choose pull-right send_event_out" id="event_<%= schedule.event.id %>" style="background-color: #db3f3f; margin-bottom: 5px;color:#fff;margin-top: 3px; margin-right: 20px"><strong>SAIR DA PROGRAMAÇÃO</strong></button>
                         <% else %>

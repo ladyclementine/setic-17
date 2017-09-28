@@ -13,6 +13,62 @@
 </script>
 <% end %>
  <!-- Main content -->
+<!-- Main content -->
+<section class="content">
+<div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"><%= @crew_event.name %></h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-hover">
+                <tr>
+                  <th>Descrição</th>
+                  <th>Facilitator</th>
+                  <th>Valor</th>
+                  <th>Tipo</th>
+                  <th>Inscritos/Total de vagas</th>
+                  <th>Horário</th>
+                </tr>
+                <tr>
+                  <td><%= @crew_event.description %></td>
+                  <td><%= @crew_event.facilitator %></td>
+                  <td><%= @crew_event.price %></td>
+                  <td><span class="label label-success"><%= @crew_event.event_type.try(:name) %></span></td>
+                  <td><%= @crew_event.users.count %>/<%= @crew_event.limit %></td>
+                  <td>
+                     <ul class="list-group">
+                        <% @crew_event.schedules.each do |schedule| %>
+                        <li class="list-group-item">
+                          Início: <%= schedule.start_time %></br>
+                          Fim: <%= schedule.end_time %>
+                          <%= link_to crew_event_schedule_path(@crew_event, schedule), method: :delete do %>
+                          <small class="btn btn-danger dropdown-toggle btn-xs">
+                          <i class="fa fa-pencil-square-o"></i> Excluir
+                          </small>
+                          <% end %>
+                          <%= link_to edit_crew_event_schedule_path(@crew_event, schedule) do %>
+                          <small class="btn btn-default dropdown-toggle btn-xs">
+                          <i class="fa fa-pencil-square-o"></i> Editar
+                          </small>
+                          <% end %>
+                       </li>
+                       <% end %>
+                    </ul>
+                    <%= link_to "Novo Horário", new_crew_event_schedule_path(@crew_event), class:'btn btn-primary waves-effect w-md waves-light m-b-5' %>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+</section>
+
 
 <section class="content">
    <div class="box box-primary">

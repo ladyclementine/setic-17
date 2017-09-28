@@ -57,7 +57,7 @@ gem 'cpf_faker'
 
 gem 'jquery-datatables-rails'
 gem 'ajax-datatables-rails'
-
+gem 'validates_timeliness', '~> 4.0'
 
 gem 'dalli'
 
@@ -95,4 +95,4 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-ruby '2.3.4'
+#ruby '2.3.4'

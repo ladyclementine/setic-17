@@ -1,14 +1,14 @@
 class EventsController < BaseController
   before_action :get_user
   before_action :verify_register_conclusion
-  #before_action :if_event_close_redirect
 
-  #before_action :close_insert_exit_event, only: [:enter_event,:exit_event]
-
+  before_action :error_if_try_pay_has_select, only: [:enter_event, :exit_event] # PENDENTE
 
   def index
-   # @days = Event.join_events_by_time
+   #@days = Event.join_events_by_time
    @days = Event.join_events_by_time
+   @types = EventType.all
+   @cores = ['#d70a4d']
   end
 
   def enter_event
@@ -40,6 +40,14 @@ class EventsController < BaseController
       render :status => 200, :json => {mensage: "error", infos: "Não foi possível sair da programação.",  subscribers: event.users.count}
     else
       render :status => 200, :json => {mensage: "success", infos: "Você saiu da programação.",  subscribers: event.users.count}
+    end
+  end
+
+  private
+  def error_if_try_pay_has_select
+    payment = @user.payment
+    if !payment.nil?
+      render :status => 200, :json => {mensage: "error", infos: "Você não pode entrar ou sair de uma programação depois que selecionar o pagamento."}
     end
   end
 end

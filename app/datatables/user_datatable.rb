@@ -7,10 +7,7 @@ class UserDatatable < AjaxDatatablesRails::Base
     @view_columns ||= {
       name: { source: "User.name" },
       email: { source: "User.email" },
-      payment: { source: "Payment.portions,method", searchable: false},
-      lot: { source: "User.lot_id"},
-      fed: { source: "User.federation_check"},
-      ej: {source: "User.junior_enterprise"},
+      payment: { source: "Payment.method", searchable: false},
       edit: {source: "User.id", searchable: false, orderable: false},
       login: {source: "User.id",  searchable: false, orderable: false},
     }
@@ -23,9 +20,6 @@ class UserDatatable < AjaxDatatablesRails::Base
         email: record.email,
         payment: payment_view(record.payment),
         payment_pdf: payment_view_pdf(record.payment),
-        lot: lot_name(record.lot),
-        ej: ej_name(record.junior_enterprise),
-        fed: record.federation_check,
         edit: button_edit(record.id),
         login: button_login(record.id)
       }
@@ -37,9 +31,9 @@ class UserDatatable < AjaxDatatablesRails::Base
     when 'all'
       User.includes(:payment).all
     when 'qualified'
-      User.includes(:payment).where.not(lot_id:nil)
+      #User.includes(:payment).where.not(lot_id:nil)
     when 'pay'
-      User.joins(:payment).where("payments.portion_paid!=0")
+      User.includes(:payment).where(payments: {status: true})
     end
   end
 

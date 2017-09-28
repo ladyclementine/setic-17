@@ -135,6 +135,14 @@ pt-BR:
         one: não possui o tamanho esperado (1 caracter)
         other: não possui o tamanho esperado (%{count} caracteres)
       other_than: deve ser diferente de %{count}
+      invalid_date: "não é uma data válida"
+      invalid_time: "não é uma hora válida"
+      invalid_datetime: "não é uma hora-data válida"
+      is_at: "deve ser igual a %{restriction}"
+      before: "deve ser antes de %{restriction}"
+      on_or_before: deve ser igual ou antes de %{restriction}"
+      after: "deve ser depois de %{restriction}"
+      on_or_after: "deve ser igual ou depois de %{restriction}"
     template:
       body: 'Por favor, verifique o(s) seguinte(s) campo(s):'
       header:
