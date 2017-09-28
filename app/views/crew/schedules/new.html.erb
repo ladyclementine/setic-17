@@ -9,7 +9,7 @@
 <% if @schedule.errors.any? %>
 <script>
    $(document).ready(function() {
-    noty({text: ' <%= pluralize(@crew_event.errors.count, "error") %> encontrados: </br><ul><% @schedule.errors.full_messages.each do |message| %><li><%= message %></li><% end %></ul>', layout: 'bottom', type: 'warning', timeout: 4000});
+    noty({text: ' <%= pluralize(@schedule.errors.count, "error") %> encontrados: </br><ul><% @schedule.errors.messages.each do |message| %><li><%= message[1][0] %></li><% end %></ul>', layout: 'bottom', type: 'warning', timeout: 4000});
    });
 </script>
 <% end %>

@@ -1,6 +1,7 @@
 class Schedule < ApplicationRecord
   belongs_to :event
   validates_presence_of :start_time, :end_time
+  validate :end_time_bigger?
   #validates_datetime :end_time, after: :start_time
 
 
@@ -26,7 +27,7 @@ class Schedule < ApplicationRecord
 
 #horário de término não pode ser em uma data anterior a data de início
   def end_time_bigger?
-    self.end_time >= self.start_time
+    errors.add(:end_time,:blank, message: "Não pode ser maior que horário de início") if self.end_time <= self.start_time
   end
 
 end
