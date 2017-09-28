@@ -1,0 +1,18 @@
+stem:
+  <<: *default
+  name: Semana de Tecnologia da Engenharia Mecânica
+  sigla: STEM
+  colors:
+    primary: 871328
+    default: 871328
+  logo: stem-logo.png
+  infos:
+    conta: 23857-X
+    agencia: 4439-3
+    beneficiado: Laylla Sharon Bezerra Peixoto
+    banco: Banco do Brasil
+    local: PET da Engenharia Mecânica
+
+# Config.create(name: 'Semana de Tecnologia da Engenharia Mecânica', sigla: 'STEM', conta: '23857-X',
+# agencia: '4439-3', beneficiado: 'Laylla Sharon Bezerra Peixoto', banco: 'banco', local: 'PET da Engenharia Mecânica',
+# email: 'pixelzip0@gmail.com')

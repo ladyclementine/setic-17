@@ -63,13 +63,13 @@
                             <th>Forma de Pagamento:</th>
                             <td>
 
-                            <a href="#" style="color: #DD4B39;" data-toggle="modal" data-target="#modal-tempo"><%=number_to_currency(@user.payment.method)%> (Ver Dados da Conta)</a>
+                            <a href="#" style="color: #DD4B39;" data-toggle="modal" data-target="#modal-tempo"><%=@user.payment.method%>  <% if !@user.payment.nil? && (@user.payment.method == @user.payment.accepted_payment_methods[0] || @user.payment.method == @user.payment.accepted_payment_methods[1]) %> (Ver Dados da Conta) <% end %></a>
 
                             </td>
                           </tr>
                           <tr>
-                            <th>Desconto:</th>
-                            <td><%=number_to_currency(@user_cart.total_discount_by_pack[0])%> (<%= @user_cart.total_discount_by_pack[1] || "Nenhum"%>)</td>
+                            <th>Subtotal:</th>
+                            <td><%=number_to_currency(@user_cart.total_discount_by_pack[0])%> <!-- (<%= @user_cart.total_discount_by_pack[1] || "Nenhum Pacote"%>) --></td>
                           </tr>
                           <tr>
                             <th>Total:</th>
@@ -285,10 +285,34 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span></button>
          </div>
+         
          <div class="modal-body" style="font-size: 17px;line-height: 1.4;color: #6e7a89">
+         <% if !@user.payment.nil? && (@user.payment.method == @user.payment.accepted_payment_methods[0] || @user.payment.method == @user.payment.accepted_payment_methods[1]) %>
+            <b class=text-danger>Atenção:</b> Após efetuar o pagamento, envie o comprovante para: <b><%=@config.email%></b>
+           <div class="table-responsive">
+              <table class="table table-bordered">
+                  <tr>
+                    <th>Banco</th>
+                    <th>Agência</th>
+                    <th>Beneficiado</th>
+                  </tr>
+                 
+                  <tr>
+                    <td><%=@config.banco%></td>
+                    <td><%=@config.agencia%></td>
+                    <td><%=@config.beneficiado%></td>
+                  </tr>
+                </table>
+            </div>
 
-          Dados
+            <% elsif !@user.payment.nil? && !@user.payment.method == "PagSeguro" %>
+               <b class=text-danger>Atenção:</b> Visite o PET até dia 12/12 e efetue seu pagamento.</b>
+            <%else%>
+              <b class=text-danger>Atenção:</b> A confirmação será feita de forma automática pelo sistema.</b>
+            <%end%>
          </div>
+      
+
          <div class="modal-footer">
             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
          </div>

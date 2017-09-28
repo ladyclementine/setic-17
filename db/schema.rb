@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170904112404) do
+ActiveRecord::Schema.define(version: 20170928063628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,20 @@ ActiveRecord::Schema.define(version: 20170904112404) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "configs", force: :cascade do |t|
+    t.string   "name"
+    t.string   "sigla"
+    t.string   "logo"
+    t.string   "conta"
+    t.string   "agencia"
+    t.string   "beneficiado"
+    t.string   "banco"
+    t.string   "local"
+    t.string   "email"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "event_types", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -79,9 +93,10 @@ ActiveRecord::Schema.define(version: 20170904112404) do
     t.float    "price"
     t.integer  "user_id"
     t.boolean  "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.datetime "deleted_at"
+    t.string   "url_pagseguro"
     t.index ["deleted_at"], name: "index_payments_on_deleted_at", using: :btree
     t.index ["user_id"], name: "index_payments_on_user_id", using: :btree
   end
@@ -97,7 +112,8 @@ ActiveRecord::Schema.define(version: 20170904112404) do
   create_table "subscriptions", force: :cascade do |t|
     t.integer "user_id"
     t.integer "event_id"
-    t.index ["event_id", "user_id"], name: "index_subscriptions_on_event_id_and_user_id", using: :btree
+    t.integer "paymant_id"
+    t.index ["event_id", "paymant_id", "user_id"], name: "index_subscriptions_on_event_id_and_paymant_id_and_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

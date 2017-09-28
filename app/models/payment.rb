@@ -46,15 +46,15 @@ class Payment < ApplicationRecord
   def price_pagseguro
     percert_taxa = 0.0399
     fixed_taxa = 0.4
-    total = (set_price + fixed_taxa) / (1 - percert_taxa)
+    total = (self.price + fixed_taxa) / (1 - percert_taxa)
     return '%.2f' % total
   end
 
   def pay_pagseguro
-    update(price: set_price) unless set_price.nil?
+    p 11111111111
     payment = PagSeguro::PaymentRequest.new
 
-    payment.reference = "REFl#{self.user.lot_id}user#{self.user.id}"
+    payment.reference = "REFl#user#{self.user.id}"
 
     if Rails.env.development? || Rails.env.test?
       payment.notification_url = 'http://localhost:3000/confirm_payment'
@@ -66,17 +66,13 @@ class Payment < ApplicationRecord
 
     payment.items << {
       id: self.user.id,
-      description: "#{self.user.lot.name} #{set_name_description} #{set_name_host}" ,
+      description: "PAGAMENTO DA STEM" ,
       amount: price_pagseguro
     }
 
     payment.sender = {
       email: self.user.email,
       cpf: self.user.cpf.numero.only_numbers,
-      phone: {
-        area_code: self.user.phone.only_numbers[0..1],
-        number: self.user.phone.only_numbers[2..10]
-      }
     }
 
     response = payment.register
@@ -84,7 +80,7 @@ class Payment < ApplicationRecord
     if response.errors.any?
       raise response.errors.join("\n")
     else
-      update(url_pagseguro: response.url)
+       response.url
     end
   end
 

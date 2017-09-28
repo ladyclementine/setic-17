@@ -71,7 +71,7 @@
       </div>
       <!-- /.row -->
 
-<%= form_for(@payment , url: payment_send_path, html: {class: 'form-horizontal '}, data: {confirm: 'Tem certeza que deseja finalizar a compra?'} ) do |f| %>
+<%= form_for(@payment , url: payment_send_path, html: {class: 'form-horizontal '}) do |f| %>
       <div class="row">
         <!-- accepted payments column -->
         <div class="col-md-6">
@@ -109,6 +109,35 @@
           </div>
 
           <% end %>
+
+          <% if !@user.payment.nil? && (@user.payment.method == @user.payment.accepted_payment_methods[0] || @user.payment.method == @user.payment.accepted_payment_methods[1]) %>
+          <p class="lead">Pagamento</p>
+          <div class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+          <b class=text-danger>Atenção:</b> Após efetuar o pagamento, envie o comprovante para: <b><%=@config.email%></b>
+           <div class="table-responsive">
+              <table class="table table-bordered">
+                  <tr>
+                    <th>Banco</th>
+                    <th>Agência</th>
+                    <th>Beneficiado</th>
+                  </tr>
+                 
+                  <tr>
+                    <td><%=@config.banco%></td>
+                    <td><%=@config.agencia%></td>
+                    <td><%=@config.beneficiado%></td>
+                  </tr>
+                </table>
+            </div>
+          </div>
+          <% end %>
+
+             <% if !@user.payment.nil? && @user.payment.method == "PagSeguro"  %>
+                <%= link_to @user.payment.pay_pagseguro, target: '_blank' do %>
+                  PAGAR AGORA
+                  <% end %>
+              <% end %>
+
         </div>
 
         <!-- /.col -->
@@ -152,15 +181,15 @@
         <div class="col-md-12">
 
           <% if @user.payment.nil?%>
-          <button type="submit" class="btn btn-success pull-right"class="btn btn-outline pull-left" data-dismiss="modal" data-disable-with="Aguarde..."  data-confirm="Após confirmar, não será possível alterar o método de pagamento manualmente. Deseja Continuar?" rel="nofollow"><i class="fa fa-credit-card"></i> Pagar
+          <button type="submit" class="btn btn-success pull-right"class="btn btn-outline pull-left" data-dismiss="modal" data-disable-with="Aguarde..."  data-confirm="Você precisará deletar seu pagamento caso desejar editar sua programação." rel="nofollow"><i class="fa fa-credit-card"></i> Pagar
           </button>
 
           <% elsif @user.payment.status == "Pendente" %>
-              
-          <button type="button" class="btn btn-danger pull-right" style="margin-right: 5px;">
-            <i class="fa fa-download"></i> Deletar Pagamento
-          </button>
-
+             <%= link_to remove_payment_path, method: :post do%>   
+              <button type="button" class="btn btn-danger pull-right" style="margin-right: 5px;">
+                <i class="fa fa-download"></i> Deletar Pagamento
+              </button>
+            <% end %>
           <% end %>
         </div>
       </div>

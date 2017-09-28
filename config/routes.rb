@@ -112,6 +112,7 @@ Rails.application.routes.draw do
       put 'active_again' => 'user_dashboard#active_account', as: :active_again
 
       post 'pay' => 'checkout#create', as: :payment_send
+      post 'remove_payment' => 'checkout#remove_payment', as: :remove_payment
 
       #Sobre o evento
       get "about" => "user_dashboard#about"
@@ -141,7 +142,7 @@ Rails.application.routes.draw do
 
       post 'kit/remove'
 
-      get 'kit/index'
+      get 'kits' => 'kit#index'
 
 
     end
