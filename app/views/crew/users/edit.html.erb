@@ -29,23 +29,9 @@
       <div class="box-body">
          <div class="row">
             <div class="col-md-3">
-               <%= link_to "Inativar Congressista", crew_disqualify_user_path(@user), class: 'btn btn-block btn-danger', method: :patch, data: { confirm: "Deseja realmente inativar #{@user.name || @user.email}" },'data-toggle': "tooltip", 'title': "", 'data-original-title': "Remover do lote atual e marcar a conta com o status inativo" %>
+               <%= link_to "Remover Programações", crew_disqualify_user_path(@user), class: 'btn btn-block btn-danger', method: :patch, data: { confirm: "Deseja realmente inativar #{@user.name || @user.email}" },'data-toggle': "tooltip", 'title': "", 'data-original-title': "Remover todas as programações" %>
             </div>
-            <div class="col-md-3">
-               <button type="button"  class="btn btn-info btn-block  dropdown-toggle" data-toggle="dropdown">
-               Mover Usuário Para o Lote <span class="caret"></span>
-               <span class="sr-only"></span>
-               </button>
-               <ul class="dropdown-menu" role="menu" style="margin-left: 15px;">
-                  <% Lot.all.each do |lot| %>
-                  <% unless @user_lot == lot %>
-                  <li><%= link_to lot.name, crew_move_user_to_lot_path(@user, lot.number), method: :patch %></li>
-                  <% end %>
-                  <% end %>
-                  <li class="divider"></li>
-                  <li><a href="#">Atual: <%= @user.lot.nil? ? 'Não Alocado' : @user.lot.name%></a></li>
-               </ul>
-            </div>
+
             <% if !@payment.nil? %>
             <div class="col-md-3">
                <%= link_to "Remover Método De Pagamento", crew_change_payment_method_path(@payment.id),'data-toggle': "tooltip", 'title': "", 'data-original-title': "Só será possivel remover o pagamento caso o usuário não tenha feito nenhum pagamento.", class: 'btn btn-block btn-danger', method: :patch, data: { confirm: "Deseja realmente apagar os boletos|pagseguro de #{@user.name || @user.email}?" } unless @payment.nil? %>
@@ -60,33 +46,12 @@
                <ul class="dropdown-menu" role="menu" style="margin-left: 15px;">
                   <% i = 1 %>
                   <% if !@payment.nil? %>
-                  <% if @payment.method == 'Boleto' %>
-                  <li><%= link_to "NÃO PAGO", crew_change_payment_status_path(@payment.id, 'NON'), method: :patch %></li>
-                  <% @payment.asaas_payments.order('description').each do |link| #, download: 'data'%>
-                  <li><%= link_to "P#{i} PAGA", crew_set_billet_portion_paid_path(link.id, @payment.portion_paid+1), method: :patch %></li>
-                  <% i += 1 %>
-                  <% end %>
-                  <li><%= link_to "PAGO", crew_change_payment_status_path(@payment.id, 'paid'), method: :patch %></li>
-                  <% else #FIM BOLETO METHOD%> 
                   <li><%= link_to "NÃO PAGO", crew_change_payment_status_path(@payment.id, 'NON'), method: :patch %></li>
                   <li><%= link_to "PAGO", crew_change_payment_status_path(@payment.id, 'paid'), method: :patch %></li>
-                  <% end #PAGSEGURO %>
                   <li class="divider"></li>
-                  <li><a href="#">Atual: <% if @payment.method == 'Boleto' %>
-                     <% i = 1 %>
-                     <% @payment.asaas_payments.order('description').each do |boletos| %>
-                     <% if  boletos.status == 'PENDING' %>
-                     <small class="label bg-red" data-toggle="tooltip" title="" data-original-title="Pagamento Pendente | <%=boletos.description%>"><%=i%></small>
-                     <% elsif boletos.status == 'RECEIVED' %>
-                     <small class="label bg-green" data-toggle="tooltip" title="" data-original-title="Pagamento Recebido | <%=boletos.description%>"><%=i%></small>
-                     <% elsif boletos.status == 'OVERDUE' %>
-                     <small class="label bg-blue" data-toggle="tooltip" title="" data-original-title="Pagamento Atrasado | <%=boletos.description%>"><%=i%></small>
-                     <% end %>
-                     <% i += 1 %>
-                     <% end %>
-                     <% else %>
-                     <%= @payment.paid? ? 'Pago' : 'Não pago' %>
-                     <% end %></a>
+                  <li><a href="#">Atual: [<%= @payment.method %>]<%= @payment.paid? ? 'Pago' : 'Não pago' %></a>
+                  </li>
+                  <li><a href="#">Preço: <%= number_to_currency(@payment.price) %></a>
                   </li>
                   <% else %>
                   <li><a href="#">Não há pagamento disponível</a></li>
@@ -121,19 +86,23 @@
       <!-- /.box-header -->
       <div class="box-body">
          <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                <div class="form-group">
                   <label>Nome Completo</label>
                   <%= f.text_field :name, :id => 'name', placeholder: 'Nome completo', class: 'form-control'%>
                </div>
-               <div class="form-group">
-                  <label>Email <% if !@user.unconfirmed_email.nil? %><small style="color: red">(Aguardando confirmação de <%=@user.unconfirmed_email%>)</small><%end%></label>
-                  <%= f.email_field :email, placeholder: 'Email', class: 'form-control', autocomplete: "off"%>
-               </div>
+            </div>
+            <!-- /.col -->
+            <div class="col-md-6">
                <!-- /.form-group -->
                <div class="form-group">
                   <label>CPF</label>
                   <%= f.text_field :cpf, :id => 'cpf', placeholder: 'CPF', class: 'form-control'%>
+               </div>
+               <!-- /.form-group -->
+               <div class="form-group">
+                  <label>Curso</label>
+                  <%= f.text_field :course, :id => 'curso', placeholder: 'Curso', class: 'form-control'%>
                </div>
                <!-- /.form-group -->
             </div>
@@ -141,13 +110,25 @@
             <div class="col-md-6">
                <div class="form-group">
                   <label>RG</label>
-                  <%= f.text_field :general_register, :id => 'rg', placeholder: 'rg', class: 'form-control'%>
-               </div>
-               <div class="form-group">
-                  <label>Senha</label>
-                  <%= f.password_field :password, placeholder: 'Deixe em branco para não alterar.', class: 'form-control', autocomplete: "off"%>
+                  <%= f.text_field :general_register, :id => 'rg', placeholder: 'RG', class: 'form-control'%>
                </div>
                <!-- /.form-group -->
+               <div class="form-group">
+                  <label>Semestre</label>
+                  <%= f.text_field :semester, :id => 'semestre', placeholder: 'semester', class: 'form-control'%>
+               </div>
+               <!-- /.form-group -->
+               <!-- /.form-group -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-6">
+               <div class="form-group">
+                  <label>Universidade</label>
+                  <%= f.text_field :university, :id => 'university', placeholder: 'Universidade', class: 'form-control'%>
+               </div>
+            </div>
+            <!-- /.col -->
+            <div class="col-md-6">
                <div class="form-group">
                   <label>Data de Nascimento</label>
                   <div class="input-group date">
@@ -157,166 +138,15 @@
                      <%= f.text_field :birthday, :id => 'birthday_picker', placeholder: 'Data de nascimento', class: 'form-control'%>
                   </div>
                </div>
-               <!-- /.form-group -->
-            </div>
-            <!-- /.col -->
-            <div class="">
-               <div class="form-group col-md-6">
-                  <label>Gênero</label>
-                  <%= f.select(:gender,['Masculino', 'Feminino', 'Prefiro não declarar'], {}, { :class => 'form-control select2' }) %>
-               </div>
-               <!-- /.form-group -->
-               <div class="form-group col-md-6">
-                  <label>Necessita de Traslado?</label>
-                  <div class="input-group">
-                     <span class="input-group-addon">
-                     <%= f.check_box :transport_required, value: true, id: 'transport_check'%> Sim
-                     </span>
-                     <%= f.text_field :transport_local, id: 'transport', placeholder: 'Lista de Locais em Breve', class: 'form-control' , disabled: true%>
-                  </div>
-               </div>
-               <!-- /.form-group -->
-            </div>
-            <div class="col-md-12">
-               <div class="form-group">
-                  <label>Necessidades especiais</label>
-                  <%= f.text_area :special_needs, :id => 'special_needs', :class => 'form-control',:length => '120' %>
-               </div>
             </div>
          </div>
          <!-- /.row -->
       </div>
       <!-- /.box-body -->
    </div>
-   <!-- /.box -->
-   <div class="box  box-info">
-      <div class="box-header with-border">
-         <h3 class="box-title">DADOS DO MEJ</h3>
-         <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-         </div>
-      </div>
-      <!-- /.box-header -->
-      <div class="box-body">
-         <div class="row">
-            <div class="col-md-6">
-               <div class="form-group">
-                  <label>EJ Federada?</label>
-                  <div class="input-group">
-                     <span class="input-group-addon">
-                     <%= f.select(:federation_check,['Não', 'Sim', 'Pós-júnior'], {},style: 'height: 20px') %>
-                     </span>
-                     <%= f.select(:federation, ['Não confederada', 'RioJunior (RJ)', 'UNIJr-BA (BA)', 'SERJÚNIOR (SE)', 'RN Júnior (RN)', 'PB Júnior (PB)', 'Maranhão Júnior (MA)', 'Juniores (ES)', 'Goiás Júnior (GO)', 'FEJESP (SP)', 'FEJESC (SC)', 'FEJERS (RS)', 'FEJEPE (PE)', 'FEJEPAR (PR)', 'FEJEMS (MS)', 'FEJEMG (MG)', 'FEMTEJ (MT)', 'FEJECE (CE)', 'FEJEA (AL)', 'Concentro (DF)', 'Piauí Junior (PI)', 'Pará Júnior (PA)', 'Acre Júnior (AC)'], {include_blank: 'Selecione sua federação'}, class: "form-control select2", :id => 'federation') %>
-                  </div>
-               </div>
-               <!-- /.form-group -->
-               <div class="form-group">
-                  <label>Cargo</label>
-                  <%= f.text_field :job, :id => 'job', placeholder: "Ex: Analista, Diretor", class:"form-control"%>
-               </div>
-               <!-- /.form-group -->
-            </div>
-            <!-- /.col -->
-            <div class="col-md-6">
-               <div class="form-group">
-                  <label>Nome da EJ</label>
-                  <%= f.text_field :junior_enterprise, :id => 'junior_enterprise', placeholder: "Empresa Junior", class:"form-control", "data-toggle"=>"tooltip" ,"title"=>"", "data-original-title"=>"Pós-júnior, informe a sua última EJ." %>
-               </div>
-               <!-- /.form-group -->
-               <div class="form-group">
-                  <label>Nome Completo da Universidade</label>
-                  <%= f.text_field :university, :id => 'university', placeholder: "Universidade", class: 'form-control'%>
-               </div>
-               <!-- /.form-group -->
-            </div>
-            <!-- /.col -->
-         </div>
-         <!-- /.row -->
-      </div>
-      <!-- /.box-body -->
-   </div>
-   <!-- /.box -->
-   <div class="box box-default">
-      <div class="box-header with-border">
-         <h3 class="box-title">ENDEREÇO</h3>
-         <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-         </div>
-      </div>
-      <!-- /.box-header -->
-      <div class="box-body">
-         <div class="row">
-            <div class="col-md-6">
-               <div class="form-group">
-                  <label>CEP</label>
-                  <%= f.text_field :cep, placeholder: "CEP", id:"postal_code", class: 'form-control'%>
-               </div>
-               <!-- /.form-group -->
-               <div class="form-group">
-                  <label>CIDADE</label>
-                  <%= f.text_field :city, placeholder: "Cidade", id:"city", class: 'form-control'%>
-               </div>
-               <!-- /.form-group -->
-            </div>
-            <!-- /.col -->
-            <div class="col-md-6">
-               <div class="form-group">
-                  <label>ESTADO</label>
-                  <%= f.text_field :state, placeholder: "Estado", id:"state", class: 'form-control'%>
-               </div>
-               <!-- /.form-group -->
-               <div class="form-group">
-                  <label>ENDEREÇO</label>
-                  <%= f.text_field :address, placeholder: "Rua, Bairro e número", id:"street", class: 'form-control'%>
-               </div>
-               <!-- /.form-group -->
-            </div>
-            <!-- /.col -->
-         </div>
-         <!-- /.row -->
-      </div>
-      <!-- /.box-body -->
-   </div>
-   <!-- /.box -->
-   <div class="box box-danger">
-      <div class="box-header with-border">
-         <h3 class="box-title">CONTATO</h3>
-         <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-         </div>
-      </div>
-      <!-- /.box-header -->
-      <div class="box-body">
-         <div class="row">
-            <div class="col-md-6">
-               <div class="form-group">
-                  <label>MEU NUMERO</label>
-                  <%= f.text_field :phone, placeholder: "Número para contato.", id:"phone", class: 'form-control phone'%>
-               </div>
-               <!-- /.form-group -->
-            </div>
-         </div>
-         <!-- /.row -->
-         <div class="row">
-            <div class="col-md-6">
-               <div class="form-group">
-                  <label>NUMERO DO RESPONSAVEL</label>
-                  <%= f.text_field :phone_parents, placeholder: "Número para contato em caso de urgência", id:"phone", class: 'form-control phone'%>
-               </div>
-               <!-- /.form-group -->
-            </div>
-            <div class="col-md-6">
-               <div class="form-group">
-                  <label>NOME DO RESPONSAVEL</label>
-                  <%= f.text_field :name_parents, placeholder: "Pai, Mãe, avós", id:"name", class: 'form-control'%>
-               </div>
-               <!-- /.form-group -->
-            </div>
-         </div>
-         <!-- /.row -->
-      </div>
-      <!-- /.box-body -->
-   </div>
+
+
+
    <!-- /.box -->
    <div class="box box-success">
       <div class="box-header with-border">
@@ -329,4 +159,3 @@
    <!-- /.box -->
 </section>
 <% end %>
-<%= javascript_include_tag 'cep' %>

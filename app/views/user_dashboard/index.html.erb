@@ -51,7 +51,7 @@
                           <tbody>
                           <% @user_cart.each do |cart|%>
                           <tr>
-                            <td>[<%=cart.event_type.name%>] - <%=cart.name%></td>
+                            <td>[<%=cart.event_type ? cart.event_type.name : 'KIT'%>] - <%=cart.name%></td>
                             <td><%=number_to_currency(cart.price)%></td>
                           </tr>
                           <% end %>

@@ -9,7 +9,7 @@
 <% if @schedule.errors.any? %>
 <script>
    $(document).ready(function() {
-    noty({text: ' <%= pluralize(@crew_event.errors.count, "error") %> encontrados: </br><ul><% @schedule.errors.full_messages.each do |message| %><li><%= message %></li><% end %></ul>', layout: 'bottom', type: 'warning', timeout: 4000});
+    noty({text: ' <%= pluralize(@schedule.errors.count, "error") %> encontrados: </br><ul><% @schedule.errors.full_messages.each do |message| %><li><%= message %></li><% end %></ul>', layout: 'bottom', type: 'warning', timeout: 4000});
    });
 </script>
 <% end %>
@@ -29,7 +29,7 @@
             <div class="col-md-12">
                <div class="form-group">
                   <label>Início da programação</label>
-                  <%= f.datetime_field :start_time, placeholder: '', class: 'form-control', autofocus: true%>
+                  <%= f.text_field :start_time, placeholder: '', class: 'form-control', autofocus: true%>
                </div>
                <!-- /.form-group -->
             </div>
@@ -37,7 +37,7 @@
             <div class="col-md-12">
                <div class="form-group">
                   <label>Término da programação</label>
-                  <%= f.datetime_field :end_time, placeholder: '', class: 'form-control'%>
+                  <%= f.text_field :end_time, placeholder: '', class: 'form-control'%>
                </div>
                <!-- /.form-group -->
             </div>

@@ -18,18 +18,14 @@ class Crew::SchedulesController < Crew::BaseController
   # POST /events
   def create
     @schedule = @event.schedules.new(schedule_params)
-    if @schedule == !blank?
-    if @schedule.end_time_bigger?
+    respond_to do |format|
       if @schedule.save
-        redirect_to [:crew, @event], notice: 'Horário da programação criado com sucesso.'
+        format.html { redirect_to [:crew, @event], notice: 'Horário da programação criado com sucesso.' }
+        format.json { render :show, status: :created, location: @crew_event }
       else
-        render :new
+        format.html { render :new }
+        format.json { render json: @schedule.errors, status: :unprocessable_entity }
       end
-    else
-      redirect_to new_crew_event_schedule_path, notice: 'Horário de término da programação deve ser posterior ao horário de início.'
-    end
-    else
-      redirect_to new_crew_event_schedule_path, notice: 'Horário de início e término da programação não podem ficar em branco.'
     end
   end
 

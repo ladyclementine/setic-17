@@ -41,24 +41,26 @@ class Event < ApplicationRecord
 
     belong = false
     pacote_select = nil
-    
+
     #checar se ta nos conformes do pacote
     Packages::ALL_PACKAGES.each do |k, v|
-      
-      v[:types].each do |pacote|
-        if pacote[1] <= count[pacote[0].to_s]
-          belong = true
-        else
-          belong = false
-          break
+      #total_users = 2
+      #unless total_users >= v[:limit]  #is_ful?
+        v[:types].each do |pacote|
+          # se quantidade de um tipo do pacote for menor ou igual a minha quantidade por tipo
+          if pacote[1] <= count[pacote[0].to_s] ## &&
+            belong = true
+          else
+            belong = false
+            break
+          end
         end
-      end
 
-      if belong == true
-        pacote_select = v[:name]
-        price = v[:price] + self.plus(k)
-      end
-
+        if belong == true
+          pacote_select = v[:name]
+          price = v[:price] + self.plus(k)
+        end
+      #end
     end
     price = preco_total if price == 0
     [price,pacote_select, count]

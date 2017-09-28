@@ -12,9 +12,8 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
 
   has_many :subscriptions
-  has_many :all_itens, through: :subscriptions, class_name: "Event"
-  has_many :events, -> { where(is_shirt: false) }, through: :subscriptions
-  has_many :shirts, -> { where(is_shirt: true) }, through: :subscriptions, class_name: "Event"
+  has_many :events, through: :subscriptions
+  #has_many :shirts, -> { where(is_shirt: true) }, through: :subscriptions, class_name: "Event"
   has_one :payment
 
   enum certificate: { 'SIM':true, 'NÃO':false }
@@ -36,7 +35,7 @@ class User < ApplicationRecord
 
 
   def total_cart_discount
-    self.all_itens.total_discount_by_pack[0] * (1 - self.events.total_discount)
+    self.events.total_discount_by_pack[0] * (1 - self.events.total_discount)
   end
 
 

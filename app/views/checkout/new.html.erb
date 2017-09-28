@@ -26,15 +26,13 @@
         <div class="col-sm-4 invoice-col">
           <address>
             <strong>Dados da compra:</strong><br>
-            <b>Status:</b> <%#=@user.payment.status%>
+            <b>Status:</b> <%=@user.payment.nil? ? 'Não Selecionado' : @user.payment.status %>
            <br>
+           <% unless @user.payment.nil? %>
+           <b>Método selecionado:</b> <%=@user.payment.method %>
+           <br>
+           <% end %>
           </address>
-        </div>
-        <!-- /.col -->
-        <div class="col-sm-4 invoice-col">
-          <b>Invoice #007612</b><br>
-          <br>
-    
         </div>
         <!-- /.col -->
       </div>
@@ -85,6 +83,8 @@
 
           </p>
           <%end%>
+           
+          <% if Packages::ALL_PACKAGES.any? %>
            <p class="lead">Pacote</p>
           <div class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
           <b class=text-danger>Atenção:</b> A escolha do pacote será feita de acordo com a programação selecionada e seu respectivo TIPO.
@@ -107,6 +107,8 @@
               </div>
               Minha programação (por tipo): <%=@user_cart.total_discount_by_pack[2].map{|a| "#{a[1]} #{a[0].pluralize(a[1])}" }.join(", ")%>
           </div>
+
+          <% end %>
         </div>
 
         <!-- /.col -->
@@ -123,10 +125,12 @@
                 <th style="width:50%">Subtotal:</th>
                 <td><%=number_to_currency(@user_cart.total_price)%></td>
               </tr>
+              <% if Packages::ALL_PACKAGES.any? %>
               <tr>
                 <th>Desconto (Pacotes)</th>
                 <td><%=number_to_currency(@user_cart.total_price - @user_cart.total_discount_by_pack[0])%> (<%= @user_cart.total_discount_by_pack[1] || "Nenhum"%>)</td>
               </tr>
+              <% end %>
               <tr>
                 <th>Desconto:</th>
                 <td><%='%.2f' % (@user.events.total_discount * 100)%> %</td>
@@ -146,15 +150,18 @@
   <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-md-12">
-          <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+
+          <% if @user.payment.nil?%>
           <button type="submit" class="btn btn-success pull-right"class="btn btn-outline pull-left" data-dismiss="modal" data-disable-with="Aguarde..."  data-confirm="Após confirmar, não será possível alterar o método de pagamento manualmente. Deseja Continuar?" rel="nofollow"><i class="fa fa-credit-card"></i> Pagar
           </button>
 
-
-               
+          <% elsif @user.payment.status == "Pendente" %>
+              
           <button type="button" class="btn btn-danger pull-right" style="margin-right: 5px;">
-            <i class="fa fa-download"></i> Cancelar
+            <i class="fa fa-download"></i> Deletar Pagamento
           </button>
+
+          <% end %>
         </div>
       </div>
 <% end %>

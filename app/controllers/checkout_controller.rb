@@ -11,7 +11,7 @@ class CheckoutController < BaseController
   end
 
   def new
-    @user_cart = @user.all_itens.order(:is_shirt, :event_type_id)
+    @user_cart = @user.events.order(:is_shirt, :event_type_id)
     @payment = Payment.new
   end
 

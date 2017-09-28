@@ -57,7 +57,7 @@ gem 'cpf_faker'
 
 gem 'jquery-datatables-rails'
 gem 'ajax-datatables-rails'
-
+gem 'validates_timeliness', '~> 4.0'
 
 gem 'dalli'
 

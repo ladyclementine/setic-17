@@ -10,7 +10,8 @@ class Crew::EventsController < Crew::BaseController
   # GET /crew/events/1
   # GET /crew/events/1.json
   def show
-    @users = @crew_event.users
+    @users_nopays = @crew_event.users.no_pays
+    @users_pays = @crew_event.users.pays
   end
 
   def pending

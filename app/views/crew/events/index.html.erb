@@ -21,12 +21,8 @@
                      <tr>
                         <th>Nome</th>
                         <th>Categoria</th>
-                        <th>dia</th>
                         <th>Facilitador</th>
-                        <th>Vagas</th>
-                        <th>Inscritos</th>
-                        <th hidden="">Dia</th>
-                        <th>Horário</th>
+                        <th>Inscritos/Total de vagas</th>
                         <th class="noExport">Opções</th>
                      </tr>
                   </thead>
@@ -37,8 +33,8 @@
                         <td><%= event.name %></td>
                         <td><%= event.event_type.try(:name) %></td>
                         <td><%= event.facilitator %></td>
-          
-
+                        <td><%= event.users.count %>/<%= event.limit %></td>
+         
                         <td>
                           <%= link_to crew_event_path(event) do %>
                            <small class="btn btn-info dropdown-toggle btn-xs">

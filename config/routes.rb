@@ -136,6 +136,14 @@ Rails.application.routes.draw do
       #certificado
       get 'certificate.pdf' => 'certificates#show'
 
+      #KITS
+      post 'kit/select/:id' => 'kit#select', as: :kit_select
+
+      post 'kit/remove'
+
+      get 'kit/index'
+
+
     end
     unauthenticated :users do
       root to: "users/sessions#new", as: :unauthenticated_user_root
