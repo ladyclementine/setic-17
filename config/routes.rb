@@ -140,15 +140,15 @@ Rails.application.routes.draw do
       #KITS
       post 'kit/select/:id' => 'kit#select', as: :kit_select
 
-      post 'kit/remove'
+      post 'kit/remove/:id' => 'kit#remove', as: :kit_remove
 
       get 'kits' => 'kit#index'
 
 
     end
     unauthenticated :users do
-      root to: "users/sessions#new", as: :unauthenticated_user_root
-      #root to: "site#index", as: :site
+      #root to: "users/sessions#new", as: :unauthenticated_user_root
+      root to: "site#index", as: :site
 
       get 'reminder'  => "users/registrations#show_reminder"
     end
@@ -158,7 +158,7 @@ Rails.application.routes.draw do
 
     get '/inscription/cancel' => 'users/registrations#cancel', :as => 'cancel_user_registration'
 
-    get '/inscription/new_secret' => 'users/registrations#new', :as => 'new_user_registration'
+    get '/inscription/new' => 'users/registrations#new', :as => 'new_user_registration'
     post '/inscription' => 'users/registrations#create', :as => 'user_registration'
 
     get '/inscription/edit' => 'users/registrations#edit', :as => 'edit_user_registration'

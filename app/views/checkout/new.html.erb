@@ -133,8 +133,10 @@
           <% end %>
 
              <% if !@user.payment.nil? && @user.payment.method == "PagSeguro"  %>
+             <p class="lead">PagSeguro</p>
+              <b class=text-danger>Atenção:</b> Após efetuar o pagamento, aguarde a confirmação! Será feita de forma automática pelo sistema.</b><br>
                 <%= link_to @user.payment.pay_pagseguro, target: '_blank' do %>
-                  PAGAR AGORA
+                   <img data-toggle="tooltip" title="" data-original-title="PAGAMENTO  PENDENTE" src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/120x53-pagar.gif" type="image" class="btn btn-alert btn-space">
                   <% end %>
               <% end %>
 
@@ -146,10 +148,12 @@
 
           <div class="table-responsive">
             <table class="table">
-            <tr>
-                <th>Camisa:</th>
-                <td><a href="">Selecionar</a></td>
+            <% unless @user_cart.where(is_shirt: true).any? %>
+              <tr>
+                <th>KIT:</th>
+                <td><%=link_to 'SELECIONAR KIT', kits_path %></td>
               </tr>
+              <% end %>
               <tr>
                 <th style="width:50%">Subtotal:</th>
                 <td><%=number_to_currency(@user_cart.total_price)%></td>

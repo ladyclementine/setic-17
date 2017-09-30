@@ -4,164 +4,99 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-		<!--[if IE]><link rel="shortcut icon" href="/images/efej/icon.png"><![endif]-->
 		<link rel="icon" type="image/png" sizes="16x16" href="/images/efej/icon.png">
-		<title>EFEJ 2017</title>
-		<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
-		<link href="landing/css/bootstrap.min.css" rel="stylesheet">
-		<link href="landing/css/font-awesome.min.css" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="landing/css/efej.css">
+		<title><%=@config.sigla%></title>
+		<link rel="stylesheet" type="text/css" href="site/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="site/css/site.css">
 		<meta name="robots" content="index,follow">
       	<meta name="description" content="Encontro Fluminense de Empresários Juniores. #CONECTADOS">
       	<meta name="keywords" content="mej, eventi, gti, empreendedorismo, empresa júnior, ej, empresário júnior, sites, sistemas, aplicativos, fejece, confederação, empresas, juniores, empresa, junior, federação, ufc, congresso, rio júnior, EFEJ 2017, efej, rio de janeiro, brasil jr">
 
-    	<meta property="og:url"           content="http://www.efej.com.br/" />
-    	<meta property="og:type"          content="website" />
-    	<meta property="og:title"         content="EFEJ 2017 - Landing Page" />
-    	<meta property="og:description"   content="Encontro Fluminense de Empresários Juniores. #CONECTADOS" />
-    	<meta property="og:image"         content="http://www.efej.com.br/images/efej/capa_botão_compartilhar.png" />
+
 	</head>
 	<body>
-		<header id="home">
-			<nav class="navbar navbar-default">
-			    <div class="container-fluid">
-			      	<div class="navbar-header">
-				        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
-				          	<span class="sr-only">Navegação</span>
-				          	<span class="icon-bar"></span>
-				          	<span class="icon-bar"></span>
-				          	<span class="icon-bar"></span>
-				        </button>
-				       	<div class="avisoNavEfej">
-				       		<p>EFEJ 2017: 12, 13, 14 E 15 DE OUTUBRO</p>
-				       	</div>
-			      	</div>		
-			      	<div class="sistema"><a href="#">ÁREA DO CONGRESSISTA</a></div>
-			    </div>
-			</nav>
-		</header>	
-		<section id="conectadosApresentacao">
-			<div class="container">
-				<div class="logoConectados">
-					<img src="landing/images/logoefejbranca.png" class="img-responsive" alt="Logotipo EFEJ">
-					<h1>#CONECTADOS</h1>
-					<a href="#estatisticasEfej">SAIBA MAIS SOBRE O EVENTO</a>
-				</div>
-			</div>
-		</section>
-		<section id="bemVindosEfej">
-			<div class="container">
-				<div class="textoBemVindos">
-					<h2>SEMPRE ESTIVEMOS CONECTADOS</h2>
-					<p>
-						Somente seis pessoas te separam do resto do mundo. Te separam de alguém que pode mudar a sua vida. De um melhor amigo, de um grande amor, de uma pessoa que pode te dar uma ideia inovadora ou de alguém que vai sonhar junto com você. Talvez você já conheça aquele amigo para rir junto, chorar junto, dançar, cantar, brincar, desabafar, para tudo. Talvez você já conheça aquele grande amor que te mostrou que esse sentimento ainda existe, mesmo nos tempos de hoje onde tudo é tão rápido, prático e descartável. Ou talvez você já conheça a pessoa que vai mudar a sua perspectiva, te ajudar a pensar grande ou até mudar seus pensamentos. Ou quem sabe, talvez você não conheça nenhuma delas.
-					</p>		
-					<p>
-						Mais do que interligados por seis pessoas, hoje nós estamos cada vez mais conectados com tudo. Na internet, todos se conhecem. Se tornam amigos, seguidores, trocam likes, comentários e compartilhamentos. Mas será que diante de tudo, o acaso acontece? Ou será que tudo acontece por algum motivo? Nós não sabemos. O que sabemos é que não importa quais seis pessoas você precisa conhecer para chegar onde mais quer. A verdade é que só depende de você se conectar.
-					</p>
-					<p>
-						Estamos ligados por nosso passado, nosso presente e nosso futuro. Então o que falta para começar? Um brinde a esse passado, ao futuro e ao presente. Um brinde as pessoas que conhecemos e que ainda vamos conhecer as seis pessoas que nos separam do resto do mundo. Um brinde a quem não só podemos, mas como vamos conhecer. Afinal de contas, sempre estaremos conectados.
-					</p>
-					
-					<h3>BEM-VINDOS AO EFEJ 2017!</h3>
-					<span></span>
-				</div>
-				<div class="pacotesEfej">
-					<h2>GARANTA JÁ SEU LUGAR!</h2>
-					<h4>VENHA FAZER PARTE DO MAIOR EVENTO DO MEJ FLUMINENSE</h4>
-					<div class="row rowPacotes">
-						<div class="col-md-6 comHospedagem">
-							<h3>R$ 360,00</h3>
-							<div class="opcoesHospe">
-								COM HOSPEDAGEM
-							</div>
-						</div>
-						<div class="col-md-6 semHospedagem">
-							<h3>R$ 220,00</h3>
-							<div class="opcoesHospe">
-								SEM HOSPEDAGEM
-							</div>
-						</div>
-					</div>
-					<div class="clear"></div>
-					<div class="euQueroCartao">
-						<p>CARTÃO DE CRÉDITO EM ATÉ 12X E BOLETO BANCÁRIO EM ATÉ 3X</p>
-						<span>#EUQUERO</span>
-					</div>
-				</div>
-			</div>
-		</section>
-		<section id="contadorEfej">
-			<div class="container">
-				<div class="configsContador">
-				 	<span id="contadorTempo"></span>
-				</div>
-			</div>
-		</section>
-		<section id="estatisticasEfej">
-			<div class="container">
-				<div class="col-md-3 est1">
-					<span class="counter">15</span>
-					EDIÇÕES<br>
-					<strong>DESDE 2002</strong>
-				</div>
-				<div class="col-md-3 est2">
-					<span class="counter">500</span>
-					EMPRESÁRIOS<br>
-					<strong>JUNIORES</strong>
-				</div>
-				<div class="col-md-3 est3">
-					<span class="counter">72</span>
-					HORAS<br>
-					<strong>DE EVENTO</strong>
-				</div>
-				<div class="col-md-3 est4">
-					<span class="counter">35</span>
-					CONTEÚDOS<br>
-					<strong>DIFERENTES</strong>
-				</div>
-			</div>
-		</section>
-		<section id="parceiros">
-			<div class="container">
-				<h3>NOSSOS PARCEIROS</h3>
-				<ul>
-					<li>
-						<img src="landing/images/voltaredonda.png" class="img-responsive" alt="Volta Redonda">
-					</li>
-					<li>
-						<img src="landing/images/globo.png" class="img-responsive" alt="Globo">
-					</li>
-					<li>
-						<img src="landing/images/sico.png" class="img-responsive" alt="Sicoob">
-					</li>
-				</ul>
-			</div>
-		</section>
-		<footer>
-			<div class="container-fluid">
-				<div class="col-md-6">
-					<h5>MÍDIAS OFICIAIS <span>EFEJ 2017</span></h5>
-					<ul class="redesSociais">
-						<a href="https://www.facebook.com/efej2017/" target="_blank">
-							<li>
-								<i class="fa fa-facebook" aria-hidden="true"></i>
-							</li>
-						</a>
-					</ul>
-				</div>
-				<div class="col-md-6">
-					<a href="#home"><img src="landing/images/logofooter.png" class="img-responsive" alt="Efej"></a>
-				</div>
-			</div>
-		</footer>
-	<script src="landing/js/jquery-1.12.0.min.js"></script>
-	<script src="landing/js/jquery-ui.min.js"></script>
- 	<script src="landing/js/bootstrap.min.js"></script>
- 	<!-- COUNTERUP -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
-    <script type='text/javascript' src='landing/js/jquery.counterup.js?ver=4.5.3'></script>
 
- 	<script src="landing/js/efej.js"></script>
+				<!-- Header -->
+		<header id="top" class="header">
+		  <div class="text-vertical-center">
+		    <div class="container">
+		      <h1 class="visible-sm visible-md visible-lg" style="text-shadow: 1px -3px 2px #000, 1px 3px 2px #000"><%= @config.name %></h1>
+		      <h1 class="visible-xs"  style="text-shadow: 1px -3px 2px #000, 1px 3px 2px #000"><%= @config.sigla %></h1>
+		    </div>
+		    <br>
+		     <%= link_to new_user_registration_path, class:'btn btn-dark btn-lg' do %>
+		      Inscrições
+		     <% end %>
+		    
+		    <%= link_to new_user_session_path, class:'btn btn-dark btn-lg' do %>
+		      Acessar sua conta
+		    <% end %>
+		    <br>
+		    <br>
+		    <%# link_to challenge_new_team_inscription_path, class:'btn btn-dark btn-lg' do %>
+		    <!--   Concurso de Planadores: Inscreva-se -->
+		    <%# end %>
+		  </div>
+		</header>
+		<!-- Services -->
+		<!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+		<!-- Map -->
+		<section id="contact" class="map">
+		  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31850.466333142867!2d-38.57561223251674!3d-3.7428619257204643!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74bdc62c8ba8f%3A0x9267767abebdb982!2sDepartamento+de+Engenharia+de+Produ%C3%A7%C3%A3o+Mec%C3%A2nica+UFC!5e0!3m2!1spt-BR!2sbr!4v1474461603668" width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+		  <br />
+		    <small>
+		      <a href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31850.466333142867!2d-38.57561223251674!3d-3.7428619257204643!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74bdc62c8ba8f%3A0x9267767abebdb982!2sDepartamento+de+Engenharia+de+Produ%C3%A7%C3%A3o+Mec%C3%A2nica+UFC!5e0!3m2!1spt-BR!2sbr!4v1474461603668"></a>
+		    </small>
+		  <a id="to-top" href="#top" class="btn btn-dark btn-lg"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
+		</section>
+		<!-- Custom Theme JavaScript -->
+		<script>
+		//#to-top button appears after scrolling
+		var fixed = false;
+		$(document).scroll(function() {
+		  if ($(this).scrollTop() > 250) {
+		    if (!fixed) {
+		      fixed = true;
+		      // $('#to-top').css({position:'fixed', display:'block'});
+		      $('#to-top').show("slow", function() {
+		        $('#to-top').css({
+		          position: 'fixed',
+		          display: 'block'
+		        });
+		      });
+		    }
+		  } else {
+		    if (fixed) {
+		      fixed = false;
+		      $('#to-top').hide("slow", function() {
+		        $('#to-top').css({
+		          display: 'none'
+		        });
+		      });
+		    }
+		  }
+		});
+		// Disable Google Maps scrolling
+		// See http://stackoverflow.com/a/25904582/1607849
+		// Disable scroll zooming and bind back the click event
+		var onMapMouseleaveHandler = function(event) {
+		  var that = $(this);
+		  that.on('click', onMapClickHandler);
+		  that.off('mouseleave', onMapMouseleaveHandler);
+		  that.find('iframe').css("pointer-events", "none");
+		}
+		var onMapClickHandler = function(event) {
+		    var that = $(this);
+		    // Disable the click handler until the user leaves the map area
+		    that.off('click', onMapClickHandler);
+		    // Enable scrolling zoom
+		    that.find('iframe').css("pointer-events", "auto");
+		    // Handle the mouse leave event
+		    that.on('mouseleave', onMapMouseleaveHandler);
+		  }
+		  // Enable map zooming with mouse scroll when the user clicks the map
+		$('.map').on('click', onMapClickHandler);
+		</script>
+		
 	</body>
 </html>

@@ -25,6 +25,9 @@ class CheckoutController < BaseController
         payment.method = payment_params[:method]
         payment.price = @total_price
       end
+      @payment = @user.payment
+      PaymentMailer.new_payment(@user, @payment).deliver_now
+      PaymentMailer.info(@user, @payment, @config).deliver_now
       #@user.payment.pay_pagseguro if payment_params[:method] == "PagSeguro"
       redirect_to payment_path, notice: "Compra finalizada com sucesso! Verifique as informações para efetuar o pagamento."
     else

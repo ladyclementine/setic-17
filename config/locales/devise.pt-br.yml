@@ -18,11 +18,11 @@ pt-BR:
       unconfirmed: 'Antes de continuar, confirme a sua conta.'
     mailer:
       confirmation_instructions:
-        subject: '[EFEJ 2017] Instruções de confirmação'
+        subject: 'Instruções de confirmação'
       reset_password_instructions:
-        subject: '[EFEJ 2017] Instruções de troca de senha'
+        subject: 'Instruções de troca de senha'
       unlock_instructions:
-        subject: '[EFEJ 2017] Instruções de desbloqueio'
+        subject: 'Instruções de desbloqueio'
     omniauth_callbacks:
       failure: 'Não foi possível autenticá-lo como %{kind} porque "%{reason}".'
       success: 'Autenticado com sucesso com uma conta de %{kind}.'

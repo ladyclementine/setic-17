@@ -2372,16 +2372,16 @@ a:focus {
 }
 
 .btn-primary {
-  background-color: #f91675;
-  border-color: #e10d67;
+  background-color: #870017;
+  border-color: #ff0000;
 }
 .btn-primary:hover,
 .btn-primary:active,
 .btn-primary:focus,
 .btn-primary:active:focus,
 .btn-primary.hover {
-  background-color: #d7065e;
-  border-color: #d7065e;
+  background-color: #870017;
+  border-color: #000;
 }
 
 .btn-success {
@@ -3201,7 +3201,7 @@ table.text-center th {
   border: 3px solid #fff;
 }
 .widget-user .box-footer {
-  padding-top: 30px;
+  padding-top: 40px;
 }
 .widget-user-2 .widget-user-header {
   padding: 20px;

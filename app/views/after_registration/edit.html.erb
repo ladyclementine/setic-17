@@ -25,10 +25,16 @@
       <!-- /.box-header -->
       <div class="box-body">
          <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                <div class="form-group">
                   <label>Nome Completo</label>
                   <%= f.text_field :name, :id => 'name', placeholder: 'Nome completo', class: 'form-control'%>
+               </div>
+            </div>
+            <div class="col-md-6">
+               <div class="form-group">
+                  <label>Tamanho da Camisa</label>
+                  <%= f.select :shirt, options_for_select(sizes_to_array, selected: resource.shirt), {}, class: 'form-control' %>
                </div>
             </div>
             <!-- /.col -->

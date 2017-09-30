@@ -23,5 +23,10 @@ module Semanas17
     Dir[File.join(Rails.root, "lib", "core_ext", "*.rb")].each {|l| require l }
     Dir[File.join(Rails.root, "lib", "classes",  "*.rb")].each {|l| require l } 
 
+    config.to_prepare do
+      Devise::Mailer.layout "mailer"
+    end
+
+
   end
 end

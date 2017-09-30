@@ -1,0 +1,24 @@
+<tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+  <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
+    Usuário: <%= @user.email %>
+  </td>
+</tr>
+<tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+ <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
+      Método de pagamento: <%= @payment.method %>
+  </td>
+</tr>
+
+<tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+  <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
+    <h5>Informações de conta</h5>
+    <ul>
+      <li>Conta corrente: <%= @config.conta %></li>
+      <li>Agencia: <%= @config.agencia %></li>
+      <li>Beneficiado: <%= @config.beneficiado %></li>
+      <li>Banco: <%= @config.banco %></li>
+    </ul>
+    <p>Em caso de pagamento presencial diriga-se à <%= @config.local %>(bloco 708, campus do PIC, UFC) </p>
+    <p><strong>ATENÇÃO:</strong>o pagamento deverá ser feito no prazo de 3 dias úteis após o fechamento da conta, caso contrário, a compra será automaticamente cancelada.</p>
+  </td>
+</tr>

@@ -17,7 +17,7 @@
               
               <div class="box-footer">
                  <div class="row">
-                    <div class="col-sm-6 col-xs-6 border-right">
+                    <div class="col-sm-4 col-xs-4 border-right">
                        <div class="description-block">
                           <h5 class="description-header inscritos_event_"><%=kit.limit - kit.users.count%></h5>
                           <span class="description-text">Kits Restante</span>
@@ -25,9 +25,18 @@
                        <!-- /.description-block -->
                     </div>
                     <!-- /.col -->
+
+                    <div class="col-sm-4 col-xs-4 border-right">
+                       <div class="description-block">
+                          <h5 class="description-header inscritos_event_"><%= (@user.shirt.nil? || @user.shirt == "") ? 'NÃO SELECIONADO'  : @user.shirt  %></h5>
+                          <span class="description-text">Tamanho da Camisa <%= link_to '(EDITAR)',  edit_user_registration_path %></span>
+                       </div>
+                       <!-- /.description-block -->
+                    </div>
+                    <!-- /.col -->
                   
 
-                    <div class="col-sm-6 col-xs-6 border-right">
+                    <div class="col-sm-4 col-xs-4 border-right">
                        <div class="description-block">
                           <h5 class="description-header"><%=number_to_currency(kit.price)%></h5>
                           <span class="description-text">Reais</span>
@@ -44,7 +53,9 @@
                    		 <button type="button" class="btn btn-sm hotel-choose pull-right send_event_enter" id="event" style="background-color: #1AB394; margin-bottom: 5px;color:#fff;margin-top: 3px; margin-right: 20px"><strong>ADICIONAR AO CARRINHO</strong></button>
                    		 <% end %>
                     <% else %>
+                       <%= link_to kit_remove_path(kit.id), method: :post do%>
                        <button type="submit" class="btn btn-sm hotel-choose pull-right send_event_out" id="event" style="background-color: #db3f3f; margin-bottom: 5px;color:#fff;margin-top: 3px; margin-right: 20px"><strong>REMOVER DO CARRINHO</strong></button>
+                      <% end %>
                     <% end %>
 
                     </div>
