@@ -1,3 +1,4 @@
+
 <section class="content-header">
    <h1>
       Programação
@@ -19,11 +20,9 @@
                   <thead>
                      <tr>
                         <th>Nome</th>
-                        <th>dia</th>
+                        <th>Categoria</th>
                         <th>Facilitador</th>
-                        <th>Vagas</th>
-                        <th hidden="">Dia</th>
-                        <th>Horário</th>
+                        <th>Inscritos/Total de vagas</th>
                         <th class="noExport">Opções</th>
                      </tr>
                   </thead>
@@ -32,13 +31,10 @@
                      <% @crew_events.each do |event| %>
                      <tr>
                         <td><%= event.name %></td>
-                        <td>Dia <%= event.start.strftime('%d/%m') %></td>
+                        <td><%= event.event_type.try(:name) %></td>
                         <td><%= event.facilitator %></td>
-                        <td><%= "#{event.users.count} / #{event.limit}" %></td>
-                        <td hidden=""><%= event.start.strftime('%d/%m/%Y') %></td>
-                        <td><%= event.start.strftime('%H:%M') %> - <%= event.end.strftime('%H:%M') %></td>
-          
-
+                        <td><%= event.users.count %>/<%= event.limit %></td>
+         
                         <td>
                           <%= link_to crew_event_path(event) do %>
                            <small class="btn btn-info dropdown-toggle btn-xs">

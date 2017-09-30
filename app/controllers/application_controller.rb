@@ -7,7 +7,12 @@ class ApplicationController < ActionController::Base
   #before_action :room_open?
   #before_action :event_open?
   #before_action :authenticate
+  before_action :load_config
   protected
+  def load_config
+    @config = Config.first
+  end
+  
   def authenticate
     authenticate_or_request_with_http_basic do |username, password|
       username == "gtigti" && password == "gti2gti"

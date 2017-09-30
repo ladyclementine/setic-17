@@ -16,9 +16,6 @@ $ ->
       {data: 'email'}
       {data: 'payment'}
       {data: 'payment_pdf'}
-      {data: 'lot'}
-      {data: 'ej'}
-      {data: 'fed'}
       {data: 'edit'}
       {data: 'login'}
     ]
@@ -46,17 +43,17 @@ $ ->
     buttons: [
       {
         extend: 'csv'
-        title: 'EFEJ 2017 - CSV - ' + moment().format('DD/MM/YYYY HH:mm:ss') + ' - ' + $('.box-title').html()
+        title: 'SEMANAS 2017 - CSV - ' + moment().format('DD/MM/YYYY HH:mm:ss') + ' - ' + $('.box-title').html()
         exportOptions: columns: 'thead th:not(.noExport)'
       }
       {
         extend: 'excel'
-        title: 'EFEJ 2017 - EXCEL - ' + moment().format('DD/MM/YYYY HH:mm:ss') + ' - ' + $('.box-title').html()
+        title: 'SEMANAS 2017 - EXCEL - ' + moment().format('DD/MM/YYYY HH:mm:ss') + ' - ' + $('.box-title').html()
         exportOptions: columns: 'thead th:not(.noExport)'
       }
       {
         extend: 'pdf'
-        title: 'EFEJ 2017 - PDF - ' + moment().format('DD/MM/YYYY HH:mm:ss') + ' - ' + $('.box-title').html()
+        title: 'SEMANAS 2017 - PDF - ' + moment().format('DD/MM/YYYY HH:mm:ss') + ' - ' + $('.box-title').html()
         exportOptions: columns: 'thead th:not(.noExport)'
       }
     ]

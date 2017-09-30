@@ -12,7 +12,7 @@ class Crew::ExcelController < Crew::BaseController
 
 
   def excel_handler
-    @ej = User.all.where.not(junior_enterprise:nil).order(:junior_enterprise).group_by{|d| d.junior_enterprise.split(' ').first.downcase}
+    @ej = User.all
     excel = ExcelHandler.new model: User
     @possible_columns = excel.possible_columns
   end

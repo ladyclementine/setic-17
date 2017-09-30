@@ -1,15 +1,21 @@
+
+
+
 <!-- Main content -->
 <section class="content">
+
    <!-- <section class="box"> -->
    <div class="row">
-      <div class="col-xs-12">
+
+<!--    <%= link_to :back, class: "btn btn-app pull-right" do %>
+                <i class="fa fa-repeat"></i> Voltar
+               <% end %> -->
+      <div class="col-xs-6">
          <div class="box">
             <div class="box-header">
-               <h3 class="box-title">Lista de usuários da programação: <%=@crew_event.name%></h3>
+               <h3 class="box-title">(PAGANTES) Lista de usuários da programação: <%=@crew_event.name%></h3>
 
-               <%= link_to :back, class: "btn btn-app pull-right" do %>
-                <i class="fa fa-repeat"></i> Voltar
-               <% end %>
+               
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -18,31 +24,67 @@
                      <tr>
                         <th>Nome</th>
                         <th>CPF</th>
-                        <th>Lote</th>
-                        <th>EJ</th>
-                        <th>Federada?</th>
                         <th class="noExport">Retirar</th>
                         <th class="noExport">Login</th>
                      </tr>
                   </thead>
                   <tbody>
-                     <% @users.each do |users| %>
+                     <% @users_pays.each do |users| %>
                      <tr>
                         <td><%= users.name.nil? ? 'Não Informado' : users.name.titleize%></td>
                         <td><%= users.cpf%></td>
                         <td>
-                           <%= users.lot.nil? ? 'Não Alocado' : "Lote #{users.lot.number}"%>
-                        </td>
-                        <td><%= users.junior_enterprise.nil? ? 'Não Informado' : users.junior_enterprise %></td>
-                        <td><%= users.federation_check %></td> 
-                        <td>
                           <%= link_to crew_remove_event_user_path(@crew_event, users), method: :delete, data: { confirm: "Deseja realmente remover #{users.name} do evento #{@crew_event.name}?" } do %>
-                           <button type="button" class="btn btn-block btn-danger btn-sm">Remover</button> 
+                           <button type="button" class="btn btn-block btn-danger btn-sm">Remover</button>
                            </small>
                            <% end %>
                         </td>
                         <td> <%= link_to crew_login_user_path(users), target: "_blank", method: :patch do %><button type="button" class="btn btn-block btn-warning btn-sm">Login</button> <% end %>
                       </td>
+
+
+                     </tr>
+                     <% end %>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+
+
+      <div class="col-xs-6">
+         <div class="box">
+            <div class="box-header">
+               <h3 class="box-title title_1">(NÃO PAGANTES) Lista de usuários da programação: <%=@crew_event.name%></h3>
+
+            
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="table_ecej1" class="table table-striped table-bordered dt-responsive nowrap display"  cellspacing="0" width="100%">
+                  <thead>
+                     <tr>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th class="noExport">Retirar</th>
+                        <th class="noExport">Login</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <% @users_nopays.each do |users| %>
+                     <tr>
+                        <td><%= users.name.nil? ? 'Não Informado' : users.name.titleize%></td>
+                        <td><%= users.cpf%></td>
+                        <td>
+                          <%= link_to crew_remove_event_user_path(@crew_event, users), method: :delete, data: { confirm: "Deseja realmente remover #{users.name} do evento #{@crew_event.name}?" } do %>
+                           <button type="button" class="btn btn-block btn-danger btn-sm">Remover</button>
+                           </small>
+                           <% end %>
+                        </td>
+                        <td> <%= link_to crew_login_user_path(users), target: "_blank", method: :patch do %><button type="button" class="btn btn-block btn-warning btn-sm">Login</button> <% end %>
+                      </td>
+
+
                      </tr>
                      <% end %>
                   </tbody>

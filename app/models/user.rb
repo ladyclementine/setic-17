@@ -13,8 +13,8 @@ class User < ApplicationRecord
 
   has_many :subscriptions
   has_many :events, through: :subscriptions
-  has_many :shirts, -> { where(is_shirt: true) }, through: :subscriptions, class_name: "Event"
-  has_many :payments
+  #has_many :shirts, -> { where(is_shirt: true) }, through: :subscriptions, class_name: "Event"
+  has_one :payment
 
   enum certificate: { 'SIM':true, 'NÃO':false }
   #VALIDAÇÃO PARA CONCLUSÃO DE CADASTRO
@@ -31,6 +31,11 @@ class User < ApplicationRecord
 
   def total_cart
     self.events.sum(:price) + self.shirts.sum(:price)
+  end
+
+
+  def total_cart_discount
+    self.events.total_discount_by_pack[0] * (1 - self.events.total_discount)
   end
 
 
@@ -81,7 +86,7 @@ class User < ApplicationRecord
           end
           user.password = Devise.friendly_token[0,20]
           user.name = auth.info.name   # assuming the user model has a name
-          user.remote_avatar_url = auth.info.image.gsub('http://','https://') unless auth.info.image.nil?
+          #user.remote_avatar_url = auth.info.image.gsub('http://','https://') unless auth.info.image.nil?
           user.uid = auth.uid
           #user.gender = auth.info.gender
           user.skip_confirmation!
@@ -98,14 +103,18 @@ class User < ApplicationRecord
 
   #evento
   def has_concurrent_event?(event)
-    events.each do |user_event|
-      condition =   (user_event.end < event.start) ||
-        (user_event.end.strftime('%Y/%m/%d %H:%M:%S') == event.start.strftime('%Y/%m/%d %H:%M:%S')) ||
-        (user_event.start > event.end) ||
-        (user_event.start.strftime('%Y/%m/%d %H:%M:%S') == event.end.strftime('%Y/%m/%d %H:%M:%S'))
-      return true unless condition
+    check_schedules = []
+    conflit_schedules = []
+    check_schedules = self.events.where.not(id: event.id).collect { |e| e.schedules }
+
+    event.schedules.each do |schedule|
+      conflit_schedules << schedule.start_time_between
     end
-    false
+   result = (conflit_schedules.flatten & check_schedules.flatten)
+   false
+   true if !result.empty?
   end
+
+
 
 end

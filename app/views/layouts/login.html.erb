@@ -1,29 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>EFEJ 2017 - EvenTi Login</title>
+    <title><%=@config.sigla%> 2017 - EvenTi Login</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes" name="viewport">
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'login', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'login' %>
-    
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/efej/icon.png">
-    <meta property="og:url"           content="http://www.efej.com.br/login" />
-    <meta property="og:type"          content="website" />
-    <meta property="og:title"         content="EFEJ 2017 - Área do Congressista" />
-    <meta property="og:description"   content="Encontro Fluminense de Empresários Juniores. #CONECTADOS" />
-    <meta property="og:image"         content="http://www.efej.com.br/images/efej/capa_botão_compartilhar.png" />
+<!--     
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/efej/icon.png"> -->
 
     <meta name="msapplication-TileColor" content="#000000">
     <meta name="theme-color" content="#000000">
     <meta name="robots" content="index, follow">
     <meta name="author" content="GTi Engenharia Júnior">
-    <meta name="description" content="Encontro Fluminense de Empresários Juniores. #CONECTADOS">
-    <meta name="keywords" content="mej, eventi, gti, empreendedorismo, empresa júnior, ej, empresário júnior, sites, sistemas, aplicativos, fejece, confederação, empresas, juniores, empresa, junior, federação, ufc, congresso, rio júnior, EFEJ 2010, efej, rio de janeiro, brasil jr">
+    <meta name="description" content="<%=@config.name%>">
+  
 
   </head>
 
-  <body style="background: url(/images/efej/bg.jpg) top center;">
+  <body style="background: url(/images/fundo.png) top center; background-repeat: repeat;">
   <div> &nbsp; </div>
    <% flash.each do |key, value| %>
     <script type="text/javascript">

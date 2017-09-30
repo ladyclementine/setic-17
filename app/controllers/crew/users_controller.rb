@@ -14,8 +14,6 @@ class Crew::UsersController < Crew::BaseController
 
   def edit
     @payment = @user.payment
-    @lots = Lot.all
-    @user_lot = @user.lot unless @user.lot.nil?
   end
 
   def update
@@ -101,6 +99,6 @@ class Crew::UsersController < Crew::BaseController
   end
 
   def user_params
-    params.require(:user).permit(:email,:name, :general_register, :birthday ,:cpf, :gender, :avatar, :phone, :special_needs, :federation, :junior_enterprise, :job, :university, :transport_required,:transport_local, :cep, :state, :city, :address, :name_parents, :phone_parents, :federation_check)
+    params.require(:user).permit(:name, :general_register, :birthday ,:cpf, :course, :semester, :university, :shirt)
   end
 end

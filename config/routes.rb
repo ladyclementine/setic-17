@@ -18,13 +18,13 @@ Rails.application.routes.draw do
     devise_scope :admin do
       authenticated  do
         resources :users
-        resources :lots
         resources :admins
-        resources :hotels, only: [:edit,:update, :index] do
-          get 'users'
+        resources :events do
+          resources :schedules, except: [:index, :show]
         end
-        resources :rooms
-        resources :events
+        resources :event_types, except: [:show]
+        resources :comments
+        resources :configs, only: [:edit, :update]
         get '/events_pending' => 'events#pending'
 
 
@@ -46,11 +46,10 @@ Rails.application.routes.draw do
         patch 'move_user_to_lot/:user_id/:lot_id' => 'admins_methods#move_user_to_lot', as: :move_user_to_lot
         patch 'change_users/:user_id/:user_2_email' => 'admins_methods#change_users', as: :change_users_position
         patch 'disqualify/:id' => 'admins_methods#disqualify_user', as: :disqualify_user
-        patch 'move_first_user_to_lot/:lot_id' => 'admins_methods#move_first_user_to_lot', as: :move_first_user_to_lot
 
         #PAYMENTS
         patch 'change_payment_status/:id/:status' => 'admins_methods#change_payment_status', as: :change_payment_status
-        patch 'set_billet_portion_paid/:id/:portion_paid' => 'admins_methods#billet_portion_paid', as: :set_billet_portion_paid
+
         patch 'remove_payment_method/:id' => 'admins_methods#remove_payment_method', as: :change_payment_method
 
         #sistema
@@ -63,10 +62,6 @@ Rails.application.routes.draw do
         #relatorio
         get 'relatorio' => 'excel#excel_handler', as: :excel_handler
         get 'excel/generate_xls' => 'excel#generate_xls', as: :generate_xls, format: :xls
-        #ej
-        get 'excel/ejlist' => 'excel#ejlist', format: :xls_ejlist
-        #fed
-        get 'excel/fedlist' => 'excel#fedlist', format: :xls_fedlist
 
         #acess account
         patch 'login_user/:user_id' => 'admins_methods#login', as: :login_user
@@ -117,12 +112,8 @@ Rails.application.routes.draw do
 
       put 'active_again' => 'user_dashboard#active_account', as: :active_again
 
-      post 'payment_billet' => 'checkout#billet', as: :payment_billet
-      put 'payment_billet_again' => 'checkout#try_again', as: :payment_billet_again
-
-      post 'payment_pagseguro' => 'checkout#pagseguro', as: :payment_pagseguro
-
-      post 'payment_deposit' => 'checkout#deposit', as: :payment_deposit
+      post 'pay' => 'checkout#create', as: :payment_send
+      post 'remove_payment' => 'checkout#remove_payment', as: :remove_payment
 
       #Sobre o evento
       get "about" => "user_dashboard#about"
@@ -138,6 +129,8 @@ Rails.application.routes.draw do
       get 'events' => 'events#index', as: :events
       post 'events/enter' => 'events#enter_event', as: :enter_event
       post 'events/exit' => 'events#exit_event', as: :exit_event
+      #
+      put 'cart/remove/:id', to: 'checkout#exit_event', as: :remove_from
 
       #get 'terms'  => 'terms#index'
       #put 'terms/update'  => 'terms#update'
@@ -145,10 +138,18 @@ Rails.application.routes.draw do
       #certificado
       get 'certificate.pdf' => 'certificates#show'
 
+      #KITS
+      post 'kit/select/:id' => 'kit#select', as: :kit_select
+
+      post 'kit/remove/:id' => 'kit#remove', as: :kit_remove
+
+      get 'kits' => 'kit#index'
+
+
     end
     unauthenticated :users do
-      root to: "users/sessions#new", as: :unauthenticated_user_root
-      #root to: "site#index", as: :site
+      #root to: "users/sessions#new", as: :unauthenticated_user_root
+      root to: "site#index", as: :site
 
       get 'reminder'  => "users/registrations#show_reminder"
     end
@@ -158,7 +159,7 @@ Rails.application.routes.draw do
 
     get '/inscription/cancel' => 'users/registrations#cancel', :as => 'cancel_user_registration'
 
-    get '/inscription/new_secret' => 'users/registrations#new', :as => 'new_user_registration'
+    get '/inscription/new' => 'users/registrations#new', :as => 'new_user_registration'
     post '/inscription' => 'users/registrations#create', :as => 'user_registration'
 
     get '/inscription/edit' => 'users/registrations#edit', :as => 'edit_user_registration'

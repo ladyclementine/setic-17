@@ -29,20 +29,12 @@ module Crew::UsersHelper
       else
         content_tag(:small, "PagSeguro", class: "label bg-red", 'data-toggle': 'tooltip', title: '', 'data-original-title': "Pagamento #{payment.status_pagseguro.nil? ? ' Pendente' : payment.status_pagseguro}")
       end
-    elsif payment.method == "Boleto"
-      i = 1
-      @billets = " ".html_safe
-      payment.asaas_payments.order('description').each do |boletos|
-        if  boletos.status == 'PENDING'
-          @billets = @billets + content_tag(:small, "#{i}", class: "label bg-red", 'data-toggle': 'tooltip', title: '', 'data-original-title': "Pagamento Pendente | #{boletos.description}") + " "
-        elsif boletos.status == 'RECEIVED'
-          @billets = @billets + content_tag(:small, "#{i}", class: "label bg-green", 'data-toggle': 'tooltip', title: '', 'data-original-title': "Pagamento Recebido | #{boletos.description}") + " "
-        elsif boletos.status == 'OVERDUE'
-          @billets = @billets + content_tag(:small, "#{i}", class: "label bg-blue", 'data-toggle': 'tooltip', title: '', 'data-original-title': "Pagamento Atrasado | #{boletos.description}") + " "
-        end
-        i += 1
+    else  
+      if payment.paid?
+        content_tag(:small, payment.method, class: "label bg-green", 'data-toggle': 'tooltip', title: '', 'data-original-title': "Pagamento Recebido")
+      else
+        content_tag(:small, payment.method, class: "label bg-red", 'data-toggle': 'tooltip', title: '', 'data-original-title': "Pagamento Pendente")
       end
-      @billets
     end
   end
 
@@ -53,7 +45,7 @@ module Crew::UsersHelper
       if payment.paid?
         "#{payment.method} - "
       else
-        "#{payment.method} - Não Pago - #{payment.portion_paid}/#{payment.portions}"
+        "#{payment.method} - Não Pago"
       end
     end
   end

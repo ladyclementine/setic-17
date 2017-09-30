@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170831171709) do
+ActiveRecord::Schema.define(version: 20170930033403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,29 @@ ActiveRecord::Schema.define(version: 20170831171709) do
     t.index ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "configs", force: :cascade do |t|
+    t.string   "name"
+    t.string   "sigla"
+    t.string   "logo"
+    t.string   "conta"
+    t.string   "agencia"
+    t.string   "beneficiado"
+    t.string   "banco"
+    t.string   "local"
+    t.string   "email"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "faq"
+    t.boolean  "close"
+  end
+
   create_table "event_types", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -60,7 +83,7 @@ ActiveRecord::Schema.define(version: 20170831171709) do
     t.integer  "limit"
     t.text     "description"
     t.string   "avatar"
-    t.string   "price"
+    t.float    "price",         default: 0.0
     t.integer  "event_type_id"
     t.boolean  "is_shirt",      default: false
     t.datetime "created_at",                    null: false
@@ -72,9 +95,10 @@ ActiveRecord::Schema.define(version: 20170831171709) do
     t.float    "price"
     t.integer  "user_id"
     t.boolean  "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.datetime "deleted_at"
+    t.string   "url_pagseguro"
     t.index ["deleted_at"], name: "index_payments_on_deleted_at", using: :btree
     t.index ["user_id"], name: "index_payments_on_user_id", using: :btree
   end
@@ -125,6 +149,7 @@ ActiveRecord::Schema.define(version: 20170831171709) do
     t.string   "provider"
     t.string   "uid"
     t.string   "email_face"
+    t.string   "shirt"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["deleted_at"], name: "index_users_on_deleted_at", using: :btree
     t.index ["email"], name: "index_users_on_email", where: "(deleted_at IS NULL)", using: :btree

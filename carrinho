@@ -1,0 +1,29 @@
+<li class="dropdown user user-menu" style="font-size: 20px">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span>(2)</span>
+                        </a>
+
+
+                        <ul class="dropdown-menu">
+                           <!-- User image -->
+                           <li class="user-header">
+                              <p>
+                                Listar programação, remover, valor total
+                              </p>
+                           </li>
+                           <!-- Menu Body -->
+                           <!-- Menu Footer-->
+                           <li class="user-footer">
+                              <div class="pull-left">
+                                 <button class="btn btn-default btn-flat">Limpar Carrinho</button>
+                                 
+                              </div>
+                              <div class="pull-right">
+                                 <button class="btn btn-default btn-flat">Finalizar Compra</span></button>
+                                 
+                              </div>
+
+                           </li>
+                        </ul>
+                     </li>

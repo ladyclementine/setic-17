@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <title>EFEJ 2017 - Área do Congressista</title>
+      <title><%=@config.sigla%> 2017 - Área do Congressista</title>
       <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
       <%= csrf_meta_tags %>
       <%= stylesheet_link_tag    'dashboard', media: 'all','data-turbolinks-track': 'reload' %>
       <%= javascript_include_tag 'dashboard' %>
-      <link rel="icon" type="image/png" sizes="16x16" href="/images/efej/icon.png">
+<!--       <link rel="icon" type="image/png" sizes="16x16" href="/images/efej/icon.png"> -->
       <meta name="msapplication-TileColor" content="#ffffff">
       <meta name="theme-color" content="#ffffff">
       <meta name="robots" content="index,nofollow">
       <meta name="author" content="GTi Engenharia Júnior">
-      <meta name="description" content="Encontro Fluminense de Empresários Juniores. #CONECTADOS">
-      <meta name="keywords" content="mej, eventi, gti, empreendedorismo, empresa júnior, ej, empresário júnior, sites, sistemas, aplicativos, fejece, confederação, empresas, juniores, empresa, junior, federação, ufc, congresso, rio júnior, EFEJ 2017, efej, rio de janeiro, brasil jr">
+      <meta name="description" content="<%=@config.name%>"">
+
    </head>
    <body class="sidebar-mini skin-blue">
       <% flash.each do |key, value| %>
@@ -26,9 +26,9 @@
             <!-- Logo -->
             <a href="javascript:void(0)" class="logo">
                <!-- mini logo for sidebar mini 50x50 pixels -->
-               <span class="logo-mini"><b>E</b></span>
+               <span class="logo-mini"><b><%=@config.sigla[0]%></b></span>
                <!-- logo for regular state and mobile devices -->
-               <div align="center"><span class="logo-lg user-image"><img src="/images/efej/logo-branca.png"></span></div>
+               <div align="center"><span class="logo-lg user-image"><img src="/site/images/logo_B.png"></span></div>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
@@ -55,7 +55,7 @@
                               <ul class="menu">
                                  <li>
                                     <a href="#">
-                                    <i class="fa fa-users text-aqua"></i> Bem vindo ao EFEJ 2017 :)
+                                    <i class="fa fa-users text-aqua"></i> Bem vindo :)
                                     </a>
                                  </li>
                               </ul>
@@ -64,35 +64,7 @@
                         </ul>
                      </li>
                      <!-- User Account: style can be found in dropdown.less -->
-                     <li class="dropdown user user-menu" style="font-size: 20px">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-shopping-cart"></i>
-                        <span>(2)</span>
-                        </a>
-
-
-                        <ul class="dropdown-menu">
-                           <!-- User image -->
-                           <li class="user-header">
-                              <p>
-                                Listar programação, remover, valor total
-                              </p>
-                           </li>
-                           <!-- Menu Body -->
-                           <!-- Menu Footer-->
-                           <li class="user-footer">
-                              <div class="pull-left">
-                                 <button class="btn btn-default btn-flat">Limpar Carrinho</button>
-                                 
-                              </div>
-                              <div class="pull-right">
-                                 <button class="btn btn-default btn-flat">Finalizar Compra</span></button>
-                                 
-                              </div>
-
-                           </li>
-                        </ul>
-                     </li>
+                     
                   </ul>
                </div>
             </nav>
@@ -114,7 +86,7 @@
                <div class="pull-right hidden-xs">
                  <b>Version</b> 2.3.8
                </div>-->
-            <strong>EFEJ 2017. Desenvolvido com ♥ pela <a href="http://www.gti.ufc.br/" target="_blank">GTI Jr.</a></strong> 
+            <strong><%=@config.sigla%> 2017. Desenvolvido com ♥ pela <a href="http://www.gti.ufc.br/" target="_blank">GTI Jr.</a></strong> 
             <div class="pull-right hidden-xs" style="margin-top: -5px">
                <a target="_blank" href="https://www.facebook.com/gti.ufc/" class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a>
             </div>

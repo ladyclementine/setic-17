@@ -4,19 +4,20 @@ class Crew::EventsController < Crew::BaseController
   # GET /crew/events
   # GET /crew/events.json
   def index
-    @crew_events = Event.all
+    @crew_events = Event.where(is_shirt: false)
   end
 
   # GET /crew/events/1
   # GET /crew/events/1.json
   def show
-    @users = @crew_event.users
+    @users_nopays = @crew_event.users.no_pays
+    @users_pays = @crew_event.users.pays
   end
 
   def pending
     @days = Event.join_events_by_time
   end
-  
+
 
   # GET /crew/events/new
   def new
@@ -84,6 +85,6 @@ class Crew::EventsController < Crew::BaseController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def crew_event_params
-    params.require(:event).permit(:name, :start, :end, :limit, :description, :facilitator, :avatar)
+    params.require(:event).permit(:name, :start, :end, :limit, :description, :facilitator, :avatar, :event_type_id, :price)
   end
 end

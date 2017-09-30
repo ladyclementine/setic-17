@@ -4,30 +4,27 @@ class Crew::AdminsController < Crew::BaseController
   def dashboard
     @user = User.all
     @user_list = User.order("created_at DESC").limit(8)
-    @eligible_users = User.eligible.order(:created_at)
-    @disqualified_users = User.disqualified
-    @allocated_users = User.allocated
     @pays = User.pays
     @onlines = User.online
-    @lots = Lot.all.order("number")
-    @select_boleto = User.joins(:payment).where("payments.method = 'Boleto'")
-    @select_pagseguro = User.joins(:payment).where("payments.method = 'PagSeguro'")
+    #@select_boleto = User.joins(:payment).where("payments.method = 'Boleto'")
+    #@select_pagseguro = User.joins(:payment).where("payments.method = 'PagSeguro'")
 
-    @total = 0
-    @tPagseguro = 0
-    @tBoleto = 0
+    #@total = 0
+    #@tPagseguro = 0
+    #@tBoleto = 0
 
-    @pays.each do |user|
-      if user.payment.method == 'PagSeguro' && user.payment.paid? && !user.payment.price.nil?
-        @total += user.payment.price
-        @tPagseguro += user.payment.price
-      elsif user.payment.method == 'Boleto' && !user.payment.asaas_payments.nil? && !user.payment.price.nil?
-        parcelas = user.payment.portions
-        total_pago = user.payment.asaas_payments.where(status: 'RECEIVED').count
-        @total += (user.payment.price/parcelas) * total_pago
-        @tBoleto += (user.payment.price/parcelas) * total_pago
-      end
-    end
+    #@pays.each do |user|
+      #if user.payment.method == 'PagSeguro' && user.payment.paid? && !user.payment.price.nil?
+        #@total += user.payment.price
+        #@tPagseguro += user.payment.price
+   
+        #total_pago = user.payment.asaas_payments.where(status: 'RECEIVED').count
+        #@total += (user.payment.price/parcelas) * total_pago
+        #@tBoleto += (user.payment.price/parcelas) * total_pago
+      #end
+    #end
+    @total = Payment.where(status: true)
+    @total_pendente = Payment.where(status: false)
   end
 
 

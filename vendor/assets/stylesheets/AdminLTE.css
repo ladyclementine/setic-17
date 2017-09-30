@@ -2062,6 +2062,11 @@ a:focus {
   border-radius: 2px;
   margin-bottom: 15px;
 }
+.info-box-packs{
+  text-align: center;
+  padding: 10px;
+  border-bottom: 7px solid #2fa7da;
+}
 .info-box small {
   font-size: 14px;
 }
@@ -2084,7 +2089,7 @@ a:focus {
   border-bottom-left-radius: 2px;
   display: block;
   float: left;
-  height: 90px;
+  height: 100%;
   width: 90px;
   text-align: center;
   font-size: 45px;
@@ -2100,13 +2105,14 @@ a:focus {
 }
 .info-box-number {
   display: block;
-  font-weight: bold;
+
   font-size: 18px;
 }
 .progress-description,
 .info-box-text {
   display: block;
   font-size: 14px;
+    font-weight: bold;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -2366,16 +2372,16 @@ a:focus {
 }
 
 .btn-primary {
-  background-color: #f91675;
-  border-color: #e10d67;
+  background-color: #870017;
+  border-color: #ff0000;
 }
 .btn-primary:hover,
 .btn-primary:active,
 .btn-primary:focus,
 .btn-primary:active:focus,
 .btn-primary.hover {
-  background-color: #d7065e;
-  border-color: #d7065e;
+  background-color: #870017;
+  border-color: #000;
 }
 
 .btn-success {
@@ -2626,6 +2632,11 @@ a:focus {
   margin-bottom: -2px;
   margin-right: 5px;
 }
+.filtros-nav-tabs-custom > .nav-tabs > li {
+  margin: 0px;
+  padding: 10px 10px 0px 10px; 
+}
+
 .nav-tabs-custom > .nav-tabs > li > a {
   color: #444;
   border-radius: 0;
@@ -3190,7 +3201,7 @@ table.text-center th {
   border: 3px solid #fff;
 }
 .widget-user .box-footer {
-  padding-top: 30px;
+  padding-top: 40px;
 }
 .widget-user-2 .widget-user-header {
   padding: 20px;
