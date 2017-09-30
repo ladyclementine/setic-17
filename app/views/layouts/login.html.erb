@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%=@config.sigla%> 2017 - EvenTi Login</title>
+    <title>Stem 2017 - EvenTi Login</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes" name="viewport">
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'login', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'login' %>
-<!--     
+<!--
     <link rel="icon" type="image/png" sizes="16x16" href="/images/efej/icon.png"> -->
 
     <meta name="msapplication-TileColor" content="#000000">
     <meta name="theme-color" content="#000000">
     <meta name="robots" content="index, follow">
     <meta name="author" content="GTi Engenharia Júnior">
-    <meta name="description" content="<%=@config.name%>">
-  
+
 
   </head>
 
@@ -24,10 +23,10 @@
     <script type="text/javascript">
       toastr.warning('<span><%= value %></span>', "Aviso");
      </script>
-  <% end %> 
+  <% end %>
   <%= yield %>
 
-  
+
     <%= javascript_include_tag 'login_footer' %>
   </body>
 </html>
