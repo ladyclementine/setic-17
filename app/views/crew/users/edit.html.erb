@@ -29,7 +29,7 @@
       <div class="box-body">
          <div class="row">
             <div class="col-md-3">
-               <%= link_to "Remover Programações", crew_disqualify_user_path(@user), class: 'btn btn-block btn-danger', method: :patch, data: { confirm: "Deseja realmente inativar #{@user.name || @user.email}" },'data-toggle': "tooltip", 'title': "", 'data-original-title': "Remover todas as programações" %>
+               <%= link_to "Remover Programações","", class: 'btn btn-block btn-danger', method: :patch, data: { confirm: "(NÃO disponível) Deseja realmente inativar #{@user.name || @user.email}" },'data-toggle': "tooltip", 'title': "", 'data-original-title': "(NÃO disponível) Remover todas as programações" %>
             </div>
 
             <% if !@payment.nil? %>
@@ -86,10 +86,16 @@
       <!-- /.box-header -->
       <div class="box-body">
          <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                <div class="form-group">
                   <label>Nome Completo</label>
                   <%= f.text_field :name, :id => 'name', placeholder: 'Nome completo', class: 'form-control'%>
+               </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                  <label>Tamanho da Camisa</label>
+                  <%= f.select :shirt, options_for_select(sizes_to_array, selected: @user.shirt), {}, class: 'form-control' %>
                </div>
             </div>
             <!-- /.col -->

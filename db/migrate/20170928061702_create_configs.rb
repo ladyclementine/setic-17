@@ -10,7 +10,6 @@ class CreateConfigs < ActiveRecord::Migration[5.0]
       t.string :banco
       t.string :local
       t.string :email
-
       t.timestamps
     end
   end

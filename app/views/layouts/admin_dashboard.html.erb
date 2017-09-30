@@ -6,15 +6,15 @@
       <%= csrf_meta_tags %>
       <%= stylesheet_link_tag    'dashboard', media: 'all','data-turbolinks-track': 'reload' %>
       <%= javascript_include_tag 'dashboard' %>
-      <link rel="icon" type="image/png" sizes="16x16" href="/images/efej/icon.png">
+<!--       <link rel="icon" type="image/png" sizes="16x16" href="/images/efej/icon.png"> -->
       <link rel="manifest" href="/icons/manifest.json">
       <meta name="msapplication-TileColor" content="#ffffff">
       <meta name="theme-color" content="#ffffff">
 
       <meta name="robots" content="noindex, nofollow">
       <meta name="author" content="GTi Engenharia Júnior">
-      <meta name="description" content="Encontro Fluminense de Empresários Juniores. #CONECTADOS">
-    <meta name="keywords" content="mej, eventi, gti, empreendedorismo, empresa júnior, ej, empresário júnior, sites, sistemas, aplicativos, fejece, confederação, empresas, juniores, empresa, junior, federação, ufc, congresso, rio júnior, EFEJ 2010, efej, rio de janeiro, brasil jr">
+      <meta name="description" content="<%=@config.name%>">
+  
 
    </head>
    <body class="sidebar-mini skin-blue">
@@ -34,7 +34,7 @@
       <span class="logo-mini"><b>E</b></span>
       <!-- logo for regular state and mobile devices -->
   
-      <span class="logo-lg user-image"><b>EFEJ</b> 2017</span>
+      <span class="logo-lg user-image"><b><%=@config.sigla%></b> 2017</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -84,7 +84,7 @@
               <%= image_tag('dog.jpg', class:'img-circle', style:'max-width: 100px;') %>
                 <p>
                   <%= @admin.name.nil? ? @admin.email : @admin.name %>
-                  <small>FEDERA TUDO</small>
+                  <small>VENDE TUDO!</small>
                 </p>
               </li>
               <!-- Menu Body -->

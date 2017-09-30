@@ -34,7 +34,7 @@
             <div class="col-md-6">
                <div class="form-group">
                   <label>Tamanho da Camisa</label>
-                  <%= f.select :shirt, options_for_select(sizes_to_array, selected: resource.shirt), {}, class: 'form-control' %>
+                  <%= f.select :shirt, options_for_select(sizes_to_array, selected: @user.shirt), {}, class: 'form-control' %>
                </div>
             </div>
             <!-- /.col -->

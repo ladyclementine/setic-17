@@ -28,7 +28,7 @@ class Crew::SchedulesController < Crew::BaseController
       end
     end
   end
-
+  
   # PATCH/PUT /events/1
   def update
     if @schedule.update(schedule_params)

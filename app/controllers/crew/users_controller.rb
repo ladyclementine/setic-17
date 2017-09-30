@@ -99,6 +99,6 @@ class Crew::UsersController < Crew::BaseController
   end
 
   def user_params
-    params.require(:user).permit(:name, :general_register, :birthday ,:cpf, :course, :semester, :university)
+    params.require(:user).permit(:name, :general_register, :birthday ,:cpf, :course, :semester, :university, :shirt)
   end
 end

@@ -24,6 +24,7 @@ Rails.application.routes.draw do
         end
         resources :event_types, except: [:show]
         resources :comments
+        resources :configs, only: [:edit, :update]
         get '/events_pending' => 'events#pending'
 
 
@@ -45,10 +46,10 @@ Rails.application.routes.draw do
         patch 'move_user_to_lot/:user_id/:lot_id' => 'admins_methods#move_user_to_lot', as: :move_user_to_lot
         patch 'change_users/:user_id/:user_2_email' => 'admins_methods#change_users', as: :change_users_position
         patch 'disqualify/:id' => 'admins_methods#disqualify_user', as: :disqualify_user
-      
+
         #PAYMENTS
         patch 'change_payment_status/:id/:status' => 'admins_methods#change_payment_status', as: :change_payment_status
-      
+
         patch 'remove_payment_method/:id' => 'admins_methods#remove_payment_method', as: :change_payment_method
 
         #sistema

@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(version: 20170930033403) do
     t.string   "email"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "faq"
+    t.boolean  "close"
   end
 
   create_table "event_types", force: :cascade do |t|

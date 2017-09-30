@@ -8,7 +8,7 @@
  *= require toast/toastr.css
 
  = require skins/_all-skins.css
-
+*= require iCheck/minimal/blue
  *= require dropify/dropify.css
  *= require datepicker/daterangepicker.css
  *= require datatable/dataTables.bootstrap.css

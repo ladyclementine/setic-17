@@ -13,7 +13,7 @@
      <div class="col-md-3">
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Dados Pessoais</h3>
+              <h3 class="box-title">Selecione os campos</h3>
               <!-- /.box-tools -->
             </div>
             <!-- /.box-header -->
@@ -33,26 +33,12 @@
                 <div>
                   <input type="checkbox" name="selected_columns[Birthday]" id="selected_columns_Birthday" value="1" class="minimal"/> <label>Data de Nasc.</label>
                 </div>
-                <div>
-                  <input type="checkbox" name="selected_columns[Gender]" id="selected_columns_Gender" value="1" class="minimal" /> <label>Sexo</label>
-                </div>
+              
                 <div>
                   <input type="checkbox" name="selected_columns[Created at]" id="selected_columns_Created_at" value="1" class="minimal" /> <label>Data de cadastro</label>
                 </div>
                 <div>
-                  <input type="checkbox" name="selected_columns[Special needs]" id="selected_columns_Special_needs" value="1" class="minimal"  /> <label>Necessidades</label>
-                </div>  
-                <div>
-                  <input type="checkbox" name="selected_columns[Transport required]" id="selected_columns_Transport_required" value="1"  class="minimal"  /> <label>Traslado?</label>
-                </div>  
-                 <div>
-                  <input type="checkbox" name="selected_columns[Room]" id="selected_columns_Room_required" value="1"  class="minimal"  /> <label>Quarto / Hotel</label>
-                </div>
-                <div>
-                  <input type="checkbox" name="selected_columns[Lot]" id="selected_columns_Lot_required" value="1"  class="minimal"  /> <label> Número do Lote</label>
-                </div>
-                <div>
-                  <input type="checkbox" name="selected_columns[Certificate]" id="selected_columns_Certificate_required" value="1"  class="minimal"  /> <label> Respondeu a pesquisa?</label>
+                  <input type="checkbox" name="selected_columns[University]" id="selected_columns_University" value="1"  class="minimal" checked="true" /> <label>Universidade</label>
                 </div>
                 <div>
                   <input type="checkbox" name="selected_columns[Login_face]" id="selected_columns_Login_face_required" value="1"  class="minimal"  /> <label> Login via facebook? </label>
@@ -62,80 +48,6 @@
           <!-- /. box -->
      </div>
 
-     <div class="col-md-3">
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Dados do MEJ</h3>
-              <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <div>
-                  <input type="checkbox" name="selected_columns[Federation check]" id="selected_columns_Federation_check" value="1"  class="minimal" checked="true" /> <label>Federada?</label>
-                </div>
-                <div>
-                   <input type="checkbox" name="selected_columns[Federation]" id="selected_columns_Federation" value="1"  class="minimal" checked="true" /> <label>Nome Federação</label>
-                </div>
-                <div>
-                 <input type="checkbox" name="selected_columns[Junior enterprise]" id="selected_columns_Junior_enterprise" class="minimal"  value="1" checked="true" /> <label>Nome da EJ</label>
-                </div>
-                <div>
-                  <input type="checkbox" name="selected_columns[Job]" id="selected_columns_Job" value="1" class="minimal" /> <label>Cargo</label>
-                </div>
-                <div>
-                  <input type="checkbox" name="selected_columns[University]" id="selected_columns_University" value="1"  class="minimal" checked="true" /> <label>Universidade</label>
-                </div>
-            </div>
-          </div>
-          <!-- /. box -->
-     </div>
-
-     <div class="col-md-3">
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Endereço</h3>
-              <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <div>
-                  <input type="checkbox" name="selected_columns[Cep]" id="selected_columns_Cep" value="1" class="minimal"/> <label>CEP</label>
-                </div>
-                <div>
-                   <input type="checkbox" name="selected_columns[City]" id="selected_columns_City" value="1" class="minimal" checked="true" /> <label>Cidade</label>
-                </div>
-                <div>
-                 <input type="checkbox" name="selected_columns[State]" id="selected_columns_State" class="minimal"  value="1" checked="true" /> <label>Estado</label>
-                </div>
-                <div>
-                  <input type="checkbox" name="selected_columns[Address]" id="selected_columns_Address" value="1" class="minimal" /> <label>Endereço</label>
-                </div>
-            </div>
-          </div>
-          <!-- /. box -->
-     </div>
-
-     <div class="col-md-3">
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Contatos</h3>
-              <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <div>
-                  <input type="checkbox" name="selected_columns[Phone]" id="selected_columns_Phone" value="1" class="minimal"/> <label>Número</label>
-                </div>
-                <div>
-                   <input type="checkbox" name="selected_columns[Phone parents]" id="selected_columns_Phone_parents" value="1" class="minimal" /> <label>Número do resp.</label>
-                </div>
-                <div>
-                 <input type="checkbox" name="selected_columns[Name parents]" id="selected_columns_Name_parents" class="minimal"  value="1" /> <label>Nome do resp.</label>
-                </div>
-            </div>
-          </div>
-          <!-- /. box -->
-     </div>
 
 
      <div class="col-md-12">
@@ -149,17 +61,11 @@
                <label>Status do Pagamento</label>
                <select name="pay_status" class="form-control"> 
                 <option value="0"> Todos</option>
-                <option value="1"> Pago (Total e Parcial)</option>
-                <option value="2"> Pago (Total)</option>
-                <option value="3"> Pago (Parcial)</option>
-                <option value="4"> Não Pago (Selecionaram uma forma de pag.)</option>
-                <option value="5"> Não selecionado </option>
+                <option value="1"> Pago </option>
+                <option value="2"> Não Pago </option>
                </select>
             </div>
-            <div class="box-body">
-               <label>EJ</label>
-               <%=select("filtro", "ej_name", @ej.map {|e, u| [u.map{ |h| h.junior_enterprise}.max.titleize ,e] }, {include_blank: 'Todas'}, class: 'form-control') %>
-            </div>
+        
           </div>
           <!-- /. box -->
      </div>
