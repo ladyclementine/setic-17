@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-xs-12">
           <h2 class="page-header">
-            <i class="fa fa-globe"></i> Pedido #<%= @user.confirmation_token.first(3).upcase %><%= @user.id %>
+            <i class="fa fa-globe"></i> Pedido #<%= @user.confirmation_token.first(3).upcase ? @user.confirmation_token.first(3).upcase : 'GT1-33'  %><%= @user.id %>
 
           </h2>
         </div>
