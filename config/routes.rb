@@ -24,7 +24,10 @@ Rails.application.routes.draw do
         end
         resources :event_types, except: [:show]
         resources :comments
-        resources :configs, only: [:edit, :update]
+        #resources :configs, only: [:edit, :update]
+        get 'configs' => 'configs#set_config'
+        patch 'configs_update' => 'configs#update'
+        #post 
         get '/events_pending' => 'events#pending'
 
 
@@ -113,7 +116,7 @@ Rails.application.routes.draw do
       put 'active_again' => 'user_dashboard#active_account', as: :active_again
 
       post 'pay' => 'checkout#create', as: :payment_send
-      post 'remove_payment' => 'checkout#remove_payment', as: :remove_payment
+      post 'change_payment' => 'checkout#change_payment', as: :change_payment
 
       #Sobre o evento
       get "about" => "user_dashboard#about"

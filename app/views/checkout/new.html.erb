@@ -189,9 +189,9 @@
           </button>
 
           <% elsif @user.payment.status == "Pendente" %>
-             <%= link_to remove_payment_path, method: :post do%>   
-              <button type="button" class="btn btn-danger pull-right" style="margin-right: 5px;">
-                <i class="fa fa-download"></i> Deletar Pagamento
+             <%= link_to change_payment_path, method: :post do%>   
+              <button type="button" class="btn btn-info pull-right" style="margin-right: 5px;">
+                <i class="fa fa-arrows-h"></i> Solicitar Trocar
               </button>
             <% end %>
           <% end %>

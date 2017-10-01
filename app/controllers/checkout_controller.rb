@@ -39,18 +39,9 @@ class CheckoutController < BaseController
   end
 
 
-  def remove_payment
-    unless @user.payment.paid? 
-      @user.payment.destroy
-    else
-      redirect_to payment_path, alert: "Não foi possível apagar o método de pagamento."
-      return false
-    end
-
-    if @user.payment.save
-      redirect_to payment_path, notice: "Método do pagamento foi apagado."
-    else
-      redirect_to payment_path, alert: "Não foi possível apagar o método de pagamento"
+  def change_payment
+    if PaymentMailer.require_change(@user).deliver_now
+      redirect_to :payment, notice: 'Sua solicitação foi enviada, aguarde contato!'
     end
   end
 

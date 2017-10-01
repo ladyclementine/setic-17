@@ -7,7 +7,7 @@ class Crew::ConfigsController < Crew::BaseController
     # PATCH/PUT /events/1
     def update
       if @config.update(config_params)
-      redirect_to edit_crew_config_path, notice: 'Salvo com sucesso!'
+      redirect_to crew_configs_path, notice: 'Salvo com sucesso!'
       else
         render :edit
       end
