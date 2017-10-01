@@ -36,7 +36,7 @@ class Crew::EventTypesController < Crew::BaseController
   # DELETE /event_types/1
   def destroy
     if @event_type.destroy
-      redirect_to admin_event_types_path, notice: 'EventType was successfully destroyed.'
+      redirect_to crew_event_types_path, notice: 'EventType was successfully destroyed.'
     else
       redirect_to crew_event_types_path, notice: @event_type.errors.full_messages[0]
     end

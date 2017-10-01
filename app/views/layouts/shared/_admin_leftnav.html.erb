@@ -28,7 +28,7 @@
               <i class="fa fa-angle-left pull-right"></i>
             <ul class="treeview-menu">
               <li><%= link_to crew_users_path do %><i class="fa fa-circle-o"></i> Todos os Usuários<% end %></li>
-          
+
               <li><%= link_to crew_users_disqualified_path do %><i class="fa fa-circle-o"></i> Inativos<% end %></li>
               <li><%= link_to crew_users_pays_list_path do %><i class="fa fa-circle-o"></i> Pagos<% end %></li>
               <li><%= link_to "" do %><i class="fa fa-circle-o"></i> Certificados<% end %></li>
@@ -43,6 +43,7 @@
             </span>
             <ul class="treeview-menu">
               <li><%= link_to crew_events_path do %><i class="fa fa-circle-o"></i> Gerenciar Programações<% end %></li>
+              <li><%= link_to new_crew_event_type_path do %><i class="fa fa-circle-o"></i> Adicionar tipo de evento<% end %></li>
               <!--
                <li><%#= link_to crew_events_pending_path do %><i class="fa fa-circle-o"></i> Usuários Pendentes <%# end %></li>-->
             </ul>

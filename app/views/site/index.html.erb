@@ -5,7 +5,6 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		<link rel="icon" type="image/png" sizes="16x16" href="/images/efej/icon.png">
-		<title><%=@config.sigla%></title>
 		<link rel="stylesheet" type="text/css" href="site/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="site/css/site.css">
 		<meta name="robots" content="index,follow">
@@ -20,14 +19,14 @@
 		<header id="top" class="header">
 		  <div class="text-vertical-center">
 		    <div class="container">
-		      <h1 class="visible-sm visible-md visible-lg" style="text-shadow: 1px -2px 0px #000, 1px 2px 0px #000"><%= @config.name %></h1>
-		      <h1 class="visible-xs"  style="text-shadow: 1px -3px 2px #000, 1px 3px 2px #000"><%= @config.sigla %></h1>
+		      <h1 class="visible-sm visible-md visible-lg" style="text-shadow: 1px -2px 0px #000, 1px 2px 0px #000"></h1>
+		      <h1 class="visible-xs"  style="text-shadow: 1px -3px 2px #000, 1px 3px 2px #000"></h1>
 		    </div>
 		    <br>
 		     <%= link_to new_user_registration_path, class:'btn btn-dark btn-lg' do %>
 		      Inscrições
 		     <% end %>
-		    
+
 		    <%= link_to new_user_session_path, class:'btn btn-dark btn-lg' do %>
 		      Acessar sua conta
 		    <% end %>
@@ -97,6 +96,6 @@
 		  // Enable map zooming with mouse scroll when the user clicks the map
 		$('.map').on('click', onMapClickHandler);
 		</script>
-		
+
 	</body>
 </html>

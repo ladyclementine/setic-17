@@ -47,7 +47,7 @@
    </div>
    <!-- ./col -->
   <!--  <div class="col-lg-3 col-xs-6">
-    
+
       <div class="small-box bg-green">
          <div class="inner">
             <h3></h3>
@@ -79,14 +79,7 @@
          </div>
          <!-- /.box-header -->
          <div class="box-body no-padding">
-            <ul class="users-list clearfix">
-               <% @user_list.each do |user| %>
-               <li style="width: 25%">
-                  <%= image_tag(user.avatar_url(:medium), style:'max-height: 100px') if user.avatar? %>
-                  <%= image_tag('dog.jpg', style:'max-height: 100px') if !user.avatar? %>
-                  <a class="users-list-name" href="#"><%= user.name.nil? ? user.email : user.name.titleize%></a>
-               </li>
-               <% end %>
+
             </ul>
             <!-- /.users-list -->
          </div>
@@ -117,15 +110,7 @@
          </div>
          <!-- /.box-header -->
          <div class="box-body no-padding">
-            <ul class="users-list clearfix">
-               <% @onlines.each do |user| %>
-               <li>
-                  <%= image_tag(user.avatar_url(:medium), style:'max-height: 30px;float:left') if user.avatar? %>
-                  <%= image_tag('dog.jpg', style:'max-height: 30px;float:left') if !user.avatar? %>
-                  <a class="users-list-name" style="float: left;margin-left: 5px;" href="#"><%= user.name.nil? ? user.email : user.first_name.titleize%></a>
-               </li>
-               <% end %>
-            </ul>
+
             <!-- /.users-list -->
          </div>
 
