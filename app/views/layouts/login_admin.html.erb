@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    Stem 2017 - ADMIN - EvenTi Login</title>
+    <title><%=@config.sigla%> 2017 - ADMIN - EvenTi Login</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'login', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -12,6 +12,7 @@
     <meta name="theme-color" content="#ffffff">
     <meta name="robots" content="noindex, nofollow">
     <meta name="author" content="GTi Engenharia Júnior">
+    <meta name="description" content="<%=@config.name%>">
   </head>
 
   <body>

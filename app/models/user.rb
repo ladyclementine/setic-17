@@ -9,7 +9,7 @@ class User < ApplicationRecord
   acts_as_paranoid
 
   #INSTALAR: apt-get install imagemagick
-  #mount_uploader :avatar, AvatarUploader
+  mount_uploader :avatar, AvatarUploader
 
   has_many :subscriptions
   has_many :events, through: :subscriptions

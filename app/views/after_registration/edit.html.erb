@@ -69,7 +69,7 @@
             <div class="col-md-6">
                <div class="form-group">
                   <label>Universidade</label>
-                  <%= f.text_field :university, :id => 'university', placeholder: 'Universidade', class: 'form-control'%>
+                    <%= f.select :university, options_for_select(['Anhanguera - EAD', 'Faculdade Farias Brito','Fanor','IFCE FORTALEZA','IFCE MARACANAÚ','Maurício de Nassau','UFC','UNI7','Unifor', 'Outro']), {},  :include_blank => true, :required => true, :class => 'form-control'  %>
                </div>
             </div>
             <!-- /.col -->

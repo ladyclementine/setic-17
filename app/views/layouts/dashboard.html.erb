@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <title> Stem 2017 - Área do Congressista</title>
+      <title><%=@config.sigla%> 2017 - Área do Congressista</title>
       <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
       <%= csrf_meta_tags %>
       <%= stylesheet_link_tag    'dashboard', media: 'all','data-turbolinks-track': 'reload' %>
@@ -11,7 +11,7 @@
       <meta name="theme-color" content="#ffffff">
       <meta name="robots" content="index,nofollow">
       <meta name="author" content="GTi Engenharia Júnior">
-
+      <meta name="description" content="<%=@config.name%>"">
    </head>
    <body class="sidebar-mini skin-blue">
       <% flash.each do |key, value| %>
@@ -25,7 +25,7 @@
             <!-- Logo -->
             <a href="javascript:void(0)" class="logo">
                <!-- mini logo for sidebar mini 50x50 pixels -->
-
+               <span class="logo-mini"><b><%=@config.sigla[0]%></b></span>
                <!-- logo for regular state and mobile devices -->
                <div align="center"><span class="logo-lg user-image"><img src="/site/images/logo_B.png"></span></div>
             </a>
@@ -85,7 +85,7 @@
                <div class="pull-right hidden-xs">
                  <b>Version</b> 2.3.8
                </div>-->
-            <strong>< Stem 2017. Desenvolvido com ♥ pela <a href="http://www.gti.ufc.br/" target="_blank">GTI Jr.</a></strong>
+            <strong><%=@config.sigla%> 2017. Desenvolvido com ♥ pela <a href="http://www.gti.ufc.br/" target="_blank">GTI Jr.</a></strong>
             <div class="pull-right hidden-xs" style="margin-top: -5px">
                <a target="_blank" href="https://www.facebook.com/gti.ufc/" class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a>
             </div>

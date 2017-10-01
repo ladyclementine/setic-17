@@ -11,7 +11,10 @@
       <div class="col-xs-12">
          <div class="box">
             <div class="box-header">
+
+
                <%= link_to "NOVO EVENTO", new_crew_event_path, class:"btn btn-info pull-right" %>
+               <%= link_to "CADASTRAR TIPO DE EVENTO", new_crew_event_type_path, class:"btn btn-primary pull-right" %>
                <h3 class="box-title">Gerenciamento de Programação</h3>
             </div>
             <!-- /.box-header -->
@@ -27,14 +30,14 @@
                      </tr>
                   </thead>
                   <tbody>
-                  
+
                      <% @crew_events.each do |event| %>
                      <tr>
                         <td><%= event.name %></td>
                         <td><%= event.event_type.try(:name) %></td>
                         <td><%= event.facilitator %></td>
                         <td><%= event.users.count %>/<%= event.limit %></td>
-         
+
                         <td>
                           <%= link_to crew_event_path(event) do %>
                            <small class="btn btn-info dropdown-toggle btn-xs">
@@ -53,7 +56,7 @@
                            <% end %>
                         </td>
                      </tr>
-                     <% end %> 
+                     <% end %>
                   </tbody>
                </table>
             </div>
