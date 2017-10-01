@@ -41,8 +41,7 @@
           </span>
           <ul class="treeview-menu">
             <li><%= link_to crew_events_path do %><i class="fa fa-circle-o"></i> Gerenciar Programações<% end %></li>
-            <!--
-             <li><%#= link_to crew_events_pending_path do %><i class="fa fa-circle-o"></i> Usuários Pendentes <%# end %></li>-->
+             <li><%= link_to crew_event_types_path do %><i class="fa fa-circle-o"></i> Gerenciar Tipos <% end %></li>
           </ul>
         </a>
       </li>
@@ -59,8 +58,6 @@
           </span>
           <ul class="treeview-menu">
             <li><%= link_to crew_comments_path do %><i class="fa fa-circle-o"></i> Gerenciar Avisos<% end %></li>
-            <!--
-             <li><%#= link_to crew_events_pending_path do %><i class="fa fa-circle-o"></i> Usuários Pendentes <%# end %></li>-->
           </ul>
         </a>
       </li>
@@ -74,9 +71,6 @@
           <ul class="treeview-menu">
             <li><%= link_to crew_configs_path do %><i class="fa fa-circle-o"></i> Configurações do responsável<% end %></li>
             <li><%= link_to crew_admins_path do %><i class="fa fa-circle-o"></i> Gerenciar Admins<% end %></li>
-            <!--<li><a href="pages/UI/general.html"><i class="fa fa-circle-o"></i> Notificações </a></li>-->
-            <!--<li><%#= link_to crew_system_info_path do %><i class="fa fa-circle-o"></i> Informações <%#end %></li>-->
-            <!-- <li><%#= link_to crew_change_vacancies_index_path do %><i class="fa fa-circle-o"></i> Trocar Vaga <%# end %></li> -->
             <li><%= link_to crew_excel_handler_path do %><i class="fa fa-circle-o"></i> Gerar Relarório<% end %></li>
           </ul>
         </a>
