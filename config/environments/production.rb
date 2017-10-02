@@ -103,6 +103,6 @@ Rails.application.configure do
     :deliver_with => :deliver_now,
     :email_prefix => "[STEM 2017] ",
     :sender_address => %{"notifier" <exceptions@stem.com>},
-    :exception_recipients => %w{pixelzip0@gmail.com, rayane-santos131@hotmail.com}
+    :exception_recipients => %w{pixelzip0@gmail.com, rayanesantos-131@hotmail.com}
   }
 end
