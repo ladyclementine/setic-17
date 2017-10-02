@@ -60,8 +60,8 @@ class Payment < ApplicationRecord
       payment.notification_url = 'http://localhost:3000/confirm_payment'
       payment.redirect_url = 'http://localhost:3000/'
     else
-      payment.notification_url = 'https://rjfej17.herokuapp.com/confirm_payment'
-      payment.redirect_url = 'http://www.efej.com.br'
+      payment.notification_url = 'https://stem17.herokuapp.com/confirm_payment'
+      payment.redirect_url = 'https://stem17.herokuapp.com'
     end
 
     payment.items << {

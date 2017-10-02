@@ -222,14 +222,14 @@ $('.dropify').dropify({
               buttons: [
                 {
                     extend: 'csv',
-                    title: 'EFEJ 2017 - CSV - '+ moment().format('DD/MM/YYYY HH:mm:ss') + ' - '+$('.box-title').html(),
+                    title: 'SEMANAS 2017 - CSV - '+ moment().format('DD/MM/YYYY HH:mm:ss') + ' - '+$('.box-title').html(),
                     exportOptions: {
                         columns: "thead th:not(.noExport)"
                     }
                 },
                 {  
                      extend: 'excel',
-                    title: 'EFEJ 2017 - EXCEL - '+ moment().format('DD/MM/YYYY HH:mm:ss') + ' - '+$('.box-title').html(),
+                    title: 'SEMANAS 2017 - EXCEL - '+ moment().format('DD/MM/YYYY HH:mm:ss') + ' - '+$('.box-title').html(),
                     exportOptions: {
                         columns: "thead th:not(.noExport)"
                     }
@@ -237,7 +237,7 @@ $('.dropify').dropify({
 
                 {
                     extend: 'pdf',
-                    title: 'EFEJ 2017 - PDF - '+ moment().format('DD/MM/YYYY HH:mm:ss') + ' - '+$('.box-title').html(),
+                    title: 'SEMANAS 2017 - PDF - '+ moment().format('DD/MM/YYYY HH:mm:ss') + ' - '+$('.box-title').html(),
                     exportOptions: {
                         columns: "thead th:not(.noExport)"
                     }
@@ -521,7 +521,7 @@ if ($("#edit_user_form").length) {
 }
 
 function popitup(url) {
-    //newwindow=window.open(url,'Tire sua dúvida - EFEJ 2017','height=500,width=500');
+    //newwindow=window.open(url,'Tire sua dúvida - SEMANAS 2017','height=500,width=500');
     newwindow = window.open(url, 'Tire sua dúvida','height=500,width=500'); 
     if (window.focus) {newwindow.focus()}
     return false;
