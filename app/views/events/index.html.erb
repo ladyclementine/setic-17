@@ -74,7 +74,7 @@
                      <h5 class="widget-user-desc"> <%= "#{schedule.start_time.strftime('%H:%M')} - #{schedule.end_time.strftime('%H:%M')}" %></h5>
                   </div>
                   <div class="widget-user-image">
-                     <img class="img-circle" style="border: 3px solid #54524F;" src="https://ecej17.s3.amazonaws.com/uploads/event/avatar/13/medium_J%C3%9ALIA-01.png<%#=event.avatar_url(:medium)%>"  data-toggle="tooltip" title="" data-original-title="<%= schedule.event.facilitator %>" alt="Palestrante Avatar">
+                     <img class="img-circle" style="border: 3px solid #54524F;" src="<%=schedule.event.avatar_url(:medium)%>"  data-toggle="tooltip" title="" data-original-title="<%= schedule.event.facilitator %>" alt="Palestrante Avatar">
                   </div>
                   <div class="box-footer">
                      <div class="row">
