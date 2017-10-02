@@ -25,13 +25,9 @@ class Crew::ExcelController < Crew::BaseController
     @users = nil
   end
 
-  def filter(payment, ej)
+  def filter(payment)
     reset_query_state
 
-    #FILTRO DE EJ
-    if ej!=""
-      @users = users.where("lower(split_part(junior_enterprise, ' ', 1)) = ?", "#{ej}")
-    end
 
     #FILTRO DE PAGAMENTO
     case payment
@@ -40,13 +36,7 @@ class Crew::ExcelController < Crew::BaseController
     when '1'
       @users = users.pays
     when '2'
-      @users = users.pays_total
-    when '3'
-      @users = users.qnt_pays_partial
-    when '4'
       @users = users.no_pays
-    when '5'
-      @users = users.no_selected_payment_e
     end
 
 
@@ -57,7 +47,7 @@ class Crew::ExcelController < Crew::BaseController
   def generate_xls
     excel = ExcelHandler.new model: User
     @columns = excel.get_selected_columns_from_params(params, :selected_columns)
-    @users = filter(params[:pay_status], params[:filtro][:ej_name])
+    @users = filter(params[:pay_status])
     filename = "relatorio_#{Time.now}"
 
     respond_to do |format|
