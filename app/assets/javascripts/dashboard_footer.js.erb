@@ -28,6 +28,19 @@
 //= require crew/users.coffee
 
 $(function() {
+
+$('.dropify').dropify({
+    messages: {
+        'default': 'Arraste a foto ou clique para enviar',
+        'replace': 'Arraste ou clique para substituir',
+        'remove': 'Remover',
+        'error': 'Esse arquivo é muito grande'
+
+    }
+});
+
+
+
     //Flat red color scheme for iCheck
     $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
       checkboxClass: 'icheckbox_flat-green',
@@ -527,6 +540,8 @@ $('body').on('shown.bs.modal', function () {
      $('.patrick-modal').find('.commit').on('click', function () {
       $('.preloader').show();
      });
+
+
 });
 
 
