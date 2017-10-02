@@ -36,11 +36,11 @@
           <i class="fa  fa-credit-card"></i> <span>Pagamento / Carrinho</span>
          <% end %>
       </li>
-      <li>
-        <a href="javascript:void(0)" onclick="popitup('<%=@config.faq%>');">
+<!--       <li>
+        <a href="javascript:void(0)" onclick="popitup('<%#=@config.faq%>');">
           <i class="fa fa-file-pdf-o"></i> <span>FAQ</span>
         </a>
-      </li>
+      </li> -->
       <li>
          <%= link_to(destroy_user_session_path, :method => :delete)  do %>
           <i class="fa fa-sign-out"></i> <span>Sair</span>

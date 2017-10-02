@@ -2,6 +2,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
   before_action :get_user
+  before_action :check_open_system, only: [:new, :create]
   #before_action :verify_facebook_login, only: :edit_password
   layout :determine_layout
   # GET /resource/sign_up
@@ -95,8 +96,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def verify_facebook_login
     unless User.find(@user.id).uid.nil?
       flash[:notice] = "Contas associadas ao facebook não podem alterar uma senha :)"
-      redirect_to authenticated_user_root_path
+      redirect_to new_user_session_path
     end
   end
 
+
+  def check_open_system
+    @config = Config.first
+    unless @config.nil?
+      if @config.close
+        flash[:notice] = "Aguarde a abertura do próximo lote para realizar seu cadastro. Para mais informações, visite nossa página no Facebook."
+        redirect_to authenticated_user_root_path
+      end
+    end
+  end
 end
