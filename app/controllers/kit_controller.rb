@@ -1,5 +1,6 @@
 class KitController < BaseController
   before_action :get_user
+  before_action :verify_register_conclusion
   before_action :error_if_try_pay_has_select, only: [:select, :remove] # PENDENTE
   def select
     kit = Event.find(params[:id])
