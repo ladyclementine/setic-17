@@ -20,7 +20,7 @@ class Event < ApplicationRecord
   end
 
   def self.total_discount
-    total_eventos = self.count - 1
+    total_eventos = self.where.not(price:0).count - 1
     total_discount = total_eventos * 0.05
     if total_discount <= 0.25
       total_discount

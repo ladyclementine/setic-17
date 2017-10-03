@@ -5,7 +5,7 @@ namespace :db do
   task :dump => :environment do
     cmd = nil
     with_config do |app, host, db, user|
-      cmd = "pg_dump --host localhost --username patrick --verbose --clean --no-owner --no-acl --format=c efej_development > #{Rails.root}/db/#{app}.dump"
+      cmd = "pg_dump --host localhost --username patrick --verbose --clean --no-owner --no-acl --format=c semana_development > #{Rails.root}/db/#{app}.dump"
     end
     puts cmd
     exec cmd
@@ -15,7 +15,7 @@ namespace :db do
   task :restore => :environment do
     cmd = nil
     with_config do |app, host, db, user|
-      cmd = "pg_restore --verbose --host localhost --username patrick --clean --no-owner --no-acl --dbname efej_development #{Rails.root}/db/#{app}.dump"
+      cmd = "pg_restore --verbose --host localhost --username patrick --clean --no-owner --no-acl --dbname semana_development #{Rails.root}/db/#{app}.dump"
     end
     Rake::Task["db:drop"].invoke
     Rake::Task["db:create"].invoke
