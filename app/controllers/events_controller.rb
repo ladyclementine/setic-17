@@ -19,7 +19,7 @@ class EventsController < BaseController
       render :status => 200, :json => {mensage: "full", subscribers: event.users.count, infos: "A programação chegou na sua capacidade máxima."}
     elsif current_user.has_concurrent_event?(event)
       concurrents_names = event.concurrents(current_user).map { |event| event.name }.join(' | ')
-      render :status => 200, :json => {mensage: "conflict", subscribers: event.users.count, infos: "Você possui outra(s) programação(ões) no mesmo horário! - #{concurrents_names}"}
+      render :status => 200, :json => {mensage: "conflict", subscribers: event.users.count, infos: "Você possui outra(s) programação(ões) no mesmo horário! "}
     else
       event.add current_user
       if event.contains? current_user
