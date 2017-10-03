@@ -105,7 +105,7 @@ class User < ApplicationRecord
   def has_concurrent_event?(event)
     check_schedules = []
     conflit_schedules = []
-    check_schedules = self.events.where.not(id: event.id).collect { |e| e.schedules }
+    check_schedules = self.events.where(is_shirt: false).where.not(id: event.id).collect { |e| e.schedules }
 
     event.schedules.each do |schedule|
       conflit_schedules << schedule.start_time_between
