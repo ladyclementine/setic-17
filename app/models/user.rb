@@ -13,6 +13,7 @@ class User < ApplicationRecord
 
   has_many :subscriptions
   has_many :events, through: :subscriptions
+
   #has_many :shirts, -> { where(is_shirt: true) }, through: :subscriptions, class_name: "Event"
   has_one :payment
 
@@ -103,28 +104,45 @@ class User < ApplicationRecord
 
   #evento
   #  scope :no_pays, -> { includes(:payment).where(payments: {status: false })}
-  # def has_concurrent_event?(event)
-
-  #   hora = event.schedules.first
-  #   #check_schedules = self.events.where(is_shirt: false).where("schedules.start_time < ? AND schedules.end_time > ?", hora.start_time, hora.end_time)
-  #   check_schedules = self.events.where(is_shirt: false).collect { |e| e.schedules.where("schedules.start_time < ? AND schedules.end_time > ?", hora.start_time, hora.end_time) }
-
-  #   p check_schedules
-  #   false
-  # end
-
-   def has_concurrent_event?(event)
-    check_schedules = []
-    conflit_schedules = []
-    check_schedules = self.events.where.not(id: event.id).collect { |e| e.schedules }
-
-    event.schedules.each do |schedule|
-      conflit_schedules << schedule.start_time_between
+  def has_concurrent_event?(event)
+    condition = false
+    #check_schedules = self.events.where(is_shirt: false).where("schedules.start_time < ? AND schedules.end_time > ?", hora.start_time, hora.end_time)
+    check_schedules = self.events.where.not(id: event.id).where(is_shirt: false).collect { |e| e.schedules }.flatten
+    check_schedules.each do |user_event|
+      event.schedules.each do |schedule1|
+        condition = user_event.end_time < schedule1.start_time ||
+          (user_event.end_time.strftime('%Y/%m/%d %H:%M:%S') == schedule1.start_time.strftime('%Y/%m/%d %H:%M:%S')) ||
+          (user_event.start_time > schedule1.end_time) ||
+          (user_event.start_time.strftime('%Y/%m/%d %H:%M:%S') == schedule1.end_time.strftime('%Y/%m/%d %H:%M:%S'))
+        return true unless condition
+      end
     end
-   result = (conflit_schedules.flatten & check_schedules.flatten)
-   false
-   true if !result.empty?
+    false
   end
+
+  def has_concurrent_event1?(event)
+    events.each do |user_event|
+      condition =   (user_event.end < event.start) ||
+        (user_event.end.strftime('%Y/%m/%d %H:%M:%S') == event.start.strftime('%Y/%m/%d %H:%M:%S')) ||
+        (user_event.start > event.end) ||
+        (user_event.start.strftime('%Y/%m/%d %H:%M:%S') == event.end.strftime('%Y/%m/%d %H:%M:%S'))
+      return true unless condition
+    end
+    false
+  end
+
+  #  def has_concurrent_event?(event)
+  #   check_schedules = []
+  #   conflit_schedules = []
+  #   check_schedules = self.events.where.not(id: event.id).collect { |e| e.schedules }
+
+  #   event.schedules.each do |schedule|
+  #     conflit_schedules << schedule.start_time_between
+  #   end
+  #  result = (conflit_schedules.flatten & check_schedules.flatten)
+  #  false
+  #  true if !result.empty?
+  # end
 
 
 

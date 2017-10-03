@@ -1,5 +1,6 @@
 class Schedule < ApplicationRecord
   belongs_to :event
+
   validates_presence_of :start_time, :end_time
   validates_datetime :end_time, after: :start_time
 
