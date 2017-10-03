@@ -102,9 +102,12 @@ class User < ApplicationRecord
   end
 
   #evento
+  #  scope :no_pays, -> { includes(:payment).where(payments: {status: false })}
   # def has_concurrent_event?(event)
 
-  #   check_schedules = self.events.includes(:schedule).where(is_shirt: false).where("schedules.start_time < ? AND schedules.end_time > ?", date.end_of_day, date.beginning_of_day)
+  #   hora = event.schedules.first
+  #   #check_schedules = self.events.where(is_shirt: false).where("schedules.start_time < ? AND schedules.end_time > ?", hora.start_time, hora.end_time)
+  #   check_schedules = self.events.where(is_shirt: false).collect { |e| e.schedules.where("schedules.start_time < ? AND schedules.end_time > ?", hora.start_time, hora.end_time) }
 
   #   p check_schedules
   #   false
