@@ -132,7 +132,7 @@
           </div>
           <% end %>
 
-             <% if !@user.payment.nil? && @user.payment.method == "PagSeguro"  %>
+             <% if !@user.payment.nil? && @user.payment.method == "PagSeguro" && !@user.payment.paid?  %>
              <p class="lead">PagSeguro</p>
               <b class=text-danger>Atenção:</b> Após efetuar o pagamento, aguarde a confirmação! Será feita de forma automática pelo sistema.</b><br>
                 <%= link_to @user.payment.pay_pagseguro, target: '_blank' do %>
