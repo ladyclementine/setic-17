@@ -1,10 +1,10 @@
-class Crew::EventsController < Crew::BaseController
+class Crew::KitsController < Crew::BaseController
   before_action :set_crew_event, only: [:show, :edit, :update, :destroy]
 
   # GET /crew/events
   # GET /crew/events.json
   def index
-    @crew_events = Event.where(is_shirt: false)
+    @crew_events = Event.where(is_shirt: true)
   end
 
   # GET /crew/events/1
@@ -28,28 +28,12 @@ class Crew::EventsController < Crew::BaseController
   def edit
   end
 
-  # POST /crew/events
-  # POST /crew/events.json
-  def create
-    @crew_event = Event.new(crew_event_params)
-
-    respond_to do |format|
-      if @crew_event.save
-        format.html { redirect_to crew_events_path, notice: 'Evento foi criado com sucesso.' }
-        format.json { render :show, status: :created, location: @crew_event }
-      else
-        format.html { render :new }
-        format.json { render json: @crew_event.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # PATCH/PUT /crew/events/1
   # PATCH/PUT /crew/events/1.json
   def update
     respond_to do |format|
       if @crew_event.update(crew_event_params)
-        format.html { redirect_to crew_events_path, notice: 'Evento foi atualizado com sucesso.' }
+        format.html { redirect_to crew_kits_path, notice: 'Kit foi atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @crew_event }
       else
         format.html { render :edit }
@@ -64,7 +48,7 @@ class Crew::EventsController < Crew::BaseController
     @crew_event.users.destroy_all
     @crew_event.destroy
     respond_to do |format|
-      format.html { redirect_to crew_events_url, notice: 'Event was successfully destroyed.' }
+      format.html { redirect_to crew_kits_url, notice: 'Kit was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -73,7 +57,7 @@ class Crew::EventsController < Crew::BaseController
     user  = User.find(params[:user_id])
     event = Event.find(params[:id])
     event.remove(user)
-    flash[:success] = "#{user.email} foi removido de #{event.name}."
+    flash[:success] = "#{user.email} foi removido do kit."
     redirect_to :back
   end
 
@@ -85,6 +69,6 @@ class Crew::EventsController < Crew::BaseController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def crew_event_params
-    params.require(:event).permit(:name, :start, :end, :limit, :description, :facilitator, :avatar, :event_type_id, :price)
+    params.require(:event).permit(:name,  :limit, :description, :price)
   end
 end

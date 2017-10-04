@@ -21,31 +21,31 @@ class NotificationsController < ApplicationController
         payment_user.status_pagseguro = "Em processamento"
       when :paid
         payment_user.status_pagseguro = "Pago"
-        payment_user.portion_paid = 1
-        user.paid_on = Time.now
+        payment_user.status = "Confirmado"
+        #user.paid_on = Time.now
       when :avaliable
         payment_user.status_pagseguro = "Pago"
-        payment_user.portion_paid = 1
-        user.paid_on = Time.now
+        payment_user.status = "Confirmado"
+        #user.paid_on = Time.now
       when :in_dispute
       when :refunded
         payment_user.status_pagseguro = "Não processado"
-        user.paid_on = nil
+        #user.paid_on = nil
         # user.lot = nil
-        payment_user.portion_paid = 0
+        payment_user.status = "Pendente"
       when :cancelled
         payment_user.status_pagseguro = "Não processado"
-        user.paid_on = nil
+        #user.paid_on = nil
         # user.lot = nil
-        payment_user.portion_paid = 0
+        payment_user.status = "Pendente"
       when :chargeback_charged
         payment_user.status_pagseguro = "Não processado"
-        user.paid_on = nil
+        #user.paid_on = nil
         #  user.lot = nil
-        payment_user.portion_paid = 0
+        payment_user.status = "Pendente"
       when :contested
         payment_user.status_pagseguro = "Não processado"
-        payment_user.portion_paid = 0
+        payment_user.status = "Pendente"
       end
       user.save
       payment_user.save
@@ -59,36 +59,4 @@ class NotificationsController < ApplicationController
     render body: nil, status: 200
   end
 
-  def confirm_payment_asaas
-    unless params['event'].nil?
-      billet = AsaasPayment.where(payment_asaas_id: params['payment']['id']).first
-      if !billet.nil?
-        case params['event']
-        when "PAYMENT_CREATED"
-          p 'PAGAMENTO CRIADO'
-        when "PAYMENT_UPDATED"
-          p 'PAGAMENTO ATUALIZADO'
-        when "PAYMENT_RECEIVED"
-          billet.status = params['payment']['status']
-          billet.client_payment_date = Time.now
-          billet.save
-
-          billet.payment.portion_paid = AsaasPayment.where(status: 'RECEIVED', custumer_id: params['payment']['customer']).count
-          billet.payment.user.paid_on = Time.now
-
-          billet.payment.save
-          billet.payment.user.save
-        when "PAYMENT_OVERDUE" #Cobrança vencida
-          billet.status = params['payment']['status']
-          billet.save
-        when :PAYMENT_DELETED
-          p 'PAGAMENTO DELETADO'
-        end
-
-      else
-        PaymentNotificationsMailer.asaas_error(params['payment']).deliver_now if params['event']=="PAYMENT_RECEIVED"
-      end
-    end
-    render body: nil, status: 200
-  end
 end

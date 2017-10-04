@@ -1,0 +1,2 @@
+module Crew::KitHelper
+end

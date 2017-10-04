@@ -24,6 +24,8 @@ Rails.application.routes.draw do
         end
         resources :event_types, except: [:show]
         resources :comments
+        resources :kits
+
         #resources :configs, only: [:edit, :update]
         get 'configs' => 'configs#set_config'
         patch 'configs_update' => 'configs#update'
@@ -36,6 +38,8 @@ Rails.application.routes.draw do
         get '/change_vacancies/index'
         # Events
         delete '/events/:id/remove/:user_id' => 'events#remove_user', as: :remove_event_user
+        #kits
+        delete '/kits/:id/remove/:user_id' => 'kits#remove_user', as: :remove_kit_user
 
         get '/qualified_users' => 'users#qualified', as: :users_qualified
         get '/disqualified_users' => 'users#disqualified', as: :users_disqualified

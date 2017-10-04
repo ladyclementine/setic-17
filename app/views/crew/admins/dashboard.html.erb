@@ -102,6 +102,71 @@
    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <div class="col-md-12">
+      <div class="box">
+         <div class="box-header with-border">
+            <h3 class="box-title">Lotes e Usuários</h3>
+            <div class="box-tools pull-right">
+               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+               </button>
+               <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            </div>
+         </div>
+         <!-- /.box-header -->
+         <div class="box-body">
+            <div class="row">
+               <!-- /.col -->
+               <div class="col-md-6">
+                  <p class="text-center">
+                     <strong>Infos Adicionais</strong>
+                  </p>
+                  <!-- /.progress-group -->
+                  <div class="progress-group">
+                     <span class="progress-text">Não Sel. Pag.</span>
+                     <span class="progress-number"><b><%=@user.no_selected_payment.count%></b>/<%=@user.count%></span>
+                     <div class="progress sm">
+                        <div class="progress-bar progress-bar-green" style="width: 80%"></div>
+                     </div>
+                  </div>
+
+               </div>
+               <div class="col-md-6">
+                  <p class="text-center">
+                     <strong>Infos de Pagamento</strong>
+                  </p>
+                  <% Payment.new.accepted_payment_methods.each do |p|%>
+                  <div class="progress-group">
+                     <span class="progress-text">Selecionaram <%=p%></span>
+                     <span class="progress-number"><b><%=select_pay_by_type_count(p)%></b></span>
+                     <div class="progress sm">
+                        <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
+                     </div>
+                  </div>
+                  <% end %>
+                  <br>
+                  <% Payment.new.accepted_payment_methods.each do |p|%>
+                  <div class="progress-group">
+                     <span class="progress-text">Recebido <%=p%></span>
+                     <span class="progress-number"><b><%=select_payed_by_type_count(p)%></b></span>
+                     <div class="progress sm">
+                        <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
+                     </div>
+                  </div>
+                  <% end %>
+                  <!-- /.progress-group -->
+               </div>
+               <!-- /.col -->
+            </div>
+            <!-- /.row -->
+         </div>
+         </br>
+      </div>
+      <!-- /.box -->
+   </div>
+
+
+
    <div class="col-md-12">
       <!-- USERS LIST -->
       <div class="box box-success">

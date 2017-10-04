@@ -25,6 +25,9 @@ class User < ApplicationRecord
 
   scope :pays, -> { includes(:payment).where(payments: {status: true})}
   scope :no_pays, -> { includes(:payment).where(payments: {status: false })}
+  scope :no_pays_or_no_select, -> { includes(:payment).where(payments: {status: false }).or(includes(:payment).where(payments: {id: nil})) }
+
+
   scope :online, lambda{ where("updated_at > ?", 10.minutes.ago) }
   scope :no_finalized, -> { where(completed: nil) }
   scope :no_selected_payment, -> { includes(:payment).where(payments: {id: nil})}
@@ -106,7 +109,6 @@ class User < ApplicationRecord
   #  scope :no_pays, -> { includes(:payment).where(payments: {status: false })}
   def has_concurrent_event?(event)
     condition = false
-    #check_schedules = self.events.where(is_shirt: false).where("schedules.start_time < ? AND schedules.end_time > ?", hora.start_time, hora.end_time)
     check_schedules = self.events.where.not(id: event.id).where(is_shirt: false).collect { |e| e.schedules }.flatten
     check_schedules.each do |user_event|
       event.schedules.each do |schedule1|
