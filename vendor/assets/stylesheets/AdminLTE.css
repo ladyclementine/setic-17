@@ -2372,16 +2372,16 @@ a:focus {
 }
 
 .btn-primary {
-  background-color: #870017;
-  border-color: #ff0000;
+  background-color: #000;
+  border-color: #f9b21d;
 }
 .btn-primary:hover,
 .btn-primary:active,
 .btn-primary:focus,
 .btn-primary:active:focus,
 .btn-primary.hover {
-  background-color: #870017;
-  border-color: #000;
+  background-color: #f9b21d;
+  border-color: #fff;
 }
 
 .btn-success {
@@ -2595,7 +2595,7 @@ a:focus {
   border-left: 3px solid transparent;
   color: #444;
   overflow: hidden;
-  white-space: nowrap; 
+  white-space: nowrap;
   text-overflow: ellipsis;
 
 
@@ -2634,7 +2634,7 @@ a:focus {
 }
 .filtros-nav-tabs-custom > .nav-tabs > li {
   margin: 0px;
-  padding: 10px 10px 0px 10px; 
+  padding: 10px 10px 0px 10px;
 }
 
 .nav-tabs-custom > .nav-tabs > li > a {
@@ -4651,7 +4651,7 @@ table.text-center th {
 .bg-aqua-active,
 .modal-info .modal-header,
 .modal-info .modal-footer {
-   background: url('/images/fundo.png') center ; 
+   background: url('/images/fundo.png') center ;
    background-size: cover;
    z-index: 2;
 }
@@ -4662,7 +4662,7 @@ table.text-center th {
   left: 0;
   z-index: 0;
   width: 100%;
-  height: 120px;   
+  height: 120px;
   background: rgba(0, 0, 0, .4) !important;
  }
  .bg-aqua-active h3,  .bg-aqua-active h5,  .bg-aqua-active .box-tools .btn{
@@ -5136,7 +5136,7 @@ header > .container{
 }
 
 .profile-image-login {
-   
+
     height: 100px;
     margin: 20px;
 }
@@ -5185,7 +5185,7 @@ header > .container{
 ::-webkit-scrollbar-track{background-color:#fbfbfd}
 ::-webkit-scrollbar-track:hover{background-color:rgba(50,50,50,.2)}
 
-/* hotel | */ 
+/* hotel | */
 
 .hotel-choose{
   margin-top: -20px;
@@ -5213,7 +5213,7 @@ header > .container{
   margin-bottom: 20px;
   margin-top: 6px;
 
-} 
+}
 
 .content-hotel .users-list{
 
@@ -5245,7 +5245,7 @@ div[class*="col-"] {
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-     background-position: center center; 
+     background-position: center center;
     /* background-repeat: no-repeat; */
     /* background-size: cover; */
 }
@@ -5256,7 +5256,7 @@ div[class*="col-"] {
 
 .textify_links a {
   font-size: 30px;
-  color: #017d8c !important ; 
+  color: #017d8c !important ;
   text-align: center;
 }
 
@@ -5289,7 +5289,7 @@ div[class*="col-"] {
 }
 
 
-@media (max-width: 991px) 
+@media (max-width: 991px)
 {
   .hotel-ventilacao
    {
@@ -5338,7 +5338,7 @@ canvas{
 }
 
 
-/* preloader 
+/* preloader
 -------------------------------------------------------------------------*/
 /* line 132, ../sass/style.scss */
 .preloader {
@@ -5588,7 +5588,7 @@ tr.group:hover {
 
 }
 .btn-events-info {
-background-color: #000; 
+background-color: #000;
 opacity: 0.6
 }
 .logo-proloader-gti2 img {
@@ -5608,10 +5608,10 @@ opacity: 0.6
 
 @-webkit-keyframes identifierG {
   0% {
-    -webkit-transform: rotateY(0deg); 
+    -webkit-transform: rotateY(0deg);
   }
   30% {
-    -webkit-transform: rotateY(90deg); 
+    -webkit-transform: rotateY(90deg);
   }
   68% {
     -webkit-transform: rotateY(720deg);
@@ -5623,10 +5623,10 @@ opacity: 0.6
 
 @-moz-keyframes identifierG {
   0% {
-     -moz-transform: rotateY(0deg); 
+     -moz-transform: rotateY(0deg);
   }
   30% {
-     -moz-transform: rotateY(90deg); 
+     -moz-transform: rotateY(90deg);
   }
   68% {
      -moz-transform: rotateY(720deg);
@@ -5638,10 +5638,10 @@ opacity: 0.6
 
 @-o-keyframes identifierG {
   0% {
-     -o-transform: rotateY(0deg); 
+     -o-transform: rotateY(0deg);
   }
   30% {
-     -o-transform: rotateY(90deg); 
+     -o-transform: rotateY(90deg);
   }
   68% {
      -o-transform: rotateY(720deg);
@@ -5716,7 +5716,7 @@ opacity: 0.6
 .message__title {
   font-size: 23px;
   color: #FFF;
-  margin-bottom: 8px; 
+  margin-bottom: 8px;
   text-shadow: 0px 1px #000;
 
 }
@@ -5725,7 +5725,7 @@ opacity: 0.6
 }
 
 /* RANKING */
-.ranking-ejs{ 
+.ranking-ejs{
   background: url(/images/barrinha3.png) repeat top;
   padding-left:2px;
   padding-top:1px;
@@ -5764,5 +5764,5 @@ opacity: 0.6
 
 }
 .ranking-ejsul li{
-  margin-bottom: 12px !important;  
+  margin-bottom: 12px !important;
 }

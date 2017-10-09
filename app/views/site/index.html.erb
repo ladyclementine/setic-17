@@ -19,8 +19,9 @@
 		<header id="top" class="header">
 		  <div class="text-vertical-center">
 		    <div class="container">
-		     <h1 class="visible-sm visible-md visible-lg" style="text-shadow: 1px -2px 0px #000, 1px 2px 0px #000"><%= @config.name %></h1>		 +		      <h1 class="visible-sm visible-md visible-lg" style="text-shadow: 1px -2px 0px #000, 1px 2px 0px #000"></h1>
- -		      <h1 class="visible-xs"  style="text-shadow: 1px -3px 2px #000, 1px 3px 2px #000"><%= @config.sigla %></h1>
+		     <h1 class="visible-sm visible-md visible-lg"><%= @config.name %>
+				 </h1><h1 class="visible-sm visible-md visible-lg" style="text-shadow: 1px -2px 0px #000, 1px 2px 0px #000"></h1>
+       <h1 class="visible-xs"  style="text-shadow: 1px -3px 2px #000, 1px 3px 2px #000"><%= @config.sigla %></h1>
 		    </div>
 		    <br>
 		     <%= link_to new_user_registration_path, class:'btn btn-dark btn-lg' do %>
@@ -35,6 +36,8 @@
 		    <%# link_to challenge_new_team_inscription_path, class:'btn btn-dark btn-lg' do %>
 		    <!--   Concurso de Planadores: Inscreva-se -->
 		    <%# end %>
+				<span style="background-color:#000; color:#fff; font-size:30px; text-transform:uppercase; letter-spacing:3px; font-weight:300px"> Engenharia </span> <span style="background-color:#000; color:#fff; font-size:30px; text-transform:uppercase; letter-spacing:3px">Química</span>
+					<span style="background-color:#000; color:#fff; font-size:30px; text-transform:uppercase; letter-spacing:3px">Além</span> <span style="background-color:#000; color:#fff; font-size:30px; text-transform:uppercase; letter-spacing:3px">das</span> <span style="background-color:#000; color:#fff; font-size:30px; text-transform:uppercase; letter-spacing:3px">fronteiras</span>
 		  </div>
 		</header>
 		<!-- Services -->
