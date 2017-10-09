@@ -34,8 +34,8 @@ module Packages
        },
        price: 40.0,
        limit: 5
-     }
-     pacote_3:  {
+     },
+     pacote_4:  {
        name: 'Pacote Excelente',
        types: {
          "Palestra": 2,
