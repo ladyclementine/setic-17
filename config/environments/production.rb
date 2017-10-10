@@ -96,13 +96,13 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.action_mailer.default_url_options = { :host => 'stem17.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'seq17.herokuapp.com' }
 
   Rails.application.config.middleware.use ExceptionNotification::Rack,
   :email => {
     :deliver_with => :deliver_now,
-    :email_prefix => "[STEM 2017] ",
-    :sender_address => %{"notifier" <exceptions@stem.com>},
+    :email_prefix => "[SEQ 2017] ",
+    :sender_address => %{"notifier" <exceptions@seq.com>},
     :exception_recipients => %w{pixelzip0@gmail.com, rayanesantos-131@hotmail.com}
   }
 end

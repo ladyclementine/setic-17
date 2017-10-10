@@ -3,12 +3,10 @@ module Packages
      pacote_1:  {
        name: 'Pacote Bom',
        types: {
-         "Palestra": 2,
-         "Mesa Redonda": 1,
-         "MiniCurso": 2
+         "Visita Técnica": 1,
+         "Kit": 1
        },
-       price: 20.0,
-       limit: 0
+       price: 10.0
      },
      pacote_2:  {
        name: 'Pacote Muito bom',
@@ -19,8 +17,7 @@ module Packages
          "Visita Técnica": 1
 
        },
-       price: 30.0,
-       limit: 10
+       price: 30.0
      },
      pacote_3:  {
        name: 'Pacote Ótimo',
@@ -32,8 +29,7 @@ module Packages
          "Oficina": 1
 
        },
-       price: 40.0,
-       limit: 5
+       price: 40.0
      },
      pacote_4:  {
        name: 'Pacote Excelente',
@@ -45,8 +41,7 @@ module Packages
          "Oficina": 1
 
        },
-       price: 40.0,
-       limit: 5
+       price: 40.0
      }
   }
 end

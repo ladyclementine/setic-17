@@ -20,13 +20,14 @@ class Event < ApplicationRecord
   end
 
   def self.total_discount
-    total_eventos = self.where.not(price:0).count - 1
-    total_discount = total_eventos * 0.05
-    if total_discount <= 0.25
-      total_discount
-    else
-      0.25
-    end
+    # total_eventos = self.where.not(price:0).count - 1
+    # total_discount = total_eventos * 0.05
+    # if total_discount <= 0.25
+    #   total_discount
+    # else
+    #   0
+    # end
+    0
   end
 
 
@@ -35,8 +36,8 @@ class Event < ApplicationRecord
     preco_total = self.total_price
     count = Hash.new(0)
     price = 0
-    self.all.each do |a|
-      count[a.event_type.name] += 1 unless a.is_shirt
+    self.where("price != 0").each do |a|
+      count[a.event_type.name] += 1 #unless a.is_shirt
     end
 
     belong = false
