@@ -63,7 +63,18 @@
          rangelength: "O CPF deve possuir 11 dígitos"
        }
      });
-  
+    $( "#entry_year" ).rules( "add", {
+       required: true
+       messages: {
+         required: "Entre com seu ano de ingresso na universidade",
+       }
+     });
+    $( "#matricula" ).rules( "add", {
+       required: true
+       messages: {
+         required: "Entre com seu número de matrícula",
+       }
+     });
      $( "#university" ).rules( "add", {
        required: true,
        messages: {

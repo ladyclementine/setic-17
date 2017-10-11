@@ -1,6 +1,6 @@
 <section class="content-header">
    <h1>
-      Finalizar Cadastro
+      Editar Cadastro
       <small></small>
    </h1>
 </section>
@@ -50,23 +50,12 @@
                 <%= f.text_field :course, :id => 'curso', placeholder: 'Curso', class: 'form-control'%>
                </div>
                <!-- /.form-group -->
-               <div class="form-group">
-                  <label>Matrícula</label>
-                <%= f.text_field :registration, :id => 'matricula', placeholder: 'Matrícula', class: 'form-control'%>
-               </div>
-               <!-- /.form-group -->
-
             </div>
             <!-- /.col -->
             <div class="col-md-6">
                <div class="form-group">
                   <label>RG</label>
                   <%= f.text_field :general_register, :id => 'rg', placeholder: 'RG', class: 'form-control'%>
-               </div>
-               <!-- /.form-group -->
-               <div class="form-group">
-                  <label>Ano de ingresso</label>
-                  <%= f.text_field :entry_year, :id => 'entry_year', placeholder: 'Ano de ingresso', class: 'form-control'%>
                </div>
                <!-- /.form-group -->
                <div class="form-group">
@@ -77,6 +66,19 @@
                <!-- /.form-group -->
             </div>
             <!-- /.col -->
+                     <div class="col-md-6">
+            <div class="form-group">
+                  <label>Matrícula</label>
+                <%= f.text_field :registration, :id => 'matricula', placeholder: 'Matrícula', class: 'form-control'%>
+            </div>
+                              <!-- /.form-group -->
+               <div class="form-group">
+                  <label>Ano de ingresso</label>
+                  <%= f.text_field :entry_year, :id => 'entry_year', placeholder: 'Ano de ingresso', class: 'form-control'%>
+               </div>
+
+            </div>
+               <!-- /.form-group -->
             <div class="col-md-6">
                <div class="form-group">
                   <label>Universidade</label>

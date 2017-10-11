@@ -29,7 +29,7 @@ class AfterRegistrationController < BaseController
   end
 
   def user_params
-    params.require(:user).permit(:name, :general_register, :birthday ,:cpf, :course, :semester, :university, :shirt)
+    params.require(:user).permit(:name, :general_register, :birthday ,:cpf, :course, :semester, :university, :shirt, :registration, :entry_year)
   end
 
   def user_email_params
