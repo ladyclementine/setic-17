@@ -9,7 +9,7 @@ EventType.create(name: 'Mesa Redonda')
 EventType.create(name: 'Kit')
 EventType.create(name: 'Workshop')
 
-# Event.create(limit: 10, name: 'KIT', price: 25.0, is_shirt: true, description: "Camisa, copo etc")
+# Event.create(limit: 10, name: 'KIT', price: 25.0, is_shirt: true, description: "Camisa, copo etc", event_type_id: 10)
 
 # Event.create(facilitator: 'fulano', limit: 4, name: 'Título da palestra', price: 5.0, event_type_id: 1)
 # Event.create(facilitator: 'fulano2', limit: 4, name: 'Workshop TESTE', price: 5.0, event_type_id: 1)

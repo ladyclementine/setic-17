@@ -29,7 +29,7 @@
             <div class="col-md-12">
                <div class="form-group">
                   <label>Início da programação</label>
-                  <%= f.text_field :start_time, placeholder: '', class: 'form-control', autofocus: true%>
+                  <%= f.datetime_field :start_time, placeholder: '', class: 'form-control', autofocus: true%>
                </div>
                <!-- /.form-group -->
             </div>
@@ -37,7 +37,7 @@
             <div class="col-md-12">
                <div class="form-group">
                   <label>Término da programação</label>
-                  <%= f.text_field :end_time, placeholder: '', class: 'form-control'%>
+                  <%= f.datetime_field :end_time, placeholder: '', class: 'form-control'%>
                </div>
                <!-- /.form-group -->
             </div>
