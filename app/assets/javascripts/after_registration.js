@@ -64,13 +64,13 @@
        }
      });
     $( "#entry_year" ).rules( "add", {
-       required: true
+       required: true,
        messages: {
          required: "Entre com seu ano de ingresso na universidade",
        }
      });
     $( "#matricula" ).rules( "add", {
-       required: true
+       required: true,
        messages: {
          required: "Entre com seu número de matrícula",
        }
