@@ -50,6 +50,11 @@
                   <%= f.text_field :course, :id => 'curso', placeholder: 'Curso', class: 'form-control'%>
                </div>
                <!-- /.form-group -->
+               <div class="form-group">
+                  <label>Matrícula</label>
+                <%= f.text_field :registration, :id => 'matricula', placeholder: 'Matrícula', class: 'form-control'%>
+               </div>
+               <!-- /.form-group -->
             </div>
             <!-- /.col -->
             <div class="col-md-6">
@@ -59,8 +64,13 @@
                </div>
                <!-- /.form-group -->
                <div class="form-group">
+                  <label>Ano de ingresso</label>
+                  <%= f.text_field :entry_year, :id => 'entry_year', placeholder: 'Ano de ingresso', class: 'form-control'%>
+               </div>
+               <!-- /.form-group -->
+               <div class="form-group">
                   <label>Semestre</label>
-                  <%= f.text_field :semester, :id => 'semestre', placeholder: 'semester', class: 'form-control'%>
+                  <%= f.text_field :semester, :id => 'semestre', placeholder: 'Semestre', class: 'form-control'%>
                </div>
                <!-- /.form-group -->
                <!-- /.form-group -->
@@ -69,7 +79,7 @@
             <div class="col-md-6">
                <div class="form-group">
                   <label>Universidade</label>
-                    <%= f.select :university, options_for_select(['Anhanguera - EAD', 'Faculdade Farias Brito','Fanor','IFCE FORTALEZA','IFCE MARACANAÚ','Maurício de Nassau','UFC','UNI7','Unifor', 'Outros']), {},  :include_blank => true, :required => true, :class => 'form-control'  %>
+                    <%= f.text_field :university, :id => 'universidade', placeholder: 'Universidade', class: 'form-control' %>
                </div>
             </div>
             <!-- /.col -->

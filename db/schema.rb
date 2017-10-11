@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171002000845) do
+ActiveRecord::Schema.define(version: 20171011184427) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 20171002000845) do
     t.integer  "limit"
     t.text     "description"
     t.string   "avatar"
-    t.float    "price",         default: 0.0
+    t.string   "price"
     t.integer  "event_type_id"
     t.boolean  "is_shirt",      default: false
     t.datetime "created_at",                    null: false
@@ -115,7 +115,8 @@ ActiveRecord::Schema.define(version: 20171002000845) do
   create_table "subscriptions", force: :cascade do |t|
     t.integer "user_id"
     t.integer "event_id"
-    t.index ["event_id", "user_id"], name: "index_subscriptions_on_event_id_and_user_id", using: :btree
+    t.integer "paymant_id"
+    t.index ["event_id", "paymant_id", "user_id"], name: "index_subscriptions_on_event_id_and_paymant_id_and_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -151,6 +152,8 @@ ActiveRecord::Schema.define(version: 20171002000845) do
     t.string   "email_face"
     t.string   "shirt"
     t.string   "avatar"
+    t.string   "registration"
+    t.string   "entry_year"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["deleted_at"], name: "index_users_on_deleted_at", using: :btree
     t.index ["email"], name: "index_users_on_email", where: "(deleted_at IS NULL)", using: :btree
