@@ -3,6 +3,16 @@ class CheckoutController < BaseController
   before_action :verify_register_conclusion
   before_action :redirect_if_try_pay_has_select, only: [:create, :exit_event] # PENDENTE
   before_action :redirect_if_events_blank
+  before_action :check_permanent_event, only: [:exit_event] 
+
+  def check_permanent_event
+    event = Event.find(params[:id])
+    if event.event_type.name == "Palestra" || event.event_type.name == "Mesa-Redonda"
+      redirect_to payment_path, notice: "Não é possível remover programação obrigatória."
+      return true
+    end
+  end
+
 
   require "#{Rails.root}/config/initializers/packages.rb"
 
