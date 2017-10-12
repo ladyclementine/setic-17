@@ -16,7 +16,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     set_minimum_password_length
     if @user.save
       flash[:success] = "Inscrição realizada, em instantes receberá as instruções de confirmação no seu e-mail."
-      redirect_to reminder_path
+      redirect_to site_path
     else
       flash[:error] = "Um erro ocorreu, não foi possível processar sua inscrição. #{@user.errors.full_messages}"
       redirect_to new_user_registration_path
