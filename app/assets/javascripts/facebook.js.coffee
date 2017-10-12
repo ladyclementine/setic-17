@@ -2,7 +2,7 @@ $(document).ready ->
   $('body').prepend('<div id="fb-root"></div>')
 
   $.ajax
-    url: "#{window.location.protocol}//connect.facebook.net/en_US/all.js"
+    url: "#{window.location.protocol}//connect.facebook.net/pt_BR/sdk.js?&version=v2.10"
     dataType: 'script'
     cache: true
 
