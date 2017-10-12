@@ -1,7 +1,7 @@
 module Packages
   ALL_PACKAGES = {
     pacote_1:  {
-      name: 'Stwart',
+      name: 'Stewart',
       types: {
         "Kit": 1
       },
