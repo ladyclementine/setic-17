@@ -5152,6 +5152,7 @@ header > .container{
     -ms-transform: translateY(0%);
     -o-transform: translateY(0%);
     transform: translateY(0%);
+    position: absolute;
 }
 
 .plans-container .price {
@@ -5419,7 +5420,8 @@ canvas{
 }
 
 .patrick-modal .modal-header {
-  background-image: url('/images/efej/modal_avisos.png');
+  background: #F9B21D;
+  border: 2px solid black;
   height: 150px;
   background-size: 600px 100%;
   background-position: bottom;
@@ -5765,4 +5767,16 @@ opacity: 0.6
 }
 .ranking-ejsul li{
   margin-bottom: 12px !important;
+}
+
+
+#pack>h1{
+
+    padding: 20px;
+    font-size: 20px;
+    font-weight: 800;
+    color: #000;
+    border: 2px solid black;
+    margin: 20px;
+    text-align: center;
 }

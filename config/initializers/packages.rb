@@ -1,52 +1,60 @@
 module Packages
   ALL_PACKAGES = {
-     pacote_1:  {
-       name: 'Pacote Bom',
-       types: {
-         "Palestra": 2,
-         "Mesa Redonda": 1,
-         "MiniCurso": 2
-       },
-       price: 20.0,
-       limit: 0
-     },
-     pacote_2:  {
-       name: 'Pacote Muito bom',
-       types: {
-         "Palestra": 2,
-         "Mesa Redonda": 1,
-         "MiniCurso": 2,
-         "Visita Técnica": 1
-
-       },
-       price: 30.0,
-       limit: 10
-     },
-     pacote_3:  {
-       name: 'Pacote Ótimo',
-       types: {
-         "Palestra": 2,
-         "Mesa Redonda": 1,
-         "MiniCurso": 2,
-         "Visita Técnica": 2,
-         "Oficina": 1
-
-       },
-       price: 40.0,
-       limit: 5
-     },
-     pacote_4:  {
-       name: 'Pacote Excelente',
-       types: {
-         "Palestra": 2,
-         "Mesa Redonda": 1,
-         "MiniCurso": 2,
-         "Visita Técnica": 2,
-         "Oficina": 1
-
-       },
-       price: 40.0,
-       limit: 5
-     }
+    pacote_1:  {
+      name: 'Stwart',
+      types: {
+        "Kit": 1
+      },
+      price: 31.0
+    },
+    pacote_2:  {
+      name: 'Felder',
+      types: {
+        "Kit": 1,
+        "MiniCurso": 1
+      },
+      price: 38.0
+    },
+    pacote_3:  {
+      name: 'Van Ness',
+      types: {
+        "Kit": 1,
+        "MiniCurso": 1,
+        "Workshop": 1
+      },
+      price: 48.0
+    },
+    pacote_4:  {
+      name: 'Fogler',
+      types: {
+        "Kit": 1,
+        "MiniCurso": 1,
+        "Workshop": 1,
+        "Visita Técnica": 1
+      },
+      price: 58.0
+    }
   }
 end
+
+
+
+# Bom dia, estou enviando abaixo os valores dos nossos pacotes da SEQ.
+#   Pacote Bom: Mesa-redonda + Palestras + Kit SEQ 2017 -  R$ 31,00
+# Pacote Muito Bom: Mesa-redonda + Palestras + Kit SEQ 2017 + 1 Minicurso - R$ 38,00
+
+# Pacote Ótimo: Mesa-redonda + Palestras + Kit SEQ 2017 + 1 Minicurso + 1 Workshop - R$ 48,00
+# Pacote Excelente: Mesa-redonda + Palestras + Kit SEQ 2017 + 1 Minicurso + 1 Workshop + 1 Visita Técnica - R$ 58,00
+
+# Atividades Extras:
+#   Visita Técnica: R$ 15,00
+# Workshop: R$ 15,00
+# Minicurso: R$ 10,00
+
+
+# Rayane GTI, [11.10.17 15:09]
+# Nomes dos pacotes:
+#   1. Stwart (palestras + mesa-redonda + kit)
+# 2. Felder (palestras + mesa-redonda+ minicurso + kit)
+# 3. Van Ness (palestras + mesa-redonda+ minicurso + workshop + kit)
+# 4. Fogler (palestras + mesa-redonda+ minicurso + workshop + visita técnica + kit)

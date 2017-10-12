@@ -85,7 +85,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def user_params
     # NOTE: Using `strong_parameters` gem
-    params.require(:user).permit(:name, :general_register, :birthday ,:cpf, :gender, :avatar, :phone, :university, :shirt, :registration, :entry_year)
+    params.require(:user).permit(:name, :general_register, :birthday ,:cpf, :gender, :avatar, :phone, :course, :semester, :university, :shirt, :entry_year, :registration)
   end
 
   def password_params

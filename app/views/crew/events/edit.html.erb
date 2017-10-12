@@ -113,7 +113,13 @@
            </div>
            </div>
            <!-- /.col -->
-
+           <div class="col-md-6">
+           <div class="form-group">
+              <label>Tipo de evento</label>
+               <%= f.select :event_type_id, EventType.all.collect { |c| [ c.name, c.id ] }, { include_blank: true } , { class: "form-control" }%>
+           </div>
+           </div>
+           
             <div class="col-md-6">
                <div class="form-group">
                   <label>Descrição</label>

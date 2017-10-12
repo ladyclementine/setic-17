@@ -1,17 +1,20 @@
 
 <section class="content-header">
       <div class="row">
+        <div id="pack">
+          <h1>PACOTES SEQ17</h1>
+        </div>
       <%i = 0%>
        <%Packages::ALL_PACKAGES.each do |k, v|%>
          <div class="col-md-3 col-sm-6 col-xs-12">
-         
+
 
           <div class="info-box info-box-packs" style="border-color: <%=@cores[0]%>">
-          
+
               <span class="info-box-text"> <%=v[:name].upcase%></span>
               <span class="info-box-number"><%=number_to_currency(v[:price])%></span>
               <span class=""><%=v[:types].map{|a| "#{a[1]} #{a[0].to_s.pluralize(a[1])}"}.join(", ")%></span>
-       
+
             <!-- /.info-box-content -->
           </div>
           <!-- /.info-box -->
@@ -19,14 +22,14 @@
         <%i = i+1%>
         <% end %>
 
-</div>                
+</div>
 
    <h1>
       Lista de programação - <span class="recebe_dia"></span>
    </h1>
 </section>
 <section class="content">
-   
+
    <div class="nav-tabs-custom">
       <ul class="nav nav-tabs">
          <% @days.each_with_index do |day, index| %>
@@ -34,9 +37,7 @@
          </a></li>
          <% end %>
 
-         <li class="pull-right">
-         <a href="">Selecione o Dia</a>
-         </li>
+
       </ul>
 
    </div>
@@ -46,7 +47,7 @@
          <% @types.each do |e|%>
          <li class="li_tipo_<%=e.id%> active"><input type="checkbox" checked class="flat-red filtro" name="tipo_<%=e.id%>"> <%=e.name.upcase%></li>
          <% end %>
- 
+
 
          <li class="pull-right" style="margin-top: -10px">
          <a href="">Filtre os Resultados</a>
@@ -110,8 +111,8 @@
                            <!-- /.description-block -->
                         </div>
                         <!-- /.col -- .join(' | ') -->
-             
-                        
+
+
                         <div id="buttons_event_<%= schedule.event.id %>" class="buttons_event_<%= schedule.event.id %>"">
                         <% if schedule.event.users.include? @user %>
                         <button type="submit" class="btn btn-sm hotel-choose pull-right send_event_out" id="event_<%= schedule.event.id %>" style="background-color: #db3f3f; margin-bottom: 5px;color:#fff;margin-top: 3px; margin-right: 20px"><strong>SAIR DA PROGRAMAÇÃO</strong></button>

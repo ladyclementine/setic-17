@@ -8,7 +8,7 @@ class AddAtributesToUser < ActiveRecord::Migration[5.0]
     add_column :users, :course, :string
     add_column :users, :university, :string
     add_column :users, :birthday, :string
-    add_column :users, :cpf, :string 
+    add_column :users, :cpf, :string
     add_column :users, :general_register, :string
     add_column :users, :certificate, :boolean, default: false
 

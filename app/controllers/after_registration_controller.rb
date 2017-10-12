@@ -10,6 +10,14 @@ class AfterRegistrationController < BaseController
     respond_to do |format|
       if @user.update_attributes(user_params)
         flash[:success] = "Cadastro completo, realize o pagamento para garantir sua vaga."
+
+        Event.includes(:event_type).where(event_types: {name: 'Palestra'}).each do |event|
+          event.add current_user
+        end
+
+        Event.includes(:event_type).where(event_types: {name: 'Mesa Redonda'}).each do |event|
+          event.add current_user
+        end
         format.html {  redirect_to authenticated_user_root_path }
       else
         #flash[:error] = "Não foi possível completar seu cadastro, verifique se seus dados estão corretos e entre em contato com nossa equipe."
@@ -29,7 +37,7 @@ class AfterRegistrationController < BaseController
   end
 
   def user_params
-    params.require(:user).permit(:name, :general_register, :birthday ,:cpf, :course, :semester, :university, :shirt)
+    params.require(:user).permit(:name, :general_register, :birthday ,:cpf, :course, :semester, :university, :shirt, :registration, :entry_year)
   end
 
   def user_email_params

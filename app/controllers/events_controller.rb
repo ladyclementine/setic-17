@@ -4,6 +4,16 @@ class EventsController < BaseController
 
   before_action :error_if_try_pay_has_select, only: [:enter_event, :exit_event] # PENDENTE
 
+  before_action :check_permanent_event, only: [:exit_event] 
+
+  def check_permanent_event
+    event = Event.find(params[:id])
+    if event.event_type.name == "Palestra" || event.event_type.name == "Mesa Redonda"
+      render :status => 200, :json => {mensage: "error", infos: "Não é possível remover programação obrigatória"}
+      return true
+    end
+  end
+
   def index
    #@days = Event.join_events_by_time
    @days = Event.join_events_by_time

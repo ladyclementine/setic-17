@@ -55,7 +55,7 @@
                             <td><%=number_to_currency(cart.price)%></td>
                           </tr>
                           <% end %>
-                  
+
                           </tbody>
                         </table>
                          <table class="table">
@@ -84,7 +84,7 @@
                 </div>
               <% end %>
 
-                
+
             </div>
 
 
@@ -122,7 +122,7 @@
                   <%= comment.description%>
                 </div>
               </div>
-            </li>         
+            </li>
             <% end %>
           </ul>
 
@@ -168,7 +168,7 @@
                                           <div class="timeline-body">
                                              <div>
                                                 <%= schedule.event.description == "" ? "Descrição não informada." : schedule.event.description%></br></br>
-                                        
+
                                              </div>
                                           </div>
                                        </div>
@@ -194,38 +194,32 @@
                            </div>
                         </div>
                         <%end%>
-                      
+
                      </div>
                   </div>
                </div>
                <!-- /.tab-pane -->
                <div class="tab-pane" id="settings">
-                  <div class="clearfix">
-                     <%= link_to edit_user_registration_path, class: 'btn btn-app btn-primary' do %>
-                     <i class="fa fa-edit"></i> Editar meus dados
-                     <% end %>
-                     <%= link_to password_edit_path, class: 'btn btn-app btn-primary' do %>
-                     <i class="fa fa-edit"></i> Editar minha senha
-                     <% end %>
-                  </div>
+
                   <div class="row">
                      <div class="col-sm-12">
-                        <b>DADOS PESSOAIS</b>
+                        <b>DADOS PESSOAIS <i>Criação da conta:</i> <%=@user.created_at.strftime("%d/%m/%Y - %H:%M:%S") %></b>
                      </div>
                      <hr  style="margin-bottom: 0px">
                      <div class="col-sm-6 ">
                         <b>Nome:</b> <%=@user.name.upcase %><br>
                         <b>Email:</b> <%=@user.email.upcase %><br>
                         <b>CPF:</b> <%=@user.cpf %><br>
+                        <b>RG:</b> <%=@user.general_register %><br>
                         <b>Data de nascimento:</b> <%=@user.birthday %>
                      </div>
                      <div class="col-sm-6 ">
-                        <b>RG:</b> <%=@user.general_register %><br>
-                  
-                        <b>Criação da conta:</b> <%=@user.created_at.strftime("%d/%m/%Y - %H:%M:%S") %><br>
+
                         <b>Universidade:</b> <%=@user.university.upcase %><br>
-
-
+                        <b>Curso:</b> <%=@user.course %><br>
+                        <b>Data de ingresso:</b> <%=@user.entry_year%><br>
+                        <b>Semestre:</b> <%=@user.semester %><br>
+                        <b>Matrícula:</b> <%=@user.registration %><br>
                      </div>
                   </div>
                   <div class="row" style="margin-top: 15px">
@@ -235,11 +229,18 @@
                      <hr  style="margin-bottom: 0px">
                      <div class="col-sm-6 ">
                         <b>Data de Pagamento:</b> <%#= @user.paid_on.nil? ? '' : @user.paid_on.strftime("%d/%m/%Y - %H:%M:%S") %><br>
-                     
+
                      </div>
                   </div>
-                 
-               
+                  <div class="clearfix">
+                     <%= link_to edit_user_registration_path, class: 'btn btn-block btn-primary btn-flat' do %>
+                     <i class="fa fa-edit"></i> Editar meus dados
+                     <% end %>
+                     <%= link_to password_edit_path, class: 'btn btn-block btn-primary btn-flat' do %>
+                     <i class="fa fa-edit"></i> Editar minha senha
+                     <% end %>
+                  </div>
+
                </div>
                <!-- /.tab-pane -->
             </div>
@@ -265,7 +266,7 @@
             <%end%>
             </div>
          </div>
-      </div>   
+      </div>
       <%end%>
 
 
@@ -285,7 +286,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span></button>
          </div>
-         
+
          <div class="modal-body" style="font-size: 17px;line-height: 1.4;color: #6e7a89">
          <% if !@user.payment.nil? && (@user.payment.method == @user.payment.accepted_payment_methods[0] || @user.payment.method == @user.payment.accepted_payment_methods[1]) %>
             <b class=text-danger>Atenção:</b> Após efetuar o pagamento, envie o comprovante para: <b><%=@config.email%></b>
@@ -296,7 +297,7 @@
                     <th>Agência</th>
                     <th>Beneficiado</th>
                   </tr>
-                 
+
                   <tr>
                     <td><%=@config.banco%></td>
                     <td><%=@config.agencia%></td>
@@ -311,7 +312,7 @@
               <b class=text-danger>Atenção:</b> A confirmação será feita de forma automática pelo sistema.</b>
             <%end%>
          </div>
-      
+
 
          <div class="modal-footer">
             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
