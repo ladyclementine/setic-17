@@ -19,7 +19,7 @@ class User < ApplicationRecord
 
   enum certificate: { 'SIM':true, 'NÃO':false }
   #VALIDAÇÃO PARA CONCLUSÃO DE CADASTRO
-  validates_presence_of :name, :general_register, :birthday ,:cpf, :course, :semester, :university, on: [:update], :allow_nil => true
+  validates_presence_of :name, :registration, :entry_year, :general_register, :birthday ,:cpf, :course, :semester, :university, on: [:update], :allow_nil => true
 
   usar_como_cpf :cpf
 

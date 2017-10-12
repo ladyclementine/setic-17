@@ -50,6 +50,11 @@
                   <%= f.text_field :course, :id => 'curso', placeholder: 'Curso', class: 'form-control'%>
                </div>
                <!-- /.form-group -->
+               <div class="form-group">
+                  <label>Matrícula</label>
+                <%= f.text_field :registration, :id => 'matrícula', placeholder: 'Matrícula', class: 'form-control'%>
+               </div>
+               <!-- /.form-group -->
             </div>
             <!-- /.col -->
             <div class="col-md-6">
@@ -58,9 +63,15 @@
                   <%= f.text_field :general_register, :id => 'rg', placeholder: 'RG', class: 'form-control'%>
                </div>
                <!-- /.form-group -->
+               <!-- /.form-group -->
+               <div class="form-group">
+                  <label>Ano de entrada</label>
+                  <%= f.text_field :entry_year, :id => 'entrada', placeholder: 'Ano de entrada', class: 'form-control'%>
+               </div>
+               <!-- /.form-group -->
                <div class="form-group">
                   <label>Semestre</label>
-                  <%= f.text_field :semester, :id => 'semestre', placeholder: 'semester', class: 'form-control'%>
+                  <%= f.text_field :semester, :id => 'semestre', placeholder: 'Semestre', class: 'form-control'%>
                </div>
                <!-- /.form-group -->
                <!-- /.form-group -->
