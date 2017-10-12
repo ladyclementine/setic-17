@@ -26,11 +26,11 @@ class Crew::EventTypesController < Crew::BaseController
 
   # PATCH/PUT /event_types/1
   def update
-    if @event_type.update(event_type_params)
-      redirect_to crew_event_types_path, notice: 'EventType was successfully updated.'
-    else
-      render :edit
-    end
+    # if @event_type.update(event_type_params)
+    #   redirect_to crew_event_types_path, notice: 'EventType was successfully updated.'
+    # else
+    #   render :edit
+    # end
   end
 
   # DELETE /event_types/1

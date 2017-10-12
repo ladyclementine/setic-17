@@ -7,7 +7,7 @@ class CheckoutController < BaseController
 
   def check_permanent_event
     event = Event.find(params[:id])
-    if event.event_type.name == "Palestra" || event.event_type.name == "Mesa-Redonda"
+    if event.event_type.name == "Palestra" || event.event_type.name == "Mesa Redonda"
       redirect_to payment_path, notice: "Não é possível remover programação obrigatória."
       return true
     end

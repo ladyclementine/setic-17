@@ -15,7 +15,7 @@ class AfterRegistrationController < BaseController
           event.add current_user
         end
 
-        Event.includes(:event_type).where(event_types: {name: 'Mesa-Redonda'}).each do |event|
+        Event.includes(:event_type).where(event_types: {name: 'Mesa Redonda'}).each do |event|
           event.add current_user
         end
 

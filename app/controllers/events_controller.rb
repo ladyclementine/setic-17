@@ -8,7 +8,7 @@ class EventsController < BaseController
 
   def check_permanent_event
     event = Event.find(params[:id])
-    if event.event_type.name == "Palestra" || event.event_type.name == "Mesa-Redonda"
+    if event.event_type.name == "Palestra" || event.event_type.name == "Mesa Redonda"
       render :status => 200, :json => {mensage: "error", infos: "Não é possível remover programação obrigatória"}
       return true
     end
