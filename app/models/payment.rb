@@ -14,11 +14,11 @@ class Payment < ApplicationRecord
   def paid?
     self.status == self.accepted_payment_status[1]
   end
-  
+
   #validate :validate_payment_method, :validate_payment_status
 
   def accepted_payment_methods
-    ['Depósito', 'Transferência', 'Presencial', 'PagSeguro']
+    ['PagSeguro']
   end
 
   def accepted_payment_status
