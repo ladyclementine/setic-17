@@ -27,6 +27,13 @@ class Crew::UsersController < Crew::BaseController
       end
     end
   end
+  def destroy
+      @users = User.find(params[:id])
+      @users.destroy
+      respond_to do |format|
+        format.html { redirect_to edit_crew_user_path(@user), notice: "Usuário deletado com sucesso." }
+      end
+    end
 
   def qualified
     respond_to do |format|

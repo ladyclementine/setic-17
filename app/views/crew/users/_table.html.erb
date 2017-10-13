@@ -50,9 +50,9 @@
 
                            <% elsif  users.payment.method == "PagSeguro"  %>
                               <% if users.payment.paid? %>
-                              <small class="label bg-green" data-toggle="tooltip" title="" data-original-title="Pagamento Recebido">PagSeguro</small> 
+                              <small class="label bg-green" data-toggle="tooltip" title="" data-original-title="Pagamento Recebido">PagSeguro</small>
                               <% else %>
-                              <small class="label bg-red" data-toggle="tooltip" title="" data-original-title="Pagamento <%= users.payment.status_pagseguro.nil? ? ' Pendente' : users.payment.status_pagseguro%>">PagSeguro</small> 
+                              <small class="label bg-red" data-toggle="tooltip" title="" data-original-title="Pagamento <%= users.payment.status_pagseguro.nil? ? ' Pendente' : users.payment.status_pagseguro%>">PagSeguro</small>
                               <% end %>
                            <% end %>
 
@@ -67,12 +67,12 @@
                               </ul>
                            </div>
                            <% end %>
-                           
+
                         </td>
 
 
                         <td hidden="">
-                        <% if  users.payment.nil? %> 
+                        <% if  users.payment.nil? %>
                           Não selecionado
                         <% else %>
                           <%= users.payment.method %> - <% if users.payment.paid? %> Pago<% else %>Não Pago - <%=users.payment.portion_paid%>/<%=users.payment.portions%>
@@ -80,7 +80,7 @@
                         <%end %>
                         </td>
 
-                        <td><%= users.created_at.strftime("%d-%m-%Y  %H:%M:%S") %></td> 
+                        <td><%= users.created_at.strftime("%d-%m-%Y  %H:%M:%S") %></td>
                         <td>
                            <%= link_to  edit_crew_user_path(users) do %>
                            <small class="btn btn-default dropdown-toggle btn-xs">
@@ -89,7 +89,7 @@
                            <!-- <span class="glyphicon glyphicon-wrench" aria-hidden="true" style="margin-left: 5px"></span> -->
                            <% end %> <i style="margin-left:3px"></i>
                            <%#= link_to users, method: :delete, data: { confirm: 'Are you sure?' } do %><a href="">
-                        
+
                            <!-- <span class="glyphicon glyphicon-remove" aria-hidden="true" style="margin-left: 20px"></span> -->
                            <%# end %>
                         </td>

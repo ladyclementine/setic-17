@@ -5420,9 +5420,7 @@ canvas{
 }
 
 .patrick-modal .modal-header {
-  background: #F9B21D;
-  border: 2px solid black;
-  height: 150px;
+  height: 0;
   background-size: 600px 100%;
   background-position: bottom;
 }
@@ -5439,7 +5437,6 @@ canvas{
 }
 
 .patrick-modal .modal-header .modal-title{
-  margin-top:150px;
   text-align: center;
 }
 /*DESCUBRA*/
@@ -5705,8 +5702,9 @@ opacity: 0.6
 
 
 .modal-body p{
-  margin-top: -16px;
-  text-align: center;
+
+  text-align: justify;
+  font-size: 15px;
 }
 .modal-body img{
     display: block;
