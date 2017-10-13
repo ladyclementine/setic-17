@@ -9,7 +9,7 @@
          .logo {
          background-image: url('/site/images/logo.png');
          width: 256px;
-         height: 130px;
+         height: 170px;
          margin: 90px auto;
          margin-bottom: 10px;
          background-size: 256px;
@@ -17,13 +17,15 @@
          }
          .text-info{
          text-align: center;
-         margin-top: 50px;
          color: #4d4d4d;
+         background: #F9B21D;
+         margin: 25px;
+         padding: 15px;
          }
          .text-info h2{
          overflow: hidden;
          font-size: 19px;
-         font-weight: normal;
+        text-transform: uppercase;
          }
          a {
          color: #337ab7;
@@ -34,7 +36,7 @@
          text-align: center;
          }
          .hr.default-color {
-         border-color: #45bbff;
+         border-color: #000;
          }
          .btn {
          font-weight: 700;
@@ -42,12 +44,7 @@
          transition: all 0.2s;
          margin-bottom: 20px;
          border: none;
-         border-radius: 20px;
-         padding: 10px 30px 10px 20px;
-         -webkit-transition: all 0.2s;
-         }
-         .btn + .btn {
-         margin-left: 40px;
+         padding: 15px 30px 15px 30px;
          }
          .btn:focus,
          .btn:active {
@@ -58,34 +55,14 @@
          .btn-default:focus,
          .btn-default:active,
          .btn-default:active:hover {
-         background-color: #45bbff;
+         background-color: #000;
          color: #fff;
          }
-         .btn-default:after,
-         .btn-default:before {
-         content: "";
-         position: absolute;
-         top: 0;
-         bottom: 0;
-         width: 40px;
-         border-radius: 50%;
-         }
-         .btn-default:before {
-         right: 9px;
-         box-shadow: 10px 0 0 0 #2cacf5;
-         -webkit-transition: all 0.3s;
-         transition: all 0.3s;
-         }
-         .btn-default:after {
-         right: 0;
-         box-shadow: 10px 0 0 0 #209fe8;
-         -webkit-transition: all 0.3s;
-         transition: all 0.3s;
-         }
+
          .btn-default:hover {
-         background-color: #45bbff;
+         background-color: transparent;
          color: #fff;
-         padding: 10px 30px;
+         border: 2px solid black;
          }
          .btn-default:hover:after,
          .btn-default:hover:before {
@@ -152,13 +129,10 @@
       <div class="text-info">
          <h2>Ative sua conta</h2>
          <p>
-            Para completar seu registro, você deve</br> ativar sua conta.
+            Para completar seu registro e garantir sua vaga, você deve</br> <strong>ativar sua conta</strong>.
          </p>
          <p>
             Nós enviamos um e-mail para você</br> explicando todos os passos.
-         </p>
-         <p style="color: #e80d0d; font-size: 15px">
-            Atenção! Finalize o cadastro para garantir sua vaga =)
          </p>
          <div class="hr default-color"><%= link_to new_user_session_path , class: "btn btn-default" do %> Entendi! <% end %> </div>
       </div>

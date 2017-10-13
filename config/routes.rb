@@ -29,7 +29,7 @@ Rails.application.routes.draw do
         #resources :configs, only: [:edit, :update]
         get 'configs' => 'configs#set_config'
         patch 'configs_update' => 'configs#update'
-        #post 
+        #post
         get '/events_pending' => 'events#pending'
 
 
@@ -91,7 +91,7 @@ Rails.application.routes.draw do
     passwords: "users/passwords",
     registrations: "users/registrations",
     confirmations: 'users/confirmations',
-    omniauth_callbacks: "users/omniauth_callbacks"
+    #omniauth_callbacks: "users/omniauth_callbacks"
   },
     path: "/",
     path_names: { sign_in: 'login',

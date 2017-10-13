@@ -24,10 +24,6 @@
          <!-- /.col -->
       </div>
       <% end %>
-      <div class="text-center"  style="margin-bottom: 20px">
-         <p style="color:#252525; font-weight: bold;">- OU -</p>
-         <%= link_to user_facebook_omniauth_authorize_path+"?auth_type=rerequest&scope=email", "class": "btn btn-block btn-social btn-facebook btn-flat", id: "sign_in" do %><i class="fa fa-facebook" style="color:#fff;text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);"></i> ENTRAR COM FACEBOOK <% end %>
-      </div>
       <div class="row">
          <div class="text-left col-xs-6">
             <%= link_to 'Nova inscrição', new_registration_path(resource_name), style: 'color:#F9B21D; font-weight: bold;'%>

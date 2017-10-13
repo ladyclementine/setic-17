@@ -3,8 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable, :confirmable
-  devise :omniauthable, :omniauth_providers => [:facebook]
-  attr_writer :login_face
+  #devise :omniauthable, :omniauth_providers => [:facebook]
+  #attr_writer :login_face
 
   acts_as_paranoid
 
