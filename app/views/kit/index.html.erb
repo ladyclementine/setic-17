@@ -53,10 +53,8 @@
                          <button type="button" class="btn btn-sm hotel-choose pull-right send_event_enter" id="event" style="background-color: #1AB394; margin-bottom: 5px;color:#fff;margin-top: 3px; margin-right: 20px"><strong>ADICIONAR AO CARRINHO</strong></button>
                          <% end %>
                     <% else %>
-                      <%= link_to kit_remove_path(kit.id), method: :post do%>
                        <button type="submit" class="btn btn-sm hotel-choose pull-right send_event_out" id="event" style="background-color: #db3f3f; margin-bottom: 5px;color:#fff;margin-top: 3px; margin-right: 20px"><strong>REMOVER DO CARRINHO</strong></button>
                       <% end %>
-                    <% end %>
 
                     </div>
                     <!-- /.col -->
