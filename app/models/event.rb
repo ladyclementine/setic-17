@@ -37,7 +37,7 @@ class Event < ApplicationRecord
     count = Hash.new(0)
     price = 0
     self.where("price != 0").each do |a|
-      count[a.event_type.name] += 1 #unless a.is_shirt
+      count[a.event_type.name] += 1 unless a.is_shirt
     end
 
     belong = false
