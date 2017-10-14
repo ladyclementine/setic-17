@@ -60,10 +60,9 @@
               <td><%=number_to_currency(cart.price)%></td>
               <% if @user.payment.nil?%>
               <td><%= link_to remove_from_path(cart.id), :method => :put do %>
-              <% if !cart.is_shirt %>
               <small class="label bg-red">remover</small><% end %></td>
               <% end %>
-              <% end %>
+
             </tr>
             <%end%>
             </tbody>
