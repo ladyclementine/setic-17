@@ -23,7 +23,7 @@
                   <thead>
                      <tr>
                         <th>Nome</th>
-                        <th>CPF</th>
+                        <th>Camisa</th>
                         <th class="noExport">Retirar</th>
                         <th class="noExport">Login</th>
                      </tr>
@@ -32,7 +32,7 @@
                      <% @users_pays.each do |users| %>
                      <tr>
                         <td><%= users.name.nil? ? 'Não Informado' : users.name.titleize%></td>
-                        <td><%= users.cpf%></td>
+                        <td><%= users.shirt%></td>
                         <td>
                            <button type="button" class="btn btn-block btn-danger btn-sm">Remover</button>
                           <%= link_to crew_remove_kit_user_path(@crew_event, users), method: :delete, data: { confirm: "Deseja realmente remover #{users.name} do kit?" } do %>
@@ -65,7 +65,7 @@
                   <thead>
                      <tr>
                         <th>Nome</th>
-                        <th>CPF</th>
+                        <th>Camisa</th>
                         <th class="noExport">Retirar</th>
                         <th class="noExport">Login</th>
                      </tr>
@@ -74,7 +74,7 @@
                      <% @users_nopays.each do |users| %>
                      <tr>
                         <td><%= users.name.nil? ? 'Não Informado' : users.name.titleize%></td>
-                        <td><%= users.cpf%></td>
+                        <td><%= users.shirt%></td>
                         <td>
                           <%= link_to crew_remove_event_user_path(@crew_event, users), method: :delete, data: { confirm: "Deseja realmente remover #{users.name} do evento #{@crew_event.name}?" } do %>
                            <button type="button" class="btn btn-block btn-danger btn-sm">Remover</button>
