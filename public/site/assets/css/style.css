@@ -1394,10 +1394,6 @@ input:-ms-input-placeholder {
     position: relative;
     z-index: 1;
     background-color: #131124;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: rgba(0, 0, 0, 0.45);
 }
 
 .gb-banner:before {
@@ -1407,7 +1403,6 @@ input:-ms-input-placeholder {
     left:0;
     width: 100%;
     height:100%;
-    background-color: rgba(0, 0, 0, 0.45);
     z-index: -1;
 }
 
@@ -1600,24 +1595,11 @@ border-radius: 50%;
     	padding: 20px 40px 35px;
     	cursor: pointer;
     	position: relative;
-    	border-bottom: 1px solid #0c788e;
+    	border-bottom: 1px solid #0C788E;
     }
 
     .schedule>ul>li:nth-child(even) {
-    	background-color: #f7f7f7;
-    }
-
-    .schedule>ul>li:after {
-    	position: absolute;
-    	content: "\f0c9";
-    	top: 45px;
-    	right: 45px;
-    	font-size: 20px;
-    	font-family: "fontawesome";
-    }
-
-    .schedule>ul>li.active:after {
-    	content: "\f068";
+    	background-color: #282154;
     }
 
     .author-image {
