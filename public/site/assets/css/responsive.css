@@ -52,7 +52,10 @@
 	.schedule-info h2 {
 		font-size: 18px;
 	}
+	.navbar-brand>img{
 
+		margin-top: -20px;
+	}
 
 }
 
@@ -169,6 +172,10 @@
 	.title-card{
 		font-size: 30px;
 	}
+	.navbar-brand>img{
+
+		margin-top: -20px;
+	}
 
 }
 
@@ -186,7 +193,10 @@
 	.banner-info h2 {
 		font-size: 20px;
 	}
+	.navbar-brand>img{
 
+		margin-top: -20px;
+	}
 	.homepage-style .unique-apps h2 {
     font-size: 20px;
 	}
