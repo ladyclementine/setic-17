@@ -18,7 +18,7 @@ class Payment < ApplicationRecord
   #validate :validate_payment_method, :validate_payment_status
 
   def accepted_payment_methods
-    ['PagSeguro']
+    ['Transferência', 'Presencial', 'PagSeguro']
   end
 
   def accepted_payment_status

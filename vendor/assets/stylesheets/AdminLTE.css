@@ -2373,14 +2373,13 @@ a:focus {
 
 .btn-primary {
   background-color: #000;
-  border-color: #f9b21d;
 }
 .btn-primary:hover,
 .btn-primary:active,
 .btn-primary:focus,
 .btn-primary:active:focus,
 .btn-primary.hover {
-  background-color: #f9b21d;
+  background-color: #282154;
   border-color: #fff;
 }
 

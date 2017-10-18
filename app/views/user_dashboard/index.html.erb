@@ -63,7 +63,7 @@
                             <th>Forma de Pagamento:</th>
                             <td>
 
-                            <a href="#" style="color: #DD4B39;" data-toggle="#" data-target="#modal-tempo"><%=@user.payment.method%>  <% if !@user.payment.nil? && (@user.payment.method == @user.payment.accepted_payment_methods[0] || @user.payment.method == @user.payment.accepted_payment_methods[1]) %><% end %></a>
+                            <a href="#" style="color: #DD4B39;" data-toggle="modal" data-target="#modal-tempo"><%=@user.payment.method%>  <% if !@user.payment.nil? && (@user.payment.method == @user.payment.accepted_payment_methods[0] || @user.payment.method == @user.payment.accepted_payment_methods[1]) %> (Ver Dados da Conta) <% end %></a>
 
                             </td>
                           </tr>

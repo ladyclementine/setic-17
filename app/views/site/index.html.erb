@@ -1,98 +1,399 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-	<head>
-		<meta charset="utf-8">
-		<title><%=@config.sigla%> 2017 </title>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-		<link rel="icon" type="image/png" sizes="16x16" href="/images/efej/icone.ico">
-		<link rel="stylesheet" type="text/css" href="site/css/bootstrap.css">
-		<link rel="stylesheet" type="text/css" href="site/css/site.css">
-		<meta name="robots" content="index,follow">
-    	<meta name="description" content="<%=@config.name%>">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title><%=@config.sigla%> 2017 </title>
+        <meta name="description" content="<%=@config.name%>">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/efej/icone.ico">
+        <link rel="stylesheet" href="site/assets/css/reset.css">
+      	<link rel="stylesheet" href="site/assets/css/schedule.css">
+        <link rel="stylesheet" href="site/assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="site/assets/css/plugins.css" />
+        <link rel="stylesheet" href="site/assets/css/style.css">
+        <link rel="stylesheet" href="site/assets/css/responsive.css" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+        <script src="assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    </head>
+    <body data-spy="scroll" data-target="#main-navbar">
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+		<div class='preloader'><div class='loaded'>&nbsp;</div></div>
+        <div id="menubar" class="main-menu">
+            <nav class="navbar navbar-default navbar-fixed-top ">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="index.html"><img src="site/images/logo.png" alt="" /></a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="active"><a href="#home">Home<span class="sr-only">(current)</span></a></li>
+                            <li><a href="#sobre">SETIC</a></li>
+                            <li><a href="#atividades">ATIVIDADES</a></li>
+                            <li><a href="#programacao">PROGRAMAÇÃO</a></li>
+                            <li><a href="#organizacao">ORGANIZAÇÃO</a></li>
+                            <li class="inscribe"><%= link_to new_user_registration_path do %>
+                             INSCREVA-SE
+                            <% end %></li>
+
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+        </div>
+
+        <div class="gb-banner" id="home">
+            <div class="banner-info text-center">
+                <div class="container">
+                    <h1>SEMANA DE TECNOLOGIA
+                        DA INFORMAÇÃO E COMUNICAÇÃO</h1>
+                    <h2><span>10-17 NOVEMBRO</span> 2017</h2>
+
+                      <%= link_to new_user_registration_path,  class:"btn btn-heading" do %>
+                       INSCREVA-SE
+                      <% end %>
+
+                </div><!-- /.container -->
+            </div><!-- /.banner-info -->
+        </div><!-- /.gb-banner -->
+        <!--Home page style-->
 
 
-	</head>
-	<body>
+        <!-- Sections -->
+        <section class="section2">
+            <div class="container">
+               <div class="col-md-12">
+                <div  id="sobre" class="about-card">
+                    <div class="title-card">
+                    <h2>SOBRE A SETIC</h2>
+                    </div>
+                    <div class="text-card">
+                    Com a experiência em organização de quatro edições da Semana de Teleinformática e a sensação de renovação inspirada pelas mudanças na Universidade e no mundo, nasceu a I Semana de Tecnologia da Informação e Comunicação (SETIC), que será realizada durante a Semana da Tecnologia do Centro de Tecnologia da UFC, de 19 a 23 de outubro, no entanto, a palestra de abertura ocorrerá dia 15 de outubro. A SETIC é um evento anual promovido pela Direção do Centro de Tecnologia da Universidade Federal do Ceará e organizado pelas entidades presentes nos cursos de Engenharia de Computação e Telecomunicações, voltado para universitários e entusiastas das diversas áreas que abrangem esses cursos. O evento tem como objetivo interligar os alunos e seus respectivos cursos às práticas e tendências do mercado.
+                    </div>
+                </div>
+            </div>
+            <!-- /container -->
+        </section>
+        <section id="atividades" class="sections" style="background-color:#282154">
+          <div class="container">
+            <div class="title-card">
+              <h2>ATIVIDADES SETIC 17</h2>
 
-				<!-- Header -->
-		<header id="top" class="header">
-		  <div class="text-vertical-center">
- 			<h1 class="visible-sm visible-md visible-lg" style="text-shadow: 1px -2px 0px #000, 1px 2px 0px #000"></h1>
-		     <h1 class="visible-sm visible-md visible-lg"><%= @config.name %>
- 			 </h1><h1 class="visible-sm visible-md visible-lg" style="text-shadow: 1px -2px 0px #000, 1px 2px 0px #000"></h1>
-		    <br>
-		     <%= link_to new_user_registration_path, class:'btn btn-dark btn-lg' do %>
-		      Inscrições
-		     <% end %>
+            </div>
+                <ul class="plano-lista">
+                   <li>
+                      <div class="box-info">
+                      <i class="material-icons md-60">chat_bubble</i><span>PALESTRAS</span>
+                      </div>
+                      <span id="slidee">
+                      <div><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                      </div>
+                      </span>
 
-		    <%= link_to new_user_session_path, class:'btn btn-dark btn-lg' do %>
-		      Acessar sua conta
-		    <% end %>
-		    <br>
-		    <br>
-				<span style="background-color:#000; color:#fff; font-size:30px; text-transform:uppercase; letter-spacing:3px; font-style: italic">Engenharia</span> <span style="background-color:#000; color:#fff; font-size:30px; text-transform:uppercase; letter-spacing:3px; font-style: italic">Química</span>
- 				<span style="background-color:#000; color:#fff; font-size:30px; text-transform:uppercase; letter-spacing:3px; font-style: italic">Além</span> <span style="background-color:#000; color:#fff; font-size:30px; text-transform:uppercase; letter-spacing:3px; font-style: italic">das</span> <span style="background-color:#000; color:#fff; font-size:30px; text-transform:uppercase; letter-spacing:3px; font-style: italic">fronteiras</span>
-		  </div>
-		</header>
+                   </li>
+                   <li>
+                      <div class="box-info">
+                      <i class="material-icons md-60">build</i><span>VISITA TÉCNICA</span>
+                      </div>
+                      <span id="slidee">
+                      <div><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                      </div>
+                      </span>
 
-		<!-- Map -->
-		<section id="contact" class="map">
-		  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31850.466333142867!2d-38.57561223251674!3d-3.7428619257204643!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74bdc62c8ba8f%3A0x9267767abebdb982!2sDepartamento+de+Engenharia+de+Produ%C3%A7%C3%A3o+Mec%C3%A2nica+UFC!5e0!3m2!1spt-BR!2sbr!4v1474461603668" width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
-		  <br />
-		    <small>
-		      <a href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31850.466333142867!2d-38.57561223251674!3d-3.7428619257204643!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74bdc62c8ba8f%3A0x9267767abebdb982!2sDepartamento+de+Engenharia+de+Produ%C3%A7%C3%A3o+Mec%C3%A2nica+UFC!5e0!3m2!1spt-BR!2sbr!4v1474461603668"></a>
-		    </small>
-		  <a id="to-top" href="#top" class="btn btn-dark btn-lg"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
-		</section>
-		<!-- Custom Theme JavaScript -->
-		<script>
-		//#to-top button appears after scrolling
-		var fixed = false;
-		$(document).scroll(function() {
-		  if ($(this).scrollTop() > 250) {
-		    if (!fixed) {
-		      fixed = true;
-		      // $('#to-top').css({position:'fixed', display:'block'});
-		      $('#to-top').show("slow", function() {
-		        $('#to-top').css({
-		          position: 'fixed',
-		          display: 'block'
-		        });
-		      });
-		    }
-		  } else {
-		    if (fixed) {
-		      fixed = false;
-		      $('#to-top').hide("slow", function() {
-		        $('#to-top').css({
-		          display: 'none'
-		        });
-		      });
-		    }
-		  }
-		});
-		// Disable Google Maps scrolling
-		// See http://stackoverflow.com/a/25904582/1607849
-		// Disable scroll zooming and bind back the click event
-		var onMapMouseleaveHandler = function(event) {
-		  var that = $(this);
-		  that.on('click', onMapClickHandler);
-		  that.off('mouseleave', onMapMouseleaveHandler);
-		  that.find('iframe').css("pointer-events", "none");
-		}
-		var onMapClickHandler = function(event) {
-		    var that = $(this);
-		    // Disable the click handler until the user leaves the map area
-		    that.off('click', onMapClickHandler);
-		    // Enable scrolling zoom
-		    that.find('iframe').css("pointer-events", "auto");
-		    // Handle the mouse leave event
-		    that.on('mouseleave', onMapMouseleaveHandler);
-		  }
-		  // Enable map zooming with mouse scroll when the user clicks the map
-		$('.map').on('click', onMapClickHandler);
-		</script>
+                   </li>
+                   <li>
+                      <div class="box-info">
+                      <i class="material-icons md-60">computer</i><span>WORKSHOP</span>
+                      </div>
+                      <span id="slidee">
+                      <div><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                      </div>
+                      </span>
 
-	</body>
+                   </li>
+                   <li>
+                      <div class="box-info">
+                      <i class="material-icons md-60">videogame_asset</i><span>CAMPEONATOS DE VIDEO GAME</span>
+                      </div>
+                      <span id="slidee">
+                      <div><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                      </div>
+                      </span>
+
+                   </li>
+                </ul>
+              </div>
+          </div>
+      </section>
+    <section id="programacao" class="section7" style="background-color: #fff;">
+    <div class="container">
+      <div class="title-section">
+        <h2>PROGRAMAÇÃO</h2>
+      </div>
+      <div class="cd-schedule loading">
+      	<div class="timeline">
+      		<ul>
+            <li><span>08:00</span></li>
+            <li><span>09:00</span></li>
+      			<li><span>10:00</span></li>
+            <li><span>11:00</span></li>
+      			<li><span>12:00</span></li>
+            <li><span>13:00</span></li>
+      			<li><span>14:00</span></li>
+            <li><span>15:00</span></li>
+      			<li><span>16:00</span></li>
+            <li><span>17:00</span></li>
+      			<li><span>18:00</span></li>
+            <li><span>19:00</span></li>
+      			<li><span>20:00</span></li>
+      		</ul>
+      	</div> <!-- .timeline -->
+
+      	<div class="events">
+      		<ul>
+      			<li class="events-group">
+      				<div class="top-info"><span>Segunda-feira</span></div>
+
+      				<ul>
+
+      					<li class="single-event" data-start="14:00" data-end="16:00"  data-content="event-yoga-1" data-event="palestra">
+      						<a href="#0">
+      							<em class="event-name">INOVAÇÃO EM TI</em>
+      						</a>
+      					</li>
+                <li class="single-event" data-start="16:00" data-end="18:00"  data-content="event-yoga-1" data-event="workshop">
+      						<a href="#0">
+      							<em class="event-name">Printed Circuit Board(PCB)</em>
+      						</a>
+      					</li>
+      				</ul>
+      			</li>
+
+      			<li class="events-group">
+      				<div class="top-info"><span>Terça-feira</span></div>
+
+      				<ul>
+      					<li class="single-event" data-start="14:00" data-end="16:00"  data-content="event-rowing-workout" data-event="palestra">
+      						<a href="#0">
+      							<em class="event-name">DAVIDSON</em>
+      						</a>
+      					</li>
+
+      					<li class="single-event" data-start="16:00" data-end="18:00"  data-content="event-restorative-yoga" data-event="workshop">
+      						<a href="#0">
+      							<em class="event-name">OCTAVE/Printed Circuit Board(PCB)</em>
+      						</a>
+      					</li>
+
+      				</ul>
+      			</li>
+
+      			<li class="events-group">
+      				<div class="top-info"><span>Quarta-feira</span></div>
+
+      				<ul>
+      					<li class="single-event" data-start="08:00" data-end="10:00" data-content="event-restorative-yoga" data-event="workshop">
+      						<a href="#0">
+      							<em class="event-name">Introdução a Ruby on Rails</em>
+      						</a>
+      					</li>
+
+      					<li class="single-event" data-start="10:00" data-end="12:00" data-content="event-yoga-1" data-event="palestra">
+      						<a href="#0">
+      							<em class="event-name">Yoga Level 1</em>
+      						</a>
+      					</li>
+
+      					<li class="single-event" data-start="16:00" data-end="18:00"  data-content="event-rowing-workout" data-event="workshop">
+      						<a href="#0">
+      							<em class="event-name">Rowing Workout</em>
+      						</a>
+      					</li>
+
+      					<li class="single-event" data-start="18:00" data-end="20:00" data-content="event-yoga-1" data-event="workshop">
+      						<a href="#0">
+      							<em class="event-name">Yoga Level 1</em>
+      						</a>
+      					</li>
+      				</ul>
+      			</li>
+
+      			<li class="events-group">
+      				<div class="top-info"><span>Quinta-feira</span></div>
+
+      				<ul>
+      					<li class="single-event" data-start="08:00" data-end="10:00" data-content="event-abs-circuit" data-event="event-1">
+      						<a href="#0">
+      							<em class="event-name">Abs Circuit</em>
+      						</a>
+      					</li>
+
+      					<li class="single-event" data-start="10:00" data-end="12:00" data-content="event-restorative-yoga" data-event="workshop">
+      						<a href="#0">
+      							<em class="event-name">Restorative Yoga</em>
+      						</a>
+      					</li>
+
+      					<li class="single-event" data-start="16:00" data-end="18:00" data-content="event-abs-circuit" data-event="workshop">
+      						<a href="#0">
+      							<em class="event-name">Abs Circuit</em>
+      						</a>
+      					</li>
+      				</ul>
+      			</li>
+
+      			<li class="events-group">
+      				<div class="top-info"><span>Sexta-feira</span></div>
+
+      				<ul>
+      					<li class="single-event" data-start="08:00" data-end="10:00"  data-content="event-rowing-workout" data-event="workshop">
+      						<a href="#0">
+      							<em class="event-name">Introdução a Ruby on Rails</em>
+      						</a>
+      					</li>
+
+      					<li class="single-event" data-start="10:00" data-end="12:00" data-content="event-abs-circuit" data-event="workshop">
+      						<a href="#0">
+      							<em class="event-name">Abs Circuit</em>
+      						</a>
+      					</li>
+
+      					<li class="single-event" data-start="14:00" data-end="16:00"  data-content="event-yoga-1" data-event="palestra">
+      						<a href="#0">
+      							<em class="event-name">Yoga Level 1</em>
+      						</a>
+      					</li>
+                <li class="single-event" data-start="16:00" data-end="18:00"  data-content="event-yoga-1" data-event="workshop">
+      						<a href="#0">
+      							<em class="event-name">Yoga Level 1</em>
+      						</a>
+      					</li>
+      				</ul>
+      			</li>
+      		</ul>
+      	</div>
+
+      	<div class="event-modal">
+      		<header class="header">
+      			<div class="content">
+      				<span class="event-date"></span>
+      				<h3 class="event-name"></h3>
+      			</div>
+
+      			<div class="header-bg"></div>
+      		</header>
+
+      		<div class="body">
+      			<div class="event-info"></div>
+      			<div class="body-bg"></div>
+      		</div>
+
+      		<a href="#0" class="close">Close</a>
+      	</div>
+
+      	<div class="cover-layer"></div>
+      </div> <!-- .cd-schedule -->
+    <div>
+    </section>
+
+        <section class="section8" id= "organizacao">
+            <div class="container">
+                <div class="title-section">
+                    <h2>ORGANIZAÇÃO</h2>
+                </div>
+                <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <img src="site/images/organizacao/pet.png">
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <img src="site/images/organizacao/gti.png">
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <img src="site/images/organizacao/daam.png">
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <img src="site/images/organizacao/cdh.png">
+                </div>
+            </div>
+
+            </div>
+        </section>
+				<!-- Map -->
+				<section id="contact" class="map" style="height: 500px">
+				  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31850.466333142867!2d-38.57561223251674!3d-3.7428619257204643!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74bdc62c8ba8f%3A0x9267767abebdb982!2sDepartamento+de+Engenharia+de+Produ%C3%A7%C3%A3o+Mec%C3%A2nica+UFC!5e0!3m2!1spt-BR!2sbr!4v1474461603668" width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+				  <br />
+				    <small>
+				      <a href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31850.466333142867!2d-38.57561223251674!3d-3.7428619257204643!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74bdc62c8ba8f%3A0x9267767abebdb982!2sDepartamento+de+Engenharia+de+Produ%C3%A7%C3%A3o+Mec%C3%A2nica+UFC!5e0!3m2!1spt-BR!2sbr!4v1474461603668"></a>
+				    </small>
+				 </section>
+
+        <div class="scroll-top">
+
+            <div class="scrollup">
+                <i class="fa fa-angle-double-up"></i>
+            </div>
+
+        </div>
+
+        <!--Footer-->
+        <footer id="footer" class="footer">
+            <div class="container">
+
+               <div class="row">
+                 <div class="col-md-12 text-center">
+                    <div class="socio-copyright">
+                        <div class="social">
+                            <a target="_blank" href="#"><i class="fa fa-facebook"></i></a>
+                        </div>
+                        <p>SETIC 2017. UFC | Feito com <i class="fa fa-heart"></i> por <a target="_blank" href="http://bootstrapthemes.co"> GTi Engenharia Jr</a> 2017. </p>
+
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+				<!-- Custom Theme JavaScript -->
+				<script>
+				var onMapMouseleaveHandler = function(event) {
+				  var that = $(this);
+				  that.on('click', onMapClickHandler);
+				  that.off('mouseleave', onMapMouseleaveHandler);
+				  that.find('iframe').css("pointer-events", "none");
+				}
+				var onMapClickHandler = function(event) {
+				    var that = $(this);
+				    // Disable the click handler until the user leaves the map area
+				    that.off('click', onMapClickHandler);
+				    // Enable scrolling zoom
+				    that.find('iframe').css("pointer-events", "auto");
+				    // Handle the mouse leave event
+				    that.on('mouseleave', onMapMouseleaveHandler);
+				  }
+				  // Enable map zooming with mouse scroll when the user clicks the map
+				$('.map').on('click', onMapClickHandler);
+				</script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+        <script>
+        	if( !window.jQuery ) document.write('<script src="js/jquery-3.0.0.min.js"><\/script>');
+        </script>
+        <script src="site/assets/js/schedule.js"></script> <!-- Resource jQuery -->
+        <script src="site/assets/js/vendor/jquery-1.11.2.min.js"></script>
+        <script src="site/assets/js/vendor/bootstrap.min.js"></script>
+        <script src="site/assets/js/plugins.js"></script>
+        <script src="site/assets/js/main.js"></script>
+    </body>
 </html>

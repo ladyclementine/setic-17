@@ -3,8 +3,8 @@
    <div class="login-box-body">
       <div class="row">
          <div class="col-md-12">
-            <div align="center"><%= image_tag("/site/images/logo.png", :alt => "LOGO 17",:class => "profile-image-login") %></div>
-            <p class="text-center">Painel Administrativo</p>
+            <div align="center"><%= image_tag("/site/images/logo-azul.png", :alt => "LOGO 17",:class => "profile-image-login") %></div>
+            <p class="text-center" style="font-weight: 700;text-transform: uppercase">Painel Administrativo</p>
          </div>
       </div>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name),  html: {:class => 'login-form'} ) do |f| %>
