@@ -1,41 +1,41 @@
-module Packages
-  ALL_PACKAGES = {
-    pacote_1:  {
-      name: 'Stewart',
-      types: {
-        "Kit": 1
-      },
-      price: 31.0
-    },
-    pacote_2:  {
-      name: 'Felder',
-      types: {
-        "Kit": 1,
-        "MiniCurso": 1
-      },
-      price: 38.0
-    },
-    pacote_3:  {
-      name: 'Van Ness',
-      types: {
-        "Kit": 1,
-        "MiniCurso": 1,
-        "Workshop": 1
-      },
-      price: 48.0
-    },
-    pacote_4:  {
-      name: 'Fogler',
-      types: {
-        "Kit": 1,
-        "MiniCurso": 1,
-        "Workshop": 1,
-        "Visita Técnica": 1
-      },
-      price: 58.0
-    }
-  }
-end
+#module Packages
+  #ALL_PACKAGES = {
+    #pacote_1:  {
+      #name: 'Stewart',
+      #types: {
+        #{}"Kit": 1
+      #},
+      #price: 31.0
+    #},
+    #pacote_2:  {
+      #name: 'Felder',
+      #types: {
+        #{}"Kit": 1,
+        #{}"MiniCurso": 1
+      #},
+      #price: 38.0
+    #},
+    #pacote_3:  {
+      #name: 'Van Ness',
+      #types: {
+        #{}"Kit": 1,
+        #{}"MiniCurso": 1,
+        #{}"Workshop": 1
+      #},
+      #price: 48.0
+    #},
+    #pacote_4:  {
+      #name: 'Fogler',
+      #types: {
+        #{}"Kit": 1,
+        #{}"MiniCurso": 1,
+        #{}"Workshop": 1,
+        #{}"Visita Técnica": 1
+      #},
+      #price: 58.0
+    #}
+  #}
+#end
 
 
 

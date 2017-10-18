@@ -20,16 +20,13 @@ class Event < ApplicationRecord
   end
 
   def self.total_discount
-    # total_eventos = self.where.not(price:0).count - 1
-    # total_discount = total_eventos * 0.05
-    # if total_discount <= 0.25
-    #   total_discount
-    # else
-    #   0
-    # end
-    0
+     total_eventos = self.where.not(price:0).count - 2
+     total_discount = total_eventos * 0.20
+     if total_discount <= 0.20
+       total_discount
+     else
+     end
   end
-
 
   #DECONNTO POR PACOTES
   def self.total_discount_by_pack

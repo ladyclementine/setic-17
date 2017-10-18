@@ -10,9 +10,9 @@ class AfterRegistrationController < BaseController
     respond_to do |format|
       if @user.update_attributes(user_params)
         flash[:success] = "Cadastro completo, realize o pagamento para garantir sua vaga."
-        Event.where(is_shirt:true).each do |event|
-           event.add current_user
-         end
+        #Event.where(is_shirt:true).each do |event|
+          #event.add current_user
+         #end
         format.html {  redirect_to authenticated_user_root_path }
       else
         #flash[:error] = "Não foi possível completar seu cadastro, verifique se seus dados estão corretos e entre em contato com nossa equipe."

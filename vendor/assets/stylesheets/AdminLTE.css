@@ -4650,7 +4650,7 @@ table.text-center th {
 .bg-aqua-active,
 .modal-info .modal-header,
 .modal-info .modal-footer {
-   background: url('/images/fundo.png') center ;
+   background: #282154;
    background-size: cover;
    z-index: 2;
 }
