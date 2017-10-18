@@ -12,7 +12,7 @@ Rails.application.configure do
 
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
-  
+
   config.action_controller.perform_caching = true
   # config.cache_store = :dalli_store,
   #                   (ENV["MEMCACHIER_SERVERS"] || "").split(","),
@@ -96,13 +96,13 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.action_mailer.default_url_options = { :host => 'seq17.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'setic17.herokuapp.com' }
 
   Rails.application.config.middleware.use ExceptionNotification::Rack,
   :email => {
     :deliver_with => :deliver_now,
-    :email_prefix => "[SEQ 2017] ",
-    :sender_address => %{"notifier" <exceptions@seq.com>},
+    :email_prefix => "[SETIC 2017] ",
+    :sender_address => %{"notifier" <exceptions@setic.com>},
     :exception_recipients => %w{pixelzip0@gmail.com, rayanesantos-131@hotmail.com}
   }
 end
