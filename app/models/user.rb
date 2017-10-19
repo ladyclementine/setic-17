@@ -19,7 +19,7 @@ class User < ApplicationRecord
 
   enum certificate: { 'SIM':true, 'NÃO':false }
   #VALIDAÇÃO PARA CONCLUSÃO DE CADASTRO
-  validates_presence_of :name, :registration, :birthday , :semester, :university, on: [:update], :allow_nil => true
+  validates_presence_of :name, :birthday , :semester, :university, on: [:update], :allow_nil => true
 
 
   scope :pays, -> { includes(:payment).where(payments: {status: true})}
