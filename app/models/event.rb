@@ -20,7 +20,7 @@ class Event < ApplicationRecord
   end
 
   def self.total_discount
-    if self.where.not(price:0).count > 2
+    if self.where.not(price:0).count >= 3
      total_eventos = self.where.not(price:0).count - 2
      total_discount = total_eventos * 0.20
      if total_discount <= 0.20
