@@ -12,6 +12,9 @@
      <strong>Olá, <%= @user.name %> !</strong> Serão sorteadas 10 vagas no curso de Treinamento Gráficos oferecido pela <strong><a href="http://www.pixelsescola.com/"> Pixels</a></strong>! Para participar, basta você comprar um kit da SETIC 17.
    </br>O resultado do sorteio será divulgado dia 12/11!
      </div>
+     <!-- Button trigger modal -->
+     <!-- Trigger the modal with a button -->
+
 
            <!-- Widget: user widget style 1 -->
            <div class="box box-widget widget-user">
@@ -19,6 +22,7 @@
 
                  <h3 class="widget-user-username" style="margin-top: -10px"><%=kit.name%></h3>
                  <h5 class="widget-user-desc"><%=kit.description%></h5>
+
               </div>
 
               <div class="box-footer">
@@ -73,5 +77,7 @@
 
     </div>
     <%end%>
-
+    <div>
+      <img src="/site/images/camisa.jpg" class="img-responsive">
+    </div>
 </section>
