@@ -1,5 +1,5 @@
-#module Packages
-  #ALL_PACKAGES = {
+module Packages
+  ALL_PACKAGES = {
     #pacote_1:  {
       #name: 'Stewart',
       #types: {
@@ -34,8 +34,8 @@
       #},
       #price: 58.0
     #}
-  #}
-#end
+  }
+end
 
 
 
