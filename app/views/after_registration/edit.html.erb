@@ -39,45 +39,16 @@
             </div>
             <div class="col-md-6">
                <div class="form-group">
-                  <label>CPF</label>
-                  <%= f.text_field :cpf, :id => 'cpf', placeholder: 'CPF', class: 'form-control'%>
-               </div>
-            </div>
-            <div class="col-md-6">
-               <div class="form-group">
                   <label>Curso</label>
                   <%= f.text_field :course, :id => 'curso', placeholder: 'Curso', class: 'form-control'%>
                </div>
             </div>
-            <div class="col-md-6">
-               <div class="form-group">
-                  <label>RG</label>
-                  <%= f.text_field :general_register, :id => 'rg', placeholder: 'RG', class: 'form-control'%>
-               </div>
-          </div>
           <div class="col-md-6">
                <div class="form-group">
                   <label>Semestre</label>
                   <%= f.select :semester, (1..10), { :include_blank => true } , :id => 'semestre', class: 'form-control'%>
                </div>
             </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                  <label>Matrícula</label>
-                <%= f.text_field :registration, :id => 'matricula', placeholder: 'Matrícula', class: 'form-control'%>
-            </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label>Ano de ingresso</label>
-            <div class="input-group">
-               <div class="input-group-addon">
-                  <i class="fa fa-calendar"></i>
-               </div>
-               <%= f.text_field :entry_year, :id => 'entry_year_picker', placeholder: 'Ano de ingresso', class: 'form-control'%>
-            </div>
-          </div>
-        </div>
             <div class="col-md-6">
                <div class="form-group">
                   <label>Universidade</label>

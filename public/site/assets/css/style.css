@@ -549,16 +549,15 @@ btn-group-md > .btn {
 
 }
 .btn-heading-inverse{
-    padding: 20px 30px 10px 30px;
-    font-size: 25px;
-    border-bottom: 7px solid #211c3f;
-    color: #fff;
-    background-color: #282154;
-
-    font-family: "BebasNeue";
-    border-radius: 0px !important;
-    letter-spacing: 2px;
-    border-left: 7px solid #413F71;
+  padding: 15px 20px 10px 20px;
+  font-size: 20px;
+  border-bottom: 7px solid #211c3f;
+  color: #fff;
+  background-color: #282154;
+  font-family: "Laconic_Light";
+  border-radius: 0px !important;
+  letter-spacing: 1px;
+  border-left: 7px solid #413F71;
 }
 .btn-heading-inverse:hover{
 
@@ -1607,9 +1606,10 @@ border-radius: 50%;
     }
 
     .schedule>ul>li:nth-child(even) {
-    	background-color: #FCFCFC;
-    }
+      background-color: #282154;
+      color: #fff;
 
+    }
     .author-image {
     	width: 100px;
     	height: 100px;
@@ -1642,6 +1642,7 @@ border-radius: 50%;
     	font-size: 18px;
     	margin: 20px 0 5px;
       font-family: "Laconic_Regular"
+
     }
 
     .schedule-info {
@@ -1667,7 +1668,7 @@ border-radius: 50%;
     	font-size: 20px;
     	margin: 15px 0;
     	text-transform: capitalize;
-    	color: #29333f;
+    	color: #0C788E;
     }
     .schedule-info p {
     	font-family: "Laconic_Light";

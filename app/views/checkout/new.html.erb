@@ -85,31 +85,7 @@
           </p>
           <%end%>
 
-          <% if Packages::ALL_PACKAGES.any? %>
-           <p class="lead">Pacote</p>
-          <div class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-          <b class=text-danger>Atenção:</b> A escolha do pacote será feita de acordo com a programação selecionada e seu respectivo TIPO.
-           <p> <b class=text-danger>Atenção:</b> em qualquer compra feita fora da cobertura do pacote, será cobrado o preço avulso dos eventos, exceto as que ultrapassarem as quantidades especificadas(sendo cobrado valor do pacote + o total dos eventos adicionais).</p>
-           <div class="table-responsive">
-          <table class="table table-bordered">
-                <tr>
-                  <th>Nome</th>
-                  <th>Programações</th>
-                  <th style="width: 40px">Preço</th>
-                </tr>
-                <%Packages::ALL_PACKAGES.each do |k, v|%>
-                <tr>
-                  <td><%=v[:name].upcase%></td>
-                  <td><%=v[:types].map{|a| "#{a[1]} #{a[0].to_s.pluralize(a[1])}"}.join(", ")%></td>
-                  <td><span class="badge bg-green"><%=number_to_currency(v[:price])%></span></td>
-                </tr>
-                <% end %>
-              </table>
-              </div>
-              Minha programação (por tipo): <%=@user_cart.total_discount_by_pack[2].map{|a| "#{a[1]} #{a[0].pluralize(a[1])}" }.join(", ")%>
-          </div>
 
-          <% end %>
           <% if !@user.payment.nil? && (@user.payment.method == @user.payment.accepted_payment_methods[0]) %>
           <p class="lead">Pagamento</p>
           <div class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
@@ -160,19 +136,13 @@
                 <th style="width:50%">Subtotal:</th>
                 <td><%=number_to_currency(@user_cart.total_price)%></td>
               </tr>
-              <% if Packages::ALL_PACKAGES.any? %>
-              <tr>
-                <th>Desconto (Pacotes)</th>
-                <td><%=number_to_currency(@user_cart.total_price - @user_cart.total_discount_by_pack[0])%> (<%= @user_cart.total_discount_by_pack[1] || "Nenhum"%>)</td>
-              </tr>
-              <% end %>
               <tr>
                 <th>Desconto:</th>
                 <td><%='%.2f' % (@user.events.total_discount * 100)%> %</td>
               </tr>
               <tr>
                 <th>Total:</th>
-                <td><%=number_to_currency(@user_cart.total_discount_by_pack[0] * (1 - @user.events.total_discount))%></td>
+                <td><%=number_to_currency(@user_cart.total_price * (1 - @user.events.total_discount))%></td>
               </tr>
             </table>
           </div>

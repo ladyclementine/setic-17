@@ -25,6 +25,7 @@ class Event < ApplicationRecord
      if total_discount <= 0.20
        total_discount
      else
+       0.20
      end
   end
 

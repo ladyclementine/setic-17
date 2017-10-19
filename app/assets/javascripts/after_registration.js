@@ -16,14 +16,8 @@
   });
 
 
-    $('#cpf').formatter({
-            'pattern': '{{999}}.{{999}}.{{999}}-{{99}}',
-    });
     $('#birthday').formatter({
         'pattern': '{{99}}/{{99}}/{{9999}}',
-    });
-    $('#entry_year').formatter({
-        'pattern': '{{9999}}',
     });
     $('.progress').hide();
     if($("#edit_user_form").length){
@@ -49,44 +43,12 @@
          required: "Preencha com nome completo"
        }
      });
-     $( "#rg" ).rules( "add", {
-       required: true,
-       digits: true,
-       messages: {
-         required: "Entre com seu número de identidade",
-         digits: "Preencha esse campo apenas com números"
-       }
-     });
-     $( "#cpf" ).rules( "add", {
-       required: true,
-       rangelength: [11,14],
-       messages: {
-         required: "Entre com seu cpf",
-         rangelength: "O CPF deve possuir 11 dígitos"
-       }
-     });
-    $( "#matricula" ).rules( "add", {
-       required: true,
-       messages: {
-         required: "Entre com seu número de matrícula",
-       }
-     });
-     $( "#universidade" ).rules( "add", {
-       required: true,
-       messages: {
-         required: "Informe a universidade da sua EJ"
-       }
-     });
+
      $( "#birthday_picker" ).rules( "add", {
        required: true,
        messages: {
          required: "Informe sua Data de Nascimento"
        }
      });
-     $( "#entry_year_picker" ).rules( "add", {
-       required: true,
-       messages: {
-         required: "Informe seu ano de ingresso"
-       }
-     });
+
    }

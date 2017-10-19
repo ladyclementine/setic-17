@@ -7,7 +7,6 @@ module ApplicationHelper
   def sizes_to_array
     sizes_array = [
       ['Selecione', nil],
-      ['PP'],
       ['P'],
       ['M'],
       ['G'],
