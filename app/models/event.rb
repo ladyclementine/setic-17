@@ -21,16 +21,10 @@ class Event < ApplicationRecord
 
   def self.total_discount
     if self.where.not(price:0).count >= 3
-     total_eventos = self.where.not(price:0).count - 2
-     total_discount = total_eventos * 0.20
-     if total_discount <= 0.20
-       total_discount
-     else
-       0.20
-     end
-   else
-     0
-   end
+      0.20
+    else
+      0
+    end
   end
 
   #DECONNTO POR PACOTES
@@ -39,7 +33,7 @@ class Event < ApplicationRecord
     count = Hash.new(0)
     price = 0
     self.where("price != 0").each do |a|
-      count[a.event_type.name] += 1 #unless a.is_shirt
+      count[a.event_type.name] += 1 unless a.is_shirt
     end
 
     belong = false
@@ -49,20 +43,20 @@ class Event < ApplicationRecord
     Packages::ALL_PACKAGES.each do |k, v|
       #total_users = 2
       #unless total_users >= v[:limit]  #is_ful?
-        v[:types].each do |pacote|
-          # se quantidade de um tipo do pacote for menor ou igual a minha quantidade por tipo
-          if pacote[1] <= count[pacote[0].to_s] ## &&
-            belong = true
-          else
-            belong = false
-            break
-          end
+      v[:types].each do |pacote|
+        # se quantidade de um tipo do pacote for menor ou igual a minha quantidade por tipo
+        if pacote[1] <= count[pacote[0].to_s] ## &&
+          belong = true
+        else
+          belong = false
+          break
         end
+      end
 
-        if belong == true
-          pacote_select = v[:name]
-          price = v[:price] + self.plus(k)
-        end
+      if belong == true
+        pacote_select = v[:name]
+        price = v[:price] + self.plus(k)
+      end
       #end
     end
     price = preco_total if price == 0

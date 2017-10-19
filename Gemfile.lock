@@ -27,6 +27,7 @@ GEM
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
     active_enum (1.0.0.rc1)
       activesupport (>= 3.0)
+    active_record_query_trace (1.5.4)
     activejob (5.0.6)
       activesupport (= 5.0.6)
       globalid (>= 0.3.6)
@@ -489,6 +490,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_enum (~> 1.0.0.pre)
+  active_record_query_trace
   ajax-datatables-rails
   awesome_print
   brazilian-rails

@@ -67,6 +67,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   #gti
   gem 'rspec-rails', '~> 3.5'
+  gem 'active_record_query_trace'
 end
 
 group :development do
