@@ -756,8 +756,8 @@ input:-ms-input-placeholder {
     top: 20px;
 }
 .navbar-default .navbar-nav>.inscribe a:hover{
-    background-color:#fff;
-    color: #413F71;
+  background-color: #0C788E;
+color: #fff;
 
 }
 .navbar-default .navbar-nav>li>a {
