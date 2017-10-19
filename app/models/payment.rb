@@ -51,7 +51,6 @@ class Payment < ApplicationRecord
   end
 
   def pay_pagseguro
-    p 11111111111
     payment = PagSeguro::PaymentRequest.new
 
     payment.reference = "REFl#user#{self.user.id}"
@@ -60,8 +59,8 @@ class Payment < ApplicationRecord
       payment.notification_url = 'http://localhost:3000/confirm_payment'
       payment.redirect_url = 'http://localhost:3000/'
     else
-      payment.notification_url = 'https://seq17.herokuapp.com/confirm_payment'
-      payment.redirect_url = 'https://seq17.herokuapp.com'
+      payment.notification_url = 'https://setic17.herokuapp.com/confirm_payment'
+      payment.redirect_url = 'https://setic17.herokuapp.com'
     end
 
     payment.items << {
