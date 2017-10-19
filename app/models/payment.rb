@@ -66,13 +66,12 @@ class Payment < ApplicationRecord
 
     payment.items << {
       id: self.user.id,
-      description: "PAGAMENTO DA SEQ" ,
+      description: "PAGAMENTO DA SETIC" ,
       amount: price_pagseguro
     }
 
     payment.sender = {
       email: self.user.email,
-      cpf: self.user.cpf.numero.only_numbers,
     }
 
     response = payment.register
