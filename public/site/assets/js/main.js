@@ -25,12 +25,12 @@ jQuery(document).ready(function ($) {
             }
         }
     });
-	
 
 		
+
 	/*---------------------------------------------*
      * Scroll Up
-     ---------------------------------------------*/	
+     ---------------------------------------------*/
 		$(window).scroll(function(){
         if ($(this).scrollTop() > 600) {
             $('.scrollup').fadeIn('slow');
@@ -38,13 +38,13 @@ jQuery(document).ready(function ($) {
             $('.scrollup').fadeOut('slow');
         }
 		});
-		
+
 		$('.scrollup').click(function(){
 			$("html, body").animate({ scrollTop: 0 },1000);
 			return false;
 		});
-		
-	
+
+
 
 
     /*---------------------------------------------*
@@ -56,7 +56,7 @@ jQuery(document).ready(function ($) {
 
 
     /*---------------------------------------------*
-     * Counter 
+     * Counter
      ---------------------------------------------*/
 
 //    $('.statistic-counter').counterUp({
