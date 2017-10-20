@@ -109,6 +109,13 @@
             </div>
           </div>
           <% end %>
+          <% if !@user.payment.nil? && (@user.payment.method == @user.payment.accepted_payment_methods[1]) %>
+         <p class="lead">Pagamento Presencial</p>
+         <div class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+           <p>Em caso de pagamento presencial diriga-se à <%= @config.local %>(bloco 725, sala do Diretório Acadêmico /Campus do PICI, UFC) </p>
+           <p><strong>ATENÇÃO:</strong>o pagamento deverá ser feito no prazo de 3 dias úteis após o fechamento da conta, caso contrário, a compra será automaticamente cancelada.</p>
+         </div>
+         <% end %>
 
              <% if !@user.payment.nil? && @user.payment.method == "PagSeguro" && !@user.payment.paid?  %>
              <p class="lead">PagSeguro</p>
