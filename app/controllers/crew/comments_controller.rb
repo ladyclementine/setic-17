@@ -23,9 +23,9 @@ class Crew::CommentsController < Crew::BaseController
   def create
     @comment = Comment.new(comment_params)
     if @comment.save
-      #User.all.each do |user|
-        #NoticesMailer.send_notification(user, @comment, current_week).deliver_now
-      #end
+      User.all.each do |user|
+        NoticesMailer.send_notification(user, @comment).deliver_now
+      end
       redirect_to crew_comments_path, notice: 'Aviso criado com sucesso.'
     else
       render :new
