@@ -38,6 +38,7 @@ Rails.application.routes.draw do
         get '/change_vacancies/index'
         # Events
         delete '/events/:id/remove/:user_id' => 'events#remove_user', as: :remove_event_user
+        delete '/events/:id/remove' => 'events#remove_user_all', as: :remove_event_user_all
         #kits
         delete '/kits/:id/remove/:user_id' => 'kits#remove_user', as: :remove_kit_user
 

@@ -1,5 +1,5 @@
 class Crew::EventsController < Crew::BaseController
-  before_action :set_crew_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_crew_event, only: [:show, :edit, :update, :destroy, :remove_user_all]
 
   # GET /crew/events
   # GET /crew/events.json
@@ -74,6 +74,13 @@ class Crew::EventsController < Crew::BaseController
     event = Event.find(params[:id])
     event.remove(user)
     flash[:success] = "#{user.email} foi removido de #{event.name}."
+    redirect_to :back
+  end
+
+  def remove_user_all
+    @users_nopays = @crew_event.users.no_pays_or_no_select
+    @crew_event.remove(@users_nopays)
+    flash[:success] = "Todos os usuários não pagantes foram removidos de #{@crew_event.name}."
     redirect_to :back
   end
 

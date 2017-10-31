@@ -138,4 +138,5 @@ class Event < ApplicationRecord
     # equivalents.each { |event| event.users.delete(user) }
   end
 
+
 end

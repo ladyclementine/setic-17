@@ -15,7 +15,7 @@
             <div class="box-header">
                <h3 class="box-title">(PAGANTES) Lista de usuários da programação: <%=@crew_event.name%></h3>
 
-               
+
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -57,7 +57,7 @@
             <div class="box-header">
                <h3 class="box-title title_1">(NÃO PAGANTES) Lista de usuários da programação: <%=@crew_event.name%></h3>
 
-            
+
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -71,6 +71,12 @@
                      </tr>
                   </thead>
                   <tbody>
+                    <div class="col-md-8">
+                    <%= link_to crew_remove_event_user_all_path(@crew_event, @users), method: :delete, data: { confirm: "Deseja realmente remover todos os usuários de #{@crew_event.name}?" } do %>
+                     <button type="button" class="btn btn-block btn-danger btn-sm">Remover todos</button>
+                     </small>
+                    <% end %>
+                  </div>
                      <% @users_nopays.each do |users| %>
                      <tr>
                         <td><%= users.name.nil? ? 'Não Informado' : users.name.titleize%></td>
